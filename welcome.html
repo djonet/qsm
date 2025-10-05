@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مرحبًا بك - Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@600&display=swap');
+  body {
+    font-family: 'Cairo', Arial, sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top, #d9faff, #aee4f5, #7fd4e8);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  .bg-illustration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('A_2D_digital_illustration_login_and_registration_s.png') center/cover no-repeat;
+    opacity: 0.06;
+    z-index: 0;
+  }
+  .floating-shapes span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    animation: float 12s linear infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-1200px) rotate(720deg); }
+  }
+  .flag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  .signature {
+    position: absolute;
+    top: 30%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 200px;
+    opacity: 0.95;
+    z-index: 5;
+  }
+  .futur-title {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+    z-index: 3;
+  }
+  .site-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    background: linear-gradient(90deg, #00b4d8, #48cae4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    animation: glow 2s ease-in-out infinite alternate;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0,0.85);
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  }
+  @keyframes glow {
+    from { text-shadow: 0 0 10px rgba(0, 180, 216, 0.4); }
+    to { text-shadow: 0 0 20px rgba(0, 180, 216, 0.9); }
+  }
+  .container {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    z-index: 2;
+    animation: fadeIn 1.5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  h1 {
+    margin-bottom: 15px;
+    color: #023e8a;
+    font-size: 26px;
+  }
+  button {
+    background: linear-gradient(90deg, #00b4d8, #48cae4);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 25px;
+    margin-top: 15px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(72, 202, 228, 0.6);
+  }
+  .news-bar {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 100%;
+    padding: 8px 0;
+    position: absolute;
+    bottom: 0;
+    font-size: 14px;
+    overflow: hidden;
+  }
+  .news-text {
+    display: inline-block;
+    padding-left: 50%;
+    animation: marquee 15s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-illustration"></div>
+  <div class="floating-shapes">
+    <span style="left:10%; animation-delay:0s;"></span>
+    <span style="left:50%; animation-delay:2s;"></span>
+    <span style="left:80%; animation-delay:4s;"></span>
+  </div>
+
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" class="flag" alt="علم الجزائر">
+  <img src="117dade3-6548-4510-b997-2c19bf5e59d4-removebg-preview.png" class="signature" alt="توقيع BENABBES DJIHAD">
+
+  <div class="futur-title">Futur Doctors Community</div>
+
+  <div class="container">
+    <div class="site-title">Qcms BY DJO</div>
+    <h1 id="welcome-message"></h1>
+    <button onclick="goToSpecialization()">تحديد التخصص والمستوى الدراسي</button>
+  </div>
+
+  <div class="news-bar">
+    <div class="news-text">
+      🦷 كل الحقوق محفوظة © 2025 - نحن الجيل الصاعد، خُلقنا للتغيير، صناع الابتسامة كتاب المجد ورمز الرقي رسالة الشفاء 💫
+    </div>
+  </div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.getElementById('welcome-message').textContent = `مرحبًا يا ${user.displayName || 'زائر'} في منصة DJO لتفيل حسابك اتصل بي`;
+    } else {
+      window.location.href = 'index.html';
+    }
+  });
+</script>
+
+<script>
+  function goToSpecialization() {
+    window.location.href = "specialization.html";
+  }
+</script>
+ 
+
+</body>
+</html>
+

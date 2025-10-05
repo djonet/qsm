@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المواد - Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@600&display=swap');
+  body {
+    font-family: 'Cairo', Arial, sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top, #d9faff, #aee4f5, #7fd4e8);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    color: white;
+  }
+  .bg-illustration {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('A_2D_digital_illustration_login_and_registration_s.png') center/cover no-repeat;
+    opacity: 0.06;
+    z-index: 0;
+  }
+  .floating-shapes span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    animation: float 12s linear infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-1200px) rotate(720deg); }
+  }
+  .flag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  
+  .container {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    width: 420px;
+    max-width: 95%;
+    text-align: center;
+    z-index: 2;
+    animation: fadeIn 1.5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .subjects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .subject-card {
+    background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    cursor: pointer;
+    color: #f0f0f0;
+  }
+  .subject-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+    background: linear-gradient(135deg, #48cae4, #007b9e);
+    color: white;
+  }
+  .subject-title {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-illustration"></div>
+  <div class="floating-shapes">
+    <span style="left:10%; animation-delay:0s;"></span>
+    <span style="left:50%; animation-delay:2s;"></span>
+    <span style="left:80%; animation-delay:4s;"></span>
+  </div>
+
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" class="flag" alt="علم الجزائر">
+ 
+
+  <div class="container">
+    <h2>المواد الدراسية</h2>
+    <p style="font-size:14px;">التخصص: <span id="selectedSpecialty"></span> | المستوى: <span id="selectedLevel"></span></p>
+    <div id="subjectsList" class="subjects-grid"></div>
+  </div>
+
+<script>
+  const specialty = localStorage.getItem('specialty') || 'غير محدد';
+  const level = localStorage.getItem('level') || 'غير محدد';
+  document.getElementById('selectedSpecialty').textContent = specialty;
+  document.getElementById('selectedLevel').textContent = level;
+
+  const subjectsData = {
+    'طب الأسنان': {
+      'سنة 1': [],
+      'سنة 2': ['PROTHESE','ODF', 'Anatomie humaine' , 'Anatomie dentaire' , 'Oce'  , 'Parodontologie' ,'Pathologie','immunologie','histologie','physiologie','biomateriaux','Microbiologie'],
+     
+    },
+    'الصيدلة': {
+      'سنة 1': [],
+      'سنة 2': [],
+      'سنة 3': []
+    },
+    'الطب البشري': {
+      'سنة 1': [],
+      'سنة 2': [],
+      'سنة 3': []
+    }
+  };
+
+  const subjectsListDiv = document.getElementById('subjectsList');
+  if(subjectsData[specialty] && subjectsData[specialty][level]) {
+    subjectsData[specialty][level].forEach(subject => {
+      const card = document.createElement('div');
+      card.className = 'subject-card';
+      card.innerHTML = `<div class="subject-title">${subject}</div>`;
+      card.onclick = () => {
+        localStorage.setItem('subject', subject);
+        window.location.href = 'lessons.html';
+      };
+      subjectsListDiv.appendChild(card);
+    });
+  } else {
+    subjectsListDiv.innerHTML = '<p>لا توجد مواد مسجلة لهذا المستوى.</p>';
+  }
+</script>
+
+</body>
+</html>

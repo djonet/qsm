@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<!-- 🔒 حارس الوصول لصفحة Qcms: لا تعرض الصفحة إلا للمستخدمين داخل allowedUsers -->
+<script type="module">
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  // ⚙️ ضع إعدادات مشروعك من Firebase Console → Project settings
+  // إعدادات Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  // اخفِ الصفحة مؤقتًا لمنع الوميض قبل التحقق
+  document.documentElement.style.visibility = 'hidden';
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      // ليس مسجّل دخول → إلى صفحة الدخول
+      window.location.replace('index.html');
+      return;
+    }
+    try {
+      // هل لدى المستخدم وثيقة سماح داخل allowedUsers/{uid}؟
+      const ref  = doc(db, 'allowedUsers', user.uid);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        // مسموح له → اعرض الصفحة
+        document.documentElement.style.visibility = 'visible';
+      } else {
+        // غير مفعّل → إلى صفحة انتظار (تُظهر UID)
+        window.location.replace('welcome.html?status=pending');
+      }
+    } catch (e) {
+      // إن ظهرت مشكلة صلاحيات في القواعد ستصل هنا
+      console.error('قراءة allowedUsers فشلت:', e);
+      window.location.replace('welcome.html?status=pending');
+    }
+  });
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الأسئلة - Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@600&display=swap');
+  body {
+    font-family: 'Cairo', Arial, sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top, #d9faff, #aee4f5, #7fd4e8);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-y: auto;
+    color: white;
+  }
+  .bg-illustration {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('A_2D_digital_illustration_login_and_registration_s.png') center/cover no-repeat;
+    opacity: 0.06;
+    z-index: 0;
+  }
+  .flag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 50px;
+    border-radius: 5px;
+  }
+ 
+  .container {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    width: 700px;
+    max-width: 95%;
+    z-index: 2;
+    margin-bottom: 40px;
+  }
+  .question-block {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: rgba(30, 30, 30, 0.85);
+    border-radius: 10px;
+  }
+  .question-text {
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  .answers {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .answer {
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 15px;
+  }
+  .answer.selected {
+    background: rgba(255,255,0,0.4);
+    border: 1px solid yellow;
+  }
+  .correct {
+    background: rgba(0, 200, 0, 0.6) !important;
+    border: 1px solid #0f0;
+  }
+  .incorrect {
+    background: rgba(200, 0, 0, 0.6) !important;
+    border: 1px solid #f00;
+  }
+  .feedback {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .feedback.correct { background: rgba(0, 200, 0, 0.5); color: #0f0; }
+  .feedback.partial { background: rgba(255, 215, 0, 0.4); color: #ffd700; }
+  .feedback.incorrect { background: rgba(200, 0, 0, 0.5); color: #f00; }
+  .show-solution-btn {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .show-solution-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #feb47b, #ff7e5f);
+  }
+  .control-buttons { display: flex; gap: 10px; margin-top: 15px; }
+  .control-buttons button {
+    flex: 1; padding: 10px; border: none; border-radius: 8px;
+    cursor: pointer; font-weight: bold;
+    background: linear-gradient(90deg, #00b4d8, #48cae4);
+    color: white; transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+</style>
+</head>
+<body>
+  <div class="bg-illustration"></div>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" class="flag" alt="علم الجزائر">
+ 
+
+  <div class="container">
+    <h2 id="lessonName"></h2>
+    <div id="questionsList"></div>
+  </div>
+
+  <!-- مكان كود الأسئلة الأصلي (questionsData) -->
+   <script>
+  const lesson = localStorage.getItem('lesson') || 'غير محدد';
+  document.getElementById('lessonName').textContent = `الأسئلة - ${lesson}`;
+  const questionsData = {
+    'طب الأسنان': {
+      'سنة 1': {
+        'Anatomie humaine': {
+          'system nerveux': [
+            {
+              question: 'هل ماحي يحب الضرائب ؟',
+              answers: [
+                { text: 'نعم', correct: true },
+                { text: 'لا', correct: false },
+                { text: 'دراسة وظائف الأعضاء', correct: false },
+                { text: 'يتناك عليهم', correct: true }
+              ]
+            },
+            {
+              question: 'ما هو تعريف',
+              answers: [
+                { text: 'دراسة شكل وبنية الجسم', correct: true },
+                { text: 'دراسة الأمراض', correct: false },
+                { text: 'دراسة وظائف الأعضاء', correct: false },
+                { text: 'رسم الجسم البشري', correct: false }
+              ]
+            }
+          ]
+        },
+        'الكيمياء الحيوية': {
+          'الإنزيمات': [
+            {
+              question: 'ما وظيفة الإنزيمات؟',
+              answers: [
+                { text: 'تسريع التفاعلات الكيميائية', correct: true },
+                { text: 'إبطاء التفاعلات الكيميائية', correct: false },
+                { text: 'إنتاج الطاقة', correct: false },
+                { text: 'تحطيم الفيتامينات', correct: false }
+              ]
+            }
+          ]
+        }
+      },
+'سنة 2': {
+  'Microbiologie': {
+    'Physiologie Bactérienne': [
+  {
+    question: 'QCM 1 : Les bactéries ont besoin pour vivre de :',
+    answers: [
+      { text: 'A. Eau', correct: true },
+      { text: 'B. Source d’énergie', correct: true },
+      { text: 'C. Source de carbone', correct: true },
+      { text: 'D. Source d’azote', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 2 : L’eau joue un rôle essentiel car elle :',
+    answers: [
+      { text: 'A. Solubilise les nutriments', correct: true },
+      { text: 'B. Transporte les nutriments', correct: true },
+      { text: 'C. Favorise l’hydrolyse', correct: true },
+      { text: 'D. Inhibe les enzymes', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 3 : La source d’énergie des bactéries phototrophes est :',
+    answers: [
+      { text: 'A. Lumière', correct: true },
+      { text: 'B. Dioxyde de carbone', correct: false },
+      { text: 'C. Ammoniac', correct: false },
+      { text: 'D. Protéines', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 4 : Les bactéries chimiotrophes tirent leur énergie :',
+    answers: [
+      { text: 'A. De la lumière', correct: false },
+      { text: 'B. De l’oxydation de composés organiques ou minéraux', correct: true },
+      { text: 'C. Du CO₂', correct: false },
+      { text: 'D. Du cément', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 5 : Le carbone est :',
+    answers: [
+      { text: 'A. L’élément constitutif majeur', correct: true },
+      { text: 'B. Toujours d’origine organique', correct: false },
+      { text: 'C. Utilisé pour la synthèse cellulaire', correct: true },
+      { text: 'D. Une source d’énergie directe', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 6 : Les bactéries autotrophes utilisent comme source de carbone :',
+    answers: [
+      { text: 'A. CO₂', correct: true },
+      { text: 'B. Glucose', correct: false },
+      { text: 'C. Acides gras', correct: false },
+      { text: 'D. Peptones', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 7 : Les bactéries hétérotrophes utilisent :',
+    answers: [
+      { text: 'A. Des substrats organiques', correct: true },
+      { text: 'B. Du dioxyde de carbone', correct: false },
+      { text: 'C. Des sucres', correct: true },
+      { text: 'D. Des acides organiques', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 8 : La source d’azote peut être :',
+    answers: [
+      { text: 'A. Ammoniac', correct: true },
+      { text: 'B. Nitrates', correct: true },
+      { text: 'C. Groupements amines', correct: true },
+      { text: 'D. Oxygène', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 9 : Le phosphore entre dans la constitution de :',
+    answers: [
+      { text: 'A. L’ATP', correct: true },
+      { text: 'B. L’ADN', correct: true },
+      { text: 'C. Les acides aminés', correct: false },
+      { text: 'D. Les coenzymes', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 10 : Les bactéries prototrophes :',
+    answers: [
+      { text: 'A. Poussent sans facteur de croissance', correct: true },
+      { text: 'B. Nécessitent des vitamines', correct: false },
+      { text: 'C. Croissent avec de l’eau et des sels minéraux', correct: true },
+      { text: 'D. Dépendent d’autres bactéries', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 11 : Les bactéries auxotrophes :',
+    answers: [
+      { text: 'A. Produisent toutes leurs vitamines', correct: false },
+      { text: 'B. Ont besoin d’un ou plusieurs facteurs de croissance', correct: true },
+      { text: 'C. Peuvent présenter des colonies satellites', correct: true },
+      { text: 'D. Croissent sans carbone', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 12 : La syntrophie est :',
+    answers: [
+      { text: 'A. Une compétition nutritionnelle', correct: false },
+      { text: 'B. Une interaction métabolique bénéfique', correct: true },
+      { text: 'C. La croissance de bactéries satellites', correct: true },
+      { text: 'D. Un phénomène d’inhibition', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 13 : Le soufre est présent dans :',
+    answers: [
+      { text: 'A. Certains acides aminés', correct: true },
+      { text: 'B. Le groupement thiol', correct: true },
+      { text: 'C. Les phosphates', correct: false },
+      { text: 'D. Le glycérol', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 14 : Le temps de doublement dépend de :',
+    answers: [
+      { text: 'A. La souche bactérienne', correct: true },
+      { text: 'B. La composition du milieu', correct: true },
+      { text: 'C. Les conditions environnementales', correct: true },
+      { text: 'D. La phase de croissance', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 15 : La croissance bactérienne est :',
+    answers: [
+      { text: 'A. Linéaire', correct: false },
+      { text: 'B. Exponentielle', correct: true },
+      { text: 'C. Proportionnelle au nombre de cellules', correct: true },
+      { text: 'D. Indépendante du milieu', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 16 : La phase de latence correspond à :',
+    answers: [
+      { text: 'A. Une période d’adaptation', correct: true },
+      { text: 'B. Une division rapide', correct: false },
+      { text: 'C. Une absence de croissance visible', correct: true },
+      { text: 'D. Une mortalité massive', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 17 : La phase exponentielle se caractérise par :',
+    answers: [
+      { text: 'A. Une division rapide', correct: true },
+      { text: 'B. Un taux constant de croissance', correct: true },
+      { text: 'C. Une phase d’équilibre', correct: false },
+      { text: 'D. Une sénescence cellulaire', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 18 : La phase stationnaire :',
+    answers: [
+      { text: 'A. Résulte d’un équilibre entre division et mort', correct: true },
+      { text: 'B. Traduit un épuisement des nutriments', correct: true },
+      { text: 'C. Est due à une accumulation de déchets', correct: true },
+      { text: 'D. Est une phase de croissance maximale', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 19 : La phase de déclin :',
+    answers: [
+      { text: 'A. Se traduit par une lyse cellulaire', correct: true },
+      { text: 'B. Est précédée de la phase stationnaire', correct: true },
+      { text: 'C. Montre une diminution des cellules viables', correct: true },
+      { text: 'D. Correspond à la multiplication rapide', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 20 : La mesure de la turbidité évalue :',
+    answers: [
+      { text: 'A. La biomasse totale', correct: true },
+      { text: 'B. La viabilité des cellules', correct: false },
+      { text: 'C. La densité optique', correct: true },
+      { text: 'D. Le poids sec', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 21 : Les bactéries mésophiles :',
+    answers: [
+      { text: 'A. Ont un optimum entre 20–45°C', correct: true },
+      { text: 'B. Incluent les bactéries pathogènes humaines', correct: true },
+      { text: 'C. Se développent à 37°C', correct: true },
+      { text: 'D. Meurent au froid', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 22 : Les bactéries psychrotrophes :',
+    answers: [
+      { text: 'A. Se développent à 0°C', correct: true },
+      { text: 'B. Ont un maximum à 35°C', correct: true },
+      { text: 'C. Ont un optimum de 20–30°C', correct: true },
+      { text: 'D. Ne vivent qu’à chaud', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 23 : Les bactéries thermophiles :',
+    answers: [
+      { text: 'A. Ont un optimum de 55–65°C', correct: true },
+      { text: 'B. Ne vivent jamais à 20°C', correct: false },
+      { text: 'C. Ont une température minimale autour de 45°C', correct: true },
+      { text: 'D. Sont toutes pathogènes', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 24 : Les acidophiles vivent :',
+    answers: [
+      { text: 'A. À pH 1–6', correct: true },
+      { text: 'B. À pH 7', correct: false },
+      { text: 'C. À pH 8–11', correct: false },
+      { text: 'D. Dans des milieux neutres', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 25 : Les halophiles :',
+    answers: [
+      { text: 'A. Nécessitent >0,2 M de NaCl', correct: true },
+      { text: 'B. Sont adaptées à une forte pression osmotique', correct: true },
+      { text: 'C. Ne peuvent vivre sans sel', correct: true },
+      { text: 'D. Meurent en milieu hypotonique', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 26 : Les bactéries microaérophiles :',
+    answers: [
+      { text: 'A. Ont besoin de 2–10 % d’O₂', correct: true },
+      { text: 'B. Se développent à 20 % d’O₂', correct: false },
+      { text: 'C. Sont tuées par absence d’oxygène', correct: false },
+      { text: 'D. Supportent mal l’air atmosphérique', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 27 : Les anaérobies strictes :',
+    answers: [
+      { text: 'A. Meurent en présence d’oxygène', correct: true },
+      { text: 'B. Se développent en anaérobiose', correct: true },
+      { text: 'C. Sont des Clostridium', correct: true },
+      { text: 'D. Utilisent l’O₂ comme accepteur final', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 28 : Les anaérobies aérotolérantes :',
+    answers: [
+      { text: 'A. Tolèrent l’oxygène', correct: true },
+      { text: 'B. Ne l’utilisent pas', correct: true },
+      { text: 'C. Se développent aussi sans oxygène', correct: true },
+      { text: 'D. En ont besoin pour croître', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 29 : Les milieux naturels :',
+    answers: [
+      { text: 'A. Sont d’origine animale ou végétale', correct: true },
+      { text: 'B. Contiennent des substances pures', correct: false },
+      { text: 'C. Peuvent être enrichis en sang', correct: true },
+      { text: 'D. Sont utilisés pour des bactéries exigeantes', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 30 : Les milieux synthétiques :',
+    answers: [
+      { text: 'A. Contiennent des substances chimiques définies', correct: true },
+      { text: 'B. Permettent des expériences précises', correct: true },
+      { text: 'C. Sont toujours solides', correct: false },
+      { text: 'D. Sont utilisés pour des tests biochimiques', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 31 : Un milieu semi-synthétique :',
+    answers: [
+      { text: 'A. Est un mélange de corps purs et naturels', correct: true },
+      { text: 'B. Est défini chimiquement', correct: false },
+      { text: 'C. Peut contenir du lactose et du bromocrésol pourpre', correct: true },
+      { text: 'D. Est toujours liquide', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 32 : Un milieu électif :',
+    answers: [
+      { text: 'A. Favorise un groupe bactérien donné', correct: true },
+      { text: 'B. Inhibe les autres', correct: true },
+      { text: 'C. Est identique à un milieu sélectif', correct: false },
+      { text: 'D. Est un milieu enrichi', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 33 : Un milieu sélectif :',
+    answers: [
+      { text: 'A. Permet la croissance d’un seul type de bactéries', correct: true },
+      { text: 'B. Contient des inhibiteurs', correct: true },
+      { text: 'C. Est souvent solide', correct: true },
+      { text: 'D. Empêche toute croissance bactérienne', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 34 : Le milieu Chapman est :',
+    answers: [
+      { text: 'A. Sélectif pour les staphylocoques', correct: true },
+      { text: 'B. Enrichi en NaCl', correct: true },
+      { text: 'C. Naturel', correct: false },
+      { text: 'D. Liquide', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 35 : Le milieu Hektoen :',
+    answers: [
+      { text: 'A. Est sélectif pour les bacilles Gram –', correct: true },
+      { text: 'B. Est enrichi', correct: false },
+      { text: 'C. Inhibe les Gram +', correct: true },
+      { text: 'D. Sert à isoler les salmonelles', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 36 : La gélose au sang est :',
+    answers: [
+      { text: 'A. Un milieu enrichi', correct: true },
+      { text: 'B. Utilisé pour les bactéries exigeantes', correct: true },
+      { text: 'C. Liquide', correct: false },
+      { text: 'D. De nature naturelle', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 37 : Un milieu de conservation :',
+    answers: [
+      { text: 'A. Est pauvre en nutriments', correct: true },
+      { text: 'B. Permet la survie ralentie', correct: true },
+      { text: 'C. Stimule la division rapide', correct: false },
+      { text: 'D. Sert à maintenir les souches', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 38 : Les applications de la croissance bactérienne concernent :',
+    answers: [
+      { text: 'A. Le diagnostic bactériologique', correct: true },
+      { text: 'B. L’antibiothérapie', correct: true },
+      { text: 'C. L’industrie pharmaceutique', correct: true },
+      { text: 'D. Le contrôle sanitaire', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 39 : La croissance bactérienne est utilisée pour :',
+    answers: [
+      { text: 'A. Le dosage des vitamines', correct: true },
+      { text: 'B. La production d’antibiotiques', correct: true },
+      { text: 'C. L’étude de la résistance', correct: true },
+      { text: 'D. La fabrication de toxines', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 40 : La croissance bactérienne est exponentielle car :',
+    answers: [
+      { text: 'A. Les cellules se divisent par fission binaire', correct: true },
+      { text: 'B. Le nombre double à intervalle constant', correct: true },
+      { text: 'C. Elle dépend du taux de croissance', correct: true },
+      { text: 'D. Elle est indépendante de la souche', correct: false }
+    ]
+  }
+]
+
+  },
+
+  'Parodontologie': {
+    'Introduction à la Parodontologie': [
+  {
+    question: 'QCM 1 : La parodontologie est :',
+    answers: [
+      { text: 'A. Une spécialité médicale générale', correct: false },
+      { text: 'B. Une spécialité de la médecine dentaire', correct: true },
+      { text: 'C. La science des maladies carieuses', correct: false },
+      { text: 'D. La science des tissus de soutien de la dent', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 2 : Le parodonte comprend :',
+    answers: [
+      { text: 'A. L’émail', correct: false },
+      { text: 'B. L’os alvéolaire', correct: true },
+      { text: 'C. Le cément', correct: true },
+      { text: 'D. La gencive', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 3 : Le rôle de la gencive est :',
+    answers: [
+      { text: 'A. D’assurer la fixation de la racine', correct: false },
+      { text: 'B. De protéger les tissus profonds', correct: true },
+      { text: 'C. De recouvrir la racine', correct: false },
+      { text: 'D. D’assurer la fonction de manchon protecteur', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 4 : Le ligament parodontal relie :',
+    answers: [
+      { text: 'A. La dent à l’os alvéolaire', correct: true },
+      { text: 'B. La couronne à la pulpe', correct: false },
+      { text: 'C. Le cément à la dentine', correct: false },
+      { text: 'D. La gencive à la racine', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 5 : Le cément permet :',
+    answers: [
+      { text: 'A. La minéralisation de la dentine', correct: false },
+      { text: 'B. L’ancrage du ligament parodontal', correct: true },
+      { text: 'C. L’irrigation de la dent', correct: false },
+      { text: 'D. La synthèse de l’émail', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 6 : Le parodonte profond comprend :',
+    answers: [
+      { text: 'A. L’os alvéolaire', correct: true },
+      { text: 'B. Le cément', correct: true },
+      { text: 'C. La gencive', correct: false },
+      { text: 'D. Le ligament parodontal', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 7 : Le parodonte superficiel est représenté par :',
+    answers: [
+      { text: 'A. La gencive', correct: true },
+      { text: 'B. L’émail', correct: false },
+      { text: 'C. Le ligament', correct: false },
+      { text: 'D. L’os', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 8 : La parodontologie étudie le parodonte du point de vue :',
+    answers: [
+      { text: 'A. Anatomique', correct: true },
+      { text: 'B. Histologique', correct: true },
+      { text: 'C. Pathologique', correct: true },
+      { text: 'D. Psychologique', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 9 : La parodontie est :',
+    answers: [
+      { text: 'A. Une branche de la chirurgie dentaire', correct: false },
+      { text: 'B. La pratique clinique de la parodontologie', correct: true },
+      { text: 'C. Une discipline de la radiologie', correct: false },
+      { text: 'D. L’étude du microbiote oral', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 10 : Le parodontiste est :',
+    answers: [
+      { text: 'A. Celui qui pratique la parodontie', correct: true },
+      { text: 'B. Celui qui enseigne la parodontologie', correct: false },
+      { text: 'C. Un chercheur en microbiologie', correct: false },
+      { text: 'D. Un spécialiste de la gencive', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 11 : Le parodontologue est :',
+    answers: [
+      { text: 'A. Un praticien', correct: false },
+      { text: 'B. Un chercheur en parodontologie', correct: true },
+      { text: 'C. Un technicien', correct: false },
+      { text: 'D. Un hygiéniste dentaire', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 12 : Le terme parodontopathie désigne :',
+    answers: [
+      { text: 'A. Une inflammation de la gencive', correct: false },
+      { text: 'B. Toute maladie du parodonte', correct: true },
+      { text: 'C. Une maladie carieuse', correct: false },
+      { text: 'D. Une affection du cément', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 13 : La parodontolyse est :',
+    answers: [
+      { text: 'A. Une lyse du parodonte', correct: true },
+      { text: 'B. Une maladie gingivale', correct: false },
+      { text: 'C. Une inflammation superficielle', correct: false },
+      { text: 'D. Une expulsion progressive de la dent', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 14 : La parodontite est :',
+    answers: [
+      { text: 'A. Une inflammation du parodonte', correct: true },
+      { text: 'B. Limitée à la gencive', correct: false },
+      { text: 'C. Sans impact systémique', correct: false },
+      { text: 'D. Ayant des répercussions générales', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 15 : La gingivite est :',
+    answers: [
+      { text: 'A. Une parodontopathie', correct: true },
+      { text: 'B. Limitée à la gencive', correct: true },
+      { text: 'C. Synonyme de parodontolyse', correct: false },
+      { text: 'D. Une affection inflammatoire', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 16 : Le microbiote buccal comprend :',
+    answers: [
+      { text: 'A. Bactéries', correct: true },
+      { text: 'B. Champignons', correct: true },
+      { text: 'C. Virus', correct: true },
+      { text: 'D. Protistes', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 17 : Les micro-organismes commensaux sont :',
+    answers: [
+      { text: 'A. Pathogènes', correct: false },
+      { text: 'B. Inoffensifs', correct: true },
+      { text: 'C. Présents sans effet sur l’hôte', correct: true },
+      { text: 'D. Toxiques', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 18 : Le mutualisme correspond à :',
+    answers: [
+      { text: 'A. Une coopération bénéfique', correct: true },
+      { text: 'B. Une compétition', correct: false },
+      { text: 'C. Une neutralité', correct: false },
+      { text: 'D. Un parasitisme non létal', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 19 : Le pathobionte est :',
+    answers: [
+      { text: 'A. Un microbe opportuniste', correct: true },
+      { text: 'B. Un symbionte bénéfique', correct: false },
+      { text: 'C. Un organisme du microbiote', correct: true },
+      { text: 'D. Potentiellement pathogène', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 20 : La citation d’Auguste Comte met l’accent sur :',
+    answers: [
+      { text: 'A. L’importance de l’histoire d’une science', correct: true },
+      { text: 'B. Le rôle des ancêtres', correct: true },
+      { text: 'C. Le traitement des gingivites', correct: false },
+      { text: 'D. L’éthique médicale', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 21 : Chez les Égyptiens, les gingivopathies étaient :',
+    answers: [
+      { text: 'A. Déjà connues', correct: true },
+      { text: 'B. Mentionnées dans le papyrus d’Ebers', correct: true },
+      { text: 'C. Traitées par contention', correct: true },
+      { text: 'D. Considérées incurables', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 22 : Les Sumériens utilisaient :',
+    answers: [
+      { text: 'A. Des cure-dents en or', correct: true },
+      { text: 'B. Des brosses à dents modernes', correct: false },
+      { text: 'C. Des systèmes de contention', correct: true },
+      { text: 'D. Des bains de bouche alcoolisés', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 23 : Hippocrate a étudié :',
+    answers: [
+      { text: 'A. L’éruption dentaire', correct: true },
+      { text: 'B. L’étiologie des parodontopathies', correct: true },
+      { text: 'C. La plaque bactérienne', correct: false },
+      { text: 'D. Le tartre', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 24 : Les Romains recommandaient :',
+    answers: [
+      { text: 'A. Le vin médicinal', correct: false },
+      { text: 'B. L’usage de la brosse à dents', correct: true },
+      { text: 'C. Des cures thermales', correct: true },
+      { text: 'D. Le sel fluoré', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 25 : Le siwak est :',
+    answers: [
+      { text: 'A. Un bâtonnet d’arak', correct: true },
+      { text: 'B. Utilisé dans la religion islamique', correct: true },
+      { text: 'C. Inventé au XXe siècle', correct: false },
+      { text: 'D. Un outil d’hygiène bucco-dentaire', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 26 : Rhazes recommandait :',
+    answers: [
+      { text: 'A. Le siwak après chaque repas', correct: true },
+      { text: 'B. L’usage de poudres dentifrices', correct: true },
+      { text: 'C. L’opium pour les douleurs', correct: true },
+      { text: 'D. Le miel pour raffermir les dents', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 27 : Abulcasis (Abulcassis) est :',
+    answers: [
+      { text: 'A. Père de la chirurgie moderne', correct: true },
+      { text: 'B. Auteur du Kitab al-Tasrif', correct: true },
+      { text: 'C. Le premier à relier tartre et gingivopathies', correct: true },
+      { text: 'D. Inventeur du microscope', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 28 : Avicenne est connu pour :',
+    answers: [
+      { text: 'A. Le Canon de la Médecine', correct: true },
+      { text: 'B. La description des maladies bucco-dentaires', correct: true },
+      { text: 'C. Les instruments de détartrage', correct: false },
+      { text: 'D. Le développement du microscope', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 29 : Pierre Fauchard a :',
+    answers: [
+      { text: 'A. Écrit Le Chirurgien Dentiste', correct: true },
+      { text: 'B. Décrit la parodontite', correct: true },
+      { text: 'C. Créé la première brosse moderne', correct: false },
+      { text: 'D. Reconnu le rôle du tartre', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 30 : William Addis est l’auteur de :',
+    answers: [
+      { text: 'A. La première brosse à dents moderne', correct: true },
+      { text: 'B. La chirurgie à lambeaux', correct: false },
+      { text: 'C. La cure du scorbut', correct: false },
+      { text: 'D. L’enduit gluant', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 31 : Louis Pasteur a :',
+    answers: [
+      { text: 'A. Mis en évidence le rôle bactérien', correct: true },
+      { text: 'B. Décrit la carie', correct: false },
+      { text: 'C. Étudié la plaque microbienne', correct: false },
+      { text: 'D. Prouvé l’importance de l’hygiène', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 32 : Black a introduit le terme :',
+    answers: [
+      { text: 'A. Plaque microbienne', correct: true },
+      { text: 'B. Carie', correct: false },
+      { text: 'C. Gencive marginale', correct: false },
+      { text: 'D. Gingivectomie', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 33 : Moritz Karolyi a souligné :',
+    answers: [
+      { text: 'A. Le rôle du traumatisme occlusal', correct: true },
+      { text: 'B. Le bruxisme', correct: true },
+      { text: 'C. La correction par meulage', correct: true },
+      { text: 'D. L’emploi de siwak', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 34 : Hyacinthe Vincent a décrit :',
+    answers: [
+      { text: 'A. La gingivite ulcéro-nécrotique', correct: true },
+      { text: 'B. Le bacille fusiforme', correct: true },
+      { text: 'C. Le tartre dentaire', correct: false },
+      { text: 'D. Le spirochète', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 35 : Gottlieb et Orban ont développé :',
+    answers: [
+      { text: 'A. L’histopathologie du parodonte', correct: true },
+      { text: 'B. La chirurgie plastique', correct: false },
+      { text: 'C. L’étude microscopique du cément', correct: true },
+      { text: 'D. Le traitement non chirurgical', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 36 : Weski a introduit le terme :',
+    answers: [
+      { text: 'A. Paradentium', correct: true },
+      { text: 'B. Periodontium', correct: false },
+      { text: 'C. Parodontite', correct: false },
+      { text: 'D. Gingivopathie', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 37 : Neumann a décrit :',
+    answers: [
+      { text: 'A. La chirurgie à lambeau', correct: true },
+      { text: 'B. L’ostéoplastie', correct: true },
+      { text: 'C. La régénération osseuse', correct: false },
+      { text: 'D. Le curetage marginal', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 38 : Le XXe siècle a vu :',
+    answers: [
+      { text: 'A. L’école de Vienne et de Berlin', correct: true },
+      { text: 'B. L’émergence de la microbiologie', correct: true },
+      { text: 'C. L’histopathologie moderne', correct: true },
+      { text: 'D. Le déclin de la chirurgie parodontale', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 39 : Le XXIe siècle a introduit :',
+    answers: [
+      { text: 'A. La médecine parodontale', correct: true },
+      { text: 'B. La régénération tissulaire guidée', correct: true },
+      { text: 'C. Les biomatériaux et cellules souches', correct: true },
+      { text: 'D. La chirurgie par extraction', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 40 : La parodontologie actuelle est marquée par :',
+    answers: [
+      { text: 'A. L’intégration médicale', correct: true },
+      { text: 'B. L’analyse génétique', correct: true },
+      { text: 'C. La modulation immunitaire', correct: true },
+      { text: 'D. L’abandon des lambeaux', correct: false }
+    ]
+  }
+],'La gencive': [
+  {
+    question: 'QCM 1 : La gencive appartient à :',
+    answers: [
+      { text: 'A. La muqueuse masticatoire', correct: true },
+      { text: 'B. La muqueuse bordante', correct: false },
+      { text: 'C. La muqueuse spécialisée', correct: false },
+      { text: 'D. La muqueuse labiale', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 2 : La gencive représente :',
+    answers: [
+      { text: 'A. Le parodonte profond', correct: false },
+      { text: 'B. Le parodonte superficiel', correct: true },
+      { text: 'C. Le ligament alvéolaire', correct: false },
+      { text: 'D. La pulpe', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 3 : Le rôle du parodonte est :',
+    answers: [
+      { text: 'A. La fixation', correct: true },
+      { text: 'B. Le recouvrement', correct: true },
+      { text: 'C. La protection de la dent', correct: true },
+      { text: 'D. La mastication', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 4 : La gencive recouvre :',
+    answers: [
+      { text: 'A. Les procès alvéolaires', correct: true },
+      { text: 'B. Le cément', correct: false },
+      { text: 'C. L’émail', correct: false },
+      { text: 'D. Les gencives palatines', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 5 : La gencive entoure :',
+    answers: [
+      { text: 'A. Le collet des dents', correct: true },
+      { text: 'B. Le ligament parodontal', correct: false },
+      { text: 'C. L’os alvéolaire', correct: false },
+      { text: 'D. La papille interdentaire', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 6 : On distingue trois types de gencive :',
+    answers: [
+      { text: 'A. Marginale', correct: true },
+      { text: 'B. Papillaire ou interdentaire', correct: true },
+      { text: 'C. Attachée', correct: true },
+      { text: 'D. Gingivale basale', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 7 : La gencive marginale entoure :',
+    answers: [
+      { text: 'A. La dent comme un collier', correct: true },
+      { text: 'B. L’os alvéolaire', correct: false },
+      { text: 'C. La gencive attachée', correct: false },
+      { text: 'D. Le palais dur', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 8 : La gencive marginale est séparée de la gencive attachée par :',
+    answers: [
+      { text: 'A. Le sillon gingival marginal', correct: true },
+      { text: 'B. La ligne muco-gingivale', correct: false },
+      { text: 'C. Le col cervical', correct: false },
+      { text: 'D. Le sulcus', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 9 : Le sillon gingival libre est distant de la jonction amélo-cémentaire de :',
+    answers: [
+      { text: 'A. 0,1 – 0,3 mm', correct: false },
+      { text: 'B. 0,5 – 2 mm', correct: true },
+      { text: 'C. 2 – 5 mm', correct: false },
+      { text: 'D. 3 – 6 mm', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 10 : Le sulcus gingival est :',
+    answers: [
+      { text: 'A. En forme de V', correct: true },
+      { text: 'B. En forme de U', correct: false },
+      { text: 'C. En forme de S', correct: false },
+      { text: 'D. En forme de ligne droite', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 11 : La profondeur normale du sulcus est :',
+    answers: [
+      { text: 'A. 0,5 ± 0,2 mm', correct: false },
+      { text: 'B. 1,8 ± 0,6 mm', correct: true },
+      { text: 'C. 2,5 ± 0,8 mm', correct: false },
+      { text: 'D. 3,5 ± 1 mm', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 12 : La gencive papillaire occupe :',
+    answers: [
+      { text: 'A. L’embrasure gingivale', correct: true },
+      { text: 'B. La muqueuse alvéolaire', correct: false },
+      { text: 'C. Le palais dur', correct: false },
+      { text: 'D. Le vestibule', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 13 : La gencive interdentaire est située :',
+    answers: [
+      { text: 'A. Sous le point de contact', correct: true },
+      { text: 'B. Sur la surface linguale', correct: false },
+      { text: 'C. À la jonction muco-gingivale', correct: false },
+      { text: 'D. Entre la gencive libre et attachée', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 14 : La gencive attachée est :',
+    answers: [
+      { text: 'A. Intimement liée au cément et à l’os', correct: true },
+      { text: 'B. Mobile sur l’os sous-jacent', correct: false },
+      { text: 'C. Lâche et fine', correct: false },
+      { text: 'D. Non kératinisée', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 15 : La gencive attachée est :',
+    answers: [
+      { text: 'A. Ferme, élastique et résistante', correct: true },
+      { text: 'B. Non adhérente au périoste', correct: false },
+      { text: 'C. Rattachée au plan osseux', correct: true },
+      { text: 'D. Prolongement de la marginale', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 16 : La hauteur de la gencive attachée est maximale :',
+    answers: [
+      { text: 'A. Dans les régions incisives', correct: true },
+      { text: 'B. Dans les régions molaires', correct: false },
+      { text: 'C. Dans les régions postérieures', correct: false },
+      { text: 'D. Au niveau des prémolaires', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 17 : La hauteur moyenne dans les régions incisives maxillaires est :',
+    answers: [
+      { text: 'A. 1 mm', correct: false },
+      { text: 'B. 2 mm', correct: false },
+      { text: 'C. 3,5 – 4,5 mm', correct: true },
+      { text: 'D. 5 – 6 mm', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 18 : La ligne muco-gingivale sépare :',
+    answers: [
+      { text: 'A. La gencive attachée de la muqueuse buccale', correct: true },
+      { text: 'B. La gencive marginale de la papillaire', correct: false },
+      { text: 'C. La muqueuse palatine de la linguale', correct: false },
+      { text: 'D. L’épithélium de jonction de la gencive libre', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 19 : La gencive saine a une couleur :',
+    answers: [
+      { text: 'A. Rose corail', correct: true },
+      { text: 'B. Rouge vif', correct: false },
+      { text: 'C. Blanche', correct: false },
+      { text: 'D. Bleuâtre', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 20 : La couleur de la gencive dépend de :',
+    answers: [
+      { text: 'A. La vascularisation', correct: true },
+      { text: 'B. Le degré de kératinisation', correct: true },
+      { text: 'C. Le nombre de mélanocytes', correct: true },
+      { text: 'D. L’épaisseur de la dentine', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 21 : La gencive saine présente une texture :',
+    answers: [
+      { text: 'A. Lisse et ferme', correct: true },
+      { text: 'B. Spongieuse', correct: false },
+      { text: 'C. Molle et humide', correct: false },
+      { text: 'D. Fragile', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 22 : L’aspect piqueté « peau d’orange » se trouve :',
+    answers: [
+      { text: 'A. Au niveau vestibulaire de la GA', correct: true },
+      { text: 'B. Au centre des papilles', correct: true },
+      { text: 'C. Sur le palais dur', correct: false },
+      { text: 'D. À la jonction muco-gingivale', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 23 : La consistance de la gencive dépend :',
+    answers: [
+      { text: 'A. Des fibres gingivales', correct: true },
+      { text: 'B. Du tissu conjonctif collagénique', correct: true },
+      { text: 'C. De la couche cornée', correct: false },
+      { text: 'D. De la salivation', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 24 : La gencive attachée est inamovible grâce :',
+    answers: [
+      { text: 'A. À son attache au périoste', correct: true },
+      { text: 'B. À l’épithélium de jonction', correct: false },
+      { text: 'C. Aux papilles conjonctives', correct: false },
+      { text: 'D. Aux hémidesmosomes', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 25 : La vascularisation de la gencive provient de :',
+    answers: [
+      { text: 'A. Trois sources principales', correct: true },
+      { text: 'B. L’artère faciale', correct: true },
+      { text: 'C. L’artère sublinguale', correct: true },
+      { text: 'D. L’artère dentaire postérieure', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 26 : Les artérioles supra-périostées irriguent :',
+    answers: [
+      { text: 'A. Les faces vestibulaires et linguales', correct: true },
+      { text: 'B. L’os spongieux', correct: false },
+      { text: 'C. Le ligament', correct: false },
+      { text: 'D. Les papilles gingivales', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 27 : Les vaisseaux du ligament parodontal :',
+    answers: [
+      { text: 'A. S’anastomosent avec des capillaires du sillon', correct: true },
+      { text: 'B. Ne participent pas à la vascularisation gingivale', correct: false },
+      { text: 'C. Appartiennent au système veineux', correct: false },
+      { text: 'D. Sont limités aux zones osseuses', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 28 : L’innervation de la gencive provient :',
+    answers: [
+      { text: 'A. Des branches du nerf trijumeau', correct: true },
+      { text: 'B. Du nerf facial', correct: false },
+      { text: 'C. Du nerf glossopharyngien', correct: false },
+      { text: 'D. Du nerf hypoglosse', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 29 : Le drainage lymphatique de la région incisive mandibulaire se fait vers :',
+    answers: [
+      { text: 'A. Les ganglions sous-mentonniers', correct: true },
+      { text: 'B. Les ganglions cervicaux profonds', correct: false },
+      { text: 'C. Les ganglions sous-mandibulaires', correct: false },
+      { text: 'D. Les ganglions parotidiens', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 30 : La gencive palatine se draine vers :',
+    answers: [
+      { text: 'A. Les ganglions cervicaux profonds', correct: true },
+      { text: 'B. Les ganglions sous-mandibulaires', correct: false },
+      { text: 'C. Les ganglions sous-mentonniers', correct: false },
+      { text: 'D. Le tronc jugulaire', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 31 : La gencive vestibulaire maxillaire se draine vers :',
+    answers: [
+      { text: 'A. Les ganglions sous-mandibulaires', correct: true },
+      { text: 'B. Les ganglions cervicaux', correct: false },
+      { text: 'C. Les ganglions sous-mentonniers', correct: false },
+      { text: 'D. Les ganglions linguals', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 32 : La gencive protège le parodonte profond grâce à :',
+    answers: [
+      { text: 'A. Sa kératinisation', correct: true },
+      { text: 'B. Ses jonctions intercellulaires', correct: true },
+      { text: 'C. Ses hémidesmosomes', correct: true },
+      { text: 'D. Sa desquamation', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 33 : Le rôle émonctoire consiste à :',
+    answers: [
+      { text: 'A. Éliminer les déchets', correct: true },
+      { text: 'B. Produire des cellules basales', correct: false },
+      { text: 'C. Transporter le sang', correct: false },
+      { text: 'D. Retenir les toxines', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 34 : Le rôle nutritif est assuré par :',
+    answers: [
+      { text: 'A. Le tissu conjonctif', correct: true },
+      { text: 'B. Les capillaires sanguins', correct: true },
+      { text: 'C. Les capillaires lymphatiques', correct: true },
+      { text: 'D. L’épithélium', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 35 : La défense gingivale est assurée par :',
+    answers: [
+      { text: 'A. Les leucocytes polynucléaires', correct: true },
+      { text: 'B. Les macrophages', correct: true },
+      { text: 'C. Les cellules lymphoïdes', correct: true },
+      { text: 'D. Les ostéoblastes', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 36 : L’attache épithéliale sécrète :',
+    answers: [
+      { text: 'A. Une substance mucopolysaccharidique', correct: true },
+      { text: 'B. Du collagène', correct: false },
+      { text: 'C. Des cytokines', correct: false },
+      { text: 'D. De la mélanine', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 37 : Le fluide gingival passe à travers :',
+    answers: [
+      { text: 'A. L’épithélium jonctionnel', correct: true },
+      { text: 'B. La membrane basale', correct: true },
+      { text: 'C. L’émail', correct: false },
+      { text: 'D. Le cément', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 38 : Le turn-over épithélial est de :',
+    answers: [
+      { text: 'A. 4–6 jours pour EJ', correct: true },
+      { text: 'B. 4–10 jours pour EOS', correct: true },
+      { text: 'C. 7–15 jours pour EOG', correct: true },
+      { text: 'D. 20–30 jours pour tout épithélium', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 39 : La kératinisation est :',
+    answers: [
+      { text: 'A. Un processus physiologique', correct: true },
+      { text: 'B. Une conversion de protéines insolubles', correct: true },
+      { text: 'C. Une desquamation cellulaire', correct: false },
+      { text: 'D. Une inflammation', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 40 : La gencive représente :',
+    answers: [
+      { text: 'A. La première barrière contre l’agression', correct: true },
+      { text: 'B. Un organe de défense mécanique', correct: true },
+      { text: 'C. Une structure passive sans rôle', correct: false },
+      { text: 'D. Une barrière chimique et bactérienne', correct: true }
+    ]
+  }
+]
+
+
+  },
+  'Anatomie dentaire':{
+   'Généralités et notions de bases en Anatomie dentaire': [
+  {
+    question: 'QCM 1 : La dent joue un rôle dans :',
+    answers: [
+      { text: 'A. La mastication', correct: true },
+      { text: 'B. La respiration', correct: false },
+      { text: 'C. La phonation', correct: true },
+      { text: 'D. L’esthétique', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 2 : Les tissus durs de la dent sont :',
+    answers: [
+      { text: 'A. L’émail', correct: true },
+      { text: 'B. La dentine', correct: true },
+      { text: 'C. Le cément', correct: true },
+      { text: 'D. La pulpe', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 3 : La pulpe dentaire contient :',
+    answers: [
+      { text: 'A. Des nerfs', correct: true },
+      { text: 'B. Des vaisseaux sanguins', correct: true },
+      { text: 'C. De l’émail', correct: false },
+      { text: 'D. Des odontoblastes', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 4 : La dent est composée de :',
+    answers: [
+      { text: 'A. Couronne', correct: true },
+      { text: 'B. Racine', correct: true },
+      { text: 'C. Pulpe', correct: true },
+      { text: 'D. Langue', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 5 : Le collet dentaire correspond à :',
+    answers: [
+      { text: 'A. La jonction amélo-cémentaire', correct: true },
+      { text: 'B. La limite entre couronne et racine', correct: true },
+      { text: 'C. La partie visible de la dent', correct: false },
+      { text: 'D. Le sommet de la racine', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 6 : Le collet clinique est limité par :',
+    answers: [
+      { text: 'A. La gencive', correct: true },
+      { text: 'B. Le cément', correct: false },
+      { text: 'C. L’os alvéolaire', correct: false },
+      { text: 'D. Le ligament', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 7 : Chez l’enfant de 10 ans :',
+    answers: [
+      { text: 'A. La couronne anatomique est plus longue que la clinique', correct: true },
+      { text: 'B. La couronne clinique est plus longue', correct: false },
+      { text: 'C. Les racines sont toutes formées', correct: false },
+      { text: 'D. La gencive recouvre partiellement la couronne', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 8 : Chez le patient âgé :',
+    answers: [
+      { text: 'A. La gencive se rétracte', correct: true },
+      { text: 'B. La couronne clinique augmente', correct: true },
+      { text: 'C. Le collet anatomique ne change pas', correct: true },
+      { text: 'D. Les racines se raccourcissent', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 9 : Une dent monoradiculée possède :',
+    answers: [
+      { text: 'A. Une seule racine', correct: true },
+      { text: 'B. Deux racines', correct: false },
+      { text: 'C. Une furcation', correct: false },
+      { text: 'D. Un canal unique', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 10 : Une dent pluriradiculée présente :',
+    answers: [
+      { text: 'A. Plusieurs racines', correct: true },
+      { text: 'B. Un tronc radiculaire', correct: true },
+      { text: 'C. Une zone de furcation', correct: true },
+      { text: 'D. Une seule couronne', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 11 : La furcation est :',
+    answers: [
+      { text: 'A. La séparation des racines', correct: true },
+      { text: 'B. La jonction couronne-racine', correct: false },
+      { text: 'C. Le sommet radiculaire', correct: false },
+      { text: 'D. La zone du collet', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 12 : Le terme “denture” désigne :',
+    answers: [
+      { text: 'A. L’état statique des dents présentes', correct: true },
+      { text: 'B. Le processus d’éruption', correct: false },
+      { text: 'C. Le remplacement dentaire', correct: false },
+      { text: 'D. L’usure dentaire', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 13 : La dentition correspond à :',
+    answers: [
+      { text: 'A. Un phénomène dynamique', correct: true },
+      { text: 'B. L’éruption et la mise en place des dents', correct: true },
+      { text: 'C. Un état statique', correct: false },
+      { text: 'D. Une destruction dentaire', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 14 : La denture déciduale contient :',
+    answers: [
+      { text: 'A. 20 dents au total', correct: true },
+      { text: 'B. 10 dents par arcade', correct: true },
+      { text: 'C. Des prémolaires', correct: false },
+      { text: 'D. Aucune prémolaire', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 15 : La denture permanente comprend :',
+    answers: [
+      { text: 'A. 32 dents au total', correct: true },
+      { text: 'B. 16 dents par arcade', correct: true },
+      { text: 'C. Des troisièmes molaires', correct: true },
+      { text: 'D. 20 dents au total', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 16 : La denture mixte s’étend entre :',
+    answers: [
+      { text: 'A. 6 et 12 ans', correct: true },
+      { text: 'B. 3 et 8 ans', correct: false },
+      { text: 'C. 12 et 18 ans', correct: false },
+      { text: 'D. 15 et 25 ans', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 17 : Les incisives :',
+    answers: [
+      { text: 'A. Découpent les aliments', correct: true },
+      { text: 'B. Ont un bord tranchant', correct: true },
+      { text: 'C. Ont deux racines', correct: false },
+      { text: 'D. Sont au nombre de quatre par arcade', correct: true }
+    ]
+  },
+  {
+    question: 'QCM 18 : Les canines :',
+    answers: [
+      { text: 'A. Ont une racine longue', correct: true },
+      { text: 'B. Déchirent les aliments', correct: true },
+      { text: 'C. Guident l’occlusion', correct: true },
+      { text: 'D. Ont une face triturante', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 19 : Les prémolaires :',
+    answers: [
+      { text: 'A. N’existent pas dans la denture lactéale', correct: true },
+      { text: 'B. Ont une face triturante', correct: true },
+      { text: 'C. Sont au nombre de huit', correct: true },
+      { text: 'D. Ont toujours une racine unique', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 20 : Les molaires :',
+    answers: [
+      { text: 'A. Sont volumineuses', correct: true },
+      { text: 'B. Ont plusieurs cuspides', correct: true },
+      { text: 'C. Servent à broyer', correct: true },
+      { text: 'D. Ont toujours deux racines', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 21 : Les dents déciduales sont aussi appelées :',
+    answers: [
+      { text: 'A. Temporaires', correct: true },
+      { text: 'B. Caduques', correct: true },
+      { text: 'C. Primaires', correct: true },
+      { text: 'D. Accessoires', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 22 : La première dent permanente à apparaître est :',
+    answers: [
+      { text: 'A. L’incisive centrale', correct: false },
+      { text: 'B. La première molaire', correct: true },
+      { text: 'C. La canine', correct: false },
+      { text: 'D. La deuxième prémolaire', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 23 : L’éruption de la première molaire a lieu vers :',
+    answers: [
+      { text: 'A. 4 ans', correct: false },
+      { text: 'B. 6 ans', correct: true },
+      { text: 'C. 10 ans', correct: false },
+      { text: 'D. 12 ans', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 24 : La formule dentaire de la denture temporaire est :',
+    answers: [
+      { text: 'A. 2i – 1c – 2m', correct: true },
+      { text: 'B. 2I – 1C – 2P – 3M', correct: false },
+      { text: 'C. 2i – 1c – 3m', correct: false },
+      { text: 'D. 1I – 1C – 2M', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 25 : La formule dentaire de la denture permanente est :',
+    answers: [
+      { text: 'A. 2I – 1C – 2P – 3M', correct: true },
+      { text: 'B. 2i – 1c – 2m', correct: false },
+      { text: 'C. 1I – 1C – 3P – 3M', correct: false },
+      { text: 'D. 2I – 2C – 2M – 3P', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 26 : Les lettres majuscules désignent :',
+    answers: [
+      { text: 'A. Les dents permanentes', correct: true },
+      { text: 'B. Les dents déciduales', correct: false },
+      { text: 'C. Les dents surnuméraires', correct: false },
+      { text: 'D. Les dents incluses', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 27 : Les lettres minuscules désignent :',
+    answers: [
+      { text: 'A. Les dents lactéales', correct: true },
+      { text: 'B. Les dents temporaires', correct: true },
+      { text: 'C. Les dents permanentes', correct: false },
+      { text: 'D. Les dents de sagesse', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 28 : Une dent pluriradiculée présente :',
+    answers: [
+      { text: 'A. Plusieurs racines', correct: true },
+      { text: 'B. Un tronc radiculaire', correct: true },
+      { text: 'C. Une seule couronne', correct: true },
+      { text: 'D. Une seule racine', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 29 : Le terme “monoradiculée” signifie :',
+    answers: [
+      { text: 'A. Une seule racine', correct: true },
+      { text: 'B. Deux racines', correct: false },
+      { text: 'C. Trois racines', correct: false },
+      { text: 'D. Une racine absente', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 30 : Les dents de sagesse sont :',
+    answers: [
+      { text: 'A. Les troisièmes molaires', correct: true },
+      { text: 'B. Les deuxièmes molaires', correct: false },
+      { text: 'C. Les canines postérieures', correct: false },
+      { text: 'D. Les prémolaires finales', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 31 : Les dents de sagesse apparaissent vers :',
+    answers: [
+      { text: 'A. 6–9 ans', correct: false },
+      { text: 'B. 12–14 ans', correct: false },
+      { text: 'C. 17–21 ans', correct: true },
+      { text: 'D. 25–30 ans', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 32 : Une arcade dentaire complète contient :',
+    answers: [
+      { text: 'A. 16 dents', correct: true },
+      { text: 'B. 8 dents', correct: false },
+      { text: 'C. 12 dents', correct: false },
+      { text: 'D. 20 dents', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 33 : La formule dentaire humaine représente :',
+    answers: [
+      { text: 'A. Une moitié d’arcade', correct: true },
+      { text: 'B. Une arcade complète', correct: false },
+      { text: 'C. Les deux mâchoires', correct: false },
+      { text: 'D. Une seule dent', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 34 : Chez un enfant de 8 ans :',
+    answers: [
+      { text: 'A. Il existe des dents déciduales', correct: true },
+      { text: 'B. Il existe des dents permanentes', correct: true },
+      { text: 'C. La première molaire permanente est présente', correct: true },
+      { text: 'D. Les dents de sagesse ont érupté', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 35 : La denture mixte débute par :',
+    answers: [
+      { text: 'A. L’éruption de la première molaire', correct: true },
+      { text: 'B. La chute des incisives temporaires', correct: true },
+      { text: 'C. L’apparition des canines', correct: false },
+      { text: 'D. La formation du cément', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 36 : L’éruption est :',
+    answers: [
+      { text: 'A. Le mouvement de la dent vers la cavité buccale', correct: true },
+      { text: 'B. Le remplacement des dents temporaires', correct: true },
+      { text: 'C. Un processus statique', correct: false },
+      { text: 'D. Un phénomène purement mécanique', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 37 : La denture permanente complète comprend :',
+    answers: [
+      { text: 'A. 32 dents', correct: true },
+      { text: 'B. 28 sans dents de sagesse', correct: true },
+      { text: 'C. 30 avec dents incluses', correct: false },
+      { text: 'D. 20 sans molaires', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 38 : Une dent pluriradiculée comporte :',
+    answers: [
+      { text: 'A. Une seule couronne', correct: true },
+      { text: 'B. Plusieurs racines', correct: true },
+      { text: 'C. Une furcation', correct: true },
+      { text: 'D. Une seule cavité pulpaire', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 39 : La denture adulte correspond à :',
+    answers: [
+      { text: 'A. Deux arcades complètes', correct: true },
+      { text: 'B. 32 dents au total', correct: true },
+      { text: 'C. Une symétrie bilatérale', correct: true },
+      { text: 'D. Une absence de prémolaires', correct: false }
+    ]
+  },
+  {
+    question: 'QCM 40 : La première dent permanente marque :',
+    answers: [
+      { text: 'A. Le début de la denture mixte', correct: true },
+      { text: 'B. Le passage à la denture adulte', correct: true },
+      { text: 'C. Le remplacement complet', correct: false },
+      { text: 'D. La chute de la dent temporaire correspondante', correct: false }
+    ]
+  }
+]
+
+}
+},
+
+      'سنة 3': {
+        'جراحة الفم': {
+          'مقدمة في جراحة الفم': [
+            {
+              question: 'ما الهدف من جراحة الفم؟',
+              answers: [
+                { text: 'معالجة وإصلاح مشاكل الفم والأسنان جراحياً', correct: true },
+                { text: 'تنظيف الأسنان فقط', correct: false },
+                { text: 'زراعة الشعر', correct: false },
+                { text: 'معالجة العظام فقط', correct: false }
+              ]
+            }
+          ]
+        },
+        'طب الأسنان التجميلي': {
+          'أساسيات طب الأسنان التجميلي': [
+            {
+              question: 'ما هو هدف طب الأسنان التجميلي؟',
+              answers: [
+                { text: 'تحسين مظهر الأسنان والابتسامة', correct: true },
+                { text: 'علاج أمراض القلب', correct: false },
+                { text: 'زيادة قوة العضلات', correct: false },
+                { text: 'معالجة البشرة', correct: false }
+              ]
+            }
+          ]
+        }
+      }
+    },
+
+    'الصيدلة': {
+      'سنة 1': {
+        'الكيمياء العامة': {
+          'مقدمة في الكيمياء': [
+            {
+              question: 'ما هي المادة؟',
+              answers: [
+                { text: 'كل ما له كتلة ويشغل حيزًا', correct: true },
+                { text: 'الهواء فقط', correct: false },
+                { text: 'الماء فقط', correct: false },
+                { text: 'الأشياء الصلبة فقط', correct: false }
+              ]
+            }
+          ]
+        },
+        'الأحياء الدقيقة': {
+          'مقدمة في الأحياء الدقيقة': [
+            {
+              question: 'ما هي الأحياء الدقيقة؟',
+              answers: [
+                { text: 'كائنات حية صغيرة لا ترى بالعين المجردة', correct: true },
+                { text: 'الحيوانات الكبيرة', correct: false },
+                { text: 'النباتات الكبيرة', correct: false },
+                { text: 'المعادن', correct: false }
+              ]
+            }
+          ]
+        }
+      },
+      'سنة 2': {
+        'علم الأدوية': {
+          'مقدمة في علم الأدوية': [
+            {
+              question: 'ما هو علم الأدوية؟',
+              answers: [
+                { text: 'دراسة تأثير الأدوية على الجسم', correct: true },
+                { text: 'دراسة الصخور', correct: false },
+                { text: 'دراسة الفلك', correct: false },
+                { text: 'دراسة الأحياء البحرية', correct: false }
+              ]
+            }
+          ]
+        },
+        'الكيمياء الصيدلية': {
+          'مقدمة في الكيمياء الصيدلية': [
+            {
+              question: 'ما هو دور الكيمياء الصيدلية؟',
+              answers: [
+                { text: 'تصميم وتطوير الأدوية', correct: true },
+                { text: 'إصلاح السيارات', correct: false },
+                { text: 'بناء المنازل', correct: false },
+                { text: 'دراسة الفضاء', correct: false }
+              ]
+            }
+          ]
+        }
+      },
+      'سنة 3': {
+        'صيدلة سريرية': {
+          'مقدمة في الصيدلة السريرية': [
+            {
+              question: 'ما هو الهدف من الصيدلة السريرية؟',
+              answers: [
+                { text: 'تحسين استخدام الأدوية لتحقيق أفضل نتائج علاجية', correct: true },
+                { text: 'إصلاح الحواسيب', correct: false },
+                { text: 'زيادة الإنتاج الزراعي', correct: false },
+                { text: 'تنظيف الأسنان', correct: false }
+              ]
+            }
+          ]
+        },
+        'علم السموم': {
+          'مقدمة في علم السموم': [
+            {
+              question: 'ما هو علم السموم؟',
+              answers: [
+                { text: 'دراسة تأثير المواد السامة على الكائنات الحية', correct: true },
+                { text: 'دراسة الفيتامينات', correct: false },
+                { text: 'دراسة المعادن', correct: false },
+                { text: 'دراسة النباتات', correct: false }
+              ]
+            }
+          ]
+        }
+      }
+    },
+
+    'الطب البشري': {
+      'سنة 1': {
+        'التشريح العام': {
+          'مقدمة في التشريح العام': [
+            {
+              question: 'ما هو التشريح العام؟',
+              answers: [
+                { text: 'دراسة بنية الجسم ككل', correct: true },
+                { text: 'دراسة النباتات', correct: false },
+                { text: 'دراسة الطقس', correct: false },
+                { text: 'دراسة الكواكب', correct: false }
+              ]
+            }
+          ]
+        },
+        'الفسيولوجيا': {
+          'مقدمة في الفسيولوجيا': [
+            {
+              question: 'ما هي الفسيولوجيا؟',
+              answers: [
+                { text: 'دراسة وظائف الأعضاء', correct: true },
+                { text: 'دراسة أشكال الأعضاء فقط', correct: false },
+                { text: 'دراسة الحشرات', correct: false },
+                { text: 'دراسة البحار', correct: false }
+              ]
+            }
+          ]
+        }
+      },
+      'سنة 2': {
+        'علم الأمراض': {
+          'مقدمة في علم الأمراض': [
+            {
+              question: 'ما هو علم الأمراض؟',
+              answers: [
+                { text: 'دراسة أسباب وتطور الأمراض', correct: true },
+                { text: 'دراسة الفضاء', correct: false },
+                { text: 'دراسة الأحياء البحرية', correct: false },
+                { text: 'دراسة المعادن', correct: false }
+              ]
+            }
+          ]
+        },
+        'علم المناعة': {
+          'مقدمة في علم المناعة': [
+            {
+              question: 'ما هو علم المناعة؟',
+              answers: [
+                { text: 'دراسة الجهاز المناعي والدفاعات الحيوية', correct: true },
+                { text: 'دراسة النباتات', correct: false },
+                { text: 'دراسة الصخور', correct: false },
+                { text: 'دراسة الأدوية', correct: false }
+              ]
+            }
+          ]
+        }
+      },
+      'سنة 3': {
+        'الطب الباطني': {
+          'مقدمة في الطب الباطني': [
+            {
+              question: 'ما هو الطب الباطني؟',
+              answers: [
+                { text: 'تشخيص وعلاج الأمراض الداخلية', correct: true },
+                { text: 'جراحة العظام', correct: false },
+                { text: 'علاج الأسنان', correct: false },
+                { text: 'علاج الجلد', correct: false }
+              ]
+            }
+          ]
+        },
+        'طب الطوارئ': {
+          'مقدمة في طب الطوارئ': [
+            {
+              question: 'ما هو هدف طب الطوارئ؟',
+              answers: [
+                { text: 'تقديم العلاج الفوري للحالات الطارئة', correct: true },
+                { text: 'إصلاح الحواسيب', correct: false },
+                { text: 'التسويق الإلكتروني', correct: false },
+                { text: 'زراعة الأشجار', correct: false }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  };
+  const specialty = localStorage.getItem('specialty') || 'غير محدد';
+  const level = localStorage.getItem('level') || 'غير محدد';
+  const subject = localStorage.getItem('subject') || 'غير محدد';
+
+  const questionsListDiv = document.getElementById('questionsList');
+  if (questionsData[specialty] && questionsData[specialty][level] && questionsData[specialty][level][subject] && questionsData[specialty][level][subject][lesson]) {
+    questionsData[specialty][level][subject][lesson].forEach(q => {
+      const block = document.createElement('div');
+      block.className = 'question-block';
+
+      const qText = document.createElement('div');
+      qText.className = 'question-text';
+      qText.textContent = q.question;
+      block.appendChild(qText);
+
+      const answersContainer = document.createElement('div');
+      answersContainer.className = 'answers';
+
+      const selectedAnswers = new Set();
+      const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+      q.answers.forEach(a => {
+        const ans = document.createElement('div');
+        ans.className = 'answer';
+        ans.textContent = a.text;
+        ans.onclick = () => {
+          if (selectedAnswers.has(a.text)) {
+            selectedAnswers.delete(a.text);
+            ans.classList.remove('selected');
+          } else {
+            selectedAnswers.add(a.text);
+            ans.classList.add('selected');
+          }
+        };
+        answersContainer.appendChild(ans);
+      });
+
+      block.appendChild(answersContainer);
+
+      const controlDiv = document.createElement('div');
+      controlDiv.className = 'control-buttons';
+
+      const submitBtn = document.createElement('button');
+      submitBtn.textContent = 'هذه هي إجابتي';
+      submitBtn.onclick = () => {
+        const selectedArray = Array.from(selectedAnswers);
+        let feedbackText = '';
+        let feedbackClass = '';
+
+        if (selectedArray.length === 0) {
+          feedbackText = 'لم تختر أي إجابة';
+          feedbackClass = 'incorrect';
+        } else if (selectedArray.length === correctAnswers.length && selectedArray.every(ans => correctAnswers.includes(ans))) {
+          feedbackText = 'إجابتك صحيحة ✅';
+          feedbackClass = 'correct';
+        } else {
+          feedbackText = 'إجابتك خاطئة ❌';
+          feedbackClass = 'incorrect';
+        }
+
+        const feedback = document.createElement('div');
+        feedback.className = `feedback ${feedbackClass}`;
+        feedback.textContent = feedbackText;
+        block.appendChild(feedback);
+
+        if (feedbackClass !== 'correct') {
+          const showSolutionBtn = document.createElement('button');
+          showSolutionBtn.className = 'show-solution-btn';
+          showSolutionBtn.textContent = '💡 عرض الإجابة الصحيحة';
+          showSolutionBtn.onclick = () => {
+            block.querySelectorAll('.answer').forEach(ans => {
+              if (correctAnswers.includes(ans.textContent)) {
+                ans.classList.add('correct');
+              } else if (selectedArray.includes(ans.textContent)) {
+                ans.classList.add('incorrect');
+              }
+            });
+            showSolutionBtn.remove();
+          };
+          block.appendChild(showSolutionBtn);
+        }
+      };
+
+      const resetBtn = document.createElement('button');
+      resetBtn.textContent = 'إعادة المحاولة';
+      resetBtn.onclick = () => {
+        selectedAnswers.clear();
+        block.querySelectorAll('.answer').forEach(ans => ans.classList.remove('selected', 'correct', 'incorrect'));
+        block.querySelectorAll('.feedback').forEach(fb => fb.remove());
+        block.querySelectorAll('.show-solution-btn').forEach(btn => btn.remove());
+      };
+
+      const backBtn = document.createElement('button');
+      backBtn.textContent = 'رجوع لاختيار درس آخر';
+      backBtn.onclick = () => {
+        window.location.href = 'lessons.html';
+      };
+
+      controlDiv.appendChild(submitBtn);
+      controlDiv.appendChild(resetBtn);
+      controlDiv.appendChild(backBtn);
+      block.appendChild(controlDiv);
+
+      questionsListDiv.appendChild(block);
+    });
+  } else {
+    questionsListDiv.innerHTML = '<p>لا توجد أسئلة مسجلة لهذا الدرس.</p>';
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول - Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@600&display=swap');
+  body {
+    font-family: 'Cairo', Arial, sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top, #d9faff, #aee4f5, #7fd4e8);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  .bg-illustration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('A_2D_digital_illustration_login_and_registration_s.png') center/cover no-repeat;
+    opacity: 0.06;
+    z-index: 0;
+  }
+  .floating-shapes span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    animation: float 12s linear infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-1200px) rotate(720deg); }
+  }
+  .flag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  
+  .futur-title {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+    z-index: 3;
+  }
+  .site-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    background: linear-gradient(90deg, #00b4d8, #48cae4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    animation: glow 2s ease-in-out infinite alternate;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0,0.85);
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  }
+  @keyframes glow {
+    from { text-shadow: 0 0 10px rgba(0, 180, 216, 0.4); }
+    to { text-shadow: 0 0 20px rgba(0, 180, 216, 0.9); }
+  }
+  .container {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    width: 320px;
+    max-width: 90%;
+    text-align: center;
+    z-index: 2;
+    animation: fadeIn 1.5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  h1 {
+    margin-bottom: 15px;
+    color: #023e8a;
+    font-size: 22px;
+  }
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    background: rgba(255,255,255,0.95);
+    transition: 0.3s;
+  }
+  input:focus {
+    outline: none;
+    box-shadow: 0 0 10px #48cae4;
+  }
+  button {
+    background: linear-gradient(90deg, #00b4d8, #48cae4);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 25px;
+    margin-top: 8px;
+    width: 100%;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(72, 202, 228, 0.6);
+  }
+  .switch {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #023e8a;
+  }
+  .switch a {
+    color: #48cae4;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-illustration"></div>
+  <div class="floating-shapes">
+    <span style="left:10%; animation-delay:0s;"></span>
+    <span style="left:50%; animation-delay:2s;"></span>
+    <span style="left:80%; animation-delay:4s;"></span>
+  </div>
+
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" class="flag" alt="علم الجزائر">
+
+  <div class="futur-title">Futur Doctors Community</div>
+
+  <div class="container">
+    <div class="site-title">Qcms BY DJO</div>
+    <h1>تسجيل الدخول</h1>
+    <input type="email" placeholder="📧 البريد الإلكتروني">
+    <input type="password" placeholder="🔒 كلمة المرور">
+    <button onclick="login()">دخول</button>
+    <div class="switch">
+      ليس لديك حساب؟ <a href="index.html">إنشاء حساب</a>
+    </div>
+  </div>
+
+<script>
+function login() {
+  alert('تم تسجيل الدخول بنجاح!');
+}
+</script>
+
+</body>
+</html>
