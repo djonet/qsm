@@ -22,7 +22,6 @@
       overflow: hidden;
     }
 
-    /* خلفية توضيحية */
     .bg-illustration {
       position: absolute;
       top: 0;
@@ -34,7 +33,6 @@
       z-index: 0;
     }
 
-    /* الأشكال المتحركة */
     .floating-shapes span {
       position: absolute;
       display: block;
@@ -50,7 +48,6 @@
       100% { transform: translateY(-1200px) rotate(720deg); }
     }
 
-    /* العلم */
     .flag {
       position: absolute;
       top: 15px;
@@ -60,7 +57,6 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
 
-    /* عنوان المستقبل */
     .futur-title {
       background-color: black;
       color: white;
@@ -74,7 +70,6 @@
       z-index: 3;
     }
 
-    /* عنوان الموقع */
     .site-title {
       font-family: 'Poppins', sans-serif;
       font-size: 28px;
@@ -96,7 +91,6 @@
       to { text-shadow: 0 0 20px rgba(0, 180, 216, 0.9); }
     }
 
-    /* الحاوية الرئيسية */
     .container {
       background: rgba(255, 255, 255, 0.12);
       padding: 30px;
@@ -115,7 +109,6 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* خيارات التخصص والمستوى */
     .options-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -138,9 +131,7 @@
       flex-wrap: nowrap;
     }
 
-    .btn-option span.icon {
-      font-size: 16px;
-    }
+    .btn-option span.icon { font-size: 16px; }
 
     .btn-option:hover {
       transform: scale(1.05);
@@ -148,7 +139,6 @@
       color: white;
     }
 
-    /* زر التأكيد */
     button.confirm {
       background: linear-gradient(90deg, #00b4d8, #48cae4);
       color: white;
@@ -167,19 +157,9 @@
       box-shadow: 0 4px 20px rgba(72, 202, 228, 0.6);
     }
 
-    /* روابط التبديل */
-    .switch {
-      margin-top: 12px;
-      font-size: 13px;
-      color: #023e8a;
-    }
+    .switch { margin-top: 12px; font-size: 13px; color: #023e8a; }
+    .switch a { color: #48cae4; text-decoration: none; }
 
-    .switch a {
-      color: #48cae4;
-      text-decoration: none;
-    }
-
-    /* شريط الأخبار */
     .news-bar {
       background: rgba(0, 0, 0, 0.6);
       color: white;
@@ -202,12 +182,78 @@
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
+
+    /* ⚡ شاشة التحذير المرعبة */
+    #securityOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at center, #000, #0a0a0a, #111);
+      z-index: 9999;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      animation: fadeInOverlay 1s ease;
+    }
+
+    @keyframes fadeInOverlay {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #securityOverlay h1 {
+      color: #ff0033;
+      font-size: 32px;
+      text-shadow: 0 0 25px red, 0 0 50px #ff0000;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    #securityOverlay p {
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    #securityOverlay button {
+      margin-top: 40px;
+      background: linear-gradient(90deg, #ff0000, #cc0000);
+      border: none;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 12px 30px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255,0,0,0.5);
+      transition: all 0.3s ease;
+    }
+
+    #securityOverlay button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(255,0,0,0.8);
+    }
+
+    #smokeBg {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.ibb.co/GH9thFj/smoke-effect.gif') center/cover repeat;
+      opacity: 0.2;
+      z-index: -1;
+      mix-blend-mode: lighten;
+    }
   </style>
 </head>
 
 <body>
   <div class="bg-illustration"></div>
-
   <div class="floating-shapes">
     <span style="left:10%; animation-delay:0s;"></span>
     <span style="left:50%; animation-delay:2s;"></span>
@@ -215,7 +261,6 @@
   </div>
 
   <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" class="flag" alt="علم الجزائر">
-
   <div class="futur-title">Futur Doctors Community</div>
 
   <div class="container">
@@ -229,7 +274,6 @@
     </div>
 
     <div id="levels" class="options-grid" style="display:none;"></div>
-
     <button class="confirm" onclick="saveSelection()">تأكيد</button>
 
     <div class="switch">
@@ -241,6 +285,18 @@
     <div class="news-text">
       🦷 كل الحقوق محفوظة © 2025 - نحن الجيل الصاعد، خُلقنا للتغيير، صناع الابتسامة كتاب المجد ورمز الرقي رسالة الشفاء 💫
     </div>
+  </div>
+
+  <!-- 🩸 نافذة التحذير المرعبة -->
+  <div id="securityOverlay">
+    <div id="smokeBg"></div>
+    <h1>🚫 تحذير أمني صارم</h1>
+    <p>
+      يُمنع <strong>مشاركة الحساب</strong> أو <strong>التقاط الشاشة</strong> أو <strong>نشر أي محتوى</strong> من الموقع.<br><br>
+      ⚠️ أي مخالفة تؤدي إلى <span style="color:#ff5555;">إغلاق الحساب نهائيًا</span>.<br>
+      🔥 النظام يُراقِب نشاط المستخدمين للحفاظ على الأمان الأكاديمي.
+    </p>
+    <button onclick="closeWarning()">✅ فهمت</button>
   </div>
 
   <script>
@@ -287,9 +343,19 @@
     function goBack() {
       window.location.href = 'welcome.html';
     }
-  </script>
 
-  <link rel="stylesheet" href="qms-bind.css">
-  <script src="qms-bind.js"></script>
+    // ⚡ عرض التحذير مرة واحدة فقط
+    const shownKey = "__warning_specialization_once";
+    window.addEventListener("load", () => {
+      if (!localStorage.getItem(shownKey)) {
+        document.getElementById("securityOverlay").style.display = "flex";
+      }
+    });
+
+    function closeWarning() {
+      document.getElementById("securityOverlay").style.display = "none";
+      localStorage.setItem(shownKey, "true");
+    }
+  </script>
 </body>
 </html>
