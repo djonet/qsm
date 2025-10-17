@@ -171,14 +171,14 @@
 <!-- ✅ Firebase Script -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
   import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
     authDomain: "qcm-djo.firebaseapp.com",
     projectId: "qcm-djo",
-    storageBucket: "qcm-djo.firebasestorage.app",
+    storageBucket: "qcm-djo.appspot.com",
     messagingSenderId: "384943172069",
     appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
     measurementId: "G-13MC1GT4HM"
@@ -188,12 +188,12 @@
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  // ✅ توليد بصمة الجهاز (deviceId)
+  // ✅ بصمة الجهاز
   function generateDeviceId() {
     return btoa(navigator.userAgent + screen.width + screen.height + navigator.language);
   }
 
-  // ✅ تسجيل أو التحقق من الجهاز
+  // ✅ تحقق الجهاز
   async function registerDevice(user) {
     const deviceId = generateDeviceId();
     const ref = doc(db, "devices", user.uid);
@@ -203,7 +203,7 @@
       const savedId = snap.data().deviceId;
       if (savedId !== deviceId) {
         alert("🚫 هذا الحساب مستخدم في جهاز آخر. لا يمكنك تسجيل الدخول من هنا.");
-        await auth.signOut();
+        await signOut(auth);
         return false;
       }
     } else {
@@ -226,29 +226,31 @@
       const userCred = await signInWithEmailAndPassword(auth, email, password);
       const user = userCred.user;
 
+      // تحقق من السماح
       const allowedRef = doc(db, "allowedUsers", user.uid);
       const allowedSnap = await getDoc(allowedRef);
       if (!allowedSnap.exists()) {
         alert("🚫 حسابك غير مفعّل بعد. يرجى التواصل مع الإدارة.");
-        await auth.signOut();
+        await signOut(auth);
         return;
       }
 
+      // تحقق الجهاز
       const ok = await registerDevice(user);
       if (!ok) return;
 
       alert("✅ تم تسجيل الدخول بنجاح!");
       window.location.href = "welcome.html";
     } catch (error) {
-      console.error(error);
       alert("❌ خطأ في تسجيل الدخول: " + error.message);
+      console.error(error);
     }
   };
 
-  // ✅ التحقق التلقائي من حالة الدخول
+  // ✅ تحقق تلقائي
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log("✅ المستخدم مسجل الدخول:", user.email);
+      console.log("✅ المستخدم:", user.email);
     }
   });
 </script>
