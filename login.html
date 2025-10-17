@@ -160,19 +160,99 @@
   <div class="container">
     <div class="site-title">Qcms BY DJO</div>
     <h1>تسجيل الدخول</h1>
-    <input type="email" placeholder="📧 البريد الإلكتروني">
-    <input type="password" placeholder="🔒 كلمة المرور">
+    <input type="email" id="email" placeholder="📧 البريد الإلكتروني">
+    <input type="password" id="password" placeholder="🔒 كلمة المرور">
     <button onclick="login()">دخول</button>
     <div class="switch">
       ليس لديك حساب؟ <a href="index.html">إنشاء حساب</a>
     </div>
   </div>
 
-<script>
-function login() {
-  alert('تم تسجيل الدخول بنجاح!');
-}
+<!-- ✅ Firebase Script -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // ✅ توليد بصمة الجهاز (deviceId)
+  function generateDeviceId() {
+    return btoa(navigator.userAgent + screen.width + screen.height + navigator.language);
+  }
+
+  // ✅ تسجيل أو التحقق من الجهاز
+  async function registerDevice(user) {
+    const deviceId = generateDeviceId();
+    const ref = doc(db, "devices", user.uid);
+    const snap = await getDoc(ref);
+
+    if (snap.exists()) {
+      const savedId = snap.data().deviceId;
+      if (savedId !== deviceId) {
+        alert("🚫 هذا الحساب مستخدم في جهاز آخر. لا يمكنك تسجيل الدخول من هنا.");
+        await auth.signOut();
+        return false;
+      }
+    } else {
+      await setDoc(ref, { deviceId });
+    }
+    return true;
+  }
+
+  // ✅ تسجيل الدخول
+  window.login = async function() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!email || !password) {
+      alert("⚠️ يرجى إدخال البريد الإلكتروني وكلمة المرور.");
+      return;
+    }
+
+    try {
+      const userCred = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCred.user;
+
+      const allowedRef = doc(db, "allowedUsers", user.uid);
+      const allowedSnap = await getDoc(allowedRef);
+      if (!allowedSnap.exists()) {
+        alert("🚫 حسابك غير مفعّل بعد. يرجى التواصل مع الإدارة.");
+        await auth.signOut();
+        return;
+      }
+
+      const ok = await registerDevice(user);
+      if (!ok) return;
+
+      alert("✅ تم تسجيل الدخول بنجاح!");
+      window.location.href = "welcome.html";
+    } catch (error) {
+      console.error(error);
+      alert("❌ خطأ في تسجيل الدخول: " + error.message);
+    }
+  };
+
+  // ✅ التحقق التلقائي من حالة الدخول
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("✅ المستخدم مسجل الدخول:", user.email);
+    }
+  });
 </script>
 
+<script src="security.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>المواد - Qcms BY DJO</title>
+<title>مواد EMD - Qcms BY DJO</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@600&display=swap');
   body {
@@ -17,10 +17,11 @@
     align-items: center;
     min-height: 100vh;
     position: relative;
-    overflow-y: auto;   /* ✅ يسمح بالتمرير للأسفل */
-    overflow-x: hidden; /* ✅ يمنع التمرير الجانبي */
+    overflow-y: auto;
+    overflow-x: hidden;
     color: white;
   }
+
   .bg-illustration {
     position: absolute;
     top: 0; left: 0;
@@ -29,6 +30,7 @@
     opacity: 0.06;
     z-index: 0;
   }
+
   .floating-shapes span {
     position: absolute;
     display: block;
@@ -42,6 +44,7 @@
     0% { transform: translateY(0) rotate(0deg); }
     100% { transform: translateY(-1200px) rotate(720deg); }
   }
+
   .flag {
     position: absolute;
     top: 15px;
@@ -50,7 +53,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   }
-  
+
   .container {
     background: rgba(0, 0, 0, 0.5);
     padding: 30px;
@@ -67,12 +70,14 @@
     from { opacity: 0; transform: scale(0.9); }
     to { opacity: 1; transform: scale(1); }
   }
+
   .subjects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 15px;
     margin-top: 20px;
   }
+
   .subject-card {
     background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
     border-radius: 15px;
@@ -94,24 +99,23 @@
     text-align: center;
   }
 
-  /* 🔹 تصميم زر EMD */
-  .emd-button {
+  .back-button {
     margin-top: 25px;
     background: linear-gradient(135deg, #007b9e, #48cae4);
     color: white;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 12px 25px;
+    font-size: 16px;
+    padding: 10px 25px;
     border: none;
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  .emd-button:hover {
+  .back-button:hover {
     background: linear-gradient(135deg, #48cae4, #007b9e);
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0,0,0,0.3);
   }
+
 </style>
 </head>
 <body>
@@ -124,49 +128,45 @@
   </div>
 
   <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" class="flag" alt="علم الجزائر">
- 
 
   <div class="container">
-    <h2>المواد الدراسية</h2>
-    <p style="font-size:14px;">التخصص: <span id="selectedSpecialty"></span> | المستوى: <span id="selectedLevel"></span></p>
+    <h2>📚 مواد EMD <span id="emdNum"></span> - السنة <span id="emdYear"></span></h2>
     <div id="subjectsList" class="subjects-grid"></div>
 
-    <!-- 🔹 زر قسم EMD -->
-    <button class="emd-button" onclick="window.location.href='emd-years.html'">📘 قسم EMD</button>
+    <button class="back-button" onclick="window.location.href='emd-number.html?year=' + emdYear">🔙 رجوع</button>
   </div>
 
-<script>
-  const specialty = localStorage.getItem('specialty') || 'غير محدد';
-  const level = localStorage.getItem('level') || 'غير محدد';
-  document.getElementById('selectedSpecialty').textContent = specialty;
-  document.getElementById('selectedLevel').textContent = level;
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const emdYear = params.get("year");
+    const emdNum = params.get("emd");
+    document.getElementById("emdYear").textContent = emdYear;
+    document.getElementById("emdNum").textContent = emdNum;
 
-  const subjectsData = {
-    'طب الأسنان': {
-      'سنة 1': [],
-      'سنة 2': ['Prothèse','ODF', 'Anatomie humaine' , 'Anatomie dentaire' , 'Oce'  , 'Parodontologie' ,'Pathologie','immunologie','histologie','physiologie','biomateriaux','Microbiologie'],
-    },
-    'الصيدلة': {},
-    'الطب البشري': {}
-  };
+    // ✅ قائمة المواد (يمكنك تعديلها لاحقاً)
+    const subjects = [
+      "Anatomie",
+      "Pathologie",
+      "Physiologie",
+      "Biomatériaux",
+      "Radiologie",
+      "Prothèse",
+      "ODF",
+      "Pharmacologie",
+      "Microbiologie"
+    ];
 
-  const subjectsListDiv = document.getElementById('subjectsList');
-  if(subjectsData[specialty] && subjectsData[specialty][level]) {
-    subjectsData[specialty][level].forEach(subject => {
-      const card = document.createElement('div');
-      card.className = 'subject-card';
+    const container = document.getElementById("subjectsList");
+    subjects.forEach(subject => {
+      const card = document.createElement("div");
+      card.className = "subject-card";
       card.innerHTML = `<div class="subject-title">${subject}</div>`;
       card.onclick = () => {
-        localStorage.setItem('subject', subject);
-        window.location.href = 'lessons.html';
+        window.location.href = `emd-qcms.html?year=${emdYear}&emd=${emdNum}&subject=${encodeURIComponent(subject)}`;
       };
-      subjectsListDiv.appendChild(card);
+      container.appendChild(card);
     });
-  } else {
-    subjectsListDiv.innerHTML = '<p>لا توجد مواد مسجلة لهذا المستوى.</p>';
-  }
-</script>
-<script src="security.js"></script>
+  </script>
 
 </body>
 </html>
