@@ -6,239 +6,68 @@
 <title>EMD QCMs - Qcms BY DJO</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-
   body {
     font-family: 'Cairo', Arial, sans-serif;
     direction: ltr;
     background: radial-gradient(circle at top, #d9faff, #aee4f5, #7fd4e8);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    color: #111;
-    position: relative;
-    overflow-x: hidden;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh; color: #111;
+    position: relative; overflow-x: hidden;
   }
-
   .bg-illustration {
-    position: absolute;
-    top: 0; left: 0;
+    position: absolute; top: 0; left: 0;
     width: 100%; height: 100%;
     background: url('A_2D_digital_illustration_login_and_registration_s.png') center/cover no-repeat;
-    opacity: 0.07;
-    z-index: 0;
+    opacity: 0.07; z-index: 0;
   }
-
   .container {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255,255,255,0.9);
     border-radius: 20px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.12);
     padding: 30px;
-    width: 700px;
-    max-width: 95%;
-    margin-top: 60px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
+    width: 700px; max-width: 95%;
+    margin-top: 60px; text-align: center;
+    position: relative; z-index: 1;
     backdrop-filter: blur(8px);
     animation: fadeIn 0.7s ease;
   }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.97); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  h2 {
-    color: #023047;
-    font-weight: 800;
-    margin-bottom: 5px;
-  }
-
-  .info {
-    font-weight: 600;
-    color: #1d3557;
-    margin-bottom: 20px;
-  }
-
-  .qcm {
-    background: white;
-    color: #111;
-    border-radius: 18px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-    text-align: left;
-    position: relative;
-    transition: all 0.3s ease;
-    animation: appear 0.6s ease;
-  }
-
-  @keyframes appear {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .qcm:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  }
-
-  .question {
-    font-weight: bold;
-    font-size: 17px;
-    color: #14213d;
-    margin-bottom: 10px;
-  }
-
-  .answers {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .answer {
-    position: relative;
-    border: 1px solid #ccc;
-    padding: 12px 14px 12px 42px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    background-color: #f8fafc;
-    display: flex;
-    align-items: center;
-  }
-
-  .answer::before {
-    content: "";
-    position: absolute;
-    left: 12px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid #999;
-    background: #fff;
-    transition: all 0.25s ease;
-  }
-
-  .answer:hover {
-    background-color: #e6faff;
-  }
-
-  .answer.selected::before {
-    background: radial-gradient(circle at center, #219ebc 50%, #023047 100%);
-    border-color: transparent;
-  }
-
-  .answer.selected {
-    background-color: #caf0f8;
-    border-color: #00b4d8;
-  }
-
-  .answer.correct::before {
-    background: #38b000;
-    border-color: #38b000;
-  }
-
-  .answer.incorrect::before {
-    background: #e63946;
-    border-color: #e63946;
-  }
-
-  .answer.correct {
-    background-color: #c7f9cc;
-    border-color: #38b000;
-  }
-
-  .answer.incorrect {
-    background-color: #ffccd5;
-    border-color: #e63946;
-  }
-
-  .control-buttons {
-    margin-top: 14px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  button {
-    border: none;
-    border-radius: 12px;
-    padding: 10px 18px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.25s ease;
-  }
-
-  .submit-btn {
-    background: linear-gradient(135deg, #00b4d8, #48cae4);
-    color: white;
-  }
-
-  .submit-btn:hover {
-    background: linear-gradient(135deg, #48cae4, #00b4d8);
-    transform: translateY(-2px);
-  }
-
-  .reset-btn {
-    background: #14213d;
-    color: white;
-  }
-
-  .reset-btn:hover {
-    background: #1d3557;
-    transform: translateY(-2px);
-  }
-
-  .show-solution-btn {
-    margin-top: 10px;
-    background: linear-gradient(135deg, #ffb703, #fb8500);
-    color: #111;
-  }
-
-  .show-solution-btn:hover {
-    background: linear-gradient(135deg, #fb8500, #ffb703);
-  }
-
-  .feedback {
-    margin-top: 10px;
-    font-weight: bold;
-    padding: 10px 14px;
-    border-radius: 8px;
-    display: inline-block;
-    animation: pulse 0.4s ease;
-  }
-
-  @keyframes pulse {
-    0% { transform: scale(0.9); opacity: 0.6; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-
-  .feedback.correct {
-    background: #c7f9cc;
-    color: #004b23;
-  }
-
-  .feedback.incorrect {
-    background: #ffccd5;
-    color: #9b2226;
-  }
-
-  @media (max-width: 480px) {
-    .container { padding: 18px; margin-top: 40px; }
-    .question { font-size: 15px; }
-    .answer { font-size: 14px; padding: 10px 12px 10px 38px; }
-    button { width: 100%; font-size: 15px; }
-  }
+  @keyframes fadeIn { from {opacity:0;transform:scale(0.97);} to {opacity:1;transform:scale(1);} }
+  h2 { color:#023047; font-weight:800; margin-bottom:5px; }
+  .info { font-weight:600; color:#1d3557; margin-bottom:20px; }
+  .qcm { background:white; color:#111; border-radius:18px; padding:20px; margin:20px 0;
+         box-shadow:0 3px 15px rgba(0,0,0,0.08); text-align:left; transition:all 0.3s ease; }
+  .qcm:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,0.15); }
+  .question { font-weight:bold; font-size:17px; color:#14213d; margin-bottom:10px; }
+  .answers { display:flex; flex-direction:column; gap:8px; }
+  .answer { position:relative; border:1px solid #ccc; padding:12px 14px 12px 42px;
+            border-radius:10px; cursor:pointer; transition:all 0.25s ease; background-color:#f8fafc; }
+  .answer::before { content:""; position:absolute; left:12px; width:20px; height:20px; border-radius:50%;
+                    border:2px solid #999; background:#fff; transition:all 0.25s ease; }
+  .answer:hover { background-color:#e6faff; }
+  .answer.selected::before { background:radial-gradient(circle at center,#219ebc 50%,#023047 100%); border-color:transparent; }
+  .answer.selected { background-color:#caf0f8; border-color:#00b4d8; }
+  .answer.correct::before { background:#38b000; border-color:#38b000; }
+  .answer.incorrect::before { background:#e63946; border-color:#e63946; }
+  .answer.correct { background-color:#c7f9cc; border-color:#38b000; }
+  .answer.incorrect { background-color:#ffccd5; border-color:#e63946; }
+  .control-buttons { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+  button { border:none; border-radius:12px; padding:10px 18px; cursor:pointer;
+           font-weight:bold; transition:all 0.25s ease; }
+  .submit-btn { background:linear-gradient(135deg,#00b4d8,#48cae4); color:white; }
+  .submit-btn:hover { background:linear-gradient(135deg,#48cae4,#00b4d8); transform:translateY(-2px); }
+  .reset-btn { background:#14213d; color:white; }
+  .reset-btn:hover { background:#1d3557; transform:translateY(-2px); }
+  .show-solution-btn { margin-top:10px; background:linear-gradient(135deg,#ffb703,#fb8500); color:#111; }
+  .feedback { margin-top:10px; font-weight:bold; padding:10px 14px; border-radius:8px; display:inline-block; }
+  .feedback.correct { background:#c7f9cc; color:#004b23; }
+  .feedback.incorrect { background:#ffccd5; color:#9b2226; }
+  @media(max-width:480px){.container{padding:18px;margin-top:40px;}.question{font-size:15px;}}
 </style>
 </head>
 <body>
 
 <div class="bg-illustration"></div>
-
 <div class="container" id="secureArea" style="display:none;">
   <h2>🦷 EMD QCMs</h2>
   <div class="info">
@@ -249,45 +78,61 @@
   <div id="qcm-container"></div>
 </div>
 
+<!-- 🔐 الحماية والتحقق من المستخدم -->
 <script type="module">
-// ========== حماية Firebase ==========
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// ⚙️ إعدادات مشروعك (استبدل القيم)
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.appspot.com",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+  document.documentElement.style.visibility = 'hidden';
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    alert("⚠️ يرجى تسجيل الدخول أولاً للوصول إلى EMD QCM.");
-    window.location.href = "login.html";
-    return;
+  function generateDeviceId() {
+    return btoa(navigator.userAgent + screen.width + screen.height + navigator.language);
   }
 
-  const allowedRef = doc(db, "allowedUsers", user.uid);
-  const allowedSnap = await getDoc(allowedRef);
-
-  if (!allowedSnap.exists()) {
-    alert("🚫 حسابك غير مفعّل بعد، يرجى التواصل مع الإدارة.");
-    window.location.href = "welcome.html";
-    return;
+  async function ensureDeviceRegistered(user) {
+    const ref = doc(db, "devices", user.uid);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) {
+      await setDoc(ref, { deviceId: generateDeviceId() });
+      console.log("✅ الجهاز تم تسجيله لأول مرة");
+    }
   }
 
-  document.getElementById("secureArea").style.display = "block";
-  startEMDPage(); // ✅ المستخدم مسموح له
-});
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.replace('index.html');
+      return;
+    }
+    try {
+      const ref = doc(db, "allowedUsers", user.uid);
+      const snap = await getDoc(ref);
+      if (snap.exists()) {
+        await ensureDeviceRegistered(user);
+        document.documentElement.style.visibility = 'visible';
+        document.getElementById("secureArea").style.display = "block";
+        startEMDPage();
+      } else {
+        window.location.replace('welcome.html?status=pending');
+      }
+    } catch (e) {
+      console.error("❌ فشل التحقق:", e);
+      window.location.replace('welcome.html?status=pending');
+    }
+  });
 </script>
 
 <script src="qcms-data.js"></script>
@@ -297,7 +142,6 @@ window.startEMDPage = function() {
   const year = params.get("year") || 2024;
   const emd = params.get("emd") || 1;
   const subject = params.get("subject") || "Anatomie dentaire";
-
   document.getElementById("year").textContent = year;
   document.getElementById("emd").textContent = emd;
   document.getElementById("subject").textContent = subject;
@@ -309,103 +153,86 @@ window.startEMDPage = function() {
     container.innerHTML = `<div class="qcm">Aucun QCM ajouté pour <b>${subject}</b> (Année ${year} / EMD ${emd}).</div>`;
   } else {
     questions.forEach((qcm) => {
-      const block = document.createElement('div');
-      block.className = 'qcm';
-      
-      const question = document.createElement('div');
-      question.className = 'question';
+      const block = document.createElement("div");
+      block.className = "qcm";
+      const question = document.createElement("div");
+      question.className = "question";
       question.textContent = qcm.question;
       block.appendChild(question);
 
-      const answersDiv = document.createElement('div');
-      answersDiv.className = 'answers';
+      const answersDiv = document.createElement("div");
+      answersDiv.className = "answers";
       block.appendChild(answersDiv);
 
       const selectedAnswers = new Set();
       const correctAnswers = qcm.answers.filter(a => a.correct).map(a => a.text);
 
       qcm.answers.forEach(a => {
-        const ans = document.createElement('div');
-        ans.className = 'answer';
+        const ans = document.createElement("div");
+        ans.className = "answer";
         ans.textContent = a.text;
         ans.onclick = () => {
           if (selectedAnswers.has(a.text)) {
             selectedAnswers.delete(a.text);
-            ans.classList.remove('selected');
+            ans.classList.remove("selected");
           } else {
             selectedAnswers.add(a.text);
-            ans.classList.add('selected');
+            ans.classList.add("selected");
           }
         };
         answersDiv.appendChild(ans);
       });
 
-      const controlDiv = document.createElement('div');
-      controlDiv.className = 'control-buttons';
+      const controlDiv = document.createElement("div");
+      controlDiv.className = "control-buttons";
 
-      const submitBtn = document.createElement('button');
-      submitBtn.className = 'submit-btn';
-      submitBtn.textContent = 'هذه هي إجابتي';
+      const submitBtn = document.createElement("button");
+      submitBtn.className = "submit-btn";
+      submitBtn.textContent = "هذه هي إجابتي";
       submitBtn.onclick = () => {
         const selectedArray = Array.from(selectedAnswers);
-        let feedbackText = '';
-        let feedbackClass = '';
-
-        block.querySelectorAll('.feedback').forEach(f => f.remove());
-
-        if (selectedArray.length === 0) {
-          feedbackText = 'لم تختر أي إجابة';
-          feedbackClass = 'incorrect';
-        } else if (selectedArray.length === correctAnswers.length && selectedArray.every(ans => correctAnswers.includes(ans))) {
-          feedbackText = 'إجابتك صحيحة ✅';
-          feedbackClass = 'correct';
-        } else {
-          feedbackText = 'إجابتك خاطئة ❌';
-          feedbackClass = 'incorrect';
-        }
-
-        const feedback = document.createElement('div');
-        feedback.className = `feedback ${feedbackClass}`;
-        feedback.textContent = feedbackText;
+        block.querySelectorAll(".feedback").forEach(f => f.remove());
+        let text = "", cls = "";
+        if (!selectedArray.length) { text = "لم تختر أي إجابة"; cls = "incorrect"; }
+        else if (selectedArray.length === correctAnswers.length && selectedArray.every(t => correctAnswers.includes(t))) {
+          text = "إجابتك صحيحة ✅"; cls = "correct";
+        } else { text = "إجابتك خاطئة ❌"; cls = "incorrect"; }
+        const feedback = document.createElement("div");
+        feedback.className = `feedback ${cls}`;
+        feedback.textContent = text;
         block.appendChild(feedback);
-
-        if (feedbackClass !== 'correct') {
-          const showSolutionBtn = document.createElement('button');
-          showSolutionBtn.className = 'show-solution-btn';
-          showSolutionBtn.textContent = '💡 عرض الإجابة الصحيحة';
-          showSolutionBtn.onclick = () => {
-            block.querySelectorAll('.answer').forEach(ans => {
-              if (correctAnswers.includes(ans.textContent)) {
-                ans.classList.add('correct');
-              } else if (selectedArray.includes(ans.textContent)) {
-                ans.classList.add('incorrect');
-              }
+        if (cls !== "correct") {
+          const showBtn = document.createElement("button");
+          showBtn.className = "show-solution-btn";
+          showBtn.textContent = "💡 عرض الإجابة الصحيحة";
+          showBtn.onclick = () => {
+            block.querySelectorAll(".answer").forEach(ans => {
+              if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+              else if (selectedArray.includes(ans.textContent)) ans.classList.add("incorrect");
             });
-            showSolutionBtn.remove();
+            showBtn.remove();
           };
-          block.appendChild(showSolutionBtn);
+          block.appendChild(showBtn);
         }
       };
 
-      const resetBtn = document.createElement('button');
-      resetBtn.className = 'reset-btn';
-      resetBtn.textContent = 'إعادة المحاولة';
+      const resetBtn = document.createElement("button");
+      resetBtn.className = "reset-btn";
+      resetBtn.textContent = "إعادة المحاولة";
       resetBtn.onclick = () => {
         selectedAnswers.clear();
-        block.querySelectorAll('.answer').forEach(ans => ans.classList.remove('selected', 'correct', 'incorrect'));
-        block.querySelectorAll('.feedback').forEach(fb => fb.remove());
-        block.querySelectorAll('.show-solution-btn').forEach(btn => btn.remove());
+        block.querySelectorAll(".answer").forEach(ans => ans.classList.remove("selected","correct","incorrect"));
+        block.querySelectorAll(".feedback, .show-solution-btn").forEach(e => e.remove());
       };
 
       controlDiv.appendChild(submitBtn);
       controlDiv.appendChild(resetBtn);
       block.appendChild(controlDiv);
-
       container.appendChild(block);
     });
   }
-}
+};
 </script>
-
+<script src="security.js"></script>
 </body>
 </html>
