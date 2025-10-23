@@ -144,17 +144,9 @@
     document.getElementById("emdNum").textContent = emdNum;
 
     // ✅ قائمة المواد (يمكنك تعديلها لاحقاً)
-    const subjects = [
-      "Anatomie",
-      "Pathologie",
-      "Physiologie",
-      "Biomatériaux",
-      "Radiologie",
-      "Prothèse",
-      "ODF",
-      "Pharmacologie",
-      "Microbiologie"
-    ];
+    const subjects = ['Prothèse','ODF', 'Anatomie humaine' , 'Anatomie dentaire' , 'Oce'  , 'Parodontologie' ,'Pathologie','immunologie','histologie','physiologie','biomateriaux','Microbiologie']
+    
+      
 
     const container = document.getElementById("subjectsList");
     subjects.forEach(subject => {
@@ -167,6 +159,7 @@
       container.appendChild(card);
     });
   </script>
+<script src="security.js"></script>
 
 </body>
 </html>

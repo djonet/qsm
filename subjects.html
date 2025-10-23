@@ -136,28 +136,37 @@
   </div>
 
 <script>
+  // ✅ قراءة التخصص والمستوى المخزنين مسبقًا
   const specialty = localStorage.getItem('specialty') || 'غير محدد';
   const level = localStorage.getItem('level') || 'غير محدد';
   document.getElementById('selectedSpecialty').textContent = specialty;
   document.getElementById('selectedLevel').textContent = level;
 
+  // ✅ قاعدة بيانات المواد
   const subjectsData = {
     'طب الأسنان': {
       'سنة 1': [],
-      'سنة 2': ['Prothèse','ODF', 'Anatomie humaine' , 'Anatomie dentaire' , 'Oce'  , 'Parodontologie' ,'Pathologie','immunologie','histologie','physiologie','biomateriaux','Microbiologie'],
+      'سنة 2': [
+        'Prothèse','ODF', 'Anatomie humaine', 'Anatomie dentaire',
+        'Oce','Parodontologie','Pathologie','immunologie',
+        'histologie','physiologie','biomateriaux','Microbiologie'
+      ],
     },
     'الصيدلة': {},
     'الطب البشري': {}
   };
 
+  // ✅ إنشاء بطاقات المواد
   const subjectsListDiv = document.getElementById('subjectsList');
-  if(subjectsData[specialty] && subjectsData[specialty][level]) {
+  if (subjectsData[specialty] && subjectsData[specialty][level]) {
     subjectsData[specialty][level].forEach(subject => {
       const card = document.createElement('div');
       card.className = 'subject-card';
       card.innerHTML = `<div class="subject-title">${subject}</div>`;
       card.onclick = () => {
         localStorage.setItem('subject', subject);
+        localStorage.setItem('specialty', specialty);
+        localStorage.setItem('level', level);
         window.location.href = 'lessons.html';
       };
       subjectsListDiv.appendChild(card);
