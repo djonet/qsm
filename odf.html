@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomie Humaine - Qcms BY DJO</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2 { margin-bottom: 10px; font-size: 24px; }
+
+  /* 🔹 كتل الأسئلة */
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  /* ⭐ النجوم المتحركة */
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty {
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1) { animation-delay: 0.1s; }
+  .star:nth-child(2) { animation-delay: 0.2s; }
+  .star:nth-child(3) { animation-delay: 0.3s; }
+  .star:nth-child(4) { animation-delay: 0.4s; }
+  .star:nth-child(5) { animation-delay: 0.5s; }
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg, #0096c7, #00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+
+  /* ✅ و ❌ */
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black !important;
+    border: 1px solid #0f0;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black !important;
+    border: 1px solid #f00;
+  }
+
+  /* 🔸 الملاحظات */
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  /* 🔘 الأزرار */
+  .control-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  /* 📱 تحسين الهاتف */
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .container { width: 95%; padding: 15px; }
+    .question-text { font-size: 16px; }
+    .answer { font-size: 15px; padding: 10px; }
+    .control-buttons { flex-direction: column; }
+    .star { font-size: 18px; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="container">
+ 
+    <h3 id="lessonTitle"></h3>
+    <div id="questionsContainer"></div>
+    <button class="control-buttons" style="background:#444" onclick="goBack()">🔙 الرجوع للدروس</button>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  const lesson = localStorage.getItem('lesson') || 'غير محدد';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 الأسئلة الخاصة بكل درس
+  const questionsData = {
+  'Les critères d’harmonie du visage': [
+  {
+    question: 'Selon l’introduction, l’harmonie du visage résulte d’une disposition équilibrée…',
+    difficulty: 1,
+    answers: [
+      { text: 'des modelés, aplats, dépressions et proéminences', correct: false },
+      { text: 'des proportions et de la symétrie', correct: true },
+      { text: 'des mimiques et expressions uniquement', correct: false },
+      { text: 'des unités (front, nez, lèvres, menton, pommettes, joues) appréciées au repos', correct: true }
+    ]
+  },
+  {
+    question: '« Anthropométrie » signifie, d’après la définition donnée, un ensemble de techniques de mesure…',
+    difficulty: 1,
+    answers: [
+      { text: 'utilisées en anthropobiologie', correct: true },
+      { text: 'et dans le domaine de la justice', correct: true },
+      { text: 'visant à standardiser la beauté au-delà de la normalité moyenne', correct: false },
+      { text: 'où « anthropos » = homme et « métrie » = mesure/évaluation', correct: true }
+    ]
+  },
+  {
+    question: 'Parmi les points médians listés :',
+    difficulty: 1,
+    answers: [
+      { text: 'Trichion (Tri) se situe à l’intersection de la racine des cheveux', correct: false },
+      { text: 'Nasion (Na) est au niveau de la suture fronto-nasale', correct: true },
+      { text: 'Stomion (St) est la jonction des lèvres sur le plan sagittal médian', correct: true },
+      { text: 'Tragion (Tr) est explicitement un point médian', correct: false }
+    ]
+  },
+  {
+    question: 'Plans décrits :',
+    difficulty: 1,
+    answers: [
+      { text: 'Francfort : horizontal, passant par porion et infra-orbitaire', correct: false },
+      { text: 'Izard : perpendiculaire à Francfort, passant par la glabelle', correct: true },
+      { text: 'Simon : perpendiculaire à Francfort, passant par l’infra-orbitaire', correct: true },
+      { text: 'E de Ricketts : plan horizontal de la glabelle à l’ophryon', correct: false }
+    ]
+  },
+  {
+    question: 'À propos des étages du visage (de face), le texte précise que :',
+    difficulty: 1,
+    answers: [
+      { text: 'frontal (trichion → ophryon), nasal (ophryon → sous-nasal), buccal (sous-nasal → menton)', correct: true },
+      { text: 'ils doivent être égaux', correct: true },
+      { text: 'l’étage buccal se subdivise en trois niveaux sensiblement égaux', correct: true },
+      { text: 'la symétrie absolue miroir existe naturellement', correct: false }
+    ]
+  },
+  {
+    question: 'Concernant la normalité vs esthétique :',
+    difficulty: 2,
+    answers: [
+      { text: 'Atteindre la normalité est le premier but du traitement orthodontique', correct: true },
+      { text: 'La beauté est un supplément espéré', correct: true },
+      { text: 'La moyenne a un intérêt clinique prioritaire', correct: false },
+      { text: 'On peut être normal sans être beau', correct: true }
+    ]
+  },
+  {
+    question: 'De face, les plans horizontaux cités :',
+    difficulty: 2,
+    answers: [
+      { text: 'joignent pupilles, ailes du nez, commissures labiales, tragus', correct: true },
+      { text: 'sont parallèles entre eux', correct: true },
+      { text: 'sont perpendiculaires au plan sagittal médian', correct: true },
+      { text: 'croisent le plan d’Izard au menton par définition', correct: false }
+    ]
+  },
+  {
+    question: 'Profil selon Izard/Simon :',
+    difficulty: 2,
+    answers: [
+      { text: 'Orthofrontal : menton à égale distance des plans d’Izard et de Simon', correct: true },
+      { text: 'Transfrontal : menton légèrement en avant', correct: true },
+      { text: 'Cisfrontal : menton légèrement en arrière', correct: true },
+      { text: 'Orthognathe : menton en arrière du plan de Francfort selon la définition donnée', correct: false }
+    ]
+  },
+  {
+    question: 'Ligne esthétique E de Ricketts :',
+    difficulty: 2,
+    answers: [
+      { text: 'relie la pointe du nez au pogonion cutané', correct: true },
+      { text: 'sert à évaluer l’harmonie labiale du profil cutané', correct: true },
+      { text: 'profil rectiligne : lèvre sup. 1 mm en arrière de E, lèvre inf. affleure E', correct: true },
+      { text: 'profil concave : lèvres en avant de E', correct: false }
+    ]
+  },
+  {
+    question: 'Équilibre du modelé :',
+    difficulty: 2,
+    answers: [
+      { text: 'saillies et dépressions doivent être concordantes', correct: true },
+      { text: 'nez pointu accepté si lèvres/menton saillants avec sillons profonds', correct: true },
+      { text: 'nez pointu harmonieux même si bouche/menton plats', correct: false },
+      { text: 'acceptabilité dépend d’un adoucissement équilibré', correct: true }
+    ]
+  },
+  {
+    question: 'Largeur de la fente labiale (Ricketts) :',
+    difficulty: 2,
+    answers: [
+      { text: 'classée de 1 à 5 selon largeur', correct: true },
+      { text: '« 3 » : entre moitié de chaque narine et chaque plan bipupillaire', correct: true },
+      { text: 'proportions harmonieuses : commissures à mi-chemin entre ailes du nez et plans pupillaires', correct: true },
+      { text: '« 1 » = largeur supérieure au bipupillaire', correct: false }
+    ]
+  },
+  {
+    question: 'Lèvres au repos :',
+    difficulty: 2,
+    answers: [
+      { text: 'jointives et compétentes, sans tension', correct: true },
+      { text: 'lèvre sup. couvre ~70% de la surface vestibulaire de l’incisive sup.', correct: true },
+      { text: 'bord incisif sup. dépasse <3 mm du bord inférieur labial sup.', correct: true },
+      { text: 'lèvre inf. recouvre ~50% de l’incisive sup.', correct: false }
+    ]
+  },
+  {
+    question: 'Sur la forme des lèvres :',
+    difficulty: 2,
+    answers: [
+      { text: 'lèvres trop minces peuvent évoquer une sévérité', correct: true },
+      { text: 'appréciation intègre épaisseur, forme, longueur, largeur bicommissurale', correct: true },
+      { text: 'lèvres saillantes demandent chéiloplastie systématique', correct: false },
+      { text: 'lèvres saillantes demandent dépressions équilibrées', correct: true }
+    ]
+  },
+  {
+    question: 'Dents et expression :',
+    difficulty: 2,
+    answers: [
+      { text: 'incisives doivent présenter surface unie et brillante', correct: true },
+      { text: 'relation incisive–stomion visible en parole/sourire', correct: true },
+      { text: 'canines marquées = agressivité', correct: true },
+      { text: 'petites incisives latérales arrondies = féminité', correct: true }
+    ]
+  },
+  {
+    question: 'Le sourire (généralités) :',
+    difficulty: 2,
+    answers: [
+      { text: 'réunit dessin des courbes des lèvres en mouvement', correct: true },
+      { text: 'contraste des couleurs (rouge/dents)', correct: true },
+      { text: 'expression de joie', correct: true },
+      { text: 'lèvre inférieure recouvre les incisives supérieures', correct: false }
+    ]
+  },
+  {
+    question: 'Sourire — position des lèvres :',
+    difficulty: 3,
+    answers: [
+      { text: 'au sourire, bord lèvre sup. ≈ hauteur des collets des incisives sup.', correct: true },
+      { text: 'lèvre inférieure ne doit pas recouvrir les incisives supérieures', correct: true },
+      { text: 'si elle les recouvre légèrement, c’est type I', correct: false },
+      { text: 'ces critères précèdent classification de Barat', correct: true }
+    ]
+  },
+  {
+    question: 'Classification de Barat :',
+    difficulty: 3,
+    answers: [
+      { text: 'Type I : bord libre lèvre sup. au-dessus de la ligne intercommissurale', correct: true },
+      { text: 'Type II : coïncide avec la ligne intercommissurale', correct: true },
+      { text: 'Type III : au-dessous', correct: true },
+      { text: 'Type IV : à mi-distance des commissures', correct: false }
+    ]
+  },
+  {
+    question: 'Menton (caractères) :',
+    difficulty: 3,
+    answers: [
+      { text: 'relation étroite avec position du nez et des lèvres', correct: true },
+      { text: 'peut être plat, proéminent ou fuyant', correct: true },
+      { text: 'forme ovalaire ou carrée', correct: true },
+      { text: 'toujours défini comme transfrontal s’il est proéminent', correct: false }
+    ]
+  },
+  {
+    question: 'Dysharmonies buccales :',
+    difficulty: 3,
+    answers: [
+      { text: 'apparaissent quand la position harmonieuse des lèvres est rompue', correct: true },
+      { text: 'Ricketts en propose 10 types', correct: true },
+      { text: 'se limitent à la biprotrusion labiale', correct: false },
+      { text: 'peuvent traduire vieillissement (ex. birétrusion)', correct: true }
+    ]
+  },
+  {
+    question: 'Biprotrusion vs birétrusion :',
+    difficulty: 3,
+    answers: [
+      { text: 'Biprotrusion : deux lèvres en avant de E', correct: true },
+      { text: 'Birétrusion : deux lèvres en arrière de E', correct: true },
+      { text: 'Birétrusion : nez et menton paraissent plus proéminents', correct: true },
+      { text: 'Biprotrusion : nez/menton s’effacent', correct: true }
+    ]
+  },
+  {
+    question: 'Lèvres courtes / contraction labiale :',
+    difficulty: 3,
+    answers: [
+      { text: 'Lèvres courtes : dents sup. apparentes', correct: true },
+      { text: 'Contraction labiale : protrusion incisives sup. impose effort de fermeture', correct: true },
+      { text: 'Les deux décrivent le même mécanisme causal', correct: false },
+      { text: 'Les deux perturbent la compétence labiale', correct: true }
+    ]
+  },
+  {
+    question: 'Contraction du menton / sillon labio-mentonnier :',
+    difficulty: 3,
+    answers: [
+      { text: 'Contraction du menton : « peau d’orange », élévation chronique de la houppe', correct: true },
+      { text: 'Sillon labio-mentonnier : contraction plus inférieure', correct: true },
+      { text: 'Les deux confondues avec succion labiale', correct: false },
+      { text: 'Perturbations péri-orales décrites', correct: true }
+    ]
+  },
+  {
+    question: 'Succion labiale inférieure :',
+    difficulty: 3,
+    answers: [
+      { text: 'lèvre inférieure placée derrière incisives sup.', correct: true },
+      { text: 'tic de succion, lèvre inférieure disparaît presque', correct: true },
+      { text: 'entraîne nécessairement un type III de Barat', correct: false },
+      { text: 'cité par Ricketts comme un des 10 types', correct: true }
+    ]
+  },
+  {
+    question: 'Proversion sup. / Éversion inf. :',
+    difficulty: 3,
+    answers: [
+      { text: 'Proversion sup. : lèvre sup. charnue dépasse E', correct: true },
+      { text: 'lèvre inf. en bonne relation sagittale', correct: true },
+      { text: 'Éversion inf. : due à protrusion inférieure ou rétrusion sup.', correct: true },
+      { text: 'Éversion inf. : lèvre inf. peut couper le plan', correct: true }
+    ]
+  },
+  {
+    question: 'Effets thérapeutiques :',
+    difficulty: 3,
+    answers: [
+      { text: 'Résultats orthopédiques influencent proportions', correct: true },
+      { text: 'Force extra-buccale peut modifier convexité chez jeune', correct: true },
+      { text: 'Lèvres suivent recul incisif à moitié ou 2/3', correct: true },
+      { text: 'Orthodontie aligne arcades et corrige sourire gingival', correct: true }
+    ]
+  },
+  {
+    question: 'Objectifs esthétiques :',
+    difficulty: 4,
+    answers: [
+      { text: 'proportionner étages du visage et éviter disproportion', correct: true },
+      { text: 'orienter incisives sup. pour paraître droites', correct: true },
+      { text: 'ignorer physiologie mandibulaire', correct: false },
+      { text: 'viser stabilité du visage', correct: true }
+    ]
+  },
+  {
+    question: 'Normalité, moyenne, beauté :',
+    difficulty: 4,
+    answers: [
+      { text: 'On confond souvent normalité, esthétique et moyenne', correct: true },
+      { text: 'Arranger selon la moyenne n’a pas d’intérêt clinique', correct: true },
+      { text: 'On ne peut être beau si non normal', correct: true },
+      { text: 'La moyenne est objectif thérapeutique central', correct: false }
+    ]
+  },
+  {
+    question: 'Plan sagittal médian et parallélisme :',
+    difficulty: 4,
+    answers: [
+      { text: 'passe entre yeux, nez, philtrum, menton', correct: true },
+      { text: 'est rectiligne', correct: true },
+      { text: 'plans horizontaux parallèles et perpendiculaires au sagittal', correct: true },
+      { text: 'symétrie absolue naturelle', correct: false }
+    ]
+  },
+  {
+    question: 'Profils E de Ricketts :',
+    difficulty: 4,
+    answers: [
+      { text: 'Profil rectiligne : lèvre sup. ~1 mm en arrière de E', correct: true },
+      { text: 'Profil concave : lèvres en arrière de E', correct: true },
+      { text: 'Profil convexe : lèvres en avant de E', correct: true },
+      { text: 'Profil concave : lèvre sup. seule en avant', correct: false }
+    ]
+  },
+  {
+    question: 'Bouche et harmonie locale :',
+    difficulty: 4,
+    answers: [
+      { text: 'rapports équilibrés avec structures environnantes', correct: true },
+      { text: 'appréciation conjointe de largeur, longueur, épaisseur', correct: true },
+      { text: 'compétence labiale dépend aussi de dysmorphoses', correct: true },
+      { text: 'seule l’épaisseur détermine harmonie', correct: false }
+    ]
+  },
+  {
+    question: 'Incisives et visibilité :',
+    difficulty: 4,
+    answers: [
+      { text: 'surface unie/brillante', correct: true },
+      { text: 'relation incisive–stomion saillante en parole', correct: true },
+      { text: 'relation incisive–stomion maximale à bouche fermée', correct: false },
+      { text: 'canines et latérales participent à l’expression', correct: true }
+    ]
+  },
+  {
+    question: 'Sourire de Barat :',
+    difficulty: 4,
+    answers: [
+      { text: 'Type I : supra-commissural', correct: true },
+      { text: 'Type II : coïncide avec ligne intercommissurale', correct: true },
+      { text: 'Type III : infra-commissural', correct: true },
+      { text: 'Type II impose couverture incisives supérieures', correct: false }
+    ]
+  },
+  {
+    question: 'Contraction péri-orale :',
+    difficulty: 4,
+    answers: [
+      { text: 'listée comme type de dysharmonie', correct: true },
+      { text: 'explicitement détaillée', correct: false },
+      { text: 'logique de perturbations labiales', correct: true },
+      { text: 'mentionnée sans description longue', correct: true }
+    ]
+  },
+  {
+    question: 'Thérapeutique : force extra-buccale et âge :',
+    difficulty: 4,
+    answers: [
+      { text: 'modifie convexité du profil chez jeune', correct: true },
+      { text: 'gouttière permet force extra-buccale intense', correct: true },
+      { text: 'effet identique chez adulte', correct: false },
+      { text: 'retentissement sur proportions de la face', correct: true }
+    ]
+  },
+  {
+    question: 'Orthodontie et lèvres vs incisives :',
+    difficulty: 4,
+    answers: [
+      { text: 'lèvres suivent recul incisives à moitié–2/3', correct: true },
+      { text: 'corrige sourire gingival et aligne arcades', correct: true },
+      { text: 'effet neutre sur alignement', correct: false },
+      { text: 'contribue à stabilité esthétique', correct: true }
+    ]
+  },
+  {
+    question: 'Plans et relations croisées :',
+    difficulty: 5,
+    answers: [
+      { text: 'Plan d’Izard : perpendiculaire à Francfort', correct: true },
+      { text: 'Plan de Simon : perpendiculaire à Francfort par infra-orbitaire', correct: true },
+      { text: 'Ligne E : relie nez–pogonion, lecture labiale', correct: true },
+      { text: 'Plan de Francfort : vertical par définition', correct: false }
+    ]
+  },
+  {
+    question: 'Étages buccaux — répartitions :',
+    difficulty: 5,
+    answers: [
+      { text: 'Lèvre sup. : sous-nasal → stomion', correct: true },
+      { text: 'Lèvre inf. : stomion → sillon labio-mentonnier', correct: true },
+      { text: 'Menton : sillon labio-mentonnier → point menton', correct: true },
+      { text: 'répartition inégale recommandée', correct: false }
+    ]
+  },
+  {
+    question: 'Dysharmonies (précisions) :',
+    difficulty: 5,
+    answers: [
+      { text: 'Proversion sup. : lèvre sup. dépasse E', correct: true },
+      { text: 'Éversion inf. : lèvre inf. en avant, peut couper plan', correct: true },
+      { text: 'Birétrusion : vieillissement, nez/menton proéminents', correct: true },
+      { text: 'Biprotrusion : impose contraction péri-orale', correct: false }
+    ]
+  },
+  {
+    question: 'Conclusion et conduite clinique :',
+    difficulty: 5,
+    answers: [
+      { text: 'but : corriger anomalie dento-faciale et viser beauté', correct: true },
+      { text: 'refus de standardisation, individualiser', correct: true },
+      { text: 'personnalisation nécessaire', correct: true },
+      { text: 'priorité à la moyenne universelle', correct: false }
+    ]
+  },
+  {
+    question: 'Champs de l’anthropométrie et points repères :',
+    difficulty: 5,
+    answers: [
+      { text: 'Anthropométrie : mesures humaines en anthropobiologie et justice', correct: true },
+      { text: 'Points : médians/latéraux, osseux/cutanés', correct: true },
+      { text: 'Tragion : point latéral au niveau du porion', correct: true },
+      { text: 'Ophryon : point latéral', correct: false }
+    ]
+  }
+],'Fonctions oro-faciales': [
+  {
+    question: 'Selon l’introduction, le fonctionnement et l’interaction des fonctions de la sphère oro-faciale peuvent avoir une incidence sur…',
+    difficulty: 1,
+    answers: [
+      { text: 'le développement cranio-facial (théorie de Moss) et donc la morphologie', correct: true },
+      { text: 'la croissance des sinus mais sans relation avec la forme cranio-faciale', correct: false },
+      { text: 'les rapports des mâchoires entre elles via l’action musculaire', correct: true },
+      { text: 'la position des dents comme conséquence du « jeu des muscles »', correct: true }
+    ]
+  },
+  {
+    question: 'Une fonction est définie comme…',
+    difficulty: 1,
+    answers: [
+      { text: 'l’ensemble des actes accomplis par une structure (organe ou système)', correct: true },
+      { text: 'en vue d’un résultat déterminé', correct: true },
+      { text: 'un ensemble d’actes sans lien avec une structure anatomique précise', correct: false },
+      { text: 'un processus autonome indifférent au résultat', correct: false }
+    ]
+  },
+  {
+    question: 'La respiration physiologique se caractérise par…',
+    difficulty: 1,
+    answers: [
+      { text: 'une ventilation naso-nasale (inspiration-expiration)', correct: true },
+      { text: 'un contact entre le voile du palais et la langue', correct: true },
+      { text: 'une bouche fermée hermétiquement pour la ventilation nasale', correct: true },
+      { text: 'une inspiration nasale et une expiration buccale au repos', correct: false }
+    ]
+  },
+  {
+    question: 'L’apparition de la respiration survient…',
+    difficulty: 1,
+    answers: [
+      { text: 'dès la naissance avec le premier cri', correct: true },
+      { text: 'uniquement après l’éruption des premières dents', correct: false },
+      { text: 'en lien avec le libre passage de l’air par les fosses nasales', correct: true },
+      { text: 'indépendamment de tout obstacle des voies nasales', correct: false }
+    ]
+  },
+  {
+    question: 'La ventilation buccale…',
+    difficulty: 1,
+    answers: [
+      { text: 'd’effort est la seule forme physiologique', correct: true },
+      { text: 'devient habituelle en cas d’obstacle nasal', correct: true },
+      { text: 'est toujours pathologique même à l’effort', correct: false },
+      { text: 'peut être mixte si l’obstacle n’est que partiel', correct: false }
+    ]
+  },
+  {
+    question: 'Le rôle de la respiration, tel que décrit, comprend…',
+    difficulty: 2,
+    answers: [
+      { text: 'le filtrage et la désinfection de l’air', correct: true },
+      { text: 'l’humidification et le réchauffement de l’air ambiant', correct: true },
+      { text: 'une modification au niveau de la pyramide nasale, fosses nasales et sinus', correct: true },
+      { text: 'la digestion initiale des aliments par turbulence nasale', correct: false }
+    ]
+  },
+  {
+    question: 'La déglutition chez le jeune adulte…',
+    difficulty: 2,
+    answers: [
+      { text: 'survient 500 à 2000 fois/jour', correct: true },
+      { text: 'dure environ une seconde', correct: true },
+      { text: 'nécessite l’arrêt de la respiration', correct: true },
+      { text: 'se poursuit pendant le sommeil à 30 à 60/h', correct: false }
+    ]
+  },
+  {
+    question: 'La fréquence de déglutition…',
+    difficulty: 2,
+    answers: [
+      { text: 'augmente pendant les repas jusqu’à ~300 fois/h', correct: true },
+      { text: 'hors repas chute à ~10 fois/h', correct: true },
+      { text: 'pendant le sommeil est de ~2 à 6/h', correct: true },
+      { text: 'maximale lors des stades profonds du sommeil', correct: false }
+    ]
+  },
+  {
+    question: 'Les phases de la déglutition adulte comprennent…',
+    difficulty: 2,
+    answers: [
+      { text: 'phase buccale', correct: true },
+      { text: 'phase pharyngée', correct: true },
+      { text: 'phase œsophagienne', correct: true },
+      { text: 'phase laryngée continue', correct: false }
+    ]
+  },
+  {
+    question: 'Concernant la phase buccale…',
+    difficulty: 2,
+    answers: [
+      { text: 'l’orbiculaire des lèvres se contracte', correct: true },
+      { text: 'le voile du palais s’élève et l’épiglotte s’abaisse', correct: true },
+      { text: 'la langue crée une onde péristaltique vers l’arrière', correct: true },
+      { text: 'la mandibule reste ouverte sans contact d’ICM', correct: false }
+    ]
+  },
+  {
+    question: 'Durant la phase buccale, on observe aussi…',
+    difficulty: 2,
+    answers: [
+      { text: 'la contraction du masséter et contact en I.C.M.', correct: true },
+      { text: 'une onde de déformation linguale antérieure', correct: true },
+      { text: 'un contrôle volontaire possible', correct: true },
+      { text: 'une descente de l’épiglotte pendant l’inspiration', correct: false }
+    ]
+  },
+  {
+    question: 'La maturation de la déglutition dépend…',
+    difficulty: 2,
+    answers: [
+      { text: 'des modifications de l’environnement buccal', correct: true },
+      { text: 'de la maturation des circuits nerveux', correct: true },
+      { text: 'du changement du mode de nutrition', correct: true },
+      { text: 'exclusivement de l’âge', correct: false }
+    ]
+  },
+  {
+    question: 'Transition de la déglutition…',
+    difficulty: 2,
+    answers: [
+      { text: 'débute vers 18 mois', correct: true },
+      { text: 'occlusion fonctionnelle vers 6 ans → déglutition adulte', correct: true },
+      { text: 'persistance infantile normale après 10 ans', correct: false },
+      { text: 'persistance après 10 ans = dysfonctionnelle', correct: true }
+    ]
+  },
+  {
+    question: 'Chez le nouveau-né, la déglutition…',
+    difficulty: 2,
+    answers: [
+      { text: 'est réflexe, déclenchée par stimulation labiale', correct: true },
+      { text: 's’accompagne d’une macroglossie naturelle', correct: true },
+      { text: 'implique les muscles péri-buccaux', correct: true },
+      { text: 'repose sur une occlusion molaire serrée', correct: false }
+    ]
+  },
+  {
+    question: 'La déglutition adulte se caractérise par…',
+    difficulty: 2,
+    answers: [
+      { text: 'arcades serrées, occlusion molaire', correct: true },
+      { text: 'lèvres jointes non contractées', correct: true },
+      { text: 'pointe linguale appui palatin antérieur', correct: true },
+      { text: 'absence totale d’activité faciale', correct: false }
+    ]
+  },
+  {
+    question: 'La déglutition fœtale…',
+    difficulty: 3,
+    answers: [
+      { text: 'décelable dès la 13e semaine', correct: true },
+      { text: 'correspond à la déglutition du liquide amniotique', correct: true },
+      { text: 'nécessite des arcades dentaires', correct: false },
+      { text: 'prépare les fonctions oro-faciales ultérieures', correct: true }
+    ]
+  },
+  {
+    question: 'Chez l’enfant en denture temporaire puis mixte…',
+    difficulty: 3,
+    answers: [
+      { text: 'l’éruption modifie la dynamique linguale', correct: true },
+      { text: 'l’orbiculaire perd son rôle de joint puissant', correct: true },
+      { text: 'la « boîte à langue » s’agrandit, contact molaire fréquent', correct: true },
+      { text: 'propulsion linguale augmente après 10 ans', correct: false }
+    ]
+  },
+  {
+    question: 'La déglutition mature résulte de l’activité coordonnée…',
+    difficulty: 3,
+    answers: [
+      { text: 'des muscles faciaux (orbiculaire, buccinateur, menton)', correct: true },
+      { text: 'des élévateurs et abaisseurs mandibulaires', correct: true },
+      { text: 'des seuls muscles laryngés', correct: false },
+      { text: 'd’un schéma neuromusculaire coordonné respiration/occlusion', correct: true }
+    ]
+  },
+  {
+    question: 'La mastication, première étape de la digestion, implique…',
+    difficulty: 3,
+    answers: [
+      { text: 'coupure, écrasement, broyage', correct: true },
+      { text: 'coordination dents, lèvres, joues, langue', correct: true },
+      { text: 'préparation du bol alimentaire', correct: true },
+      { text: 'uniquement des mouvements de propulsion', correct: false }
+    ]
+  },
+  {
+    question: 'Le cycle masticatoire…',
+    difficulty: 3,
+    answers: [
+      { text: 'enchaîne abaissements/élévations, propulsion/rétropulsion, diduction', correct: true },
+      { text: 'séquence ~15 cycles', correct: true },
+      { text: 'durée fixe de 0,25 s quel que soit l’aliment', correct: false },
+      { text: 'plus long avec aliment dur', correct: true }
+    ]
+  },
+  {
+    question: 'Types de mastication observés…',
+    difficulty: 3,
+    answers: [
+      { text: 'unilatérale (12 %)', correct: true },
+      { text: 'bilatérale (8 %)', correct: true },
+      { text: 'unilatérale alternée (80 %)', correct: true },
+      { text: 'bilatérale alternée (50 %)', correct: false }
+    ]
+  },
+  {
+    question: 'Plan frontal du cycle masticatoire…',
+    difficulty: 3,
+    answers: [
+      { text: 'abaissement, écart côté non travaillant, retour ligne médiane', correct: true },
+      { text: 'écart vertical : 16–18 mm', correct: true },
+      { text: 'écart latéral : 5–6 mm', correct: true },
+      { text: 'durée phase ouverture : ~36 %', correct: true }
+    ]
+  },
+  {
+    question: 'Phase de fermeture (plan frontal)…',
+    difficulty: 3,
+    answers: [
+      { text: 'remontée mandibulaire avec contacts selon bol', correct: true },
+      { text: 'recentrage ligne médiane', correct: true },
+      { text: 'à 3 mm d’ouverture → décalage latéral ~3 mm', correct: true },
+      { text: 'absence de contacts pour tous aliments', correct: false }
+    ]
+  },
+  {
+    question: 'Fin de fermeture et broyage…',
+    difficulty: 3,
+    answers: [
+      { text: 'cuspides vestibulaires mandibulaires sous celles maxillaires', correct: true },
+      { text: 'ralentissement de la remontée', correct: true },
+      { text: 'frottements interdentaires si aliments mous', correct: true },
+      { text: 'contacts obligatoires dès premiers cycles', correct: false }
+    ]
+  },
+  {
+    question: 'Phase d’intercuspidation…',
+    difficulty: 3,
+    answers: [
+      { text: 'clôt le cycle', correct: true },
+      { text: 'n’existe pas', correct: false },
+      { text: 'après broyage lorsque dents se touchent', correct: true },
+      { text: 'au début de l’ouverture', correct: false }
+    ]
+  },
+  {
+    question: 'Maturation de la mastication…',
+    difficulty: 4,
+    answers: [
+      { text: 'fonction apprise liée à l’éruption des dents temporaires', correct: true },
+      { text: 'se développe avec passage liquide→solide', correct: true },
+      { text: 'vers deux ans', correct: true },
+      { text: 'ressemble à adulte qu’en denture définitive', correct: true }
+    ]
+  },
+  {
+    question: 'Plan sagittal et horizontal du cycle masticatoire…',
+    difficulty: 4,
+    answers: [
+      { text: 'plan horizontal : forme ovalaire ou circulaire', correct: true },
+      { text: 'plan sagittal : mentionné sans chiffres', correct: true },
+      { text: 'trajectoire horizontale rectiligne', correct: false },
+      { text: 'variabilité soulignée', correct: true }
+    ]
+  },
+  {
+    question: 'La phonation est…',
+    difficulty: 4,
+    answers: [
+      { text: 'fonction de relation participant au langage', correct: true },
+      { text: 'réalisée par appareil autre que le larynx', correct: false },
+      { text: 'utilisant organes de respiration/nutrition', correct: true },
+      { text: 'dépendante de deux conduites superposées', correct: true }
+    ]
+  },
+  {
+    question: 'Les conduites de la phonation comprennent…',
+    difficulty: 4,
+    answers: [
+      { text: 'conduites phonatoires : système pneumo-trachéo-laryngo-pharyngé', correct: true },
+      { text: 'conduites articulatoires : voyelles et consonnes', correct: true },
+      { text: 'conduites phonatoires entièrement apprises', correct: false },
+      { text: 'conduites articulatoires influencées par le milieu', correct: true }
+    ]
+  },
+  {
+    question: 'Activité des systèmes pendant la phonation…',
+    difficulty: 4,
+    answers: [
+      { text: 'laryngien : vibration pendant expiration', correct: true },
+      { text: 'bucco-pharyngien : activité discontinue', correct: true },
+      { text: 'entre consonnes : son laryngé = voyelles', correct: true },
+      { text: 'laryngien : actif à l’inspiration', correct: false }
+    ]
+  },
+  {
+    question: 'À propos des phonèmes…',
+    difficulty: 4,
+    answers: [
+      { text: 'supports élémentaires du langage', correct: true },
+      { text: 'constitués de voyelles et consonnes', correct: true },
+      { text: 'incluent des diphtongues', correct: false },
+      { text: 'définis sans classification supplémentaire', correct: true }
+    ]
+  },
+  {
+    question: 'Relation forme-fonction (conclusion)…',
+    difficulty: 4,
+    answers: [
+      { text: 'forme et fonction étroitement liées', correct: true },
+      { text: 'morphologie adulte = activité musculaire', correct: true },
+      { text: 'muscles déterminent rapports mâchoires et dents', correct: true },
+      { text: 'forme cranio-faciale indépendante des muscles', correct: false }
+    ]
+  },
+  {
+    question: 'Respiration buccale ou mixte…',
+    difficulty: 4,
+    answers: [
+      { text: 'due à un obstacle nasal', correct: true },
+      { text: 'bouche fermée nécessaire à ventilation nasale', correct: true },
+      { text: 'obstacle nasal sans incidence', correct: false },
+      { text: 'ventilation buccale d’effort physiologique', correct: true }
+    ]
+  },
+  {
+    question: 'Phase buccale de déglutition — enchaînement :',
+    difficulty: 4,
+    answers: [
+      { text: 'contraction labiale discrète, arrêt respiratoire', correct: true },
+      { text: 'abaissement de l’épiglotte', correct: true },
+      { text: 'onde linguale propulsant le bol', correct: true },
+      { text: 'lèvres entrouvertes nécessaires', correct: false }
+    ]
+  },
+  {
+    question: 'Paramètres quantifiés du cycle masticatoire :',
+    difficulty: 4,
+    answers: [
+      { text: 'ouverture verticale ~16–18 mm', correct: true },
+      { text: 'écart latéral ~5–6 mm', correct: true },
+      { text: 'durée relative ouverture ~36 %', correct: true },
+      { text: 'décalage latéral 3 mm à 3 mm d’ouverture', correct: true }
+    ]
+  },
+  {
+    question: 'Fréquence de déglutition — piège :',
+    difficulty: 5,
+    answers: [
+      { text: '300 fois/h pendant repas', correct: true },
+      { text: '10 fois/h hors repas', correct: true },
+      { text: '2–6/h pendant sommeil', correct: true },
+      { text: 'nulle la nuit', correct: false }
+    ]
+  },
+  {
+    question: 'Intégration respiration-déglutition-larynx :',
+    difficulty: 5,
+    answers: [
+      { text: 'arrêt respiratoire et élévation du voile', correct: true },
+      { text: 'abaissement de l’épiglotte', correct: true },
+      { text: 'contact d’ICM', correct: true },
+      { text: 'inspiration forcée', correct: false }
+    ]
+  },
+  {
+    question: 'Chronologie de maturation de la déglutition :',
+    difficulty: 5,
+    answers: [
+      { text: 'mouvements fœtaux dès 13e semaine', correct: true },
+      { text: 'nouveau-né : acte réflexe et macroglossie', correct: true },
+      { text: 'denture mixte : boîte à langue agrandie', correct: true },
+      { text: 'propulsion linguale normale après 10 ans', correct: false }
+    ]
+  },
+  {
+    question: 'Synthèse mastication (séquence et contacts) :',
+    difficulty: 5,
+    answers: [
+      { text: 'séquence ≈ 15 cycles', correct: true },
+      { text: 'aliments durs : contacts absents aux premiers cycles', correct: true },
+      { text: 'aliments mous : contacts possibles en fin de cycle', correct: true },
+      { text: 'contacts toujours précoces', correct: false }
+    ]
+  },
+  {
+    question: 'Phonation (double conduite et produits) :',
+    difficulty: 5,
+    answers: [
+      { text: 'conduites phonatoires innées produisant la voix', correct: true },
+      { text: 'conduites articulatoires : voyelles/consonnes', correct: true },
+      { text: 'entre consonnes : son laryngé = voyelles', correct: true },
+      { text: 'phonèmes ne comprennent pas les consonnes', correct: false }
+    ]
+  }
+],'Introduction à l’Orthopédie Dento-Faciale': [
+  {
+    question: 'Définition et champ : l’ODF est présentée comme partie de l’odontologie/stomatologie qui étudie et traite des troubles liés aux anomalies…',
+    difficulty: 1,
+    answers: [
+      { text: 'de la forme des mâchoires', correct: true },
+      { text: 'de la position des dents', correct: true },
+      { text: 'des organes viscéraux cervicaux uniquement', correct: false },
+      { text: 'de la face et des maxillaires dans leur développement', correct: true }
+    ]
+  },
+  {
+    question: 'Selon la SFODF et Bassigny, l’ODF vise entre autres à…',
+    difficulty: 1,
+    answers: [
+      { text: 'rétablir un équilibre fonctionnel et une bonne mastication', correct: true },
+      { text: 'aider à prévenir les maladies des dents et de leur support', correct: true },
+      { text: 'ignorer l’harmonie du visage au profit de la seule occlusion', correct: false },
+      { text: 'améliorer l’harmonie du visage et de la denture', correct: true }
+    ]
+  },
+  {
+    question: 'Orthodontie vs ODF (distinction historique) :',
+    difficulty: 1,
+    answers: [
+      { text: 'ODF : modification de la croissance des mâchoires', correct: true },
+      { text: 'Orthodontie : positions dentaires, formes des arcades et rapports', correct: true },
+      { text: 'En 1978, l’AAO a admis ODF comme synonyme acceptable', correct: true },
+      { text: 'ODF n’a aucun lien avec les rapports d’arcades', correct: false }
+    ]
+  },
+  {
+    question: 'Définition d’« anomalie » en ODF :',
+    difficulty: 1,
+    answers: [
+      { text: 'une variation par rapport à la moyenne', correct: true },
+      { text: 'un ensemble de variations morphologiques et fonctionnelles', correct: true },
+      { text: 'ne peut entraîner de préjudice esthétique ni fonctionnel', correct: false },
+      { text: 'peut porter atteinte au développement harmonieux', correct: true }
+    ]
+  },
+  {
+    question: 'Buts généraux de l’ODF explicités :',
+    difficulty: 1,
+    answers: [
+      { text: 'esthétique du visage et de la denture', correct: true },
+      { text: 'fonctions oro-faciales satisfaisantes', correct: true },
+      { text: 'santé bucco-dentaire', correct: true },
+      { text: 'confort et bien-être', correct: true }
+    ]
+  },
+  {
+    question: 'Anomalies morphologiques — exemples donnés :',
+    difficulty: 2,
+    answers: [
+      { text: 'absence ou inclusion d’un germe dentaire', correct: true },
+      { text: 'dysharmonie taille dents / taille maxillaires', correct: true },
+      { text: 'anomalies des relations d’arcades dans les trois sens', correct: true },
+      { text: 'rapports base du crâne–maxillaires', correct: true }
+    ]
+  },
+  {
+    question: 'Structures osseuses et « trois sens de l’espace » :',
+    difficulty: 2,
+    answers: [
+      { text: 'réduction/augmentation du volume d’un maxillaire', correct: true },
+      { text: 'aucune répercussion fonctionnelle ou esthétique', correct: false },
+      { text: 'appartiennent aux anomalies morphologiques', correct: true },
+      { text: 'tissus mous jamais mentionnés', correct: false }
+    ]
+  },
+  {
+    question: 'Anomalies fonctionnelles (énoncées dans le texte) :',
+    difficulty: 2,
+    answers: [
+      { text: 'anomalies cinétiques des relations d’arcades', correct: true },
+      { text: 'anomalies de déglutition, ventilation, phonation, mastication', correct: true },
+      { text: 'seules les anomalies morphologiques sont concernées', correct: false },
+      { text: 'peuvent contribuer à un préjudice fonctionnel', correct: true }
+    ]
+  },
+  {
+    question: 'Champ élargi ajouté à l’étude des anomalies orthodontiques :',
+    difficulty: 2,
+    answers: [
+      { text: 'malformations congénitales (fentes labiales/palatines)', correct: true },
+      { text: 'séquelles de syndromes cranio-faciaux', correct: true },
+      { text: 'séquelles de traumatismes faciaux', correct: true },
+      { text: 'seules les malformations extra-faciales incluses', correct: false }
+    ]
+  },
+  {
+    question: 'Principe « que traiter en ODF » :',
+    difficulty: 2,
+    answers: [
+      { text: 'anomalies portant atteinte à la croissance/aspect', correct: true },
+      { text: 'anomalies nuisant aux fonctions orales/nasales', correct: true },
+      { text: 'anomalies exposant les dents aux traumatismes', correct: true },
+      { text: 'anomalies sans conséquence clinique', correct: false }
+    ]
+  },
+  {
+    question: 'Circonstances à considérer en plus des indications :',
+    difficulty: 2,
+    answers: [
+      { text: 'facteurs favorisant caries', correct: true },
+      { text: 'facteurs favorisant lésions parodontales', correct: true },
+      { text: 'facteurs favorisant troubles articulaires', correct: true },
+      { text: 'facteurs systémiques non cités', correct: false }
+    ]
+  },
+  {
+    question: 'Rôle de l’omnipraticien face aux anomalies :',
+    difficulty: 2,
+    answers: [
+      { text: 'apprécier nature et amplitude des anomalies', correct: true },
+      { text: 'rechercher causes et effets', correct: true },
+      { text: 'connaître possibilités et limites thérapeutiques', correct: true },
+      { text: 'différer tout diagnostic', correct: false }
+    ]
+  },
+  {
+    question: 'Dimension psycho-sociale citée :',
+    difficulty: 2,
+    answers: [
+      { text: 'un beau sourire → meilleure estime de soi', correct: true },
+      { text: 'esthétique dissociée de toute finalité fonctionnelle', correct: false },
+      { text: 'esthétique et fonction conjointes', correct: true },
+      { text: 'harmonie de la denture avec celle du visage', correct: true }
+    ]
+  },
+  {
+    question: 'Santé et confort (synthèse) :',
+    difficulty: 2,
+    answers: [
+      { text: 'alignement → nettoyage plus facile', correct: true },
+      { text: 'bonne occlusion → moins de tensions', correct: true },
+      { text: 'ATM non évoquée', correct: false },
+      { text: 'objectifs complètent esthétique', correct: true }
+    ]
+  },
+  {
+    question: 'Conclusion du cours : l’ODF/Orthodontie est…',
+    difficulty: 2,
+    answers: [
+      { text: 'un art scientifique', correct: true },
+      { text: 'visant l’optimum individuel esthétique/fonctionnel', correct: true },
+      { text: 'obtenu par moyens biologiques et mécaniques', correct: true },
+      { text: 'fondé sur protocole unique standardisé', correct: false }
+    ]
+  },
+  {
+    question: 'Étymologie (introduction) :',
+    difficulty: 3,
+    answers: [
+      { text: 'orthodontie = dents droites', correct: true },
+      { text: 'orthopédie = redressement de la croissance', correct: true },
+      { text: 'ODF = étude exclusive des ATM', correct: false },
+      { text: 'ODF relève de l’odontologie/stomatologie', correct: true }
+    ]
+  },
+  {
+    question: 'Logique « anomalie vs moyenne » et indication :',
+    difficulty: 3,
+    answers: [
+      { text: 'anomalie = variation par rapport à la moyenne', correct: true },
+      { text: 'toute variation impose traitement', correct: false },
+      { text: 'indication = situation génératrice de handicap', correct: true },
+      { text: 'développement harmonieux compromis', correct: true }
+    ]
+  },
+  {
+    question: 'Trois registres rassemblés dans le texte :',
+    difficulty: 3,
+    answers: [
+      { text: 'morphologique (dents, os, tissus mous)', correct: true },
+      { text: 'fonctionnel (déglutition, ventilation, etc.)', correct: true },
+      { text: 'malformations/séquelles', correct: true },
+      { text: 'uniquement morphologique', correct: false }
+    ]
+  },
+  {
+    question: 'Relations d’arcades « trois sens de l’espace » :',
+    difficulty: 3,
+    answers: [
+      { text: 'aux relations d’arcades', correct: true },
+      { text: 'au volume des maxillaires', correct: true },
+      { text: 'aux tissus mous exclusivement', correct: false },
+      { text: 'aux descriptions morphologiques globales', correct: true }
+    ]
+  },
+  {
+    question: 'Exemples précis de tissus mous donnés :',
+    difficulty: 3,
+    answers: [
+      { text: 'brièveté de la lèvre supérieure', correct: true },
+      { text: 'langue trop volumineuse', correct: true },
+      { text: 'anomalies d’insertion des freins', correct: true },
+      { text: 'défauts parodontaux', correct: true }
+    ]
+  },
+  {
+    question: 'Distinction historique maintenue pédagogiquement :',
+    difficulty: 3,
+    answers: [
+      { text: 'ODF : croissance des mâchoires (enfants)', correct: true },
+      { text: 'Orthodontie : positions dentaires et rapports', correct: true },
+      { text: 'synonymie interdit d’employer l’un pour l’autre', correct: false },
+      { text: 'distinction garde intérêt explicatif', correct: true }
+    ]
+  },
+  {
+    question: 'Préjudices potentiels explicités :',
+    difficulty: 3,
+    answers: [
+      { text: 'psychiques', correct: true },
+      { text: 'esthétiques', correct: true },
+      { text: 'fonctionnels', correct: true },
+      { text: 'aucun retentissement facial', correct: false }
+    ]
+  },
+  {
+    question: 'Enjeux de santé publique évoqués :',
+    difficulty: 3,
+    answers: [
+      { text: 'exposition des dents aux traumatismes', correct: true },
+      { text: 'lésions parodontales favorisées', correct: true },
+      { text: 'troubles articulaires possibles', correct: true },
+      { text: 'prévention sans rapport à l’ODF', correct: false }
+    ]
+  },
+  {
+    question: 'Place de l’équilibre fonctionnel :',
+    difficulty: 3,
+    answers: [
+      { text: 'rétabli selon SFODF', correct: true },
+      { text: 'lié à la fonction masticatrice', correct: true },
+      { text: 'dissocié des malformations', correct: false },
+      { text: 'objectif fondamental de l’ODF', correct: true }
+    ]
+  },
+  {
+    question: 'Objet de l’analyse clinique initiale :',
+    difficulty: 3,
+    answers: [
+      { text: 'nature et amplitude des anomalies', correct: true },
+      { text: 'recherche étiologique', correct: true },
+      { text: 'méconnaissance volontaire des limites', correct: false },
+      { text: 'diagnostic avant choix thérapeutique', correct: true }
+    ]
+  },
+  {
+    question: 'Logique décisionnelle : on traitera en priorité les anomalies…',
+    difficulty: 4,
+    answers: [
+      { text: 'portant atteinte à la croissance/aspect', correct: true },
+      { text: 'nuisibles aux fonctions', correct: true },
+      { text: 'exposant aux traumatismes', correct: true },
+      { text: 'statistiquement minoritaires', correct: false }
+    ]
+  },
+  {
+    question: '« Trois sens de l’espace » : implications :',
+    difficulty: 4,
+    answers: [
+      { text: 'orientation antéro-postérieure', correct: true },
+      { text: 'dimension transversale', correct: true },
+      { text: 'dimension verticale', correct: true },
+      { text: 'uniquement verticale', correct: false }
+    ]
+  },
+  {
+    question: 'Interdisciplinarité implicite du champ :',
+    difficulty: 4,
+    answers: [
+      { text: 'odontologie', correct: true },
+      { text: 'stomatologie', correct: true },
+      { text: 'chirurgie extra-faciale seule', correct: false },
+      { text: 'prise en compte des ATM', correct: true }
+    ]
+  },
+  {
+    question: 'Portée de la conclusion sur l’optimum individuel :',
+    difficulty: 4,
+    answers: [
+      { text: 'dimension esthétique', correct: true },
+      { text: 'dimension fonctionnelle', correct: true },
+      { text: 'standardisation universelle', correct: false },
+      { text: 'moyens biologiques/mécaniques', correct: true }
+    ]
+  },
+  {
+    question: 'Cohérence « but ↔ indication » :',
+    difficulty: 4,
+    answers: [
+      { text: 'buts justifient tri des indications', correct: true },
+      { text: 'indications fondées sur handicaps/objectifs', correct: true },
+      { text: 'moyenne statistique suffit', correct: false },
+      { text: 'diagnostic relie ces axes', correct: true }
+    ]
+  },
+  {
+    question: 'Exemples d’anomalies morphologiques citées :',
+    difficulty: 4,
+    answers: [
+      { text: 'dysharmonie dents/maxillaires', correct: true },
+      { text: 'anomalies base du crâne–maxillaires', correct: true },
+      { text: 'anomalies tissus mous', correct: true },
+      { text: 'anomalies cinétiques', correct: false }
+    ]
+  },
+  {
+    question: 'Exemples d’anomalies fonctionnelles citées :',
+    difficulty: 4,
+    answers: [
+      { text: 'déglutition', correct: true },
+      { text: 'ventilation', correct: true },
+      { text: 'phonation', correct: true },
+      { text: 'morphogenèse maxillaire', correct: false }
+    ]
+  },
+  {
+    question: 'Compléments à l’étude des anomalies orthodontiques :',
+    difficulty: 4,
+    answers: [
+      { text: 'malformations congénitales', correct: true },
+      { text: 'séquelles syndromes cranio-faciaux', correct: true },
+      { text: 'séquelles traumatismes', correct: true },
+      { text: 'anomalies dentaires isolées', correct: false }
+    ]
+  },
+  {
+    question: 'Chaîne opératoire attendue chez tout praticien :',
+    difficulty: 4,
+    answers: [
+      { text: 'constater → analyser → diagnostiquer', correct: true },
+      { text: 'connaître moyens thérapeutiques', correct: true },
+      { text: 's’abstenir de diagnostiquer', correct: false },
+      { text: 'orienter la prise en charge', correct: true }
+    ]
+  },
+  {
+    question: 'Énoncés exacts concernant les buts :',
+    difficulty: 4,
+    answers: [
+      { text: 'esthétique et estime de soi', correct: true },
+      { text: 'fonctions oro-faciales', correct: true },
+      { text: 'santé bucco-dentaire', correct: true },
+      { text: 'confort musculaire/ATM', correct: true }
+    ]
+  },
+  {
+    question: 'Lecture croisée « définition/indications/buts » :',
+    difficulty: 5,
+    answers: [
+      { text: 'définition : anomalies de forme et position', correct: true },
+      { text: 'indications : croissance, fonctions, traumatismes', correct: true },
+      { text: 'buts : esthétique, fonction, santé, confort', correct: true },
+      { text: 'conclusion : protocole unique', correct: false }
+    ]
+  },
+  {
+    question: 'Distinction historique et décision de 1978 (AAO) :',
+    difficulty: 5,
+    answers: [
+      { text: 'ODF (croissance) vs orthodontie (positions)', correct: true },
+      { text: '1978 : synonymie acceptée', correct: true },
+      { text: 'interdiction d’utiliser orthodontie', correct: false },
+      { text: 'distinction garde intérêt didactique', correct: true }
+    ]
+  },
+  {
+    question: '« On ne traite pas une anomalie pour elle-même » implique que…',
+    difficulty: 5,
+    answers: [
+      { text: 'variation ≠ indication', correct: true },
+      { text: 'indication = handicap ou risque', correct: true },
+      { text: 'facteurs caries/parodonte/ATM considérés', correct: true },
+      { text: 'absence d’impact = traitement immédiat', correct: false }
+    ]
+  },
+  {
+    question: 'Cartographie des exemples fournis :',
+    difficulty: 5,
+    answers: [
+      { text: 'anomalies dentaires', correct: true },
+      { text: 'dysharmonie dentaire–maxillaire', correct: true },
+      { text: 'relations d’arcades (3 sens)', correct: true },
+      { text: 'anomalies de sourire selon des plans anthropométriques', correct: false }
+    ]
+  },
+  {
+    question: 'Synthèse finale (statut de l’ODF/orthodontie) :',
+    difficulty: 5,
+    answers: [
+      { text: 'art scientifique', correct: true },
+      { text: 'moyens biologiques et mécaniques', correct: true },
+      { text: 'optimum individuel esthétique et fonctionnel', correct: true },
+      { text: 'absence de référence à l’ATM dans le confort', correct: false }
+    ]
+  }
+],
+
+
+
+
+    'Système nerveux': [
+      {
+        question: 'ما هو الجزء من الدماغ المسؤول عن التوازن؟',
+        difficulty: 1,
+        answers: [
+          { text: 'المخيخ', correct: true },
+          { text: 'النخاع المستطيل', correct: false },
+          { text: 'المهاد', correct: false },
+          { text: 'القشرة المخية', correct: false }
+        ]
+      },
+      {
+        question: 'ما هو العصب المسؤول عن الرؤية؟',
+        difficulty: 2,
+        answers: [
+          { text: 'العصب السمعي', correct: false },
+          { text: 'العصب البصري', correct: true },
+          { text: 'العصب الوجهي', correct: false },
+          { text: 'العصب الحائر', correct: false }
+        ]
+      }
+      // ➕ أضف المزيد من الأسئلة هنا
+    ]
+  };
+
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    // ⭐ عرض النجوم
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "../lessons.html";
+  }
+</script>
+</body>
+</html>

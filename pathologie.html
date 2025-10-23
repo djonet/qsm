@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomie Humaine - Qcms BY DJO</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2 { margin-bottom: 10px; font-size: 24px; }
+
+  /* 🔹 كتل الأسئلة */
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  /* ⭐ النجوم المتحركة */
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty {
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1) { animation-delay: 0.1s; }
+  .star:nth-child(2) { animation-delay: 0.2s; }
+  .star:nth-child(3) { animation-delay: 0.3s; }
+  .star:nth-child(4) { animation-delay: 0.4s; }
+  .star:nth-child(5) { animation-delay: 0.5s; }
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg, #0096c7, #00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+
+  /* ✅ و ❌ */
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black !important;
+    border: 1px solid #0f0;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black !important;
+    border: 1px solid #f00;
+  }
+
+  /* 🔸 الملاحظات */
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  /* 🔘 الأزرار */
+  .control-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  /* 📱 تحسين الهاتف */
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .container { width: 95%; padding: 15px; }
+    .question-text { font-size: 16px; }
+    .answer { font-size: 15px; padding: 10px; }
+    .control-buttons { flex-direction: column; }
+    .star { font-size: 18px; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h3 id="lessonTitle"></h3>
+    <div id="questionsContainer"></div>
+    <button class="control-buttons" style="background:#444" onclick="goBack()">🔙 الرجوع للدروس</button>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  const lesson = localStorage.getItem('lesson') || 'غير محدد';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 الأسئلة الخاصة بكل درس
+  const questionsData = {
+    'Cabinet Dentaire et Dispositifs chirurgicaux': [
+  // A. Bon élève ⭐
+  {
+    question: "Le secrétariat/accueil est décrit comme un lieu d’accueil et d’information, zone à faible risque sanitaire…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Lieu d’accueil, d’information et d’échanges", correct: true },
+      { text: "B. Obligatoirement séparé par des parois plombées", correct: false },
+      { text: "C. Salle dédiée avec vitrine ou comptoir à l’entrée", correct: true },
+      { text: "D. Zone à faible risque sanitaire", correct: true }
+    ]
+  },
+  {
+    question: "La salle d’attente : proximité, visibilité, aménagements…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Proche de l’entrée et visible du secrétariat", correct: true },
+      { text: "B. Interdiction de téléviseur", correct: false },
+      { text: "C. Mobilier design possible si hygiène respectée", correct: true },
+      { text: "D. Accolée au local de stérilisation", correct: false }
+    ]
+  },
+  {
+    question: "La salle de soins (opératoire) :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Fauteuil central pour circulation", correct: true },
+      { text: "B. Éclairage suffisant et scialytique", correct: true },
+      { text: "C. Zone active à haut risque, hygiène primordiale", correct: true },
+      { text: "D. Réservée aux soins non invasifs", correct: false }
+    ]
+  },
+  {
+    question: "Local radio et local à déchets :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Local radio sécurisé et protégé", correct: true },
+      { text: "B. Local radio hors cabinet", correct: false },
+      { text: "C. Local déchets : marche en avant, 2 portes", correct: true },
+      { text: "D. Nettoyage à grande eau, sécurité contre vols", correct: true }
+    ]
+  },
+  {
+    question: "Conditions atmosphériques :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Température 18–22 °C", correct: true },
+      { text: "B. Humidité 40–60 %", correct: true },
+      { text: "C. Ventilation constante et renouvelée", correct: true },
+      { text: "D. Interdiction du renouvellement d’air", correct: false }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "La marche en avant (stérilisation/déchets) :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Entrée zone sale → propre → stérile", correct: true },
+      { text: "B. Retour des DM stériles vers la zone sale", correct: false },
+      { text: "C. Local déchets avec entrées/sorties distinctes", correct: true },
+      { text: "D. Idéalement local à deux issues", correct: true }
+    ]
+  },
+  {
+    question: "Circulation au cabinet :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Circuits croisés uniquement en salle de soins", correct: true },
+      { text: "B. Patient hors stérilisation/radiologie", correct: true },
+      { text: "C. Patient croise instruments si accompagné", correct: false },
+      { text: "D. Sens unique pour DM et stérilisation", correct: true }
+    ]
+  },
+  {
+    question: "Circulation du patient :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Accueil → attente → soins → sortie", correct: true },
+      { text: "B. Peut visiter stérilisation (non)", correct: false },
+      { text: "C. Ne croise jamais l’instrumentation", correct: true },
+      { text: "D. Peut passer par local déchets", correct: false }
+    ]
+  },
+  {
+    question: "Circulation de l’assistant(e) et des instruments :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Flux codifié pour l’assistant(e)", correct: true },
+      { text: "B. Séparer sale et propre", correct: true },
+      { text: "C. Instruments propres/sales non croisés", correct: true },
+      { text: "D. Croisement encouragé", correct: false }
+    ]
+  },
+  {
+    question: "Zonage d’hygiène :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Zones protégées : soins, stérilisation, chirurgie, radio", correct: true },
+      { text: "B. Potentiellement contaminées : déchets, entretien, WC", correct: true },
+      { text: "C. Administratives : secrétariat, attente, vestiaires", correct: true },
+      { text: "D. Tout le cabinet = protégé", correct: false }
+    ]
+  },
+  {
+    question: "Environnement : lumière et son.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Scialytique zone opératoire", correct: true },
+      { text: "B. Bruit : turbines/aspiration", correct: true },
+      { text: "C. Isolation + musique apaisante", correct: true },
+      { text: "D. Aucun traitement du bruit", correct: false }
+    ]
+  },
+  {
+    question: "Surfaces et peinture :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Sols/murs lavables", correct: true },
+      { text: "B. Couleurs : blanc cassé, bleu, vert", correct: true },
+      { text: "C. Couleurs chaudes/froides : effet distance", correct: true },
+      { text: "D. Peinture mate interdite", correct: false }
+    ]
+  },
+  {
+    question: "Accessibilité handicap :",
+    difficulty: 2,
+    answers: [
+      { text: "A. WC adapté, lave-mains automatique", correct: true },
+      { text: "B. Couloirs larges accessibles", correct: true },
+      { text: "C. Fauteuil anti-allergénique", correct: false },
+      { text: "D. Salle attente au sous-sol", correct: false }
+    ]
+  },
+  {
+    question: "Éléments obligatoires/optionnels :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Nécessaires : accueil, soins, stérilisation, stockage, WC", correct: true },
+      { text: "B. Optionnels : bureau, radio, chirurgie, labo, prévention", correct: true },
+      { text: "C. Vestiaires plombés obligatoires", correct: false },
+      { text: "D. Salle de chirurgie obligatoire", correct: false }
+    ]
+  },
+  {
+    question: "Équipements du cabinet :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Fauteuil + aspiration chirurgicale", correct: true },
+      { text: "B. Radiographie + table instruments", correct: true },
+      { text: "C. Stérilisation + matériel chirurgical", correct: true },
+      { text: "D. Hémodialyse dentaire", correct: false }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "Fauteuil dentaire :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Accès facile et confort patient", correct: true },
+      { text: "B. Réglages ergonomiques", correct: true },
+      { text: "C. Commande électrique/pédale + scialytique mobile", correct: true },
+      { text: "D. Crachoir = aspiration chirurgicale", correct: false }
+    ]
+  },
+  {
+    question: "Aspirateur chirurgical et pompe à salive :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Incorporé, puissant, canule métal/plastique", correct: true },
+      { text: "B. Indispensable en chirurgie", correct: true },
+      { text: "C. Pompe à salive citée distinctement", correct: true },
+      { text: "D. Réservé à radiologie", correct: false }
+    ]
+  },
+  {
+    question: "Matériel de stérilisation :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Ultrasons + auto-laveur-désinfecteur", correct: true },
+      { text: "B. Thermo-soudeuse + gaines + autoclave", correct: true },
+      { text: "C. Four Poupinel obligatoire", correct: false },
+      { text: "D. Bac glutaraldéhyde imposé", correct: false }
+    ]
+  },
+  {
+    question: "Matériel de base :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Miroir, précelle, sonde", correct: true },
+      { text: "B. Seringues métalliques, carpules, aiguilles", correct: true },
+      { text: "C. Champs opératoires, EPI", correct: true },
+      { text: "D. Oxymètre jetable", correct: false }
+    ]
+  },
+  {
+    question: "Extraction simple :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Syndesmotome, élévateur", correct: true },
+      { text: "B. Daviers, curettes", correct: true },
+      { text: "C. Pince gouge (non)", correct: false },
+      { text: "D. Turbine haute vitesse (non)", correct: false }
+    ]
+  },
+  {
+    question: "Chirurgie muqueuse — bistouri/ciseaux :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Bistouri à lames interchangeables", correct: true },
+      { text: "B. Ciseaux dissection et fils", correct: true },
+      { text: "C. Ciseaux ostéosynthèse = fils acier", correct: true },
+      { text: "D. Ciseaux osseux uniquement", correct: false }
+    ]
+  },
+  {
+    question: "Chirurgie muqueuse — pinces/décolleurs/sutures :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Pince à disséquer (avec/sans griffes)", correct: true },
+      { text: "B. Pince hémostatique : clampe vaisseaux", correct: true },
+      { text: "C. Décolleurs : laminent la muqueuse (faux)", correct: false },
+      { text: "D. Porte-aiguille, fils, écarteurs", correct: true }
+    ]
+  },
+  {
+    question: "Chirurgie osseuse — instruments rotatifs :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Pièces à main 12 000–20 000 tr/min", correct: true },
+      { text: "B. Turbines ≈ 30 000 tr/min sur dent", correct: true },
+      { text: "C. Turbines pour fraisage osseux (faux)", correct: false },
+      { text: "D. Pièces à main non réglables (faux)", correct: false }
+    ]
+  },
+  {
+    question: "Chirurgie osseuse — instruments actifs :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Curettes : curetage osseux", correct: true },
+      { text: "B. Râpes à l’os : régularisation", correct: true },
+      { text: "C. Pince gouge : exérèse tissus durs", correct: true },
+      { text: "D. Curettes : coupent fils (faux)", correct: false }
+    ]
+  },
+  {
+    question: "Radioprotection et sécurité :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Local radio protégé", correct: true },
+      { text: "B. Double porte plombée secrétariat (non)", correct: false },
+      { text: "C. Patient ne visite pas radiologie", correct: true },
+      { text: "D. Hors zone clinique (non)", correct: false }
+    ]
+  },
+
+  // D. Difficiles ⭐⭐⭐⭐
+  {
+    question: "Plan et ergonomie du cabinet :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Fonctionnel, esthétique, confortable", correct: true },
+      { text: "B. Adapté à hygiène, accessibilité, écologie", correct: true },
+      { text: "C. Circulations encombrées", correct: false },
+      { text: "D. Accès facile et évolutif", correct: true }
+    ]
+  },
+  {
+    question: "Organisation des locaux :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Protégées : soins/stérilisation/chirurgie/radio", correct: true },
+      { text: "B. Potentiellement contaminées : DASRI, WC, entretien", correct: true },
+      { text: "C. Administratives : secrétariat, attente, vestiaires", correct: true },
+      { text: "D. Mobilier maximal", correct: false }
+    ]
+  },
+  {
+    question: "Stockage et archives :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Zone de stockage pour matériel/archives", correct: true },
+      { text: "B. Salle plombée obligatoire (non)", correct: false },
+      { text: "C. Non zone de soins", correct: true },
+      { text: "D. Produits sensibles non listés", correct: true }
+    ]
+  },
+  {
+    question: "Accueil, attente et ergonomie :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Attente visible du secrétariat", correct: true },
+      { text: "B. Accueil = zone faible risque", correct: true },
+      { text: "C. Attente = murs opaques (faux)", correct: false },
+      { text: "D. Secrétariat dans radio (faux)", correct: false }
+    ]
+  },
+  {
+    question: "Couloirs et accessibilité :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Indispensables à la circulation", correct: true },
+      { text: "B. Larges pour handicap", correct: true },
+      { text: "C. Marche en avant sans croisement", correct: true },
+      { text: "D. Stockage DASRI", correct: false }
+    ]
+  },
+  {
+    question: "Gestion du bruit :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Sources : turbines/aspiration", correct: true },
+      { text: "B. Vitrage + musique apaisante", correct: true },
+      { text: "C. Silence total imposé", correct: false },
+      { text: "D. Réduction du bruit prioritaire", correct: true }
+    ]
+  },
+  {
+    question: "Peinture et couleurs :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Couleurs claires favorables", correct: true },
+      { text: "B. Chaudes = rapprochement, froides = éloignement", correct: true },
+      { text: "C. Blanc cassé, bleu, vert recommandés", correct: true },
+      { text: "D. Rouge vif imposé", correct: false }
+    ]
+  },
+  {
+    question: "Instrumentation et plateaux :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Plateau intégré au fauteuil", correct: true },
+      { text: "B. Plateau d’examen (miroir, précelle, sonde)", correct: true },
+      { text: "C. Aspiration dissociée (faux)", correct: false },
+      { text: "D. Matériel de réanimation possible", correct: true }
+    ]
+  },
+  {
+    question: "Flux et deux issues :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Instruments propres/sales séparés", correct: true },
+      { text: "B. Sens unique pour circuits", correct: true },
+      { text: "C. Marche en avant : stérilisation et déchets", correct: true },
+      { text: "D. Retour DM stériles vers zone sale", correct: false }
+    ]
+  },
+  {
+    question: "Toilettes et mobilier :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Sanitaires faciles à nettoyer", correct: true },
+      { text: "B. Peu de meubles (hygiène)", correct: true },
+      { text: "C. Bois brut non lessivable", correct: false },
+      { text: "D. Sols/murs résistants désinfection", correct: true }
+    ]
+  },
+
+  // E. Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Marche en avant et circuits combinés :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Sens unique patient/DM", correct: true },
+      { text: "B. Croisement autorisé (non)", correct: false },
+      { text: "C. Un seul chevauchement : salle de soins", correct: true },
+      { text: "D. Local stérilisation à deux issues", correct: true }
+    ]
+  },
+   {
+    question: "Différenciation des zones (protégées/potentiellement contaminées/administratives) et implications pratiques :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Désinfection scrupuleuse en zones protégées (soins, stérilisation, chirurgie, radiologie)", correct: true },
+      { text: "B. Local déchets, première partie stérilisation et WC = zones potentiellement contaminées", correct: true },
+      { text: "C. Zones administratives = secrétariat, bureaux, salle d’attente, vestiaires", correct: true },
+      { text: "D. Toutes les zones traitées comme 'protégées' pendant l’ouverture", correct: false }
+    ]
+  },
+  {
+    question: "Spécificités du fauteuil et périphériques (intégration/ergonomie) :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Scialytique fixé sur bras mobile ; réglages dossier/têtière/hauteur", correct: true },
+      { text: "B. Crachoir : draine l’eau utilisée par le patient", correct: true },
+      { text: "C. Aspirateur chirurgical intégré, puissant, canule métal/plastique", correct: true },
+      { text: "D. Crachoir remplace aspiration chirurgicale", correct: false }
+    ]
+  },
+  {
+    question: "Instruments rotatifs et actifs — pièges de formulation :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Pièces à main/contre-angles 12 000–20 000 tr/min : tissus dentaires et osseux", correct: true },
+      { text: "B. Turbines 30 000 tr/min uniquement sur la dent", correct: true },
+      { text: "C. Râpes à l’os : régularisent la surface", correct: true },
+      { text: "D. Curettes pour couper fils (faux)", correct: false }
+    ]
+  },
+  {
+    question: "Cohérence globale « plan – environnement – organisation – dispositif » :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Plan fonctionnel + ergonomie = productivité, sécurité, accès facile", correct: true },
+      { text: "B. Environnement : température 18–22 °C, humidité 40–60 %, ventilation constante", correct: true },
+      { text: "C. Organisation : circuits à sens unique et zonage hygiénique", correct: true },
+      { text: "D. Substituer la stérilisation par rinçage si ventilation bonne", correct: false }
+    ]
+  }
+],
+
+    'Système nerveux': [
+      {
+        question: 'ما هو الجزء من الدماغ المسؤول عن التوازن؟',
+        difficulty: 1,
+        answers: [
+          { text: 'المخيخ', correct: true },
+          { text: 'النخاع المستطيل', correct: false },
+          { text: 'المهاد', correct: false },
+          { text: 'القشرة المخية', correct: false }
+        ]
+      },
+      {
+        question: 'ما هو العصب المسؤول عن الرؤية؟',
+        difficulty: 2,
+        answers: [
+          { text: 'العصب السمعي', correct: false },
+          { text: 'العصب البصري', correct: true },
+          { text: 'العصب الوجهي', correct: false },
+          { text: 'العصب الحائر', correct: false }
+        ]
+      }
+      // ➕ أضف المزيد من الأسئلة هنا
+    ]
+  };
+
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    // ⭐ عرض النجوم
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "../lessons.html";
+  }
+</script>
+</body>
+</html>

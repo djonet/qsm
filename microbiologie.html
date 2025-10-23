@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomie Humaine - Qcms BY DJO</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2 { margin-bottom: 10px; font-size: 24px; }
+
+  /* 🔹 كتل الأسئلة */
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  /* ⭐ النجوم المتحركة */
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty {
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1) { animation-delay: 0.1s; }
+  .star:nth-child(2) { animation-delay: 0.2s; }
+  .star:nth-child(3) { animation-delay: 0.3s; }
+  .star:nth-child(4) { animation-delay: 0.4s; }
+  .star:nth-child(5) { animation-delay: 0.5s; }
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg, #0096c7, #00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+
+  /* ✅ و ❌ */
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black !important;
+    border: 1px solid #0f0;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black !important;
+    border: 1px solid #f00;
+  }
+
+  /* 🔸 الملاحظات */
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  /* 🔘 الأزرار */
+  .control-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  /* 📱 تحسين الهاتف */
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .container { width: 95%; padding: 15px; }
+    .question-text { font-size: 16px; }
+    .answer { font-size: 15px; padding: 10px; }
+    .control-buttons { flex-direction: column; }
+    .star { font-size: 18px; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="container">
+   
+    <h3 id="lessonTitle"></h3>
+    <div id="questionsContainer"></div>
+    <button class="control-buttons" style="background:#444" onclick="goBack()">🔙 الرجوع للدروس</button>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  const lesson = localStorage.getItem('lesson') || 'غير محدد';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 الأسئلة الخاصة بكل درس
+  const questionsData = {
+    'Physiologie bactérienne dentaire': [
+  // A. Bon élève ⭐
+  {
+    question: "L’eau intracellulaire représente la majeure partie du poids bactérien ; elle assure solubilisation, transport et hydrolyse.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Minoritaire dans la cellule, réserve énergétique", correct: false },
+      { text: "B. Permet la solubilisation de nutriments et métabolites", correct: true },
+      { text: "C. Facilite leur transport vers les sites de réaction", correct: true },
+      { text: "D. Intervient dans des réactions d’hydrolyse", correct: true }
+    ]
+  },
+  {
+    question: "Catégories selon source d’énergie et donneur d’électrons.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Photolithotrophe", correct: true },
+      { text: "B. Photo-organotrophe", correct: false },
+      { text: "C. Chimiolithotrophe", correct: false },
+      { text: "D. Chimio-organotrophe", correct: true }
+    ]
+  },
+  {
+    question: "Source de carbone : distinctions correctes.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Autotrophes : CO₂ comme seule source de carbone", correct: true },
+      { text: "B. Hétérotrophes : substrats organiques comme source de carbone", correct: true },
+      { text: "C. Autotrophes : substrats organiques", correct: false },
+      { text: "D. Hétérotrophes : CO₂ uniquement", correct: false }
+    ]
+  },
+  {
+    question: "Sources d’azote directement assimilables.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Ammoniac/ions ammonium", correct: true },
+      { text: "B. Nitrites et nitrates", correct: true },
+      { text: "C. Azote gazeux N₂ directement", correct: false },
+      { text: "D. Groupements amines organiques", correct: true }
+    ]
+  },
+  {
+    question: "Facteurs de croissance exigés par certaines auxotrophes.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Bases puriques/pyrimidiques, acides gras, acides aminés", correct: true },
+      { text: "B. Vitamines, hème et dérivés", correct: true },
+      { text: "C. Glucose et CO₂ comme facteurs obligatoires", correct: false },
+      { text: "D. Divers composés additionnels mentionnés (ex. hème)", correct: true }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "Colonies satellites autour d’un producteur de métabolite : interprétation.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Syntrophie sur milieu solide avec facteur diffusible", correct: true },
+      { text: "B. Compétition pour l’oxygène", correct: false },
+      { text: "C. Croissance d’auxotrophes dépendantes d’un facteur libéré", correct: true },
+      { text: "D. Réservé aux bouillons d’enrichissement", correct: false }
+    ]
+  },
+  {
+    question: "Croissance exponentielle : conditions et paramètres.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Fission binaire", correct: true },
+      { text: "B. Taux de croissance propre à l’organisme", correct: true },
+      { text: "C. Température seule", correct: false },
+      { text: "D. Composition du milieu et environnement", correct: true }
+    ]
+  },
+  {
+    question: "Phase de latence : caractéristiques.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Absence de croissance observable initiale", correct: true },
+      { text: "B. Synthèse d’enzymes et d’équipements cellulaires", correct: true },
+      { text: "C. Mort massive des cellules", correct: false },
+      { text: "D. Adaptation avant divisions actives", correct: true }
+    ]
+  },
+  {
+    question: "Phase stationnaire d’une culture batch :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Courbe horizontale", correct: true },
+      { text: "B. Épuisement de nutriments / équilibre division-mort", correct: true },
+      { text: "C. Nombre viable constant", correct: true },
+      { text: "D. Augmentation illimitée", correct: false }
+    ]
+  },
+  {
+    question: "Phase de déclin :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Mort > divisions", correct: true },
+      { text: "B. Carence + déchets", correct: true },
+      { text: "C. Lyse → baisse du trouble", correct: true },
+      { text: "D. Multiplication maximale", correct: false }
+    ]
+  },
+  {
+    question: "Méthodes de nombre total (vivantes+mortes).",
+    difficulty: 2,
+    answers: [
+      { text: "A. Chambres de comptage", correct: true },
+      { text: "B. Compteurs Coulter", correct: true },
+      { text: "C. Colorations fluorescentes globales", correct: true },
+      { text: "D. Numération sur gélose", correct: false }
+    ]
+  },
+  {
+    question: "Dénombrement des viables.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Étalement en surface/profondeur", correct: true },
+      { text: "B. Filtration sur membranes", correct: true },
+      { text: "C. Turbidité seule", correct: false },
+      { text: "D. Compteur Coulter", correct: false }
+    ]
+  },
+  {
+    question: "Estimation de la biomasse cellulaire.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Poids sec", correct: true },
+      { text: "B. Turbidité", correct: true },
+      { text: "C. Dosage d’ATP/protéines/acides nucléiques", correct: true },
+      { text: "D. CFU uniquement", correct: false }
+    ]
+  },
+  {
+    question: "Groupes selon la température.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Psychrophiles ≤15°C", correct: true },
+      { text: "B. Psychrotrophes 0–35°C", correct: true },
+      { text: "C. Mésophiles 20–45°C", correct: true },
+      { text: "D. Hyperthermophiles 80–113°C", correct: true }
+    ]
+  },
+  {
+    question: "Catégories selon le pH.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Acidophiles : pH 1–6", correct: true },
+      { text: "B. Neutrophiles : pH 6,5–7,5", correct: true },
+      { text: "C. Alcalophiles : pH 8,5–11,5", correct: true },
+      { text: "D. Acidophiles : optimum 7", correct: false }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "Pression et osmose :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Barophiles : pression > atmosphère", correct: true },
+      { text: "B. Halophiles : besoin de NaCl élevé", correct: true },
+      { text: "C. Halotolérantes : large tolérance au sel", correct: true },
+      { text: "D. Barotolérantes : optimum 20% O₂", correct: false }
+    ]
+  },
+  {
+    question: "Exigences en oxygène et exemples.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Aérobies obligatoires (Pseudomonas)", correct: true },
+      { text: "B. Anaérobies strictes (Clostridium)", correct: true },
+      { text: "C. Aéro-anaérobies facultatives (E. coli)", correct: true },
+      { text: "D. Microaérophiles (2–10% O₂)", correct: true }
+    ]
+  },
+  {
+    question: "Composition et rôle des milieux de culture.",
+    difficulty: 3,
+    answers: [
+      { text: "A. En fonction du but", correct: true },
+      { text: "B. Selon les besoins bactériens", correct: true },
+      { text: "C. Eau distillée comme solvant", correct: true },
+      { text: "D. Seulement s’il est synthétique", correct: false }
+    ]
+  },
+  {
+    question: "Consistance des milieux :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Milieux liquides : bouillons", correct: true },
+      { text: "B. Milieux solides : colonies isolées", correct: true },
+      { text: "C. Gélose = agent solidifiant", correct: true },
+      { text: "D. Bouillons au sang uniquement", correct: false }
+    ]
+  },
+  {
+    question: "Milieux naturels et exemples.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Constituants animaux/végétaux", correct: true },
+      { text: "B. Macérations/décoctions de tissus", correct: true },
+      { text: "C. Gélose nutritive, Trypticase-soja", correct: true },
+      { text: "D. Milieu urée-indole naturel", correct: false }
+    ]
+  },
+  {
+    question: "Milieux synthétiques et semi-synthétiques.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Synthétiques = corps purs définis", correct: true },
+      { text: "B. Semi-synthétiques = mélange pur/naturel", correct: true },
+      { text: "C. Semi-synthétiques sans éléments naturels", correct: false },
+      { text: "D. Synthétiques = décoctions", correct: false }
+    ]
+  },
+  {
+    question: "Classement selon l’utilisation et effets recherchés.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Isolement (gélose nutritive, sang)", correct: true },
+      { text: "B. Enrichissement électif (SFB)", correct: true },
+      { text: "C. Sélectifs (pH/osmolarité/agents)", correct: true },
+      { text: "D. Sélectifs : Hektoen, Chapman", correct: true }
+    ]
+  },
+  {
+    question: "Milieux d’identification, conservation, transport.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Identification : caractères biochimiques", correct: true },
+      { text: "B. Conservation : milieux pauvres", correct: true },
+      { text: "C. Transport : bouillon TGV", correct: true },
+      { text: "D. Conservation : gélose au sang", correct: false }
+    ]
+  },
+  {
+    question: "Applications de la croissance bactérienne.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Diagnostic : isolement/identification", correct: true },
+      { text: "B. Antibiothérapie : mesure activité", correct: true },
+      { text: "C. Industrie : toxines/antibiotiques/vitamines", correct: true },
+      { text: "D. Contrôle : aliments/eaux", correct: true }
+    ]
+  },
+  {
+    question: "Courbe de culture batch.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Quatre phases", correct: true },
+      { text: "B. Exponentielle : croissance max", correct: true },
+      { text: "C. Déclin : lyse → turbidité ↓", correct: true },
+      { text: "D. Latence : croissance immédiate", correct: false }
+    ]
+  },
+
+  // D. Difficiles ⭐⭐⭐⭐
+  {
+    question: "Croisement sources/catégories.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Donneur minéral → lithotrophe", correct: true },
+      { text: "B. Donneur organique → organotrophe", correct: true },
+      { text: "C. Source énergie oxydation → chimiotrophe", correct: true },
+      { text: "D. Carbone organique → autotrophe", correct: false }
+    ]
+  },
+  {
+    question: "Éléments minéraux : rôles.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Soufre → acides aminés soufrés", correct: true },
+      { text: "B. Phosphore → acides nucléiques, ATP", correct: true },
+      { text: "C. Na⁺/K⁺/Mg²⁺/Cl⁻ → équilibre cellulaire", correct: true },
+      { text: "D. Fer/Ca²⁺ requis à fortes concentrations", correct: false }
+    ]
+  },
+  {
+    question: "Mésophiles : caractéristiques.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Optimum 20–45°C", correct: true },
+      { text: "B. Minimum 15–20°C", correct: true },
+      { text: "C. Max ≤45°C", correct: true },
+      { text: "D. Nombreux pathogènes humains", correct: true }
+    ]
+  },
+  {
+    question: "Psychrotrophes.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Vivent à 0°C", correct: true },
+      { text: "B. Optimum 20–30°C", correct: true },
+      { text: "C. Max ≈35°C", correct: true },
+      { text: "D. Incapables à 0°C", correct: false }
+    ]
+  },
+  {
+    question: "Thermophiles et hyperthermophiles.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Thermophiles 45–65°C", correct: true },
+      { text: "B. Hyperthermophiles 80–113°C", correct: true },
+      { text: "C. Thermophiles 15°C", correct: false },
+      { text: "D. Hyperthermophiles 120°C", correct: false }
+    ]
+  },
+  {
+    question: "Méthodes : total vs viables.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Hémocytomètre/Coulter/fluorescence = total", correct: true },
+      { text: "B. Étalement surface/profondeur = viable", correct: true },
+      { text: "C. Membranes filtrantes = viable", correct: true },
+      { text: "D. Turbidité seule = discrimination vivantes/mortes", correct: false }
+    ]
+  },
+  {
+    question: "Biomasse et variations du milieu.",
+    difficulty: 4,
+    answers: [
+      { text: "A. pH, impédance, redox", correct: true },
+      { text: "B. Dosage ATP/protéines/ADN", correct: true },
+      { text: "C. Poids sec/turbidité", correct: true },
+      { text: "D. CFU seul", correct: false }
+    ]
+  },
+  {
+    question: "Milieux sélectifs et effet sélectif.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Effet via pH/osmolarité ou agents", correct: true },
+      { text: "B. Croissance de quelques espèces", correct: true },
+      { text: "C. Exemples : Chapman/Hektoen", correct: true },
+      { text: "D. Équivalents d’identification", correct: false }
+    ]
+  },
+  {
+    question: "Milieux d’isolement : sous-catégories et exemples.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Usuels : gélose nutritive", correct: true },
+      { text: "B. Enrichis : gélose au sang", correct: true },
+      { text: "C. Électifs : bouillon SFB (salmonelles)", correct: true },
+      { text: "D. Sélectifs : Chapman/Hektoen", correct: true }
+    ]
+  },
+  {
+    question: "Applications industrielles et analytiques.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Production de toxines/antibiotiques", correct: true },
+      { text: "B. Cellules pour vaccins/réactifs", correct: true },
+      { text: "C. Dosage de vitamines/facteurs", correct: true },
+      { text: "D. Culture virale antiviraux", correct: false }
+    ]
+  },
+
+  // E. Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Besoins nutritifs d’une prototrophe.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Eau, énergie, C, N, minéraux", correct: true },
+      { text: "B. Facteurs de croissance indispensables", correct: false },
+      { text: "C. Aucun facteur requis", correct: true },
+      { text: "D. CO₂ et lumière seuls", correct: false }
+    ]
+  },
+  {
+    question: "Appariement espèces–catégories selon O₂.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Pseudomonas/Mycobacterium — aérobies", correct: true },
+      { text: "B. Bacteroides/Clostridium — anaérobies", correct: true },
+      { text: "C. Escherichia — facultative", correct: true },
+      { text: "D. Streptococcus pyogenes — micro-aérophile strict", correct: false }
+    ]
+  },
+  {
+    question: "Phase stationnaire : formulations exactes.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Nombre viable constant", correct: true },
+      { text: "B. Équilibre division/mort", correct: true },
+      { text: "C. Reprise après ajout ", correct: false },
+      { text: "D. Épuisement des nutriments", correct: true }
+    ]
+  },
+  {
+    question: "Catégories nutritionnelles croisées.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Phototrophe / Chimiotrophe", correct: true },
+      { text: "B. Lithotrophe / Organotrophe", correct: true },
+      { text: "C. Autotrophe / Hétérotrophe", correct: true },
+      { text: "D. Prototrophe / Auxotrophe", correct: true }
+    ]
+  },
+  {
+    question: "Antibiothérapie et mesure de l’activité.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Modifications de la courbe de croissance → activité antibiotique", correct: true },
+      { text: "B. Numération viable seule comme preuve ", correct: false },
+      { text: "C. Courbe log(N)/temps comme référence", correct: true },
+      { text: "D. Poids sec spécifique à l’antibiotique ", correct: false }
+    ]
+  }
+],
+
+    'Système nerveux': [
+      {
+        question: 'ما هو الجزء من الدماغ المسؤول عن التوازن؟',
+        difficulty: 1,
+        answers: [
+          { text: 'المخيخ', correct: true },
+          { text: 'النخاع المستطيل', correct: false },
+          { text: 'المهاد', correct: false },
+          { text: 'القشرة المخية', correct: false }
+        ]
+      },
+      {
+        question: 'ما هو العصب المسؤول عن الرؤية؟',
+        difficulty: 2,
+        answers: [
+          { text: 'العصب السمعي', correct: false },
+          { text: 'العصب البصري', correct: true },
+          { text: 'العصب الوجهي', correct: false },
+          { text: 'العصب الحائر', correct: false }
+        ]
+      }
+      // ➕ أضف المزيد من الأسئلة هنا
+    ]
+  };
+
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    // ⭐ عرض النجوم
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "../lessons.html";
+  }
+</script>
+</body>
+</html>
