@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
@@ -18,7 +17,7 @@
     align-items: center;
     min-height: 100vh;
     position: relative;
-    overflow-y: auto;
+    overflow: hidden;
     color: white;
   }
   .bg-illustration {
@@ -37,6 +36,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   }
+  
   .container {
     background: rgba(0, 0, 0, 0.5);
     padding: 30px;
@@ -62,9 +62,9 @@
   }
 </style>
 </head>
-
 <body>
   <div class="bg-illustration"></div>
+
   <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" class="flag" alt="علم الجزائر">
 
   <div class="container">
@@ -73,57 +73,52 @@
   </div>
 
 <script>
-  // ✅ قراءة البيانات من LocalStorage
+  // قراءة البيانات من LocalStorage
   const specialty = localStorage.getItem('specialty') || 'غير محدد';
   const level = localStorage.getItem('level') || 'غير محدد';
   const subject = localStorage.getItem('subject') || 'غير محدد';
 
   document.getElementById('subjectName').textContent = `الدروس - ${subject}`;
 
-  // ✅ قاعدة بيانات الدروس لكل مادة
+  // قاعدة بيانات الدروس منظمة حسب التخصص والسنة والمادة
   const lessonsData = {
     'طب الأسنان': {
+      'سنة 1': {},
       'سنة 2': {  
-        'Parodontologie': ['Introduction à la Parodontologie','Histoire de la parodontologie','la gencive','L’attache épithéliale','Le ligament alvéolo-dentaire',],
-        'Microbiologie': ['Physiologie bactérienne dentaire','Les antibiotiques',],
-        'Anatomie dentaire': ['Généralités et notions de bases en Anatomie dentaire','Nomenclature','Terminologie',],
-        'Anatomie humaine':['Os de la tête  os frontal et os éthmoïde','Os du crâne II : sphénoïde, temporal, pariétal','Os du crane III',],
-        'Prothèse':['Les indices biologiques'],
-        'Pathologie':['Cabinet Dentaire et Dispositifs chirurgicaux',],
+        'Parodontologie': ['Introduction à la Parodontologie','Histoire de la parodontologie','la gencive','L’attache épithéliale','Le ligament alvéolo-dentaire'],
+        'Microbiologie': ['Physiologie bactérienne dentaire','Les antibiotiques'],
+        'Anatomie dentaire': ['Généralités et notions de bases en Anatomie dentaire','Nomenclature','Terminologie'],
+        'Anatomie humaine':['Os de la tête I : os frontal et os éthmoïde','Os du crâne II : sphénoïde, temporal, pariétal','Os du crane III'],
+        'Prothèse':['Les indices biologiques',],
+        'Pathologie':['Cabinet Dentaire et Dispositifs chirurgicaux'],
         'Oce':[],
-        'ODF':['Introduction à l’Orthopédie Dento-Faciale','Les critères d’harmonie du visage','Les fonctions oro-faciales',],
+        'ODF':['Introduction à l’Orthopédie Dento-Faciale','Les critères d’harmonie du visage','Les fonctions oro-faciales'],
         'immunologie':[],
         'histologie':[],
         'physiologie':[],
         'biomateriaux':[]
       }
-    }
+    },
+    'الصيدلة': { 'سنة 1': {} }
   };
 
-  // ✅ عرض الدروس الخاصة بالمادة المختارة
   const lessonsListDiv = document.getElementById('lessonsList');
 
-  if (
-    lessonsData[specialty] &&
-    lessonsData[specialty][level] &&
-    lessonsData[specialty][level][subject]
-  ) {
-    lessonsData[specialty][level][subject].forEach(lesson => {
+  if (lessonsData[specialty] && lessonsData[specialty][level] && lessonsData[specialty][level][subject]) {
+    lessonsData[specialty][level][subject].forEach((lesson, index) => {
       const div = document.createElement('div');
       div.className = 'lesson-item';
       div.textContent = lesson;
+
+      // عند الضغط على الدرس → فتح ملف QCMS الخاص بالمادة
       div.onclick = () => {
         localStorage.setItem('lesson', lesson);
-        
-        // 🧩 توليد اسم الصفحة تلقائيًا بناءً على المادة
-        const fileName = subject
-          .toLowerCase()
-          .replace(/\s+/g, '')
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "");
-        
-        window.location.href = `qcms/${fileName}.html`;
+        // توليد اسم الملف حسب المادة المختارة
+        const fileName = `qcms-${subject.replaceAll(' ', '').toLowerCase()}.html`;
+        // تمرير رقم الدرس كـ query parameter
+        window.location.href = `${fileName}?lesson=${index + 1}`;
       };
+
       lessonsListDiv.appendChild(div);
     });
   } else {

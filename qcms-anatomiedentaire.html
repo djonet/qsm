@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- 🔒 حماية الصفحة بـ Firebase -->
+<script type="module">
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  document.documentElement.style.visibility = 'hidden';
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.replace('index.html');
+      return;
+    }
+    try {
+      const ref  = doc(db, 'allowedUsers', user.uid);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        document.documentElement.style.visibility = 'visible';
+      } else {
+        window.location.replace('welcome.html?status=pending');
+      }
+    } catch (e) {
+      console.error('Firebase Auth Error:', e);
+      window.location.replace('welcome.html?status=pending');
+    }
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomie Humaine - Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2,h3 { margin-bottom: 10px; }
+
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty { margin-bottom: 8px; text-align: left; }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1){animation-delay:0.1s;}
+  .star:nth-child(2){animation-delay:0.2s;}
+  .star:nth-child(3){animation-delay:0.3s;}
+  .star:nth-child(4){animation-delay:0.4s;}
+  .star:nth-child(5){animation-delay:0.5s;}
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg,#0096c7,#00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black!important;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black!important;
+  }
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  .control-buttons {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1; min-width: 100px; padding: 10px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white; font-weight: bold;
+    cursor: pointer; transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    .container{width:95%;padding:15px;}
+    .question-text{font-size:16px;}
+    .answer{font-size:15px;padding:10px;}
+    .control-buttons{flex-direction:column;}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h3 id="lessonTitle"></h3>
+  <div id="questionsContainer"></div>
+  <button class="control-buttons" style="background:#444;margin-top:20px" onclick="goBack()">🔙 الرجوع للدروس</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // 🧩 إعداد القيم الافتراضية
+  localStorage.setItem('specialty','طب الأسنان');
+  localStorage.setItem('level','سنة 2');
+  localStorage.setItem('subject','Anatomie dentaire');
+
+  const lesson = localStorage.getItem('lesson') || 'Os frontal et éthmoïde';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 أسئلة تجريبية
+  const questionsData = {
+    'Nomenclature': [
+  // 1 à 5 — Niveau lecture superficielle ⭐
+  {
+    question: "La face orientée vers le milieu de la bouche est :",
+    difficulty: 1,
+    answers: [
+      { text: "A. La face mésiale", correct: true },
+      { text: "B. La face distale", correct: false },
+      { text: "C. Une face interne", correct: true },
+      { text: "D. Une face d’alignement selon le plan sagittal", correct: true }
+    ]
+  },
+  {
+    question: "La face la plus éloignée du milieu est appelée :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Distale", correct: true },
+      { text: "B. Vestibulaire", correct: false },
+      { text: "C. Mésiale", correct: false },
+      { text: "D. Linguale", correct: false }
+    ]
+  },
+  {
+    question: "La face interne en regard de la langue ou du palais est :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Linguale", correct: true },
+      { text: "B. Palatine", correct: true },
+      { text: "C. Interne", correct: true },
+      { text: "D. Vestibulaire", correct: false }
+    ]
+  },
+  {
+    question: "La face qui s’articule avec les dents antagonistes est appelée :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Occlusale", correct: true },
+      { text: "B. Triturante", correct: true },
+      { text: "C. Bord libre (pour les incisifs)", correct: true },
+      { text: "D. Mésiale", correct: false }
+    ]
+  },
+  {
+    question: "Le plan sagittal médian sert à :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Nommer les faces dentaires", correct: true },
+      { text: "B. Définir la symétrie des arcades", correct: true },
+      { text: "C. Subdiviser les arcades en hémi-arcades", correct: true },
+      { text: "D. Identifier le type de dent", correct: false }
+    ]
+  },
+
+  // 6 à 15 — Niveau bon élève ⭐⭐
+  {
+    question: "Les dents sont réparties selon :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Deux dentures (temporaire et permanente)", correct: true },
+      { text: "B. Deux arcades (maxillaire et mandibulaire)", correct: true },
+      { text: "C. Un plan sagittal médian de symétrie", correct: true },
+      { text: "D. Une seule arcade centrale", correct: false }
+    ]
+  },
+  {
+    question: "Le plan sagittal médian subdivise :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Les arcades en hémi-arcades droite et gauche", correct: true },
+      { text: "B. La mandibule en zones fonctionnelles", correct: false },
+      { text: "C. Les arcades maxillaire et mandibulaire en quadrants", correct: true },
+      { text: "D. Les arcades en surfaces occlusales", correct: false }
+    ]
+  },
+  {
+    question: "Dans la nomenclature anatomique, le nom d’une dent inclut :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Sa classe", correct: true },
+      { text: "B. Son espèce", correct: true },
+      { text: "C. Son arcade", correct: true },
+      { text: "D. Sa latéralité", correct: true }
+    ]
+  },
+  {
+    question: "La classe dentaire peut être :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Incisive", correct: true },
+      { text: "B. Canine", correct: true },
+      { text: "C. Prémolaire", correct: true },
+      { text: "D. Molaire", correct: true }
+    ]
+  },
+  {
+    question: "Les dentures mentionnées dans le cours sont :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Permanente", correct: true },
+      { text: "B. Temporaire", correct: true },
+      { text: "C. Mixte", correct: false },
+      { text: "D. Continue", correct: false }
+    ]
+  },
+  {
+    question: "La nomenclature de Palmer permet :",
+    difficulty: 2,
+    answers: [
+      { text: "A. De numéroter les dents", correct: true },
+      { text: "B. De repérer topographiquement chaque dent", correct: true },
+      { text: "C. D’associer un symbole d’hémi-arcade", correct: true },
+      { text: "D. De distinguer les dents temporaires et permanentes", correct: true }
+    ]
+  },
+  {
+    question: "Dans le système de Palmer, les dents permanentes reçoivent :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Des chiffres arabes", correct: true },
+      { text: "B. Des chiffres romains", correct: false },
+      { text: "C. Des lettres", correct: false },
+      { text: "D. Un symbole de quadrant", correct: true }
+    ]
+  },
+  {
+    question: "Les dents temporaires selon Palmer reçoivent :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Des chiffres romains", correct: true },
+      { text: "B. Un symbole d’hémi-arcade", correct: true },
+      { text: "C. Des lettres", correct: false },
+      { text: "D. Des chiffres arabes", correct: false }
+    ]
+  },
+  {
+    question: "Dans la nomenclature de Palmer, les numéros 1 à 8 correspondent :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Aux dents permanentes", correct: true },
+      { text: "B. De l’incisive centrale à la troisième molaire", correct: true },
+      { text: "C. À l’ordre sagittal médian → distal", correct: true },
+      { text: "D. À la position occlusale", correct: false }
+    ]
+  },
+  {
+    question: "Dans le schéma de Palmer, le repérage se fait grâce à :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Un mi-cadre représentant une hémi-arcade", correct: true },
+      { text: "B. Un symbole propre à chaque quadrant", correct: true },
+      { text: "C. La combinaison du code et du cadre", correct: true },
+      { text: "D. Une ligne médiane tracée", correct: false }
+    ]
+  },
+
+  // 16 à 25 — Niveau très bon ⭐⭐⭐
+  {
+    question: "La combinaison du code de la dent et du symbole d’hémi-arcade permet :",
+    difficulty: 3,
+    answers: [
+      { text: "A. D’identifier la dent", correct: true },
+      { text: "B. De repérer la position sur l’arcade", correct: true },
+      { text: "C. De déterminer la classe dentaire", correct: false },
+      { text: "D. D’éviter la confusion droite/gauche", correct: true }
+    ]
+  },
+  {
+    question: "La nomenclature stomatologique dérive :",
+    difficulty: 3,
+    answers: [
+      { text: "A. De la nomenclature de Palmer", correct: true },
+      { text: "B. De la nomenclature anatomique", correct: false },
+      { text: "C. De la nomenclature universelle", correct: false },
+      { text: "D. De la nomenclature FDI", correct: false }
+    ]
+  },
+  {
+    question: "Dans la nomenclature stomatologique, on place :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Une lettre au lieu du numéro", correct: true },
+      { text: "B. Une majuscule pour les dents maxillaires", correct: true },
+      { text: "C. Une minuscule pour les dents mandibulaires", correct: true },
+      { text: "D. Un chiffre arabe ou romain selon la denture", correct: true }
+    ]
+  },
+  {
+    question: "Exemple « d2 » signifie :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Incisive latérale mandibulaire droite", correct: true },
+      { text: "B. Incisive centrale maxillaire gauche", correct: false },
+      { text: "C. Canine mandibulaire gauche", correct: false },
+      { text: "D. Première molaire maxillaire droite", correct: false }
+    ]
+  },
+  {
+    question: "Dans la nomenclature stomatologique :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Les majuscules désignent le maxillaire", correct: true },
+      { text: "B. Les minuscules désignent la mandibule", correct: true },
+      { text: "C. Les chiffres arabes pour les permanentes", correct: true },
+      { text: "D. Les chiffres romains pour les temporaires", correct: true }
+    ]
+  },
+  {
+    question: "La nomenclature universelle utilise :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Les chiffres arabes de 1 à 32", correct: true },
+      { text: "B. Un ordre de numérotation horaire", correct: false },
+      { text: "C. Un départ par la troisième molaire maxillaire droite", correct: true },
+      { text: "D. Une terminaison par la troisième molaire mandibulaire droite", correct: true }
+    ]
+  },
+  {
+    question: "Le système universel est employé :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Aux États-Unis", correct: true },
+      { text: "B. Pour toutes les dents permanentes", correct: true },
+      { text: "C. Avec lettres pour les dents temporaires", correct: true },
+      { text: "D. Avec chiffres romains pour les dents temporaires", correct: false }
+    ]
+  },
+  {
+    question: "La nomenclature universelle numérote les dents dans :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Le sens horaire", correct: true },
+      { text: "B. Un ordre continu", correct: true },
+      { text: "C. Deux séries séparées par arcade", correct: false },
+      { text: "D. Un plan sagittal médian", correct: false }
+    ]
+  },
+  {
+    question: "La troisième molaire maxillaire droite correspond au numéro :",
+    difficulty: 3,
+    answers: [
+      { text: "A. 1", correct: true },
+      { text: "B. 32", correct: false },
+      { text: "C. 16", correct: false },
+      { text: "D. 17", correct: false }
+    ]
+  },
+  {
+    question: "La troisième molaire mandibulaire droite porte le numéro :",
+    difficulty: 3,
+    answers: [
+      { text: "A. 32", correct: true },
+      { text: "B. 1", correct: false },
+      { text: "C. 8", correct: false },
+      { text: "D. 16", correct: false }
+    ]
+  },
+
+  // 26 à 35 — Niveau excellent ⭐⭐⭐⭐
+  {
+    question: "La nomenclature universelle comprend :",
+    difficulty: 4,
+    answers: [
+      { text: "A. 32 dents numérotées", correct: true },
+      { text: "B. Des chiffres arabes", correct: true },
+      { text: "C. Une progression continue de droite à gauche", correct: true },
+      { text: "D. Un système horaire", correct: false }
+    ]
+  },
+  {
+    question: "La nomenclature internationale FDI/OMS :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Utilise des chiffres arabes pour les deux dentures", correct: true },
+      { text: "B. Emploie deux chiffres pour chaque dent", correct: true },
+      { text: "C. Désigne le quadrant et la position", correct: true },
+      { text: "D. Commence au niveau de l’hémi-arcade maxillaire droite", correct: true }
+    ]
+  },
+  {
+    question: "Dans la nomenclature FDI, le premier chiffre :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Indique le quadrant", correct: true },
+      { text: "B. Indique la position sur la ligne médiane", correct: false },
+      { text: "C. Indique l’arcade", correct: true },
+      { text: "D. Change selon la denture", correct: true }
+    ]
+  },
+  {
+    question: "Le deuxième chiffre dans le code FDI :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Indique la position de la dent", correct: true },
+      { text: "B. Représente le type de dent", correct: false },
+      { text: "C. Donne l’orientation distale", correct: false },
+      { text: "D. Définit la classe", correct: false }
+    ]
+  },
+  {
+    question: "Les quadrants FDI pour la denture temporaire sont :",
+    difficulty: 4,
+    answers: [
+      { text: "A. 5, 6, 7, 8", correct: true },
+      { text: "B. 1, 2, 3, 4", correct: false },
+      { text: "C. A, B, C, D", correct: false },
+      { text: "D. I, II, III, IV", correct: false }
+    ]
+  },
+  {
+    question: "Dans le système FDI, la rotation se fait :",
+    difficulty: 4,
+    answers: [
+      { text: "A. En sens horaire", correct: true },
+      { text: "B. En sens antihoraire", correct: false },
+      { text: "C. Du maxillaire droit au mandibulaire droit", correct: true },
+      { text: "D. De la gauche vers la droite", correct: false }
+    ]
+  },
+  {
+    question: "Le repérage FDI commence :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Au quadrant supérieur droit", correct: true },
+      { text: "B. À la mandibule gauche", correct: false },
+      { text: "C. Au quadrant inférieur gauche", correct: false },
+      { text: "D. En rotation horaire", correct: true }
+    ]
+  },
+  {
+    question: "Les dents du quadrant supérieur droit sont notées :",
+    difficulty: 4,
+    answers: [
+      { text: "A. 1x", correct: true },
+      { text: "B. 2x", correct: false },
+      { text: "C. 3x", correct: false },
+      { text: "D. 4x", correct: false }
+    ]
+  },
+  {
+    question: "Le système FDI est :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Officiel selon l’OMS", correct: true },
+      { text: "B. Utilisé actuellement", correct: true },
+      { text: "C. Basé sur deux chiffres", correct: true },
+      { text: "D. Remplacé par la nomenclature universelle", correct: false }
+    ]
+  },
+  {
+    question: "La séquence de numérotation FDI se fait :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Du maxillaire droit vers le gauche", correct: true },
+      { text: "B. Puis vers la mandibule gauche", correct: true },
+      { text: "C. Puis vers la mandibule droite", correct: true },
+      { text: "D. En boucle fermée de rotation", correct: false }
+    ]
+  },
+
+  // 36 à 40 — Niveau très difficile ⭐⭐⭐⭐⭐
+  {
+    question: "Le passage de Palmer à la stomatologique consiste à :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Remplacer le numéro par une lettre", correct: true },
+      { text: "B. Indiquer la latéralité dans la lettre", correct: true },
+      { text: "C. Employer majuscules et minuscules selon l’arcade", correct: true },
+      { text: "D. Modifier la signification des chiffres romains", correct: false }
+    ]
+  },
+  {
+    question: "Le symbole du mi-cadre dans Palmer permet :",
+    difficulty: 5,
+    answers: [
+      { text: "A. D’indiquer l’hémi-arcade", correct: true },
+      { text: "B. De repérer la latéralité", correct: true },
+      { text: "C. De visualiser le quadrant", correct: true },
+      { text: "D. De situer la dent sur la ligne sagittale", correct: false }
+    ]
+  },
+  {
+    question: "Le système FDI est plus universel que celui de Palmer parce qu’il :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Utilise un code numérique unique", correct: true },
+      { text: "B. S’applique aux deux dentures", correct: true },
+      { text: "C. Évite les symboles graphiques", correct: true },
+      { text: "D. Indique clairement le quadrant et la position", correct: true }
+    ]
+  },
+  {
+    question: "Dans le FDI, les chiffres 1 et 5 désignent :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Le quadrant supérieur droit (permanent et temporaire)", correct: true },
+      { text: "B. Le quadrant supérieur gauche (permanent et temporaire)", correct: false },
+      { text: "C. La même position pour deux dentures différentes", correct: true },
+      { text: "D. Un rapport maxillaire commun", correct: false }
+    ]
+  },
+  {
+    question: "Dans l’ensemble des nomenclatures, on retrouve :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Une référence constante à la symétrie sagittale", correct: true },
+      { text: "B. La distinction entre arcade maxillaire et mandibulaire", correct: true },
+      { text: "C. L’usage des chiffres ou lettres selon la denture", correct: true },
+      { text: "D. La conservation du principe de quadrant", correct: true }
+    ]
+  }
+],'Terminologie': [
+  // 1 à 5 — Niveau bon élève ⭐
+  {
+    question: "La « division topographique » d’une dent, telle que décrite dans le cours, consiste à…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Séparer chaque face en zones cervicale, moyenne et occlusale (ou incisive)", correct: true },
+      { text: "B. Diviser la racine en parties cervicale, moyenne et apicale selon un plan vertical", correct: true },
+      { text: "C. Regrouper les faces en deux hémichamps identiques", correct: false },
+      { text: "D. Compléter par des lignes verticales donnant 1/3 mésial, 1/3 médian, 1/3 distal et vestibulaire/lingual", correct: true }
+    ]
+  },
+  {
+    question: "Concernant l’alignement dentaire et le contact inter-dentaire, le cours précise que…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Les dents alignées entrent d’abord en contact par un point", correct: true },
+      { text: "B. Le contact inter-dentaire reste ponctuel sans s’élargir", correct: false },
+      { text: "C. L’espace inter-dentaire se répartit en embrasures vestibulaires, linguales, cervicales et occlusales", correct: true },
+      { text: "D. Les embrasures n’existent que du côté vestibulaire", correct: false }
+    ]
+  },
+  {
+    question: "Chez les dents antérieures, la face linguale/palatine des incisives et canines est caractérisée par…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Un cingulum saillant à la partie linguale", correct: true },
+      { text: "B. Des crêtes marginales allongées délimitant la face linguale", correct: true },
+      { text: "C. Une cuspide centrale occlusale systématique", correct: false },
+      { text: "D. L’absence de toute structure proéminente au collet", correct: false }
+    ]
+  },
+  {
+    question: "Pour les incisives et canines, le bord libre est…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Rectiligne chez les incisives", correct: true },
+      { text: "B. Bord coupant (pointe canine) chez les canines", correct: true },
+      { text: "C. Remplacé par une surface occlusale cuspidée", correct: false },
+      { text: "D. Superposé à une crête transversale", correct: false }
+    ]
+  },
+  {
+    question: "À propos des cuspides des dents postérieures, le cours indique qu’elles…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Sont convexes et présentes sur les faces occlusales", correct: true },
+      { text: "B. Permettent de distinguer les classes de dents et ressemblent à une pyramide gothique", correct: true },
+      { text: "C. Sont absentes sur les molaires maxillaires", correct: false },
+      { text: "D. S’accompagnent d’arêtes amélaires convergentes", correct: true }
+    ]
+  },
+
+  // 6 à 15 — Très bon élève ⭐⭐
+  {
+    question: "Les arêtes cuspidiennes externes/vestibulaires sont décrites comme…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Les plus difficiles à localiser", correct: false },
+      { text: "B. Plus prononcées sur les deuxièmes prémolaires", correct: false },
+      { text: "C. Présentes sur les canines à direction incisale, visibles au centre des canines maxillaires", correct: true },
+      { text: "D. Absentes sur toutes les dents", correct: false }
+    ]
+  },
+  {
+    question: "Pour une cuspide donnée, les quatre arêtes distinguées sont…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Vestibulaire (externe)", correct: true },
+      { text: "B. Mésiale", correct: true },
+      { text: "C. Distale", correct: true },
+      { text: "D. Occlusale (interne)", correct: true }
+    ]
+  },
+  {
+    question: "À propos des arêtes internes des cuspides postérieures…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Chaque cuspide principale a une arête interne vers le centre occlusal", correct: true },
+      { text: "B. Toutes les cuspides maxillaires ont une seule arête interne identique", correct: false },
+      { text: "C. La cuspide mésio-palatine maxillaire a trois arêtes internes", correct: true },
+      { text: "D. L’arête interne existe seulement sur les cuspides linguales", correct: false }
+    ]
+  },
+  {
+    question: "Les crêtes cuspidiennes comprennent…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Une crête médio-distale (arêtes M et D)", correct: true },
+      { text: "B. Une crête vestibulo-linguale pour cuspide vestibulaire", correct: true },
+      { text: "C. Une crête vestibulo-linguale pour cuspide linguale", correct: true },
+      { text: "D. Canine sans arête vestibulaire/linguale", correct: false }
+    ]
+  },
+  {
+    question: "Concernant les crêtes transversales et obliques…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Crête transversale = arêtes internes des cuspides V et L", correct: true },
+      { text: "B. Crête oblique (pont d’émail) sur molaires maxillaires", correct: true },
+      { text: "C. Crête oblique diagonale : cuspides ML et DV", correct: true },
+      { text: "D. Crête transversale relie MV à DV mandibulaire", correct: false }
+    ]
+  },
+  {
+    question: "Les crêtes marginales sont…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Élévations linéaires sur faces occlusales", correct: true },
+      { text: "B. Présentes sur faces linguales/palatines antérieures", correct: true },
+      { text: "C. Limitant latéralement les faces occlusales", correct: true },
+      { text: "D. Spécifiques des molaires uniquement", correct: false }
+    ]
+  },
+  {
+    question: "Les pans et versants d’une cuspide vestibulaire permettent de distinguer…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Un versant externe et un versant interne", correct: true },
+      { text: "B. Un pan mésial et un pan distal", correct: true },
+      { text: "C. Une arête périphérique unique confondue avec l’interne", correct: false },
+      { text: "D. Une répartition topographique autour de la pointe", correct: true }
+    ]
+  },
+  {
+    question: "Concernant les tubercules…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Carabelli sur cuspide mésio-palatine 1re molaire maxillaire", correct: true },
+      { text: "B. Bolk sur face vestibulaire 2e-3e molaire maxillaire", correct: true },
+      { text: "C. Cingulum compté parmi les tubercules", correct: true },
+      { text: "D. Tubercule central constant sur toutes les prémolaires mandibulaires", correct: false }
+    ]
+  },
+  {
+    question: "Les structures concaves « sillons » comprennent…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Sillon principal central et périphérique", correct: true },
+      { text: "B. Sillons secondaires mésiaux et distaux", correct: true },
+      { text: "C. Sillons accessoires sur pans cuspidiens", correct: true },
+      { text: "D. Sillon marginal unique", correct: false }
+    ]
+  },
+  {
+    question: "À propos des fosses et fossettes…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Fosse centrale = intersection des deux sillons", correct: true },
+      { text: "B. Fosse marginale = intersection sillon + crête marginale", correct: true },
+      { text: "C. Fossettes = dépressions sur faces V et L/P", correct: true },
+      { text: "D. Fossettes limitées aux molaires", correct: false }
+    ]
+  },
+
+  // 16 à 25 — Excellent ⭐⭐⭐
+  {
+    question: "Les divisions en tiers permettent…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Identifier 1/3 mésial, médian, distal", correct: true },
+      { text: "B. Obtenir 1/3 vestibulaire, médian, lingual", correct: true },
+      { text: "C. Supprimer la distinction zones cervicales/moyennes", correct: false },
+      { text: "D. Appliquer la même grille à la racine", correct: true }
+    ]
+  },
+  {
+    question: "L’architecture « pyramide gothique » attribuée aux cuspides s’illustre par…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Quatre arêtes convergentes au sommet", correct: true },
+      { text: "B. Crête transversale et oblique superposées", correct: false },
+      { text: "C. Versants périphériques et internes autour d’une pointe", correct: true },
+      { text: "D. Variabilité selon les classes de dents postérieures", correct: true }
+    ]
+  },
+  {
+    question: "Les arêtes externes sur les canines…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Direction incisale, visibles au centre maxillaire", correct: true },
+      { text: "B. Remplacent les crêtes marginales", correct: false },
+      { text: "C. Coexistent avec la pointe canine", correct: true },
+      { text: "D. Direction vestibulo-linguale sur face palatine", correct: false }
+    ]
+  },
+  {
+    question: "La crête oblique des molaires maxillaires…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Appelée pont d’émail", correct: true },
+      { text: "B. Traverse la face occlusale en diagonale", correct: true },
+      { text: "C. Formée par cuspides ML et DV", correct: true },
+      { text: "D. Présente aussi sur molaires mandibulaires", correct: false }
+    ]
+  },
+  {
+    question: "La crête transversale est décrite comme…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Jonction des arêtes internes V et L", correct: true },
+      { text: "B. Traverse selon direction V/L", correct: true },
+      { text: "C. Entre cuspide L des PM et cuspide MV des molaires", correct: true },
+      { text: "D. Remplace les sillons secondaires", correct: false }
+    ]
+  },
+  {
+    question: "Les crêtes marginales assurent…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Limitation latérale des faces occlusales", correct: true },
+      { text: "B. Barrage contre débordement des sillons", correct: true },
+      { text: "C. Disparition des embrasures cervicales", correct: false },
+      { text: "D. Continuité sans confusion avec crêtes cuspidiennes", correct: true }
+    ]
+  },
+  {
+    question: "La classification des sillons inclut…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Principal central/périphérique", correct: true },
+      { text: "B. Secondaires avec branches divergentes", correct: true },
+      { text: "C. Accessoires sur pans cuspidiens", correct: true },
+      { text: "D. Radiculaires pour lobes radiculaires", correct: false }
+    ]
+  },
+  {
+    question: "Les fosses selon le texte…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Fosse centrale = croisement sillons", correct: true },
+      { text: "B. Fosse marginale = sillon + crête marginale", correct: true },
+      { text: "C. Existent uniquement si crête oblique", correct: false },
+      { text: "D. Distinction entre fosse et fossettes", correct: true }
+    ]
+  },
+  {
+    question: "Les dents antérieures se caractérisent par…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Incisives : bord libre rectiligne", correct: true },
+      { text: "B. Canines : bord coupant/pointe canine", correct: true },
+      { text: "C. Cingulum + crêtes marginales", correct: true },
+      { text: "D. Relief cuspidé comme molaires", correct: false }
+    ]
+  },
+  {
+    question: "Parmi les tubercules cités…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Carabelli sur ML 1re molaire maxillaire", correct: true },
+      { text: "B. Bolk sur 2e et 3e molaires maxillaires", correct: true },
+      { text: "C. Cingulum parmi les tubercules", correct: true },
+      { text: "D. Tubercule oblique reliant ML à DV", correct: false }
+    ]
+  },
+
+  // 26 à 35 — Difficiles ⭐⭐⭐⭐
+  {
+    question: "Les embrasures se répartissent en…",
+    difficulty: 4,
+    answers: [
+      { text: "A. Vestibulaires et linguales/palatines", correct: true },
+      { text: "B. Cervicales et occlusales/incisives", correct: true },
+      { text: "C. Radiculaires apicales", correct: false },
+      { text: "D. Quatre familles schématisées", correct: true }
+    ]
+  },
+  {
+    question: "La surface de contact résulte…",
+    difficulty: 4,
+    answers: [
+      { text: "A. De l’usure du point de contact", correct: true },
+      { text: "B. D’un élargissement de la fosse marginale", correct: false },
+      { text: "C. D’un phénomène sur les dents alignées", correct: true },
+      { text: "D. D’un processus supprimant les embrasures", correct: false }
+    ]
+  },
+  {
+    question: "La topographie des faces dentaires montre…",
+    difficulty: 4,
+    answers: [
+      { text: "A. Dénominations distale, mésiale, vestibulaire, linguale, occlusale", correct: true },
+      { text: "B. Correspondance buccale/palatine", correct: false },
+      { text: "C. Usage des plans/tiers pour repères", correct: true },
+      { text: "D. Organisation des reliefs", correct: true }
+    ]
+  },
+  {
+    question: "Les pans d’une cuspide vestibulaire indiquent que…",
+    difficulty: 4,
+    answers: [
+      { text: "A. Pan mésial et distal se lisent de part et d’autre de l’arête", correct: true },
+      { text: "B. Versants interne et périphérique opposés", correct: true },
+      { text: "C. Arête périphérique distincte de l’interne", correct: true },
+      { text: "D. Inapplicables aux cuspides vestibulaires", correct: false }
+    ]
+  },
+  {
+    question: "Morphologie des prémolaires/molaires :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Sillon central (M/D) et périphérique (V/L)", correct: true },
+      { text: "B. Sillons secondaires mésiaux/distaux", correct: true },
+      { text: "C. Accessoires sur pans cuspidiens", correct: true },
+      { text: "D. Aucune fosse occlusale", correct: false }
+    ]
+  },
+  {
+    question: "À propos des crêtes transversales/obliques, il est faux que…",
+    difficulty: 4,
+    answers: [
+      { text: "A. Crête oblique n’existe que sur molaires maxillaires", correct: false },
+      { text: "B. Crête transversale = réunion d’arêtes internes V/L", correct: false },
+      { text: "C. Crête oblique = pont d’émail diagonale", correct: false },
+      { text: "D. Crête transversale remplace les crêtes marginales", correct: true }
+    ]
+  },
+  {
+    question: "Le cingulum est…",
+    difficulty: 4,
+    answers: [
+      { text: "A. Tubercule de la face linguale des incisives/canines", correct: true },
+      { text: "B. Élément classé parmi les tubercules", correct: true },
+      { text: "C. Structure occupant la fosse centrale", correct: false },
+      { text: "D. Composante avec les crêtes marginales", correct: true }
+    ]
+  },
+  {
+    question: "Terminologie et topographie :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Divisions zones/tiers = base des repères", correct: true },
+      { text: "B. Arêtes internes guident formation des crêtes", correct: true },
+      { text: "C. Embrasures sans rapport au contact", correct: false },
+      { text: "D. Crêtes marginales limitent sillons", correct: true }
+    ]
+  },
+  {
+    question: "Pour les molaires maxillaires :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Crête oblique diagonale observée", correct: true },
+      { text: "B. Cuspide ML avec tubercule de Carabelli", correct: true },
+      { text: "C. Cuspide ML avec trois arêtes internes", correct: true },
+      { text: "D. Aucune arête interne", correct: false }
+    ]
+  },
+  {
+    question: "La terminologie des concavités distingue…",
+    difficulty: 4,
+    answers: [
+      { text: "A. Fosses centrale/marginale", correct: true },
+      { text: "B. Fossettes sur V et L/P", correct: true },
+      { text: "C. Sillons accessoires sur pans cuspidiens", correct: true },
+      { text: "D. Crêtes marginales comme fosses", correct: false }
+    ]
+  },
+
+  // 36 à 40 — Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Crêtes et arêtes : sélection correcte",
+    difficulty: 5,
+    answers: [
+      { text: "A. Crête transversale relie arêtes internes V et L", correct: true },
+      { text: "B. Crête oblique réunit ML et DV sur molaires maxillaires", correct: true },
+      { text: "C. Chaque cuspide postérieure a au moins une arête interne (ML en a trois)", correct: true },
+      { text: "D. Crêtes marginales disparaissent avec crête transversale", correct: false }
+    ]
+  },
+  {
+    question: "Schémas de pans/versants montrent que…",
+    difficulty: 5,
+    answers: [
+      { text: "A. Arête périphérique ≠ arête interne", correct: true },
+      { text: "B. Pans mésial/distal visibles autour de la pointe", correct: true },
+      { text: "C. Versants internes remplacés par sillons accessoires", correct: false },
+      { text: "D. Reliefs en pyramide à quatre côtés", correct: true }
+    ]
+  },
+  {
+    question: "Synthèse points de contact – embrasures – faces :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Point de contact → usure → surface de contact", correct: true },
+      { text: "B. Embrasures vestibulaires, linguales, cervicales, occlusales", correct: true },
+      { text: "C. Espaces indépendants du contact", correct: false },
+      { text: "D. Répartition circulaire autour du contact", correct: true }
+    ]
+  },
+  {
+    question: "Dents antérieures :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Incisives : bord libre rectiligne ; canines : pointe canine", correct: true },
+      { text: "B. Cingulum + crêtes marginales délimitent la face linguale", correct: true },
+      { text: "C. Cuspide occlusale médiane sur incisives", correct: false },
+      { text: "D. Pas de relief proéminent au collet lingual", correct: false }
+    ]
+  },
+  {
+    question: "Concavités occlusales :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Fosse centrale = intersection sillons central/périphérique", correct: true },
+      { text: "B. Fosse marginale = intersection sillon principal + crête marginale", correct: true },
+      { text: "C. Sillons secondaires mésial/distal", correct: true },
+      { text: "D. Fossettes sur V et L/P", correct: true }
+]
+  }
+],'Généralités et notions de bases en Anatomie dentaire': [
+  // A. Bon élève ⭐
+  {
+    question: "Les rôles mis en avant pour la dent dans l’introduction recouvrent…",
+    difficulty: 1,
+    answers: [
+      { text: "A. la mastication avec préparation mécanique du bol", correct: true },
+      { text: "B. la phonation en participant à certains sons", correct: true },
+      { text: "C. l’esthétique du sourire et du tiers inférieur", correct: true },
+      { text: "D. la digestion gastrique directe dans l’estomac", correct: false }
+    ]
+  },
+  {
+    question: "L’étude morphologique des dents et de leur organisation dans les arcades permet…",
+    difficulty: 1,
+    answers: [
+      { text: "A. de comprendre la fonction et l’adaptation en bouche", correct: true },
+      { text: "B. d’anticiper les conséquences cliniques des anomalies dentaires", correct: true },
+      { text: "C. de remplacer totalement l’examen clinique et radiographique", correct: false },
+      { text: "D. d’établir des repères descriptifs communs", correct: true }
+    ]
+  },
+  {
+    question: "Parmi les tissus de l’organe dentaire, on distingue…",
+    difficulty: 1,
+    answers: [
+      { text: "A. l’émail et la dentine comme tissus durs/minéralisés", correct: true },
+      { text: "B. la pulpe comme tissu conjonctivo-vasculo-nerveux", correct: true },
+      { text: "C. le cément comme tissu de recouvrement radiculaire", correct: true },
+      { text: "D. le cartilage dentaire marginal comme tissu constitutif de couronne", correct: false }
+    ]
+  },
+  {
+    question: "L’anatomie d’une dent s’organise autour de…",
+    difficulty: 1,
+    answers: [
+      { text: "A. une couronne (partie visible cliniquement)", correct: true },
+      { text: "B. une racine (partie intra-alvéolaire)", correct: true },
+      { text: "C. un collet anatomique défini par la jonction émail-cément (JAC)", correct: true },
+      { text: "D. un « collet osseux » synonyme de JAC", correct: false }
+    ]
+  },
+  {
+    question: "À propos du collet clinique, on peut affirmer qu’il…",
+    difficulty: 1,
+    answers: [
+      { text: "A. délimite la couronne clinique selon le niveau gingival", correct: true },
+      { text: "B. varie au cours de la vie (récessions, éruptions passives)", correct: true },
+      { text: "C. coïncide toujours avec la JAC", correct: false },
+      { text: "D. sépare partie visible et partie enfouie", correct: true }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "Couronne anatomique vs couronne clinique selon l’âge :",
+    difficulty: 2,
+    answers: [
+      { text: "A. vers 10 ans, l’anatomique > la clinique", correct: true },
+      { text: "B. vers 25 ans, l’anatomique = la clinique", correct: true },
+      { text: "C. sujet âgé : anatomique < clinique", correct: true },
+      { text: "D. relation fixe et invariable", correct: false }
+    ]
+  },
+  {
+    question: "Les termes « denture » et « dentition » désignent respectivement…",
+    difficulty: 2,
+    answers: [
+      { text: "A. denture = ensemble des dents présentes (statique)", correct: true },
+      { text: "B. dentition = processus d’éruption (dynamique)", correct: true },
+      { text: "C. synonymes sans nuance", correct: false },
+      { text: "D. notions opposées statique/dynamique utilisées conjointement", correct: true }
+    ]
+  },
+  {
+    question: "Une dent monoradiculée et une dent pluriradiculée se distinguent par…",
+    difficulty: 2,
+    answers: [
+      { text: "A. le nombre de racines", correct: true },
+      { text: "B. la présence d’une furcation pour les pluriradiculées", correct: true },
+      { text: "C. apex unique dans tous les cas", correct: false },
+      { text: "D. absence de furcation pour les monoradiculées", correct: true }
+    ]
+  },
+  {
+    question: "Les quatre classes de dents permanentes comprennent…",
+    difficulty: 2,
+    answers: [
+      { text: "A. incisives", correct: true },
+      { text: "B. canines", correct: true },
+      { text: "C. prémolaires", correct: true },
+      { text: "D. molaires", correct: true }
+    ]
+  },
+  {
+    question: "Fonctions dominantes par classe :",
+    difficulty: 2,
+    answers: [
+      { text: "A. incisives → couper/découper", correct: true },
+      { text: "B. canines → déchirer, guider", correct: true },
+      { text: "C. prémolaires → triturer", correct: true },
+      { text: "D. molaires → broyer", correct: true }
+    ]
+  },
+  {
+    question: "Caractéristiques des incisives :",
+    difficulty: 2,
+    answers: [
+      { text: "A. quatre au total (centrales et latérales)", correct: true },
+      { text: "B. bord tranchant", correct: true },
+      { text: "C. racine bifide", correct: false },
+      { text: "D. impliquées dans esthétique et phonation", correct: true }
+    ]
+  },
+  {
+    question: "À propos des canines :",
+    difficulty: 2,
+    answers: [
+      { text: "A. deux par maxillaire", correct: true },
+      { text: "B. forme pointue, racine longue", correct: true },
+      { text: "C. guidage canin", correct: true },
+      { text: "D. aucune fonction occlusale", correct: false }
+    ]
+  },
+  {
+    question: "Les prémolaires :",
+    difficulty: 2,
+    answers: [
+      { text: "A. quatre au total", correct: true },
+      { text: "B. face occlusale triturante", correct: true },
+      { text: "C. fonction intermédiaire", correct: true },
+      { text: "D. remplacent incisives latérales", correct: false }
+    ]
+  },
+  {
+    question: "Les molaires permanentes sont…",
+    difficulty: 2,
+    answers: [
+      { text: "A. les dents les plus larges", correct: true },
+      { text: "B. à plusieurs cuspides", correct: true },
+      { text: "C. dédiées au broyage", correct: true },
+      { text: "D. monoradiculées", correct: false }
+    ]
+  },
+  {
+    question: "Schéma couronne/collet/racine et parodonte :",
+    difficulty: 2,
+    answers: [
+      { text: "A. émail, dentine, pulpe, cément", correct: true },
+      { text: "B. desmodonte, os alvéolaire, gencive", correct: true },
+      { text: "C. canal osseux intra-pulpaire", correct: false },
+      { text: "D. apex et canal radiculaire décrits", correct: true }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "Denture déciduale (temporaire) :",
+    difficulty: 3,
+    answers: [
+      { text: "A. 6 mois → 6 ans", correct: true },
+      { text: "B. 10 dents/arcade (20 total)", correct: true },
+      { text: "C. incisives, canines, molaires", correct: true },
+      { text: "D. prémolaires temporaires", correct: false }
+    ]
+  },
+  {
+    question: "Denture permanente :",
+    difficulty: 3,
+    answers: [
+      { text: "A. 16 dents/arcade", correct: true },
+      { text: "B. incisives, canines, prémolaires, molaires", correct: true },
+      { text: "C. débute vers 6 ans", correct: true },
+      { text: "D. sans dents de sagesse", correct: false }
+    ]
+  },
+  {
+    question: "Denture mixte :",
+    difficulty: 3,
+    answers: [
+      { text: "A. commence à 6 ans", correct: true },
+      { text: "B. se termine vers 12 ans", correct: true },
+      { text: "C. cohabitation temporaire/permanente", correct: true },
+      { text: "D. exclut toute dent temporaire", correct: false }
+    ]
+  },
+  {
+    question: "Formule dentaire — principes :",
+    difficulty: 3,
+    answers: [
+      { text: "A. représentation par hémi-arcade", correct: true },
+      { text: "B. minuscules pour temporaires, majuscules pour permanentes", correct: true },
+      { text: "C. un seul système numérique obligatoire", correct: false },
+      { text: "D. schémas illustrant les trois états", correct: true }
+    ]
+  },
+  {
+    question: "Couronne clinique — assertions :",
+    difficulty: 3,
+    answers: [
+      { text: "A. partie visible dépendant de la gencive", correct: true },
+      { text: "B. peut être <, = ou >", correct: true },
+      { text: "C. délimitée par la gencive", correct: true },
+      { text: "D. confondue avec la JAC", correct: false }
+    ]
+  },
+  {
+    question: "Collet anatomique vs clinique :",
+    difficulty: 3,
+    answers: [
+      { text: "A. collet anatomique = JAC (fixe)", correct: true },
+      { text: "B. collet clinique : limite gingivale variable", correct: true },
+      { text: "C. JAC varie avec récessions", correct: false },
+      { text: "D. collet clinique sépare visible/enfoui", correct: true }
+    ]
+  },
+  {
+    question: "Éruption dents primaires :",
+    difficulty: 3,
+    answers: [
+      { text: "A. incisives centrales sup. : 7–12 mois", correct: true },
+      { text: "B. canines sup. : 16–22 mois", correct: true },
+      { text: "C. 1res molaires sup. : 13–19 mois", correct: true },
+      { text: "D. 2es molaires sup. : chute 10–12 ans", correct: false }
+    ]
+  },
+  {
+    question: "Éruption dents permanentes :",
+    difficulty: 3,
+    answers: [
+      { text: "A. incisives centrales sup. : 7–8 ans", correct: true },
+      { text: "B. canines sup. : 11–12 ans", correct: true },
+      { text: "C. 1res prémolaires sup. : 10–11 ans", correct: true },
+      { text: "D. 3es molaires : 17–21 ans", correct: true }
+    ]
+  },
+  {
+    question: "À propos de la furcation :",
+    difficulty: 3,
+    answers: [
+      { text: "A. divergence radiculaire des pluriradiculées", correct: true },
+      { text: "B. absente sur les monoradiculées", correct: true },
+      { text: "C. confondue avec le collet", correct: false },
+      { text: "D. visible sur schémas pluriradiculées", correct: true }
+    ]
+  },
+  {
+    question: "Repères d’ensemble :",
+    difficulty: 3,
+    answers: [
+      { text: "A. morphologie = langage commun (faces, bords, cuspides)", correct: true },
+      { text: "B. relie forme et fonction", correct: true },
+      { text: "C. rend l’examen clinique superflu", correct: false },
+      { text: "D. situe la dent dans le parodonte", correct: true }
+    ]
+  },
+
+  // D. Difficiles ⭐⭐⭐⭐
+  {
+    question: "Variations couronne anatomique/clinique (synthèse) :", difficulty: 4,
+    answers: [
+      { text: "A. 10 ans : anatomique > clinique", correct: true },
+      { text: "B. 25 ans : équivalence", correct: true },
+      { text: "C. sujet âgé : anatomique < clinique", correct: true },
+      { text: "D. relations figées", correct: false }
+    ]
+  },
+  {
+    question: "Concordance classes/fonctions :", difficulty: 4,
+    answers: [
+      { text: "A. incisives → couper", correct: true },
+      { text: "B. canines → déchirer/guider", correct: true },
+      { text: "C. prémolaires → triturer", correct: true },
+      { text: "D. molaires → broyer", correct: true }
+    ]
+  },
+  {
+    question: "Organisation tissulaire/parodontale :", difficulty: 4,
+    answers: [
+      { text: "A. émail/dentine/pulpe/cément", correct: true },
+      { text: "B. desmodonte/os/gencive", correct: true },
+      { text: "C. canal osseux intra-pulpaire", correct: false },
+      { text: "D. apex et canal radiculaire", correct: true }
+    ]
+  },
+  {
+    question: "Topographie générale :", difficulty: 4,
+    answers: [
+      { text: "A. distinction des faces (vestibulaire/linguale/mésiale/distale)", correct: true },
+      { text: "B. repérages utiles", correct: true },
+      { text: "C. suppression des repères", correct: false },
+      { text: "D. lien relief/fonction", correct: true }
+    ]
+  },
+  {
+    question: "Denture temporaire — composition :", difficulty: 4,
+    answers: [
+      { text: "A. incisives, canines, molaires", correct: true },
+      { text: "B. pas de prémolaires", correct: true },
+      { text: "C. 20 dents", correct: true },
+      { text: "D. 32 dents avant 6 ans", correct: false }
+    ]
+  },
+  {
+    question: "Denture permanente — rappels :", difficulty: 4,
+    answers: [
+      { text: "A. 32 dents", correct: true },
+      { text: "B. présence de prémolaires", correct: true },
+      { text: "C. 3es molaires possibles", correct: true },
+      { text: "D. 20 dents", correct: false }
+    ]
+  },
+  {
+    question: "Denture mixte — bornes :", difficulty: 4,
+    answers: [
+      { text: "A. débute à 6 ans", correct: true },
+      { text: "B. s’achève vers 12 ans", correct: true },
+      { text: "C. équivaut à absence de temporaire", correct: false },
+      { text: "D. cohabitation temporaire/permanente", correct: true }
+    ]
+  },
+  {
+    question: "Couronne clinique — conséquences :", difficulty: 4,
+    answers: [
+      { text: "A. varie avec récessions", correct: true },
+      { text: "B. peut > anatomique", correct: true },
+      { text: "C. reste identique chez l’enfant", correct: false },
+      { text: "D. conditionne visibilité", correct: true }
+    ]
+  },
+  {
+    question: "Formules dentaires :", difficulty: 4,
+    answers: [
+      { text: "A. hémi-arcade", correct: true },
+      { text: "B. casse distincte (minuscule/majuscule)", correct: true },
+      { text: "C. schéma enfant 8 ans", correct: true },
+      { text: "D. système unique imposé", correct: false }
+    ]
+  },
+  {
+    question: "Classes et nombres denture permanente :", difficulty: 4,
+    answers: [
+      { text: "A. 8 incisives", correct: true },
+      { text: "B. 4 canines", correct: true },
+      { text: "C. 8 prémolaires", correct: true },
+      { text: "D. 12 molaires", correct: true }
+    ]
+  },
+
+  // E. Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Recoupement 'statique vs dynamique' :", difficulty: 5,
+    answers: [
+      { text: "A. denture = état statique", correct: true },
+      { text: "B. dentition = processus dynamique", correct: true },
+      { text: "C. synonymes", correct: false },
+      { text: "D. opposition pédagogique", correct: true }
+    ]
+  },
+  {
+    question: "Lecture âge-dépendante (couronnes) :", difficulty: 5,
+    answers: [
+      { text: "A. enfant : gencive recouvre plus", correct: true },
+      { text: "B. adulte : équivalence fréquente", correct: true },
+      { text: "C. âgé : récession → couronne clinique ↑", correct: true },
+      { text: "D. JAC se déplace", correct: false }
+    ]
+  },
+  {
+    question: "Cohérence 'fonction ↔ morphologie' :", difficulty: 5,
+    answers: [
+      { text: "A. bords tranchants → section", correct: true },
+      { text: "B. pointe canine → guidage", correct: true },
+      { text: "C. cuspides prémolaires → trituration", correct: true },
+      { text: "D. tables molaires → broyage", correct: true }
+    ]
+  },
+  {
+    question: "Chronologie d’éruption — pièges :", difficulty: 5,
+    answers: [
+      { text: "A. primaires : canines 16–22 mois ; molaires 13–19 mois", correct: true },
+      { text: "B. primaires : 2es molaires chute 10–12 ans", correct: true },
+      { text: "C. permanentes : 7–8 ans à 17–21 ans", correct: true },
+      { text: "D. primaires : prémolaires avant 6 ans", correct: false }
+    ]
+  },
+  {
+    question: "Vision d’ensemble — articulation des notions :", difficulty: 5,
+    answers: [
+      { text: "A. terminologie structure la description", correct: true },
+      { text: "B. opposition denture/dentition éclaire les âges", correct: true },
+      { text: "C. distinction collet anat./clin. évite confusion", correct: true },
+      { text: "D. morphologie rend inutile l’étude du parodonte", correct: false }
+    ]
+  }
+],
+
+
+
+    'Système nerveux': [
+      {
+        question: 'ما هو الجزء من الدماغ المسؤول عن التوازن؟',
+        difficulty: 1,
+        answers: [
+          { text: 'المخيخ', correct: true },
+          { text: 'النخاع المستطيل', correct: false },
+          { text: 'المهاد', correct: false },
+          { text: 'القشرة المخية', correct: false }
+        ]
+      },
+      {
+        question: 'ما هو العصب المسؤول عن الرؤية؟',
+        difficulty: 2,
+        answers: [
+          { text: 'العصب السمعي', correct: false },
+          { text: 'العصب البصري', correct: true },
+          { text: 'العصب الوجهي', correct: false },
+          { text: 'العصب الحائر', correct: false }
+        ]
+      }
+      // ➕ أضف المزيد من الأسئلة هنا
+    ]
+  };
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "lesson.html";
+  }
+</script>
+<script src="./layout-fix.js"></script>
+
+</body>
+</html>

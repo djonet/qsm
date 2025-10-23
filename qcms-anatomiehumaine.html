@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<!-- 🔒 حماية الصفحة بـ Firebase -->
+<script type="module">
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  document.documentElement.style.visibility = 'hidden';
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.replace('index.html');
+      return;
+    }
+    try {
+      const ref  = doc(db, 'allowedUsers', user.uid);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        document.documentElement.style.visibility = 'visible';
+      } else {
+        window.location.replace('welcome.html?status=pending');
+      }
+    } catch (e) {
+      console.error('Firebase Auth Error:', e);
+      window.location.replace('welcome.html?status=pending');
+    }
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomie Humaine - Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2,h3 { margin-bottom: 10px; }
+
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty { margin-bottom: 8px; text-align: left; }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1){animation-delay:0.1s;}
+  .star:nth-child(2){animation-delay:0.2s;}
+  .star:nth-child(3){animation-delay:0.3s;}
+  .star:nth-child(4){animation-delay:0.4s;}
+  .star:nth-child(5){animation-delay:0.5s;}
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg,#0096c7,#00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black!important;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black!important;
+  }
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  .control-buttons {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1; min-width: 100px; padding: 10px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white; font-weight: bold;
+    cursor: pointer; transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    .container{width:95%;padding:15px;}
+    .question-text{font-size:16px;}
+    .answer{font-size:15px;padding:10px;}
+    .control-buttons{flex-direction:column;}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h3 id="lessonTitle"></h3>
+  <div id="questionsContainer"></div>
+  <button class="control-buttons" style="background:#444;margin-top:20px" onclick="goBack()">🔙 الرجوع للدروس</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // 🧩 إعداد القيم الافتراضية
+  localStorage.setItem('specialty','طب الأسنان');
+  localStorage.setItem('level','سنة 2');
+  localStorage.setItem('subject','Anatomie humaine');
+
+  const lesson = localStorage.getItem('lesson') || 'Os frontal et éthmoïde';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 أسئلة تجريبية
+  const questionsData = {
+    'Os du crane III': [
+  // 1 à 5 — Très faciles ⭐
+  {
+    question: "L’os occipital est décrit comme « os impair et symétrique », il participe à la formation de la base du crâne et de la calvaria, et il s’articule en arrière des pariétaux ainsi qu’avec l’atlas.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Os impair et symétrique", correct: true },
+      { text: "B. Participe à la base du crâne et à la calvaria", correct: true },
+      { text: "C. Situé en avant des pariétaux et de l’atlas", correct: false },
+      { text: "D. S’articule avec les pariétaux et l’atlas", correct: true }
+    ]
+  },
+  {
+    question: "L’os occipital présente quatre parties, dont une écaille concave postérieure et une partie basilaire située en avant du foramen magnum.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Parties latérales (masses latérales)", correct: true },
+      { text: "B. Partie basilaire en arrière du foramen magnum", correct: false },
+      { text: "C. Partie squameuse (écaille) postérieure", correct: true },
+      { text: "D. Foramen magnum perçant l’os", correct: true }
+    ]
+  },
+  {
+    question: "Sur la face exocrânienne de l’écaille, on observe des reliefs liés aux insertions musculaires et à la crête médiane.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Protubérance occipitale externe", correct: true },
+      { text: "B. Crête occipitale externe", correct: true },
+      { text: "C. Lignes nucales supérieures et inférieures", correct: true },
+      { text: "D. Sillon du sinus sagittal supérieur", correct: false }
+    ]
+  },
+  {
+    question: "La face endocrânienne de l’écaille montre des structures veineuses et des crêtes qui divisent la surface en fosses.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Protubérance occipitale interne", correct: true },
+      { text: "B. Sillon du sinus sagittal supérieur", correct: true },
+      { text: "C. Deux sillons transverses", correct: true },
+      { text: "D. Lignes nucales supérieures", correct: false }
+    ]
+  },
+  {
+    question: "Les bords et angles de l’écaille s’associent à des sutures et repères précis au voisinage du temporal.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Bord supérieur avec suture lambdoïde", correct: true },
+      { text: "B. Bords inférieurs vers la mastoïde du temporal", correct: true },
+      { text: "C. Angles correspondant à l’astérion", correct: true },
+      { text: "D. Angles correspondant au ptérion", correct: false }
+    ]
+  },
+
+  // 6 à 15 — Faciles ⭐⭐
+  {
+    question: "Le corps (partie basilaire) de l’occipital, en avant du foramen magnum, présente deux faces et quatre bords avec des unions osseuses spécifiques.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Bord antérieur soudé au corps du sphénoïde", correct: true },
+      { text: "B. Bords latéraux unis au rocher du temporal", correct: true },
+      { text: "C. Bord postérieur limite antérieure du foramen magnum", correct: true },
+      { text: "D. Face exocrânienne sans tubercule pharyngien", correct: false }
+    ]
+  },
+  {
+    question: "La face exocrânienne du corps montre des reliefs médians antérieurs.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Tubercule pharyngien sur la ligne médiane", correct: true },
+      { text: "B. Fossette naviculaire (pharyngienne) en avant", correct: true },
+      { text: "C. Gouttière basilaire inclinée en bas et en avant", correct: false },
+      { text: "D. Lignes nucales inférieures", correct: false }
+    ]
+  },
+  {
+    question: "La face endocrânienne du corps présente une gouttière basilaire inclinée en bas et en arrière, en rapport avec des structures du tronc cérébral.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Répond à la moelle allongée", correct: true },
+      { text: "B. Répond à la protubérance", correct: true },
+      { text: "C. S’unit directement au canal condylien postérieur", correct: false },
+      { text: "D. Inclinée en bas et en arrière", correct: true }
+    ]
+  },
+  {
+    question: "Les masses latérales sont disposées de chaque côté du foramen magnum et portent les surfaces d’appui crâniennes.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Présentent un condyle occipital", correct: true },
+      { text: "B. Le condyle s’articule avec la cavité glénoïde de l’atlas", correct: true },
+      { text: "C. Face externe avec fossette condylienne antérieure s’ouvrant sur le canal de l’hypoglosse (XII)", correct: true },
+      { text: "D. Face externe sans fossette condylienne postérieure", correct: false }
+    ]
+  },
+  {
+    question: "Sur la face endocrânienne des masses latérales, on retrouve des éléments veineux et des orifices nerveux.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Orifice interne du foramen de l’hypoglosse (canal condylien antérieur)", correct: true },
+      { text: "B. Sillon du sinus sigmoïde", correct: true },
+      { text: "C. Processus jugulaire", correct: false },
+      { text: "D. Sillon du sinus sagittal supérieur", correct: false }
+    ]
+  },
+  {
+    question: "Les bords des masses latérales contribuent à des limites et à une articulation jugulaire.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Bord interne limite latéralement le foramen magnum", correct: true },
+      { text: "B. Bord externe avec processus jugulaire pour la facette jugulaire du temporal", correct: true },
+      { text: "C. Bord supérieur forme la suture lambdoïde", correct: false },
+      { text: "D. Bord postérieur porte la fossette naviculaire", correct: false }
+    ]
+  },
+  {
+    question: "La base du crâne comprend plusieurs os et se subdivise en trois étages crâniens.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Ethmoïde, frontal, sphénoïde, occipital et temporaux", correct: true },
+      { text: "B. Fosse crânienne antérieure, moyenne et postérieure", correct: true },
+      { text: "C. Pariétaux constituent l’ensemble du plancher", correct: false },
+      { text: "D. Le plancher est en trois fosses", correct: true }
+    ]
+  },
+  {
+    question: "L’étage antérieur est limité en avant et en arrière par des structures précises.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Le frontal en avant", correct: true },
+      { text: "B. Le tubercule pituitaire et les petites ailes du sphénoïde en arrière", correct: true },
+      { text: "C. La lame quadrilatère du sphénoïde en avant", correct: false },
+      { text: "D. Le bord supérieur du rocher en arrière", correct: false }
+    ]
+  },
+  {
+    question: "Dans l’étage antérieur, certains orifices laissent passer des éléments olfactifs et optiques.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Lame criblée de l’ethmoïde → nerf olfactif (I)", correct: true },
+      { text: "B. Canal optique → nerf optique (II)", correct: true },
+      { text: "C. Canal optique → artère ophtalmique", correct: true },
+      { text: "D. Lame criblée → artère méningée moyenne", correct: false }
+    ]
+  },
+
+  // 16 à 25 — Moyens ⭐⭐⭐
+  {
+    question: "L’étage moyen est limité entre des repères sphénoïdaux et pétreux.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Entre petites ailes et lame quadrilatère du sphénoïde", correct: true },
+      { text: "B. Vers l’arrière par le bord supérieur du rocher", correct: true },
+      { text: "C. Par le frontal en arrière", correct: false },
+      { text: "D. Par les pariétaux en avant", correct: false }
+    ]
+  },
+  {
+    question: "La fissure orbitaire supérieure (fente sphénoïdale) transmet plusieurs nerfs oculaires.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Nerf ophtalmique (V1)", correct: true },
+      { text: "B. Nerf oculomoteur (III)", correct: true },
+      { text: "C. Nerf pathétique (IV)", correct: true },
+      { text: "D. Nerf abducens (VI)", correct: true }
+    ]
+  },
+  {
+    question: "Le foramen rond et le foramen ovale sont dédiés à des branches du trijumeau.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Foramen rond → nerf maxillaire (V2)", correct: true },
+      { text: "B. Foramen ovale → nerf mandibulaire (V3)", correct: true },
+      { text: "C. Foramen rond → nerf ophtalmique (V1)", correct: false },
+      { text: "D. Foramen ovale → nerf maxillaire (V2)", correct: false }
+    ]
+  },
+  {
+    question: "Le foramen épineux et le trou déchiré antérieur sont vasculaires.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Foramen épineux → artère méningée moyenne", correct: true },
+      { text: "B. Trou déchiré antérieur → artère carotide interne", correct: true },
+      { text: "C. Foramen épineux → veine jugulaire interne", correct: false },
+      { text: "D. Trou déchiré antérieur → nerf facial (VII)", correct: false }
+    ]
+  },
+  {
+    question: "Le foramen magnum met en continuité la cavité crânienne et le canal vertébral.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Laisse passer la moelle allongée", correct: true },
+      { text: "B. Laisse passer les artères vertébrales", correct: true },
+      { text: "C. Laisse passer les nerfs spinaux", correct: true },
+      { text: "D. Laisse passer les méninges", correct: true }
+    ]
+  },
+  {
+    question: "Le méat acoustique interne laisse passer des paires crâniennes groupées.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Nerf facial (VII)", correct: true },
+      { text: "B. Intermédiaire (VIIbis)", correct: true },
+      { text: "C. Nerf auditif (VIII)", correct: true },
+      { text: "D. Nerf hypoglosse (XII)", correct: false }
+    ]
+  },
+  {
+    question: "Le canal du nerf hypoglosse appartient à l’étage postérieur.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Canal du nerf hypoglosse → nerf hypoglosse (XII)", correct: true },
+      { text: "B. Même canal que la carotide interne", correct: false },
+      { text: "C. Distinct du foramen jugulaire", correct: true },
+      { text: "D. Situé près du foramen magnum", correct: true }
+    ]
+  },
+  {
+    question: "Le foramen jugulaire transmet des nerfs mixtes et un gros tronc veineux.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Nerf glosso-pharyngien (IX)", correct: true },
+      { text: "B. Nerf vague (X)", correct: true },
+      { text: "C. Nerf accessoire (XI)", correct: true },
+      { text: "D. Veine jugulaire interne", correct: true }
+    ]
+  },
+  {
+    question: "Les fosses endocrâniennes de l’occipital se distribuent selon la partie du système nerveux qui y repose.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Fosses cérébrales en haut", correct: true },
+      { text: "B. Fosses cérébelleuses en bas", correct: true },
+      { text: "C. Fosses orbitaires en avant immédiat", correct: false },
+      { text: "D. Fosses temporales", correct: false }
+    ]
+  },
+  {
+    question: "Les limites d’étage antérieur et moyen opposent petites ailes et bord supérieur du rocher.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Ét. antérieur en arrière : petites ailes + tubercule pituitaire", correct: true },
+      { text: "B. Ét. moyen en arrière : bord supérieur du rocher", correct: true },
+      { text: "C. Ét. moyen en avant : lame quadrilatère", correct: true },
+      { text: "D. Ét. antérieur en avant : frontal", correct: true }
+    ]
+  },
+
+  // 26 à 35 — Difficiles ⭐⭐⭐⭐
+  {
+    question: "La face externe des masses latérales présente des fossettes condyliennes associées à des canaux.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Fossette condylienne antérieure → canal de l’hypoglosse (XII)", correct: true },
+      { text: "B. Fossette condylienne postérieure → canal condylien postérieur inconstant", correct: true },
+      { text: "C. Les deux fossettes en arrière du condyle", correct: false },
+      { text: "D. Condyle occipital s’articule avec l’atlas", correct: true }
+    ]
+  },
+  {
+    question: "La face endocrânienne des masses latérales montre un sillon veineux et une incisure jugulaire.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Sillon du sinus sigmoïde", correct: true },
+      { text: "B. Orifice interne du canal de l’hypoglosse", correct: true },
+      { text: "C. Processus jugulaire uniquement exocrânien", correct: false },
+      { text: "D. Relation avec le foramen jugulaire", correct: true }
+    ]
+  },
+  {
+    question: "Associez chaque foramen à sa transmission dans l’étage moyen.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Foramen ovale → nerf mandibulaire (V3)", correct: true },
+      { text: "B. Foramen rond → nerf maxillaire (V2)", correct: true },
+      { text: "C. Foramen épineux → artère méningée moyenne", correct: true },
+      { text: "D. Trou déchiré antérieur → nerf facial (VII)", correct: false }
+    ]
+  },
+  {
+    question: "L’étage postérieur regroupe des conduits pour nerfs mixtes et sensoriels avec un gros foramen central.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Méat acoustique interne → VII, VIIbis, VIII", correct: true },
+      { text: "B. Foramen jugulaire → IX, X, XI + veine jugulaire interne", correct: true },
+      { text: "C. Foramen magnum → moelle, artères vertébrales, nerfs spinaux, méninges", correct: true },
+      { text: "D. Canal hypoglosse → V2", correct: false }
+    ]
+  },
+  {
+    question: "Le trou occipital est en continuité avec la colonne vertébrale et sous la partie basilaire.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Le plus gros de tous les foramens", correct: true },
+      { text: "B. En avant immédiat de la lame quadrilatère", correct: false },
+      { text: "C. Porte la limite antérieure du corps basilaire", correct: true },
+      { text: "D. Reçoit moelle allongée, artères vertébrales, nerfs spinaux, méninges", correct: true }
+    ]
+  },
+  {
+    question: "Associez étage et structures transmises selon la topographie.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Antérieur : lame criblée (I), canal optique (II + artère ophtalmique)", correct: true },
+      { text: "B. Moyen : fente sphénoïdale (V1, III, IV, VI), rond (V2), ovale (V3), épineux (artère méningée moyenne), déchiré antérieur (carotide interne)", correct: true },
+      { text: "C. Postérieur : méat acoustique interne, canal hypoglosse, foramen jugulaire, foramen magnum", correct: true },
+      { text: "D. Antérieur : trou déchiré postérieur (IX, X, XI)", correct: false }
+    ]
+  },
+  {
+    question: "Corrélez les faces de l’occipital et leurs reliefs.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Exocrânienne : protubérance occipitale externe, crête occipitale externe, lignes nucales", correct: true },
+      { text: "B. Endocrânienne : protubérance interne, sillon sagittal, sillons transverses, crête interne", correct: true },
+      { text: "C. Corps endocrânien : gouttière basilaire, moelle allongée et protubérance", correct: true },
+      { text: "D. Corps exocrânien : crista galli et gouttières olfactives", correct: false }
+    ]
+  },
+  {
+    question: "Les articulations et processus périphériques des masses latérales et de l’écaille se déduisent des bords et angles.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Bord externe : processus jugulaire avec le temporal", correct: true },
+      { text: "B. Bord interne : limite latérale du foramen magnum", correct: true },
+      { text: "C. Bord supérieur : suture lambdoïde", correct: true },
+      { text: "D. Angles : ptérion exclusivement", correct: false }
+    ]
+  },
+  {
+    question: "Distinguez ce qui relève de l’étage moyen.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Fente sphénoïdale (V1, III, IV, VI)", correct: true },
+      { text: "B. Foramen rond (V2) et ovale (V3)", correct: true },
+      { text: "C. Foramen épineux (artère méningée moyenne)", correct: true },
+      { text: "D. Méat acoustique interne (VII, VIII)", correct: false }
+    ]
+  },
+  {
+    question: "Associez l’élément au site exact indiqué.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Canal de l’hypoglosse : étage postérieur, près du foramen magnum", correct: true },
+      { text: "B. Trou déchiré antérieur : étage moyen, artère carotide interne", correct: true },
+      { text: "C. Lame criblée : étage antérieur, nerf olfactif (I)", correct: true },
+      { text: "D. Foramen jugulaire : étage antérieur", correct: false }
+    ]
+  },
+
+  // 36 à 40 — Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Les divisions internes de l’occipital montrent quatre fosses endocrâniennes liées aux crêtes et sillons.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Sillon sagittal supérieur", correct: true },
+      { text: "B. Sillons transverses", correct: true },
+      { text: "C. Crête interne bifurquée en bas", correct: true },
+      { text: "D. Lignes nucales supérieures", correct: false }
+    ]
+  },
+  {
+    question: "Les rapports articulaires supérieurs et inférieurs de l’occipital se distinguent par leurs sutures et processus.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Bord supérieur avec suture lambdoïde", correct: true },
+      { text: "B. Bord inférieur vers la mastoïde du temporal", correct: true },
+      { text: "C. Bord supérieur avec la crista galli", correct: false },
+      { text: "D. Angles à l’astérion", correct: true }
+    ]
+  },
+  {
+    question: "Les fosses endocrâniennes postérieures reçoivent quelles structures nerveuses ?",
+    difficulty: 5,
+    answers: [
+      { text: "A. Le tronc cérébral", correct: true },
+      { text: "B. Le cervelet", correct: true },
+      { text: "C. Les bulbes olfactifs", correct: false },
+      { text: "D. Les hémisphères cérébraux", correct: false }
+    ]
+  },
+  {
+    question: "Les limites postérieures de la base du crâne incluent :",
+    difficulty: 5,
+    answers: [
+      { text: "A. L’occipital", correct: true },
+      { text: "B. La suture lambdoïde", correct: true },
+      { text: "C. Le sphénoïde", correct: false },
+      { text: "D. Le rocher du temporal", correct: true }
+    ]
+  },
+  {
+    question: "Les communications majeures entre cavité crânienne et canal vertébral se font par :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Foramen magnum", correct: true },
+      { text: "B. Canal hypoglosse", correct: true },
+      { text: "C. Foramen jugulaire", correct: true },
+      { text: "D. Fente sphénoïdale", correct: false }
+    ]
+  }
+],"Os de la tête I : os frontal et os éthmoïde": [
+  // A. Bon élève ⭐
+  {
+    question: "Le crâne présente deux parties et la face est un massif appendu à sa base antérieure.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Deux parties : voûte (calvaria) et base (plancher)", correct: true },
+      { text: "B. Face : massif osseux appendu à la base du crâne", correct: true },
+      { text: "C. Voûte = partie inférieure, base = supérieure", correct: false },
+      { text: "D. Contient l’encéphale et relié à la mandibule par l’ATM", correct: true }
+    ]
+  },
+  {
+    question: "Les huit os du crâne et leur classification.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Impairs médians : frontal, ethmoïde, sphénoïde, occipital", correct: true },
+      { text: "B. Pairs : temporaux et pariétaux", correct: true },
+      { text: "C. Tous les os du crâne sont pairs", correct: false },
+      { text: "D. Temporaux et pariétaux latéraux", correct: true }
+    ]
+  },
+  {
+    question: "Fontanelles du nouveau-né.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Bregmatique en avant", correct: true },
+      { text: "B. Lambdoïde en arrière", correct: true },
+      { text: "C. Ptérion en avant et astérion en arrière", correct: false },
+      { text: "D. Séparent les os de la calvaria", correct: true }
+    ]
+  },
+  {
+    question: "L’articulation temporo-mandibulaire.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Articulations crâniennes immobiles", correct: true },
+      { text: "B. ATM unit mandibule et base du crâne", correct: true },
+      { text: "C. Toutes les articulations du crâne sont mobiles", correct: false },
+      { text: "D. ATM = seule articulation mobile", correct: true }
+    ]
+  },
+  {
+    question: "L’os frontal et ses parties.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Partie verticale (squameuse)", correct: true },
+      { text: "B. Partie horizontale", correct: true },
+      { text: "C. Partie postérieure autonome", correct: false },
+      { text: "D. Situé en avant du crâne et au-dessus du massif facial", correct: true }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "Reliefs antérieurs de la portion verticale du frontal.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Glabelle", correct: true },
+      { text: "B. Bosses frontales", correct: true },
+      { text: "C. Arcades sourcilières", correct: true },
+      { text: "D. Sinus frontal visible en surface", correct: false }
+    ]
+  },
+  {
+    question: "Face interne du frontal.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Concave", correct: true },
+      { text: "B. Porte le sinus longitudinal supérieur", correct: true },
+      { text: "C. Fosses frontales de chaque côté", correct: true },
+      { text: "D. Convexe et lisse", correct: false }
+    ]
+  },
+  {
+    question: "Bords du frontal.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Postéro-supérieur : pariétal + grande aile du sphénoïde", correct: true },
+      { text: "B. Antéro-inférieur (orbito-nasal) : limite vertical/horizontal", correct: true },
+      { text: "C. Antéro-inférieur : frontal-pariétal uniquement", correct: false },
+      { text: "D. Postéro-supérieur : sans suture", correct: false }
+    ]
+  },
+  {
+    question: "Portion horizontale du frontal.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Deux parties latérales : toits orbitaires", correct: true },
+      { text: "B. Partie médiane : échancrure ethmoïdale", correct: true },
+      { text: "C. Crête occipitale constante", correct: false },
+      { text: "D. Planchers orbitaires latéraux", correct: false }
+    ]
+  },
+  {
+    question: "Sinus frontal.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Cavité pneumatique", correct: true },
+      { text: "B. Cavité aérique dans le frontal", correct: true },
+      { text: "C. Toujours absente chez l’adulte", correct: false },
+      { text: "D. Taille variable", correct: true }
+    ]
+  },
+  {
+    question: "Position de l’éthmoïde.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Sous la portion horizontale du frontal", correct: true },
+      { text: "B. Partie antérieure médiane de la base du crâne", correct: true },
+      { text: "C. Partie postéro-latérale", correct: false },
+      { text: "D. En avant du sphénoïde", correct: true }
+    ]
+  },
+  {
+    question: "Constitution de l’éthmoïde.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Lame verticale", correct: true },
+      { text: "B. Lame horizontale", correct: true },
+      { text: "C. Deux masses latérales", correct: true },
+      { text: "D. Trois masses latérales", correct: false }
+    ]
+  },
+  {
+    question: "Lame verticale de l’éthmoïde.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Partie supérieure : crista galli", correct: true },
+      { text: "B. Partie inférieure : lame perpendiculaire", correct: true },
+      { text: "C. Partie médiane : os planum", correct: false },
+      { text: "D. Crista galli = partie supérieure", correct: true }
+    ]
+  },
+  {
+    question: "Lame horizontale de l’éthmoïde.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Lame criblée", correct: true },
+      { text: "B. Perforée pour le nerf olfactif", correct: true },
+      { text: "C. Traverse pour le trijumeau", correct: false },
+      { text: "D. Constitue le toit orbital complet", correct: false }
+    ]
+  },
+  {
+    question: "Masses latérales de l’éthmoïde.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Face antérieure : unguis et maxillaire", correct: true },
+      { text: "B. Face postérieure : sphénoïde", correct: true },
+      { text: "C. Face inférieure : rapport maxillaire", correct: true },
+      { text: "D. Face médiale : plane", correct: false }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "Faces supérieure et médiale des masses éthmoïdales.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Supérieure : vers lame criblée", correct: true },
+      { text: "B. Supérieure : s’articule avec frontal", correct: true },
+      { text: "C. Médiale : irrégulière, donne cornets", correct: true },
+      { text: "D. Médiale : plane", correct: false }
+    ]
+  },
+  {
+    question: "Face latérale des masses éthmoïdales.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Os planum", correct: true },
+      { text: "B. Lame papyracée", correct: true },
+      { text: "C. Épaisse et spongieuse", correct: false },
+      { text: "D. Volet fin latéral", correct: true }
+    ]
+  },
+  {
+    question: "Cavités des masses éthmoïdales.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Cavités pneumatiques", correct: true },
+      { text: "B. Cellules ethmoïdales", correct: true },
+      { text: "C. Os creusé d’air", correct: true },
+      { text: "D. Sans cavités", correct: false }
+    ]
+  },
+  {
+    question: "Organisation pair/impair du crâne.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Impairs : frontal, ethmoïde, sphénoïde, occipital", correct: true },
+      { text: "B. Pairs : temporaux et pariétaux", correct: true },
+      { text: "C. Frontal pair", correct: false },
+      { text: "D. Sphénoïde impair", correct: true }
+    ]
+  },
+  {
+    question: "Relations orbitaires du frontal.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Parties latérales : toits orbitaires", correct: true },
+      { text: "B. Échancrure ethmoïdale : médiane", correct: true },
+      { text: "C. Bord orbito-nasal = limite vertical/horizontal", correct: true },
+      { text: "D. Arcades sourcilières horizontales", correct: false }
+    ]
+  },
+  {
+    question: "Reliefs externes et empreintes internes du frontal.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Glabelle et bosses frontales = convexité antérieure", correct: true },
+      { text: "B. Arcades sourcilières = relief antérieur", correct: true },
+      { text: "C. Sinus longitudinal = empreinte médiane interne", correct: true },
+      { text: "D. Fosses frontales internes", correct: true }
+    ]
+  },
+  {
+    question: "Région antérieure de la base du crâne.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Éthmoïde sous le frontal horizontal", correct: true },
+      { text: "B. Crista galli vers la base du crâne", correct: true },
+      { text: "C. Lame criblée : nerf olfactif", correct: true },
+      { text: "D. Cornets : face latérale des masses", correct: false }
+    ]
+  },
+  {
+    question: "Rapports osseux des masses latérales.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Antérieure : unguis + maxillaire", correct: true },
+      { text: "B. Postérieure : corps du sphénoïde", correct: true },
+      { text: "C. Inférieure : maxillaire", correct: true },
+      { text: "D. Supérieure : pariétal", correct: false }
+    ]
+  },
+  {
+    question: "Opposition crâne / massif facial.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Crâne = neurocrâne", correct: true },
+      { text: "B. Face = viscérocrâne", correct: true },
+      { text: "C. Neurocrâne = face", correct: false },
+      { text: "D. Face entoure cavités sensorielles", correct: true }
+    ]
+  },
+  {
+    question: "Fontanelles principales et rôle.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Bregmatique : avant", correct: true },
+      { text: "B. Lambdoïde : arrière", correct: true },
+      { text: "C. Ptérionale : arrière", correct: false },
+      { text: "D. Croissance crânienne", correct: true }
+    ]
+  },
+
+  // D. Difficiles ⭐⭐⭐⭐
+  {
+    question: "Sutures et bords du frontal.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Bord postéro-supérieur : pariétal + sphénoïde", correct: true },
+      { text: "B. Bord orbito-nasal = limite vertical/horizontal", correct: true },
+      { text: "C. Bord postéro-supérieur : pas d’articulation faciale", correct: true },
+      { text: "D. Bord antéro-inférieur = suture fronto-pariétale", correct: false }
+    ]
+  },
+  {
+    question: "Éléments orbitaires et nasaux du frontal.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Toits orbitaires = parties latérales horizontales", correct: true },
+      { text: "B. Échancrure ethmoïdale = médiane horizontale", correct: true },
+      { text: "C. Arcades sourcilières = face antérieure verticale", correct: true },
+      { text: "D. Sinus frontal remplace la lame criblée", correct: false }
+    ]
+  },
+  {
+    question: "Éthmoïde — lames et pièces.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Lame verticale : crista galli + lame perpendiculaire", correct: true },
+      { text: "B. Lame horizontale : criblée", correct: true },
+      { text: "C. Masses latérales : six faces", correct: true },
+      { text: "D. Lame perpendiculaire = toit orbitaire", correct: false }
+    ]
+  },
+  {
+    question: "Rapports osseux des masses.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Antérieure : unguis + maxillaire", correct: true },
+      { text: "B. Postérieure : sphénoïde", correct: true },
+      { text: "C. Supérieure : frontal", correct: true },
+      { text: "D. Latérale : occipital", correct: false }
+    ]
+  },
+  {
+    question: "Faces médiale/latérale des masses.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Médiale : irrégulière, cornets", correct: true },
+      { text: "B. Latérale : os planum, lame papyracée", correct: true },
+      { text: "C. Médiale plane", correct: false },
+      { text: "D. Latérale : fine", correct: true }
+    ]
+  },
+  {
+    question: "Organisation générale tête osseuse.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Crâne = neurocrâne", correct: true },
+      { text: "B. Massif facial = viscérocrâne", correct: true },
+      { text: "C. Face appendue à la moitié postérieure", correct: false },
+      { text: "D. Crâne contient encéphale", correct: true }
+    ]
+  },
+  {
+    question: "Fontanelles et croissance néonatale.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Os calvaria séparés par fontanelles", correct: true },
+      { text: "B. Croissance de la boîte crânienne", correct: true },
+      { text: "C. Bregmatique arrière, lambdoïde avant", correct: false },
+      { text: "D. Bregmatique et lambdoïde principales", correct: true }
+    ]
+  },
+  {
+    question: "Articulations des masses ethmoïdales.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Antérieure : unguis et maxillaire", correct: true },
+      { text: "B. Inférieure : maxillaire", correct: true },
+      { text: "C. Médiale : cornets et pariétal", correct: false },
+      { text: "D. Postérieure : sphénoïde", correct: true }
+    ]
+  },
+  {
+    question: "Reliefs externes / empreintes internes du frontal.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Glabelle, bosses frontales, arcades sourcilières = relief", correct: true },
+      { text: "B. Sinus longitudinal sup. = empreinte interne", correct: true },
+      { text: "C. Fosses frontales = empreintes internes", correct: true },
+      { text: "D. Échancrure ethmoïdale = relief externe", correct: false }
+    ]
+  },
+  {
+    question: "Voûte, base, ATM.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Voûte = supérieure, base = inférieure", correct: true },
+      { text: "B. Articulations crâniennes immobiles", correct: true },
+      { text: "C. ATM unit mandibule et base", correct: true },
+      { text: "D. Toutes les articulations sont mobiles", correct: false }
+    ]
+  },
+
+  // E. Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Pièces de l’éthmoïde et rapports crâniens.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Lame verticale : crista galli + lame perpendiculaire", correct: true },
+      { text: "B. Lame horizontale : criblée (nerf I)", correct: true },
+      { text: "C. Masses latérales : six faces pneumatiques", correct: true },
+      { text: "D. Lame horizontale : toit orbitaire", correct: false }
+    ]
+     },
+   {
+    question: "Rapports précis des faces des masses latérales de l’éthmoïde.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Antérieure → unguis et maxillaire", correct: true },
+      { text: "B. Postérieure → corps du sphénoïde", correct: true },
+      { text: "C. Supérieure → frontal (lame criblée)", correct: true },
+      { text: "D. Latérale → pariétal", correct: false }
+    ]
+  },
+  {
+    question: "Synthèse du frontal : organisation, repères et cavités.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Portion verticale et horizontale (toits orbitaires + échancrure ethmoïdale)", correct: true },
+      { text: "B. Bord postéro-supérieur : pariétal + grande aile du sphénoïde", correct: true },
+      { text: "C. Face antérieure : glabelle, bosses frontales, arcades sourcilières", correct: true },
+      { text: "D. Sinus frontal : cavité pneumatique variable", correct: true }
+    ]
+  },
+  {
+    question: "Introduction : la face et ses cavités sensorielles.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Creusée de cavités abritant goût, odorat, vision", correct: true },
+      { text: "B. Entoure bouche et fosses nasales", correct: true },
+      { text: "C. Appendue à la moitié antérieure de la base du crâne", correct: true },
+      { text: "D. Remplace la voûte du crâne", correct: false }
+    ]
+  },
+  {
+    question: "Panorama antérieur : frontal et éthmoïde.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Le frontal surplombe le massif facial et forme les toits orbitaires", correct: true },
+      { text: "B. L’éthmoïde occupe l’avant médian de la base sous le frontal", correct: true },
+      { text: "C. Lame criblée : traversée par les filets du nerf olfactif", correct: true },
+      { text: "D. Cornets : issus de la face latérale des masses", correct: true }
+    ]
+  }
+]
+
+,"Os du crâne II : sphénoïde, temporal, pariétal": [
+  // A. Bon élève ⭐
+  {
+    question: "Le sphénoïde est un os impair, médian, situé à la base du crâne.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Os impair", correct: true },
+      { text: "B. Position centrale dans la base du crâne", correct: true },
+      { text: "C. En avant de l’os frontal", correct: false },
+      { text: "D. En arrière de l’os frontal et de l’ethmoïde", correct: true }
+    ]
+  },
+  {
+    question: "Constitution du sphénoïde.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Corps médian cubique à six parois", correct: true },
+      { text: "B. Deux petites ailes en arrière", correct: false },
+      { text: "C. Deux grandes ailes en arrière", correct: true },
+      { text: "D. Deux processus ptérygoïdes nés de la face inférieure", correct: true }
+    ]
+  },
+  {
+    question: "Cavités pneumatiques du sphénoïde.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Deux sinus sphénoïdaux", correct: true },
+      { text: "B. Sinus médian unique", correct: false },
+      { text: "C. Cavités séparées par un septum", correct: true },
+      { text: "D. Cellules mastoïdiennes", correct: false }
+    ]
+  },
+  {
+    question: "Face supérieure du corps sphénoïdal.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Jugum sphénoïdal", correct: true },
+      { text: "B. Sillon chiasmatique", correct: true },
+      { text: "C. Selle turcique", correct: true },
+      { text: "D. Fosse jugulaire", correct: false }
+    ]
+  },
+  {
+    question: "Face antérieure du corps du sphénoïde.",
+    difficulty: 1,
+    answers: [
+      { text: "A. S’articule avec l’ethmoïde", correct: true },
+      { text: "B. Crête sphénoïdale antérieure", correct: true },
+      { text: "C. Ostium du sinus sphénoïdal", correct: true },
+      { text: "D. Foramen ovale", correct: false }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "Face inférieure du corps du sphénoïde.",
+    difficulty: 2,
+    answers: [
+      { text: "A. En continuité avec l’occipital", correct: true },
+      { text: "B. Crête sphénoïdale inférieure pour le vomer", correct: true },
+      { text: "C. Partie postérieure des fosses nasales", correct: true },
+      { text: "D. Épine de Spix", correct: false }
+    ]
+  },
+  {
+    question: "Face postérieure et latérales du corps du sphénoïde.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Face postérieure unit sphénoïde et occipital", correct: true },
+      { text: "B. Faces latérales donnent naissance aux ailes", correct: true },
+      { text: "C. S’articulent avec le pariétal", correct: false },
+      { text: "D. Porte l’épine zygomatique", correct: false }
+    ]
+  },
+  {
+    question: "Petites ailes du sphénoïde.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Lamelles triangulaires", correct: true },
+      { text: "B. Deux racines délimitant le canal optique", correct: true },
+      { text: "C. Limitent en haut la fissure orbitaire supérieure", correct: true },
+      { text: "D. Donnent insertion au muscle temporal", correct: false }
+    ]
+  },
+  {
+    question: "Grande aile : foramen et orientation.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Foramen rond", correct: true },
+      { text: "B. Foramen ovale", correct: true },
+      { text: "C. Foramen épineux", correct: true },
+      { text: "D. Canal ptérygoïdien", correct: false }
+    ]
+  },
+  {
+    question: "Grande aile — face exocrânienne.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Partie orbitaire", correct: true },
+      { text: "B. Partie temporo-zygomatique", correct: true },
+      { text: "C. Partie jugulaire", correct: false },
+      { text: "D. Partie pétro-squameuse", correct: false }
+    ]
+  },
+  {
+    question: "Grande aile — insertions musculaires.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Partie temporale : muscle temporal", correct: true },
+      { text: "B. Partie zygomatique : ptérygoïdien latéral", correct: true },
+      { text: "C. Partie orbitaire : mylo-hyoïdien", correct: false },
+      { text: "D. Partie temporale : calvaria", correct: true }
+    ]
+  },
+  {
+    question: "Processus ptérygoïdes.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Naissent de la face inférieure du corps", correct: true },
+      { text: "B. Deux lames : médiale et latérale", correct: true },
+      { text: "C. Canal ptérygoïdien à leur origine", correct: true },
+      { text: "D. Ne circonscrivent pas de fosse", correct: false }
+    ]
+  },
+  {
+    question: "Partie inférieure des processus ptérygoïdes.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Lames écartées", correct: true },
+      { text: "B. Fosse ptérygoïde", correct: true },
+      { text: "C. Toit du méat acoustique externe", correct: false },
+      { text: "D. Foramen spinosum", correct: false }
+    ]
+  },
+  {
+    question: "Os temporal — généralités.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Pair", correct: true },
+      { text: "B. Base et calvaria", correct: true },
+      { text: "C. Sans cavités", correct: false },
+      { text: "D. Loge appareils auditif et vestibulaire", correct: true }
+    ]
+  },
+  {
+    question: "Les parties du temporal.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Écaille", correct: true },
+      { text: "B. Os tympanal", correct: true },
+      { text: "C. Rocher", correct: true },
+      { text: "D. Os zygomatique", correct: false }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "Écaille du temporal — face exocrânienne.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Partie verticale : muscle temporal", correct: true },
+      { text: "B. Partie horizontale : racines du processus zygomatique", correct: true },
+      { text: "C. Racine sagittale = toit du méat acoustique externe", correct: true },
+      { text: "D. Racine transversale = condyle du temporal", correct: true }
+    ]
+  },
+  {
+    question: "Jonction des racines zygomatiques.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Tubercule zygomatique antérieur", correct: true },
+      { text: "B. Fosse mandibulaire", correct: true },
+      { text: "C. Condyle du temporal en avant", correct: true },
+      { text: "D. Foramen stylo-mastoïdien", correct: false }
+    ]
+  },
+  {
+    question: "Processus zygomatique.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Au-dessus du méat acoustique externe", correct: true },
+      { text: "B. En dehors et en avant", correct: true },
+      { text: "C. S’articule avec l’os zygomatique", correct: true },
+      { text: "D. Se prolonge médialement vers la langue", correct: false }
+    ]
+  },
+  {
+    question: "Écaille — face endocrânienne.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Dépressions corticales", correct: true },
+      { text: "B. Sillons de l’artère méningée moyenne", correct: true },
+      { text: "C. Méat acoustique interne", correct: false },
+      { text: "D. Séparée du rocher par la suture pétro-squameuse", correct: true }
+    ]
+  },
+  {
+    question: "Rocher — généralités.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Forme pyramidale", correct: true },
+      { text: "B. Méat acoustique interne", correct: true },
+      { text: "C. Nerfs VII, VIIbis et VIII", correct: true },
+      { text: "D. Fosse jugulaire endocrânienne", correct: false }
+    ]
+  },
+  {
+    question: "Rocher — face exocrânienne.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Processus mastoïde pneumatique", correct: true },
+      { text: "B. Processus styloïde", correct: true },
+      { text: "C. Foramen stylo-mastoïdien", correct: true },
+      { text: "D. Facette jugulaire articulée à l’occipital", correct: true }
+    ]
+  },
+  {
+    question: "Rocher — rapports vasculaires.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Fosse jugulaire = veine jugulaire interne", correct: true },
+      { text: "B. Facette jugulaire en arrière et dedans du foramen stylo-mastoïdien", correct: true },
+      { text: "C. Canal ptérygoïdien dans la pyramide pétreuse", correct: false },
+      { text: "D. Méat acoustique interne sur la face postérieure", correct: true }
+    ]
+  },
+  {
+    question: "Os tympanal.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Lame en gouttière ouverte en haut", correct: true },
+      { text: "B. Sous l’écaille et en avant du rocher", correct: true },
+      { text: "C. Forme parois du méat acoustique externe", correct: true },
+      { text: "D. Prolongé par processus vaginal", correct: true }
+    ]
+  },
+  {
+    question: "Os pariétal.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Os plat", correct: true },
+      { text: "B. De part et d’autre de la ligne médiane", correct: true },
+      { text: "C. Face externe et interne", correct: true },
+      { text: "D. Porte la pyramide pétreuse", correct: false }
+    ]
+  },
+  {
+    question: "Sphénoïde et orbite.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Petites ailes : toit et canal optique", correct: true },
+      { text: "B. Petite aile : limite sup. fissure orbitaire", correct: true },
+      { text: "C. Grande aile : paroi latérale", correct: true },
+      { text: "D. Foramen rond → fosse ptérygoïde", correct: false }
+    ]
+  }
+],
+
+  };
+
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "lesson.html";
+  }
+</script>
+<script src="./layout-fix.js"></script>
+
+</body>
+</html>

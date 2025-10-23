@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<!-- 🔒 حماية الصفحة بـ Firebase -->
+<script type="module">
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  document.documentElement.style.visibility = 'hidden';
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.replace('index.html');
+      return;
+    }
+    try {
+      const ref  = doc(db, 'allowedUsers', user.uid);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        document.documentElement.style.visibility = 'visible';
+      } else {
+        window.location.replace('welcome.html?status=pending');
+      }
+    } catch (e) {
+      console.error('Firebase Auth Error:', e);
+      window.location.replace('welcome.html?status=pending');
+    }
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomie Humaine - Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2,h3 { margin-bottom: 10px; }
+
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty { margin-bottom: 8px; text-align: left; }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1){animation-delay:0.1s;}
+  .star:nth-child(2){animation-delay:0.2s;}
+  .star:nth-child(3){animation-delay:0.3s;}
+  .star:nth-child(4){animation-delay:0.4s;}
+  .star:nth-child(5){animation-delay:0.5s;}
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg,#0096c7,#00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black!important;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black!important;
+  }
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  .control-buttons {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1; min-width: 100px; padding: 10px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white; font-weight: bold;
+    cursor: pointer; transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    .container{width:95%;padding:15px;}
+    .question-text{font-size:16px;}
+    .answer{font-size:15px;padding:10px;}
+    .control-buttons{flex-direction:column;}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h3 id="lessonTitle"></h3>
+  <div id="questionsContainer"></div>
+  <button class="control-buttons" style="background:#444;margin-top:20px" onclick="goBack()">🔙 الرجوع للدروس</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // 🧩 إعداد القيم الافتراضية
+  localStorage.setItem('specialty','طب الأسنان');
+  localStorage.setItem('level','سنة 2');
+  localStorage.setItem('subject','Anatomie humaine');
+
+  const lesson = localStorage.getItem('lesson') || 'Os frontal et éthmoïde';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 أسئلة تجريبية
+  const questionsData = {
+    'Physiologie bactérienne dentaire': [
+  // A. Bon élève ⭐
+  {
+    question: "L’eau intracellulaire représente la majeure partie du poids bactérien ; elle assure solubilisation, transport et hydrolyse.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Minoritaire dans la cellule, réserve énergétique", correct: false },
+      { text: "B. Permet la solubilisation de nutriments et métabolites", correct: true },
+      { text: "C. Facilite leur transport vers les sites de réaction", correct: true },
+      { text: "D. Intervient dans des réactions d’hydrolyse", correct: true }
+    ]
+  },
+  {
+    question: "Catégories selon source d’énergie et donneur d’électrons.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Photolithotrophe", correct: true },
+      { text: "B. Photo-organotrophe", correct: false },
+      { text: "C. Chimiolithotrophe", correct: false },
+      { text: "D. Chimio-organotrophe", correct: true }
+    ]
+  },
+  {
+    question: "Source de carbone : distinctions correctes.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Autotrophes : CO₂ comme seule source de carbone", correct: true },
+      { text: "B. Hétérotrophes : substrats organiques comme source de carbone", correct: true },
+      { text: "C. Autotrophes : substrats organiques", correct: false },
+      { text: "D. Hétérotrophes : CO₂ uniquement", correct: false }
+    ]
+  },
+  {
+    question: "Sources d’azote directement assimilables.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Ammoniac/ions ammonium", correct: true },
+      { text: "B. Nitrites et nitrates", correct: true },
+      { text: "C. Azote gazeux N₂ directement", correct: false },
+      { text: "D. Groupements amines organiques", correct: true }
+    ]
+  },
+  {
+    question: "Facteurs de croissance exigés par certaines auxotrophes.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Bases puriques/pyrimidiques, acides gras, acides aminés", correct: true },
+      { text: "B. Vitamines, hème et dérivés", correct: true },
+      { text: "C. Glucose et CO₂ comme facteurs obligatoires", correct: false },
+      { text: "D. Divers composés additionnels mentionnés (ex. hème)", correct: true }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "Colonies satellites autour d’un producteur de métabolite : interprétation.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Syntrophie sur milieu solide avec facteur diffusible", correct: true },
+      { text: "B. Compétition pour l’oxygène", correct: false },
+      { text: "C. Croissance d’auxotrophes dépendantes d’un facteur libéré", correct: true },
+      { text: "D. Réservé aux bouillons d’enrichissement", correct: false }
+    ]
+  },
+  {
+    question: "Croissance exponentielle : conditions et paramètres.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Fission binaire", correct: true },
+      { text: "B. Taux de croissance propre à l’organisme", correct: true },
+      { text: "C. Température seule", correct: false },
+      { text: "D. Composition du milieu et environnement", correct: true }
+    ]
+  },
+  {
+    question: "Phase de latence : caractéristiques.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Absence de croissance observable initiale", correct: true },
+      { text: "B. Synthèse d’enzymes et d’équipements cellulaires", correct: true },
+      { text: "C. Mort massive des cellules", correct: false },
+      { text: "D. Adaptation avant divisions actives", correct: true }
+    ]
+  },
+  {
+    question: "Phase stationnaire d’une culture batch :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Courbe horizontale", correct: true },
+      { text: "B. Épuisement de nutriments / équilibre division-mort", correct: true },
+      { text: "C. Nombre viable constant", correct: true },
+      { text: "D. Augmentation illimitée", correct: false }
+    ]
+  },
+  {
+    question: "Phase de déclin :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Mort > divisions", correct: true },
+      { text: "B. Carence + déchets", correct: true },
+      { text: "C. Lyse → baisse du trouble", correct: true },
+      { text: "D. Multiplication maximale", correct: false }
+    ]
+  },
+  {
+    question: "Méthodes de nombre total (vivantes+mortes).",
+    difficulty: 2,
+    answers: [
+      { text: "A. Chambres de comptage", correct: true },
+      { text: "B. Compteurs Coulter", correct: true },
+      { text: "C. Colorations fluorescentes globales", correct: true },
+      { text: "D. Numération sur gélose", correct: false }
+    ]
+  },
+  {
+    question: "Dénombrement des viables.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Étalement en surface/profondeur", correct: true },
+      { text: "B. Filtration sur membranes", correct: true },
+      { text: "C. Turbidité seule", correct: false },
+      { text: "D. Compteur Coulter", correct: false }
+    ]
+  },
+  {
+    question: "Estimation de la biomasse cellulaire.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Poids sec", correct: true },
+      { text: "B. Turbidité", correct: true },
+      { text: "C. Dosage d’ATP/protéines/acides nucléiques", correct: true },
+      { text: "D. CFU uniquement", correct: false }
+    ]
+  },
+  {
+    question: "Groupes selon la température.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Psychrophiles ≤15°C", correct: true },
+      { text: "B. Psychrotrophes 0–35°C", correct: true },
+      { text: "C. Mésophiles 20–45°C", correct: true },
+      { text: "D. Hyperthermophiles 80–113°C", correct: true }
+    ]
+  },
+  {
+    question: "Catégories selon le pH.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Acidophiles : pH 1–6", correct: true },
+      { text: "B. Neutrophiles : pH 6,5–7,5", correct: true },
+      { text: "C. Alcalophiles : pH 8,5–11,5", correct: true },
+      { text: "D. Acidophiles : optimum 7", correct: false }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "Pression et osmose :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Barophiles : pression > atmosphère", correct: true },
+      { text: "B. Halophiles : besoin de NaCl élevé", correct: true },
+      { text: "C. Halotolérantes : large tolérance au sel", correct: true },
+      { text: "D. Barotolérantes : optimum 20% O₂", correct: false }
+    ]
+  },
+  {
+    question: "Exigences en oxygène et exemples.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Aérobies obligatoires (Pseudomonas)", correct: true },
+      { text: "B. Anaérobies strictes (Clostridium)", correct: true },
+      { text: "C. Aéro-anaérobies facultatives (E. coli)", correct: true },
+      { text: "D. Microaérophiles (2–10% O₂)", correct: true }
+    ]
+  },
+  {
+    question: "Composition et rôle des milieux de culture.",
+    difficulty: 3,
+    answers: [
+      { text: "A. En fonction du but", correct: true },
+      { text: "B. Selon les besoins bactériens", correct: true },
+      { text: "C. Eau distillée comme solvant", correct: true },
+      { text: "D. Seulement s’il est synthétique", correct: false }
+    ]
+  },
+  {
+    question: "Consistance des milieux :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Milieux liquides : bouillons", correct: true },
+      { text: "B. Milieux solides : colonies isolées", correct: true },
+      { text: "C. Gélose = agent solidifiant", correct: true },
+      { text: "D. Bouillons au sang uniquement", correct: false }
+    ]
+  },
+  {
+    question: "Milieux naturels et exemples.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Constituants animaux/végétaux", correct: true },
+      { text: "B. Macérations/décoctions de tissus", correct: true },
+      { text: "C. Gélose nutritive, Trypticase-soja", correct: true },
+      { text: "D. Milieu urée-indole naturel", correct: false }
+    ]
+  },
+  {
+    question: "Milieux synthétiques et semi-synthétiques.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Synthétiques = corps purs définis", correct: true },
+      { text: "B. Semi-synthétiques = mélange pur/naturel", correct: true },
+      { text: "C. Semi-synthétiques sans éléments naturels", correct: false },
+      { text: "D. Synthétiques = décoctions", correct: false }
+    ]
+  },
+  {
+    question: "Classement selon l’utilisation et effets recherchés.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Isolement (gélose nutritive, sang)", correct: true },
+      { text: "B. Enrichissement électif (SFB)", correct: true },
+      { text: "C. Sélectifs (pH/osmolarité/agents)", correct: true },
+      { text: "D. Sélectifs : Hektoen, Chapman", correct: true }
+    ]
+  },
+  {
+    question: "Milieux d’identification, conservation, transport.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Identification : caractères biochimiques", correct: true },
+      { text: "B. Conservation : milieux pauvres", correct: true },
+      { text: "C. Transport : bouillon TGV", correct: true },
+      { text: "D. Conservation : gélose au sang", correct: false }
+    ]
+  },
+  {
+    question: "Applications de la croissance bactérienne.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Diagnostic : isolement/identification", correct: true },
+      { text: "B. Antibiothérapie : mesure activité", correct: true },
+      { text: "C. Industrie : toxines/antibiotiques/vitamines", correct: true },
+      { text: "D. Contrôle : aliments/eaux", correct: true }
+    ]
+  },
+  {
+    question: "Courbe de culture batch.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Quatre phases", correct: true },
+      { text: "B. Exponentielle : croissance max", correct: true },
+      { text: "C. Déclin : lyse → turbidité ↓", correct: true },
+      { text: "D. Latence : croissance immédiate", correct: false }
+    ]
+  },
+
+  // D. Difficiles ⭐⭐⭐⭐
+  {
+    question: "Croisement sources/catégories.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Donneur minéral → lithotrophe", correct: true },
+      { text: "B. Donneur organique → organotrophe", correct: true },
+      { text: "C. Source énergie oxydation → chimiotrophe", correct: true },
+      { text: "D. Carbone organique → autotrophe", correct: false }
+    ]
+  },
+  {
+    question: "Éléments minéraux : rôles.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Soufre → acides aminés soufrés", correct: true },
+      { text: "B. Phosphore → acides nucléiques, ATP", correct: true },
+      { text: "C. Na⁺/K⁺/Mg²⁺/Cl⁻ → équilibre cellulaire", correct: true },
+      { text: "D. Fer/Ca²⁺ requis à fortes concentrations", correct: false }
+    ]
+  },
+  {
+    question: "Mésophiles : caractéristiques.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Optimum 20–45°C", correct: true },
+      { text: "B. Minimum 15–20°C", correct: true },
+      { text: "C. Max ≤45°C", correct: true },
+      { text: "D. Nombreux pathogènes humains", correct: true }
+    ]
+  },
+  {
+    question: "Psychrotrophes.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Vivent à 0°C", correct: true },
+      { text: "B. Optimum 20–30°C", correct: true },
+      { text: "C. Max ≈35°C", correct: true },
+      { text: "D. Incapables à 0°C", correct: false }
+    ]
+  },
+  {
+    question: "Thermophiles et hyperthermophiles.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Thermophiles 45–65°C", correct: true },
+      { text: "B. Hyperthermophiles 80–113°C", correct: true },
+      { text: "C. Thermophiles 15°C", correct: false },
+      { text: "D. Hyperthermophiles 120°C", correct: false }
+    ]
+  },
+  {
+    question: "Méthodes : total vs viables.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Hémocytomètre/Coulter/fluorescence = total", correct: true },
+      { text: "B. Étalement surface/profondeur = viable", correct: true },
+      { text: "C. Membranes filtrantes = viable", correct: true },
+      { text: "D. Turbidité seule = discrimination vivantes/mortes", correct: false }
+    ]
+  },
+  {
+    question: "Biomasse et variations du milieu.",
+    difficulty: 4,
+    answers: [
+      { text: "A. pH, impédance, redox", correct: true },
+      { text: "B. Dosage ATP/protéines/ADN", correct: true },
+      { text: "C. Poids sec/turbidité", correct: true },
+      { text: "D. CFU seul", correct: false }
+    ]
+  },
+  {
+    question: "Milieux sélectifs et effet sélectif.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Effet via pH/osmolarité ou agents", correct: true },
+      { text: "B. Croissance de quelques espèces", correct: true },
+      { text: "C. Exemples : Chapman/Hektoen", correct: true },
+      { text: "D. Équivalents d’identification", correct: false }
+    ]
+  },
+  {
+    question: "Milieux d’isolement : sous-catégories et exemples.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Usuels : gélose nutritive", correct: true },
+      { text: "B. Enrichis : gélose au sang", correct: true },
+      { text: "C. Électifs : bouillon SFB (salmonelles)", correct: true },
+      { text: "D. Sélectifs : Chapman/Hektoen", correct: true }
+    ]
+  },
+  {
+    question: "Applications industrielles et analytiques.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Production de toxines/antibiotiques", correct: true },
+      { text: "B. Cellules pour vaccins/réactifs", correct: true },
+      { text: "C. Dosage de vitamines/facteurs", correct: true },
+      { text: "D. Culture virale antiviraux", correct: false }
+    ]
+  },
+
+  // E. Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Besoins nutritifs d’une prototrophe.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Eau, énergie, C, N, minéraux", correct: true },
+      { text: "B. Facteurs de croissance indispensables", correct: false },
+      { text: "C. Aucun facteur requis", correct: true },
+      { text: "D. CO₂ et lumière seuls", correct: false }
+    ]
+  },
+  {
+    question: "Appariement espèces–catégories selon O₂.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Pseudomonas/Mycobacterium — aérobies", correct: true },
+      { text: "B. Bacteroides/Clostridium — anaérobies", correct: true },
+      { text: "C. Escherichia — facultative", correct: true },
+      { text: "D. Streptococcus pyogenes — micro-aérophile strict", correct: false }
+    ]
+  },
+  {
+    question: "Phase stationnaire : formulations exactes.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Nombre viable constant", correct: true },
+      { text: "B. Équilibre division/mort", correct: true },
+      { text: "C. Reprise après ajout ", correct: false },
+      { text: "D. Épuisement des nutriments", correct: true }
+    ]
+  },
+  {
+    question: "Catégories nutritionnelles croisées.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Phototrophe / Chimiotrophe", correct: true },
+      { text: "B. Lithotrophe / Organotrophe", correct: true },
+      { text: "C. Autotrophe / Hétérotrophe", correct: true },
+      { text: "D. Prototrophe / Auxotrophe", correct: true }
+    ]
+  },
+  {
+    question: "Antibiothérapie et mesure de l’activité.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Modifications de la courbe de croissance → activité antibiotique", correct: true },
+      { text: "B. Numération viable seule comme preuve ", correct: false },
+      { text: "C. Courbe log(N)/temps comme référence", correct: true },
+      { text: "D. Poids sec spécifique à l’antibiotique ", correct: false }
+    ]
+  }
+],
+'Les antibiotiques': [
+  // A. Bon élève ⭐
+  {
+    question: "La famille des β-lactamines regroupe des sous-familles ayant un même noyau β-lactame et un mode d’action similaire.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Cible commune : PLP impliquées dans la synthèse du peptidoglycane", correct: true },
+      { text: "B. Effet bactéricide temps-dépendant", correct: true },
+      { text: "C. Parenté de mécanismes de résistance", correct: true },
+      { text: "D. Activité sur l’ADN gyrase indépendante des PLP", correct: false }
+    ]
+  },
+  {
+    question: "La pénicilline G (benzyl-pénicilline) est décrite comme…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Découverte en 1929, utilisée dès 1941", correct: true },
+      { text: "B. Détruite par acidité gastrique → non orale", correct: true },
+      { text: "C. Inactive sur les bacilles à Gram négatif", correct: true },
+      { text: "D. Active sur 95% des staphylocoques", correct: false }
+    ]
+  },
+  {
+    question: "Les Pénicillines M (méthicilline/oxacilline)…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Anti-staphylococciques actives sur les souches productrices de pénicillinase", correct: true },
+      { text: "B. Administrables par voie orale et parentérale", correct: true },
+      { text: "C. Contournées par les souches MRSA", correct: true },
+      { text: "D. Anti-Pseudomonas", correct: false }
+    ]
+  },
+  {
+    question: "Les aminopénicillines (ampicilline/amoxicilline)…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Spectre élargi à certains BGN, inactives sur KES et Pseudomonas", correct: true },
+      { text: "B. Meilleure diffusion méningée", correct: true },
+      { text: "C. Inactivation par les pénicillinases", correct: true },
+      { text: "D. Stables face aux pénicillinases", correct: false }
+    ]
+  },
+  {
+    question: "Les glycopeptides (vancomycine/téicoplanine)…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Actifs sur les Gram +, dont MRSA", correct: true },
+      { text: "B. Bactéricides temps-dépendants", correct: true },
+      { text: "C. Ciblent D-Ala–D-Ala du pentapeptide", correct: true },
+      { text: "D. Inhibent l’ADN topoisomérase IV", correct: false }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "Cible des β-lactamines : les PLP…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Activités transpeptidase, carboxypeptidase et transglycosylase", correct: true },
+      { text: "B. Leur inhibition bloque la formation des ponts de réticulation", correct: true },
+      { text: "C. Leur inhibition induit des formes bizarroïdes menant à la lyse", correct: true },
+      { text: "D. Contrôlent la perméabilité membranaire", correct: false }
+    ]
+  },
+  {
+    question: "Carboxy- et acyl-uréido-pénicillines :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Actives sur Pseudomonas aeruginosa", correct: true },
+      { text: "B. Usage parentéral hospitalier", correct: true },
+      { text: "C. Stables à toutes les β-lactamases", correct: false },
+      { text: "D. Actives sur certains BGN résistants à l’ampicilline", correct: true }
+    ]
+  },
+  {
+    question: "Inhibiteurs de β-lactamases :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Acide clavulanique : inhibe la majorité des pénicillinases", correct: true },
+      { text: "B. Association amoxicilline + acide clavulanique (Augmentin)", correct: true },
+      { text: "C. Avibactam : non β-lactamine, s’associe à la ceftazidime", correct: true },
+      { text: "D. Bactéricides puissants seuls", correct: false }
+    ]
+  },
+  {
+    question: "Céphalosporines 1re génération :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Résistantes aux pénicillinases mais détruites par céphalosporinases", correct: true },
+      { text: "B. Actives sur BGN, inactives sur Pseudomonas", correct: true },
+      { text: "C. Céfalexine, céfazoline… orales/injectables", correct: true },
+      { text: "D. Anti-MRSA", correct: false }
+    ]
+  },
+  {
+    question: "Céphalosporines 3e–5e générations :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Large spectre, certaines anti-Pseudomonas", correct: true },
+      { text: "B. Cefepime = 4e génération", correct: true },
+      { text: "C. Ceftaroline/ceftobiprole = anti-MRSA", correct: true },
+      { text: "D. Toutes inactives sur BGN", correct: false }
+    ]
+  },
+  {
+    question: "Carbapénèmes :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Dérivés de la thiénamycine", correct: true },
+      { text: "B. Large spectre et stables vis-à-vis des β-lactamases", correct: true },
+      { text: "C. Parentéraux hospitaliers", correct: true },
+      { text: "D. Limités aux CG+", correct: false }
+    ]
+  },
+  {
+    question: "Monobactames (aztréonam)…",
+    difficulty: 2,
+    answers: [
+      { text: "A. Actifs uniquement sur BGN", correct: true },
+      { text: "B. β-lactamines", correct: true },
+      { text: "C. Actifs sur Pseudomonas", correct: true },
+      { text: "D. Anti-Gram+ de premier choix", correct: false }
+    ]
+  },
+  {
+    question: "Fosfomycine :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Large spectre, lentement bactéricide", correct: true },
+      { text: "B. Inhibe la pyruvyl-transférase", correct: true },
+      { text: "C. Forme trométamol orale pour cystite", correct: true },
+      { text: "D. Seulement topique", correct: false }
+    ]
+  },
+  {
+    question: "Polymyxines :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Se fixent aux phospholipides", correct: true },
+      { text: "B. Actives sur BGN", correct: true },
+      { text: "C. Peu absorbées par voie orale", correct: true },
+      { text: "D. Anti-Gram+ principales", correct: false }
+    ]
+  },
+  {
+    question: "Aminosides :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Ciblent 30S, erreurs de lecture", correct: true },
+      { text: "B. Oto- et néphrotoxicité", correct: true },
+      { text: "C. Synergie avec β-lactamines", correct: true },
+      { text: "D. Actifs sur anaérobies", correct: false }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "Macrolides (MLSK)…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Bactériostatiques, 50S", correct: true },
+      { text: "B. Spectre proche de pénicilline G", correct: true },
+      { text: "C. Inactifs sur entérobactéries/Pseudomonas", correct: true },
+      { text: "D. Tous stables en milieu acide", correct: false }
+    ]
+  },
+  {
+    question: "Lincosamides et streptogramines…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Action sur 50S", correct: true },
+      { text: "B. Même squelette chimique", correct: false },
+      { text: "C. Regroupement par mécanisme d’action", correct: true },
+      { text: "D. Classés avec kétolides", correct: true }
+    ]
+  },
+  {
+    question: "Phénicolés :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Large spectre, bon passage tissulaire", correct: true },
+      { text: "B. Réservés à la fièvre typhoïde", correct: true },
+      { text: "C. Toxicité hématopoïétique", correct: true },
+      { text: "D. Inhibiteurs 30S", correct: false }
+    ]
+  },
+  {
+    question: "Acide fusidique :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Bactériostatique, bactéricide à fortes doses", correct: true },
+      { text: "B. Inhibe facteur d’élongation G", correct: true },
+      { text: "C. Anti-staphylococcique", correct: true },
+      { text: "D. Cible l’ADN gyrase", correct: false }
+    ]
+  },
+  {
+    question: "Oxazolidinones (linézolide)…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Bactériostatiques, 50S", correct: true },
+      { text: "B. Actives sur CG+ résistants", correct: true },
+      { text: "C. Mécanisme partiellement élucidé", correct: true },
+      { text: "D. Agissent sur la membrane", correct: false }
+    ]
+  },
+  {
+    question: "Quinolones classiques :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Bactériostatiques", correct: true },
+      { text: "B. Spectre étroit BGN", correct: true },
+      { text: "C. Résistances élevées", correct: true },
+      { text: "D. Inhibent ADN gyrase/topoIV", correct: true }
+    ]
+  },
+  {
+    question: "Fluoroquinolones :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Fluorées (F en 6, substituant en 7)", correct: true },
+      { text: "B. Large spectre (BGN, CGP, anaérobies, mycobactéries)", correct: true },
+      { text: "C. Strictement anti-Gram+", correct: false },
+      { text: "D. Extension chimique des quinolones", correct: true }
+    ]
+  },
+  {
+    question: "Amidino-pénicillines (mécillinam/pivmécillinam)…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Actives sur BGN uniquement", correct: true },
+      { text: "B. Mécillinam parentéral, pivmécillinam oral", correct: true },
+      { text: "C. Large activité anti-Gram+", correct: false },
+      { text: "D. Pénames", correct: true }
+    ]
+  },
+  {
+    question: "Associations pénicilline + inhibiteur :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Amoxicilline + acide clavulanique", correct: true },
+      { text: "B. Ticarcilline + acide clavulanique", correct: true },
+      { text: "C. Pipéracilline + tazobactam", correct: true },
+      { text: "D. Ceftolozane + tazobactam", correct: true }
+    ]
+  },
+
+  // D. Difficiles ⭐⭐⭐⭐
+  {
+    question: "Céphalosporines : intérêt et générations",
+    difficulty: 4,
+    answers: [
+      { text: "A. Activité sur BGN", correct: true },
+      { text: "B. Classification par générations", correct: true },
+      { text: "C. Stabilité universelle", correct: false },
+      { text: "D. Exemples oraux/injectables cités", correct: true }
+    ]
+  },
+  {
+    question: "PK/PD et propriétés citées :",
+    difficulty: 4,
+    answers: [
+      { text: "A. β-lactamines : temps-dépendantes", correct: true },
+      { text: "B. Pénicilline G : T½ ≈ 30 min", correct: true },
+      { text: "C. Fosfomycine : lentement bactéricide", correct: true },
+      { text: "D. Polymyxines : très bien absorbées", correct: false }
+    ]
+  },
+  {
+    question: "Pénicillines A (aminopénicillines)…",
+    difficulty: 4,
+    answers: [
+      { text: "A. Amoxicilline : taux sériques supérieurs", correct: true },
+      { text: "B. Élimination plus lente", correct: true },
+      { text: "C. Bonne diffusion méningée", correct: true },
+      { text: "D. Invariabilité face aux pénicillinases", correct: false }
+    ]
+  },
+  {
+    question: "Céphalosporines 2e génération :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Relativement résistantes", correct: true },
+      { text: "B. Inactives sur Pseudomonas", correct: true },
+      { text: "C. Strictement orales", correct: false },
+      { text: "D. Spectre intermédiaire", correct: true }
+    ]
+  },
+  {
+    question: "Effets indésirables :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Allergie, effet convulsivant (β-lactamines)", correct: true },
+      { text: "B. Oto-/néphrotoxicité (aminosides)", correct: true },
+      { text: "C. Toxicité hématopoïétique (phénicolés)", correct: true },
+      { text: "D. Toxicité systémique glycopeptides", correct: false }
+    ]
+  },
+  {
+    question: "Monobactames, carbapénèmes et céphalosporines 5G :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Diversité des β-lactamines", correct: true },
+      { text: "B. Spectres spécifiques (aztréonam BGN)", correct: true },
+      { text: "C. Tous oraux", correct: false },
+      { text: "D. Évolution vers activité anti-MRSA", correct: true }
+    ]
+  },
+  {
+    question: "Polymyxines : voies d’administration",
+    difficulty: 4,
+    answers: [
+      { text: "A. Polymyxine B topique", correct: true },
+      { text: "B. Colistine orale, parentérale, inhalée", correct: true },
+      { text: "C. Absorption digestive faible", correct: true },
+      { text: "D. Prioritairement contre CG+", correct: false }
+    ]
+  },
+  {
+    question: "MLSK : justification du regroupement",
+    difficulty: 4,
+    answers: [
+      { text: "A. Action 50S commune", correct: true },
+      { text: "B. Noyau lactonique identique", correct: false },
+      { text: "C. Proximité de mécanisme", correct: true },
+      { text: "D. Tous bactéricides rapides", correct: false }
+    ]
+  },
+  {
+    question: "Fluoroquinolones : extension du spectre",
+    difficulty: 4,
+    answers: [
+      { text: "A. Entérobactéries/Pseudomonas", correct: true },
+      { text: "B. CGP (staphylocoques)", correct: true },
+      { text: "C. Anaérobies et mycobactéries", correct: true },
+      { text: "D. Cible peptidoglycane", correct: false }
+    ]
+  },
+  {
+    question: "β-lactamines : familles structurales",
+    difficulty: 4,
+    answers: [
+      { text: "A. Noyau β-lactame commun", correct: true },
+      { text: "B. Cible = PLP", correct: true },
+      { text: "C. Action sur lipides membranaires", correct: false },
+      { text: "D. Classification structurale", correct: true }
+    ]
+  },
+
+  // E. Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Limites de spectre :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Aminopénicillines inactives sur KES/Pseudomonas", correct: true },
+      { text: "B. Céphalosporines 1G/2G inactives sur Pseudomonas", correct: true },
+      { text: "C. Monobactames : pas d’action sur CG+", correct: true },
+      { text: "D. Macrolides : actifs sur entérobactéries", correct: false }
+    ]
+  },
+  {
+    question: "Mécanisme et cibles par familles :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Inhibition PLP/peptidoglycane → β-lactamines", correct: true },
+      { text: "B. Liaison D-Ala–D-Ala → glycopeptides", correct: true },
+      { text: "C. Fixation phospholipides → polymyxines", correct: true },
+      { text: "D. ADN gyrase → phénicolés", correct: false }
+    ]
+  },
+  {
+    question: "Activité anti-Pseudomonas :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Certaines céphalosporines 3G (ceftazidime)", correct: true },
+      { text: "B. Carboxy-/acyl-uréido-pénicillines", correct: true },
+      { text: "C. Aztréonam (BGN, dont Pseudomonas)", correct: true },
+      { text: "D. Aminopénicillines", correct: false }
+    ]
+  },
+  {
+    question: "Points piégeux :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Macrolides : spectre proche pénicilline G, inactifs sur entérobactéries/Pseudomonas", correct: true },
+      { text: "B. Phénicolés : diffusion ganglionnaire élevée", correct: true },
+      { text: "C. Fosfomycine : monodose cystite femme jeune", correct: true },
+      { text: "D. Aminosides : actifs sur anaérobies", correct: false }
+    ]
+  },
+  {
+    question: "Familles et résistances naturelles :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Entérocoques/Listeria → résistants céphalosporines 3G", correct: true },
+      { text: "B. MRSA → résistants pénicillines M", correct: true },
+      { text: "C. Anaérobies → résistants aminosides", correct: true },
+      { text: "D. Monobactames actifs sur CG+ et CG-", correct: false }
+    ]
+  }
+],
+
+  };
+
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "lesson.html";
+  }
+</script>
+<script src="./layout-fix.js"></script>
+
+</body>
+</html>

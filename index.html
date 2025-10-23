@@ -1,181 +1,296 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Qcms BY DJO — الموقع مغلق للصيانة</title>
-<link rel="manifest" href="manifest.json" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qcms BY DJO - موقع أسئلة طب الأسنان</title>
+<link rel="manifest" href="manifest.json">
+<script src="service-worker.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@600&display=swap');
-  :root { --brand1:#00b4d8; --brand2:#48cae4; --ink:#023e8a; }
   body {
-    font-family: 'Cairo', Arial, sans-serif; direction: rtl;
+    font-family: 'Cairo', Arial, sans-serif;
+    direction: rtl;
     background: radial-gradient(circle at top, #d9faff, #aee4f5, #7fd4e8);
-    margin:0; padding:0; display:flex; flex-direction:column; align-items:center; min-height:100vh; position:relative; overflow:hidden;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
   }
-  .bg-illustration { position:absolute; inset:0; background:url('A_2D_digital_illustration_login_and_registration_s.png') center/cover no-repeat; opacity:.06; z-index:0 }
-  .floating-shapes span { position:absolute; display:block; width:20px; height:20px; background:rgba(255,255,255,.25); border-radius:50%; animation:float 12s linear infinite; filter:blur(.2px) }
-  @keyframes float { 0%{transform:translateY(0) rotate(0)} 100%{transform:translateY(-1200px) rotate(720deg)} }
-  .flag { position:absolute; top:15px; left:15px; width:50px; border-radius:5px; box-shadow:0 2px 6px rgba(0,0,0,.3) }
-  .futur-title { background:#000; color:#fff; font-size:20px; padding:8px 20px; border-radius:10px; font-family:'Poppins',sans-serif; letter-spacing:1px; box-shadow:0 4px 15px rgba(0,0,0,.3); margin:22px 0; z-index:3 }
-  .site-title { font-family:'Poppins',sans-serif; font-size:28px; background:linear-gradient(90deg,var(--brand1),var(--brand2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:bold; letter-spacing:1.5px; animation:glow 2s ease-in-out infinite alternate; padding:10px 20px; background-color:rgba(0,0,0,.85); border-radius:12px; display:inline-block; box-shadow:0 4px 15px rgba(0,0,0,.4) }
-  @keyframes glow { from{ text-shadow:0 0 10px rgba(0,180,216,.4) } to{ text-shadow:0 0 20px rgba(0,180,216,.9) } }
-  .container { background:rgba(255,255,255,.12); padding:30px; border-radius:20px; backdrop-filter:blur(20px); box-shadow:0 8px 30px rgba(0,0,0,.4); width:340px; max-width:92%; text-align:center; z-index:2; animation:fadeIn 1.5s ease }
-  @keyframes fadeIn { from{opacity:0; transform:scale(.9)} to{opacity:1; transform:scale(1)} }
-  h1{ margin:12px 0 8px; color:var(--ink); font-size:22px }
-  p{ margin:8px 0 0; line-height:1.7; color:#05376e }
-  .pill{ display:inline-block; margin-top:14px; padding:10px 16px; border-radius:999px; font-size:14px; background:rgba(255,255,255,.92); box-shadow:0 4px 18px rgba(0,0,0,.15) }
-  .cta{ background:linear-gradient(90deg,var(--brand1),var(--brand2)); color:#fff; border:none; padding:12px; font-size:16px; cursor:pointer; border-radius:25px; margin-top:14px; width:100%; transition:transform .2s ease, box-shadow .3s ease }
-  .cta:hover{ transform:translateY(-2px); box-shadow:0 4px 20px rgba(72,202,228,.6) }
-  .news-bar{ background:rgba(0,0,0,.6); color:#fff; width:100%; padding:8px 0; position:absolute; bottom:0; font-size:14px; overflow:hidden }
-  .news-text{ display:inline-block; padding-left:50%; animation:marquee 15s linear infinite; white-space:nowrap }
-  @keyframes marquee{ 0%{transform:translateX(100%)} 100%{transform:translateX(-100%)} }
-  .stamp{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border:2px dashed rgba(0,0,0,.25); border-radius:12px; background:rgba(255,255,255,.6); margin-top:12px; font-weight:700; color:#043a7a }
-  /* عداد زمني */
-  .countdown { display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin-top:16px }
-  .box { background:rgba(255,255,255,.95); border-radius:16px; padding:14px 8px; box-shadow:0 8px 18px rgba(0,0,0,.12) }
-  .num { font-weight:800; font-size:22px }
-  .lbl { font-size:12px; color:#0a3d7a }
-  .progress { height:8px; background:rgba(255,255,255,.7); border-radius:999px; overflow:hidden; margin-top:14px }
-  .progress > span { display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--brand1),var(--brand2)) }
-  .typewriter{ margin-top:14px; min-height:28px; font-weight:700; color:#043a7a }
-  .open-note{ display:none; margin-top:10px }
+  .bg-illustration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('A_2D_digital_illustration_login_and_registration_s.png') center/cover no-repeat;
+    opacity: 0.06;
+    z-index: 0;
+  }
+  .floating-shapes span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    animation: float 12s linear infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-1200px) rotate(720deg); }
+  }
+  .flag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+ 
+  .futur-title {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+    z-index: 3;
+  }
+  .site-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    background: linear-gradient(90deg, #00b4d8, #48cae4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    animation: glow 2s ease-in-out infinite alternate;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0,0.85);
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  }
+  @keyframes glow {
+    from { text-shadow: 0 0 10px rgba(0, 180, 216, 0.4); }
+    to { text-shadow: 0 0 20px rgba(0, 180, 216, 0.9); }
+  }
+  .container {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    width: 320px;
+    max-width: 90%;
+    text-align: center;
+    z-index: 2;
+    animation: fadeIn 1.5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  h1 {
+    margin-bottom: 15px;
+    color: #023e8a;
+    font-size: 22px;
+  }
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    background: rgba(255,255,255,0.95);
+    transition: 0.3s;
+  }
+  input:focus {
+    outline: none;
+    box-shadow: 0 0 10px #48cae4;
+  }
+  button {
+    background: linear-gradient(90deg, #00b4d8, #48cae4);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 25px;
+    margin-top: 8px;
+    width: 100%;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(72, 202, 228, 0.6);
+  }
+  .switch {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #023e8a;
+  }
+  .switch a {
+    color: #48cae4;
+    text-decoration: none;
+  }
+  .news-bar {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 100%;
+    padding: 8px 0;
+    position: absolute;
+    bottom: 0;
+    font-size: 14px;
+    overflow: hidden;
+  }
+  .news-text {
+    display: inline-block;
+    padding-left: 50%;
+    animation: marquee 15s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
 </style>
 </head>
 <body>
+
   <div class="bg-illustration"></div>
   <div class="floating-shapes">
-    <span style="left:10%; animation-delay:0s"></span>
-    <span style="left:50%; animation-delay:2s"></span>
-    <span style="left:80%; animation-delay:4s"></span>
+    <span style="left:10%; animation-delay:0s;"></span>
+    <span style="left:50%; animation-delay:2s;"></span>
+    <span style="left:80%; animation-delay:4s;"></span>
   </div>
 
-  <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" class="flag" alt="علم الجزائر" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" class="flag" alt="علم الجزائر">
 
   <div class="futur-title">Futur Doctors Community</div>
 
-  <div class="container" role="status" aria-live="polite">
+  <div class="container">
     <div class="site-title">Qcms BY DJO</div>
-    <h1>الموقع مغلق للصيانة</h1>
-    <p>نقوم بتحسينات لضمان تجربة أفضل. <br />سيتم فتح <strong>الموقع  </strong> مساء <strong>الخميس</strong> ⏰ <span class="pill">19:30</span>.</p>
-
-    <div class="countdown" dir="ltr" aria-label="الوقت المتبقي حتى الخميس 19:30">
-      <div class="box"><div class="num" id="d">0</div><div class="lbl">أيام</div></div>
-      <div class="box"><div class="num" id="h">0</div><div class="lbl">ساعات</div></div>
-      <div class="box"><div class="num" id="m">0</div><div class="lbl">دقائق</div></div>
-      <div class="box"><div class="num" id="s">0</div><div class="lbl">ثوانٍ</div></div>
+    <h1>إنشاء حساب</h1>
+    <input type="text" id="fullname" placeholder="👤 الاسم الكامل">
+    <input type="email" placeholder="📧 البريد الإلكتروني">
+    <input type="password" placeholder="🔒 كلمة المرور">
+    <button onclick="register()">تسجيل</button>
+    <div class="switch">
+      لديك حساب؟ <a href="#" onclick="login()">تسجيل الدخول</a>
     </div>
-
-    <div class="progress" aria-hidden="true"><span id="bar"></span></div>
-
-    <div class="stamp">🛠️ قيد الصيانة · ⏳ نعود قريبًا</div>
-    <div class="typewriter" id="tw" aria-live="polite"></div>
-
-    <button class="cta" id="refreshBtn" onclick="location.reload()">تحديث الصفحة</button>
-    <a class="cta open-note" id="openBtn" href="welcome.html">ادخل الآن — تم فتح التحميل ✅</a>
-
-    <div class="pill" id="statusNote" aria-hidden="true">شكراً لصبرك وتفهمك 💙</div>
   </div>
 
   <div class="news-bar">
-    <div class="news-text">🦷 كل الحقوق محفوظة © 2025 — صُنّاع الابتسامة، نعود إليكم بعد الصيانة ✨</div>
+    <div class="news-text">
+      🦷 كل الحقوق محفوظة © 2025 - نحن الجيل الصاعد، خُلقنا للتغيير، صناع الابتسامة كتاب المجد ورمز الرقي رسالة الشفاء 💫
+    </div>
   </div>
 
-<script>
-  // ——— حساب الموعد القادم مساء الخميس 19:30 بالتوقيت المحلي للجهاز ———
-  function nextThursdayAt1930() {
-    const now = new Date();
-    const target = new Date(now);
-    const desiredDay = 4; // الخميس = 4
-    const addDays = (d, n)=>{ d.setDate(d.getDate()+n); return d };
+<!-- Firebase SDKs -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    // اذهب إلى الخميس من هذا الأسبوع
-    const diffToThu = (desiredDay - now.getDay() + 7) % 7;
-    target.setHours(19, 30, 0, 0);
-    addDays(target, diffToThu);
+  // إعدادات Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
 
-    // إذا كنا اليوم الخميس لكن الوقت تعدّى 19:30، خذه للأسبوع القادم
-    if (diffToThu === 0 && now.getTime() >= target.getTime()) {
-      addDays(target, 7);
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  let mode = 'register';
+
+  function setMode(newMode) {
+    mode = newMode;
+    const title = document.querySelector('.container h1');
+    const button = document.querySelector('.container button');
+    const switchLink = document.querySelector('.switch a');
+    const nameInput = document.getElementById('fullname');
+
+    if (mode === 'register') {
+      title.textContent = 'إنشاء حساب';
+      button.textContent = 'تسجيل';
+      switchLink.textContent = 'تسجيل الدخول';
+      nameInput.style.display = '';
+    } else {
+      title.textContent = 'تسجيل الدخول';
+      button.textContent = 'دخول';
+      switchLink.textContent = 'إنشاء حساب جديد';
+      nameInput.style.display = 'none';
     }
-    return target;
   }
 
-  // ——— عدّاد زمني + شريط تقدم حتى الموعد ———
-  const targetDate = nextThursdayAt1930();
-  const dEl = document.getElementById('d');
-  const hEl = document.getElementById('h');
-  const mEl = document.getElementById('m');
-  const sEl = document.getElementById('s');
-  const bar = document.getElementById('bar');
-  const statusNote = document.getElementById('statusNote');
-  const openBtn = document.getElementById('openBtn');
-  const refreshBtn = document.getElementById('refreshBtn');
+  window.login = function() {
+    setMode(mode === 'register' ? 'login' : 'register');
+  };
 
-  const totalMs = targetDate.getTime() - Date.now();
+  window.register = function() {
+    if (mode === 'login') return doLogin();
 
-  function updateCountdown(){
-    const now = new Date();
-    const diff = targetDate.getTime() - now.getTime();
+    const name = document.getElementById('fullname').value.trim();
+    const email = document.querySelector('input[type="email"]').value.trim();
+    const pass = document.querySelector('input[type="password"]').value;
 
-    if (diff <= 0) {
-      dEl.textContent = hEl.textContent = mEl.textContent = sEl.textContent = '0';
-      bar.style.width = '100%';
-      statusNote.textContent = 'تم فتح تحميل المحتوى الآن ✅';
-      openBtn.style.display = 'inline-block';
-      refreshBtn.style.display = 'none';
+    if (!name || !email || !pass) {
+      alert('أكمل جميع الحقول');
       return;
     }
 
-    const sec = Math.floor(diff/1000)%60;
-    const min = Math.floor(diff/1000/60)%60;
-    const hr  = Math.floor(diff/1000/60/60)%24;
-    const day = Math.floor(diff/1000/60/60/24);
+    createUserWithEmailAndPassword(auth, email, pass)
+      .then((userCredential) => {
+        return updateProfile(userCredential.user, { displayName: name });
+      })
+      .then(() => {
+        alert('تم إنشاء الحساب بنجاح!');
+        window.location.href = 'welcome.html';
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
 
-    dEl.textContent = day;
-    hEl.textContent = hr.toString().padStart(2,'0');
-    mEl.textContent = min.toString().padStart(2,'0');
-    sEl.textContent = sec.toString().padStart(2,'0');
+  function doLogin() {
+    const email = document.querySelector('input[type="email"]').value.trim();
+    const pass = document.querySelector('input[type="password"]').value;
 
-    const progress = Math.max(0, Math.min(1, 1 - diff/totalMs));
-    bar.style.width = (progress*100).toFixed(2) + '%';
+    if (!email || !pass) {
+      alert('أدخل البريد وكلمة المرور');
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, email, pass)
+      .then(() => {
+        window.location.href = 'security-warning.html';
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   }
 
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-
-  // ——— تأثير كتابة: "تحديث كُلّي للمحتوى" ———
-  (function typewriter(){
-    const tw = document.getElementById('tw');
-    const phrases = [
-      'تحديث كُلّي للمحتوى جارٍ…',
-      'تحسين السرعة والأمان…',
-      'تهيئة بنك الأسئلة…',
-      'مزامنة ملفات الوسائط…'
-    ];
-    let p = 0, i = 0, del = false;
-
-    function tick(){
-      const text = phrases[p];
-      if (!del && i <= text.length) { tw.textContent = text.slice(0, i++); }
-      else if (del && i >= 0) { tw.textContent = text.slice(0, i--); }
-
-      if (i > text.length + 8) del = true; // وقفة صغيرة
-      if (i < 0) { del = false; p = (p+1)%phrases.length; }
-      setTimeout(tick, 60);
-    }
-    tick();
-  })();
-
-  // ——— ملاحظة سياقية لليلة الخميس ———
-  (function(){
-    const now = new Date();
-    const isThursday = now.getDay() === 4;
-    const hour = now.getHours();
-    if (isThursday && hour >= 17 && hour < 19) {
-      statusNote.textContent = 'اليوم مساءً عند 19:30 سيتم فتح تحميل المحتوى بإذن الله.';
-    }
-  })();
+  document.addEventListener('DOMContentLoaded', () => setMode('register'));
 </script>
+
+<script src="assets/js/app.js"></script>
+
+
+
 </body>
 </html>

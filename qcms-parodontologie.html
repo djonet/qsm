@@ -1,0 +1,2301 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<!-- 🔒 حماية الصفحة بـ Firebase -->
+<script type="module">
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  document.documentElement.style.visibility = 'hidden';
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.replace('index.html');
+      return;
+    }
+    try {
+      const ref  = doc(db, 'allowedUsers', user.uid);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        document.documentElement.style.visibility = 'visible';
+      } else {
+        window.location.replace('welcome.html?status=pending');
+      }
+    } catch (e) {
+      console.error('Firebase Auth Error:', e);
+      window.location.replace('welcome.html?status=pending');
+    }
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomie Humaine - Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2,h3 { margin-bottom: 10px; }
+
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty { margin-bottom: 8px; text-align: left; }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1){animation-delay:0.1s;}
+  .star:nth-child(2){animation-delay:0.2s;}
+  .star:nth-child(3){animation-delay:0.3s;}
+  .star:nth-child(4){animation-delay:0.4s;}
+  .star:nth-child(5){animation-delay:0.5s;}
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg,#0096c7,#00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black!important;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black!important;
+  }
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  .control-buttons {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1; min-width: 100px; padding: 10px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white; font-weight: bold;
+    cursor: pointer; transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    .container{width:95%;padding:15px;}
+    .question-text{font-size:16px;}
+    .answer{font-size:15px;padding:10px;}
+    .control-buttons{flex-direction:column;}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h3 id="lessonTitle"></h3>
+  <div id="questionsContainer"></div>
+  <button class="control-buttons" style="background:#444;margin-top:20px" onclick="goBack()">🔙 الرجوع للدروس</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // 🧩 إعداد القيم الافتراضية
+  localStorage.setItem('specialty','طب الأسنان');
+  localStorage.setItem('level','سنة 2');
+  localStorage.setItem('subject','Anatomie humaine');
+
+  const lesson = localStorage.getItem('lesson') || 'Os frontal et éthmoïde';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 أسئلة تجريبية
+  const questionsData = {
+  'la gencive': [
+  // 1 à 5 — Niveau bon élève ⭐
+  {
+    question: "La gencive fait partie de la fibromuqueuse, recouvre les procès alvéolaires et entoure le collet dentaire ; elle représente le parodonte superficiel.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Partie de la fibromuqueuse", correct: true },
+      { text: "B. Recouvre les procès alvéolaires", correct: true },
+      { text: "C. Entoure le collet des dents", correct: true },
+      { text: "D. Constitue le parodonte profond", correct: false }
+    ]
+  },
+  {
+    question: "La muqueuse buccale est classée en trois types selon Schröder (1981), dont l’un correspond à la muqueuse masticatoire comprenant le palais dur et la gencive.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Muqueuse bordante : palais mou, lèvres, joues, etc.", correct: true },
+      { text: "B. Muqueuse masticatoire : palais dur et gencive", correct: true },
+      { text: "C. Muqueuse spécialisée : face ventrale de la langue", correct: false },
+      { text: "D. Muqueuse spécialisée : surface dorsale de la langue", correct: true }
+    ]
+  },
+  {
+    question: "Le parodonte se divise en deux ensembles, l’un superficiel et l’autre profond, avec des rôles de fixation, recouvrement et protection de la dent.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Parodonte superficiel : gencive", correct: true },
+      { text: "B. Parodonte profond : desmodonte, os alvéolaire, cément", correct: true },
+      { text: "C. Rôle : recouvrement et protection", correct: true },
+      { text: "D. Rôle exclusif : mastication", correct: false }
+    ]
+  },
+  {
+    question: "La gencive marginale entoure la dent comme un collier et constitue la paroi molle du sulcus, séparée de la gencive attachée par un sillon.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Entoure la zone cervicale de la dent", correct: true },
+      { text: "B. Paroi molle du sulcus", correct: true },
+      { text: "C. Séparée de la gencive attachée par le sillon gingival marginal", correct: true },
+      { text: "D. Fusionnée au périoste sur toute son étendue", correct: false }
+    ]
+  },
+  {
+    question: "La gencive papillaire occupe l’embrasure gingivale, sous le point de contact, et relie les pyramides vestibulaire et palatine par un isthme.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Située dans l’espace interproximal", correct: true },
+      { text: "B. Sous le point de contact", correct: true },
+      { text: "C. Reliée par un col/isthme", correct: true },
+      { text: "D. Délimitée uniquement sur les faces linguales", correct: false }
+    ]
+  },
+
+  // 6 à 15 — Très bon élève ⭐⭐
+  {
+    question: "Concernant les repères de la gencive marginale, certains espaces ou sillons sont explicitement décrits lors de l’éruption dentaire.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Rebord marginal libre à 0,5–2 mm de la jonction amélo-cémentaire", correct: true },
+      { text: "B. Sillon gingival libre parallèle au rebord gingival (0,5–2,8 mm)", correct: true },
+      { text: "C. Sillon gingivo-dentaire en V, du rebord gingival jusqu’à l’épithélium jonctionnel", correct: true },
+      { text: "D. Sillon sous-périosté permanent séparant la gencive libre de l’os", correct: false }
+    ]
+  },
+  {
+    question: "Le sulcus gingival (sillon gingivo-dentaire) présente une morphologie et une profondeur normales chiffrées dans le cours.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Forme en V autour de la dent", correct: true },
+      { text: "B. Limité par l’épithélium tapissant la gencive libre et la surface dentaire", correct: true },
+      { text: "C. Profondeur normale 1,8 ± 0,6 mm", correct: true },
+      { text: "D. Profondeur normale 4–6 mm", correct: false }
+    ]
+  },
+  {
+    question: "La gencive attachée prolonge la gencive marginale et se fixe solidement aux structures sous-jacentes, la rendant inamovible par rapport au plan osseux.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Attachée au cément et à l’os sous-jacent", correct: true },
+      { text: "B. Solidement fixée au périoste", correct: true },
+      { text: "C. Inamovible par rapport au plan osseux", correct: true },
+      { text: "D. Se limite toujours à la papille interdentaire", correct: false }
+    ]
+  },
+  {
+    question: "La hauteur de la gencive attachée varie selon les régions antérieures et postérieures, avec des valeurs numériques précisées.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Ic maxillaire : ~3,5–4,5 mm", correct: true },
+      { text: "B. Ic mandibulaire : ~3,3–3,9 mm", correct: true },
+      { text: "C. Au niveau postérieur : valeurs plus faibles autour de 1,8–1,9 mm (PM)", correct: true },
+      { text: "D. Constante et identique sur toute l’arcade", correct: false }
+    ]
+  },
+  {
+    question: "La ligne mucogingivale sépare clairement deux territoires tissulaires aux insertions différentes.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Sépare la gencive attachée de la muqueuse buccale", correct: true },
+      { text: "B. Muqueuse buccale détachée des plans profonds", correct: true },
+      { text: "C. Gencive attachée mobile comme la muqueuse alvéolaire", correct: false },
+      { text: "D. Freins participent à la rétention", correct: true }
+    ]
+  },
+  {
+    question: "Les caractéristiques cliniques d’une gencive saine incluent des éléments de couleur, de texture et de volume explicitement listés.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Couleur rose corail influencée par vascularisation, typologie, kératinisation et mélanocytes", correct: true },
+      { text: "B. Texture lisse et ferme, aspect « peau d’orange » vestibulaire", correct: true },
+      { text: "C. Hauteur variable ; 1–2 suffit pour la santé parodontale", correct: true },
+      { text: "D. Contour indépendant de la forme des dents", correct: false }
+    ]
+  },
+  {
+    question: "La consistance et la texture de la gencive sont attribuées à des éléments conjonctifs et épithéliaux décrits.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Fermeté de la GA due au tissu conjonctif collagénique", correct: true },
+      { text: "B. Fibres gingivales contribuant à la fermeté de la GM", correct: true },
+      { text: "C. Texture granitée rappelant la peau d’orange", correct: true },
+      { text: "D. Fermeté liée exclusivement aux hémidesmosomes", correct: false }
+    ]
+  },
+  {
+    question: "Le contour gingival dépend de facteurs occlusaux et anatomiques décrits.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Dépend de la forme des dents et de leur alignement", correct: true },
+      { text: "B. Dépend de la taille et de l’emplacement de la zone de contact proximal", correct: true },
+      { text: "C. Suit un tracé festonné vestibulaire et lingual", correct: true },
+      { text: "D. Strictement rectiligne quelles que soient les dents", correct: false }
+    ]
+  },
+  {
+    question: "La vascularisation de la gencive provient de plusieurs sources anastomosées, dont certaines artères nommément citées.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Sublinguale, mentale, faciale, grande palatine, infra-orbitaire, dentaire postérieure supérieure", correct: true },
+      { text: "B. Vaisseaux du ligament parodontal vers le sillon gingivo-dentaire", correct: true },
+      { text: "C. Artérioles issues des septa interdentaires", correct: true },
+      { text: "D. Exclusivement assurée par l’artère linguale", correct: false }
+    ]
+  },
+  {
+    question: "L’innervation et le drainage lymphatique de la gencive suivent des répartitions régionales précises.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Innervation : branches maxillaires et mandibulaires du trijumeau", correct: true },
+      { text: "B. Drainage vestibulaire/lingual incisif mandibulaire → sous-mentonniers", correct: true },
+      { text: "C. Gencive palatine → cervicaux profonds", correct: true },
+      { text: "D. Gencive vestibulaire maxillaire et prémolaires/molaires mandibulaires → sous-mandibulaires", correct: true }
+    ]
+  },
+
+  // 16 à 25 — Excellent ⭐⭐⭐
+  {
+    question: "Associez gencive et plan approfondi selon la description anatomique donnée.",
+    difficulty: 3,
+    answers: [
+      { text: "A. GM : paroi molle du sulcus et rebord gingival", correct: true },
+      { text: "B. GA : attachée au cément, à l’os et au périoste", correct: true },
+      { text: "C. Papillaire : sous le point de contact interproximal", correct: true },
+      { text: "D. GM : tissulaire mobile comme la muqueuse alvéolaire", correct: false }
+    ]
+  },
+  {
+    question: "À propos des distances et repères, identifiez les associations cohérentes avec le texte.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Rebord marginal libre : 0,5–2 mm de la JAC", correct: true },
+      { text: "B. Sillon gingival libre parallèle au rebord : 0,5–2,8 mm", correct: true },
+      { text: "C. Sulcus : du rebord gingival à la surface libre de l’épithélium de jonction", correct: true },
+      { text: "D. Sulcus normal : 1,8 ± 0,6 mm", correct: true }
+    ]
+  },
+  {
+    question: "Caractéristiques cliniques : précisez les items restituant fidèlement le portrait de la gencive saine.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Couleur rose corail modulée par kératinisation et mélanocytes", correct: true },
+      { text: "B. Volume lié au réseau vasculaire et éléments intercellulaires", correct: true },
+      { text: "C. Contour suivant le collet", correct: true },
+      { text: "D. Texture strictement rugueuse sur toute la GA", correct: false }
+    ]
+  },
+  {
+    question: "Sur la consistance/texture, combinez les éléments décrits comme contribuant à la fermeté.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Tissu conjonctif collagénique (GA ferme)", correct: true },
+      { text: "B. Fibres gingivales (fermeté GM)", correct: true },
+      { text: "C. Épithélium pavimenteux stratifié à renouvellement lent", correct: false },
+      { text: "D. Texture granitée peau d’orange", correct: true }
+    ]
+  },
+  {
+    question: "Vascularisation : recomposez le circuit tel que décrit, en intégrant les zones d’anastomoses.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Artérioles supra-périostées : faces vestibulaires/linguales", correct: true },
+      { text: "B. Vaisseaux du ligament parodontal : anastomoses vers la zone du sillon", correct: true },
+      { text: "C. Artérioles des septa interdentaires longeant rebord osseux", correct: true },
+      { text: "D. Unique afférence par l’artère faciale", correct: false }
+    ]
+  },
+  {
+    question: "Innervation et vascularisation suivent des trajets parallèles.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Nerfs : branches V2/V3 du trijumeau", correct: true },
+      { text: "B. Nerfs suivant le trajet des vaisseaux", correct: true },
+      { text: "C. Vaisseaux issus de grande palatine et infra-orbitaire", correct: true },
+      { text: "D. Innervation unique par le facial", correct: false }
+    ]
+  },
+  {
+    question: "Rôle protecteur : mécanismes épithéliaux mentionnés dans le texte.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Organisation en strates et cohésion intercellulaire", correct: true },
+      { text: "B. Fixation à la lame basale par hémidesmosomes", correct: true },
+      { text: "C. Kératinisation avec desquamation", correct: true },
+      { text: "D. Étanchéité absolue interdisant tout passage cellulaire", correct: false }
+    ]
+  },
+  {
+    question: "Rôle de défense et de nutrition : mécanismes explicitement indiqués.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Leucocytes PMN, macrophages, cellules lymphoïdes au sulcus", correct: true },
+      { text: "B. Sécrétion mucopolysaccharidique du joint de scellement", correct: true },
+      { text: "C. Perméabilité de la jonction gingivo-dentaire", correct: true },
+      { text: "D. Tissu conjonctif = échanges métaboliques capillaires/lymphatiques", correct: true }
+    ]
+  },
+  {
+    question: "Rôle d’émonctoire et consolidation conjonctive : affirmations concordantes.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Desquamation emportant des substances toxiques", correct: true },
+      { text: "B. Tissu conjonctif assurant tonicité/adhérence", correct: true },
+      { text: "C. Renforcement fibrillaire : fibres supra-crestales et ligament circulaire", correct: true },
+      { text: "D. Exclusion des fibres conjonctives", correct: false }
+    ]
+  },
+  {
+    question: "Homéostasie et renouvellement : identifiez les délais cités et leur portée.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Turnover EJ : 4–6 jours", correct: true },
+      { text: "B. Turnover EOS : 4–10 jours", correct: true },
+      { text: "C. Turnover EOG : 7–15 jours", correct: true },
+      { text: "D. Turnover unique 30 jours", correct: false }
+    ]
+  },
+
+  // 26 à 35 — Difficiles ⭐⭐⭐⭐
+  {
+    question: "Sur la ligne mucogingivale, précisez son rôle de frontière tissulaire.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Sépare GA et muqueuse buccale", correct: true },
+      { text: "B. Muqueuse buccale retenue par insertions musculaires et freins", correct: true },
+      { text: "C. Muqueuse buccale soudée aux plans profonds", correct: false },
+      { text: "D. LMG : repère de transition mobilité/immobilité", correct: true }
+    ]
+  },
+  {
+    question: "GA et GM : implications fonctionnelles de leur attache/fixité.",
+    difficulty: 4,
+    answers: [
+      { text: "A. GA ferme/élastique, attachée au périoste", correct: true },
+      { text: "B. GM libre du sulcus", correct: true },
+      { text: "C. GA inamovible par rapport à l’os", correct: true },
+      { text: "D. GM confondue avec muqueuse alvéolaire", correct: false }
+    ]
+  },
+  {
+    question: "Contour et embrasures : facteurs modulant la forme marginale.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Dépend de l’alignement dentaires dépend de l’alignement dentaire sur l’arcade", correct: true },
+{ text: "B. Dépend de la taille/localisation des zones de contact proximal", correct: true },
+{ text: "C. Suit un tracé festonné vestibulaire et lingual", correct: true },
+{ text: "D. Indépendant des contacts proximaux", correct: false }
+]
+},
+{
+question: "Caractéristiques cliniques : paramètres couleur/volume/hauteur",
+difficulty: 4,
+answers: [
+{ text: "A. Rose corail, influencée par vascularisation et kératinisation", correct: true },
+{ text: "B. Volume = cellules/intercellulaires + réseau vasculaire", correct: true },
+{ text: "C. Hauteur variable ; 1–2 suffisante pour santé parodontale", correct: true },
+{ text: "D. Hauteur minimale 5–6 nécessaire", correct: false }
+]
+},
+{
+question: "Vascularisation — sources multiples citées",
+difficulty: 4,
+answers: [
+{ text: "A. Sublinguale, mentale, faciale", correct: true },
+{ text: "B. Grande palatine, infra-orbitaire, dentaire postéro-supérieure", correct: true },
+{ text: "C. Uniquement septales interdentaires sans anastomoses", correct: false },
+{ text: "D. Ligament parodontal avec capillaires vers zone sulculaire", correct: true }
+]
+},
+{
+question: "Drainage lymphatique — associations exactes",
+difficulty: 4,
+answers: [
+{ text: "A. Vestibulaire/linguale incisive mandibulaire → sous-mentonniers", correct: true },
+{ text: "B. Palatine → cervicaux profonds", correct: true },
+{ text: "C. Vestibulaire maxillaire + prémolaires/molaires mandibulaires → sous-mandibulaires", correct: true },
+{ text: "D. Palatine → sous-mentonniers", correct: false }
+]
+},
+{
+question: "Innervation — nerfs et territoires",
+difficulty: 4,
+answers: [
+{ text: "A. Branches maxillaires/mandibulaires du trijumeau", correct: true },
+{ text: "B. Troncs nerveux suivant le trajet des vaisseaux", correct: true },
+{ text: "C. Innervation unique par le VII au vestibule maxillaire", correct: false },
+{ text: "D. Parcours parallèles aux voies vasculaires", correct: true }
+]
+},
+{
+question: "Physiologie — mécanismes protecteurs et d’homéostasie",
+difficulty: 4,
+answers: [
+{ text: "A. Kératinisation transformant une protéine résistante", correct: true },
+{ text: "B. Desquamation après rupture des joints intercellulaires", correct: true },
+{ text: "C. Perméabilité de la jonction aux leucocytes/fluide gingival", correct: true },
+{ text: "D. Imperméabilité complète de l’épithélium de jonction", correct: false }
+]
+},
+{
+question: "Éléments épithélio-conjonctifs — cohésion",
+difficulty: 4,
+answers: [
+{ text: "A. Jonctions intercellulaires assurant cohésion", correct: true },
+{ text: "B. Hémidesmosomes fixant à la lame basale", correct: true },
+{ text: "C. Digitations épithéliales et papilles conjonctives", correct: true },
+{ text: "D. Absence de structure d’attache", correct: false }
+]
+},
+{
+question: "Synthèse « sulcus/attache/jonction » : couples exacts",
+difficulty: 4,
+answers: [
+{ text: "A. Sulcus en V limité par surface dentaire et épithélium libre", correct: true },
+{ text: "B. Fond du sulcus = surface libre de l’épithélium de jonction", correct: true },
+{ text: "C. Sillon gingival libre parallèle au rebord gingival", correct: true },
+{ text: "D. Rebord marginal sur surface amélaire", correct: false }
+]
+},
+
+// 36 à 40 — Très difficiles ⭐⭐⭐⭐⭐
+{
+question: "Portrait fonctionnel complet de la gencive",
+difficulty: 5,
+answers: [
+{ text: "A. Rôle protecteur : strates, jonctions, hémidesmosomes, kératinisation, desquamation", correct: true },
+{ text: "B. Rôle d’émonctoire : élimination cellules et toxines", correct: true },
+{ text: "C. Rôle nutritif : échanges métaboliques via capillaires/lymphatiques", correct: true },
+{ text: "D. Rôle de défense : joint mucopolysaccharidique, perméabilité leucocytes/fluide", correct: true }
+]
+},
+{
+question: "Associez correctement région → ganglions",
+difficulty: 5,
+answers: [
+{ text: "A. Incisive mandibulaire → sous-mentonniers", correct: true },
+{ text: "B. Palatine → cervicaux profonds", correct: true },
+{ text: "C. Vestibulaire maxillaire + molaires mandibulaires → sous-mandibulaires", correct: true },
+{ text: "D. Palatine → sous-mandibulaires exclusivement", correct: false }
+]
+},
+{
+question: "Durées de renouvellement exactes",
+difficulty: 5,
+answers: [
+{ text: "A. EJ : 4–6 jours", correct: true },
+{ text: "B. EOS : 4–10 jours", correct: true },
+{ text: "C. EOG : 7–15 jours", correct: true },
+{ text: "D. Tous identiques : 7–15 jours", correct: false }
+]
+},
+{
+question: "Couleur/texture/contour selon localisation",
+difficulty: 5,
+answers: [
+{ text: "A. Couleur rose corail modulée par mélanocytes/vascularisation", correct: true },
+{ text: "B. Piqueté « peau d’orange » vestibulaire GA et centre papilles", correct: true },
+{ text: "C. Contour suivant le collet et dépend des dents", correct: true },
+{ text: "D. Piqueté généralisé sur muqueuse alvéolaire mobile", correct: false }
+]
+},
+{
+question: "Synthèse attaches/fibres/adhérence",
+difficulty: 5,
+answers: [
+{ text: "A. Conjonctif assure tonicité et adhérence à dent/alvéole", correct: true },
+{ text: "B. Renforcement : fibres supra-crestales et ligament circulaire", correct: true },
+{ text: "C. Absence d’influence des fibres gingivales", correct: false },
+{ text: "D. GA ferme/élastique grâce au collagène", correct: true }
+]
+}
+],
+'Histoire de la parodontologie': [
+  // A. Bon élève ⭐
+  {
+    question: "En Antiquité, les remèdes contre les affections gingivales cités dans le cours incluent…",
+    difficulty: 1,
+    answers: [
+      { text: "A. Miel dans des recettes empiriques", correct: true },
+      { text: "B. Minéraux dans des préparations", correct: true },
+      { text: "C. Herbes à visée astringente ou apaisante", correct: true },
+      { text: "D. Antiseptiques de synthèse modernes", correct: false }
+    ]
+  },
+  {
+    question: "Sources gréco-romaines rapportées :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Références d’Hippocrate et de Galien", correct: true },
+      { text: "B. Détartrage rudimentaire pratiqué", correct: true },
+      { text: "C. Lambeaux régénérateurs standardisés", correct: false },
+      { text: "D. Tests génétiques étiologiques", correct: false }
+    ]
+  },
+  {
+    question: "Apport islamique (VIIIe–XIIIe siècles) :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Avicenne : bains/poudres/hygiène", correct: true },
+      { text: "B. Al-Zahrawi : instruments de détartrage/extraction", correct: true },
+      { text: "C. Siwak recommandé", correct: true },
+      { text: "D. Résines photopolymérisables", correct: false }
+    ]
+  },
+  {
+    question: "À propos du siwak (Sunna) :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Recommandé, issu de Salvadora persica", correct: true },
+      { text: "B. Propriétés antibactériennes confirmées", correct: true },
+      { text: "C. Remplace totalement la chirurgie", correct: false },
+      { text: "D. Mentionné comme hygiène bucco-dentaire", correct: true }
+    ]
+  },
+  {
+    question: "Transmission des savoirs vers l’Europe médiévale :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Traductions latines", correct: true },
+      { text: "B. Centres comme Salerne", correct: true },
+      { text: "C. Montpellier", correct: true },
+      { text: "D. Congrès au XIXe siècle", correct: false }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "Europe médiévale/Renaissance — pratiques et acteurs :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Traductions arabes diffusées", correct: true },
+      { text: "B. Barbiers-chirurgiens (soins rudimentaires)", correct: true },
+      { text: "C. Ambroise Paré et hygiène bucco-dentaire", correct: true },
+      { text: "D. Lasers de débridement", correct: false }
+    ]
+  },
+  {
+    question: "XVIIIe–XIXe — naissance scientifique :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Pierre Fauchard : plaque/tartre", correct: true },
+      { text: "B. Terme 'pyorrhée alvéolaire'", correct: true },
+      { text: "C. Début chirurgie gingivale", correct: true },
+      { text: "D. Probiotiques cliniques", correct: false }
+    ]
+  },
+  {
+    question: "XXe siècle — structuration étiopathogénique :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Rôle bactérien reconnu", correct: true },
+      { text: "B. Inflammation mise en avant", correct: true },
+      { text: "C. Étude de H. Löe sur la plaque", correct: true },
+      { text: "D. Abandon hypothèse bactérienne", correct: false }
+    ]
+  },
+  {
+    question: "Années 1950–70 — jalons opératoires :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Orthopériodontie", correct: true },
+      { text: "B. Greffes gingivales", correct: true },
+      { text: "C. Lambeaux résectifs/régénérateurs", correct: true },
+      { text: "D. Tests génétiques de routine", correct: false }
+    ]
+  },
+  {
+    question: "XXIe siècle — approche systémique :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Lien parodontite–diabète", correct: true },
+      { text: "B. Lien cardio-vasculaire", correct: true },
+      { text: "C. Lien grossesse", correct: true },
+      { text: "D. Déni d’implication générale", correct: false }
+    ]
+  },
+  {
+    question: "XXIe siècle — parodontologie de précision :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Biomarqueurs", correct: true },
+      { text: "B. Tests génétiques", correct: true },
+      { text: "C. Suppression de l’hygiène de base", correct: false },
+      { text: "D. Approche personnalisée", correct: true }
+    ]
+  },
+  {
+    question: "XXIe siècle — thérapies non chirurgicales :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Débridement mécanique", correct: true },
+      { text: "B. Antiseptiques locaux", correct: true },
+      { text: "C. Antibiotiques locaux", correct: true },
+      { text: "D. Probiotiques/modulation du microbiote", correct: true }
+    ]
+  },
+  {
+    question: "Antiquité égyptienne — recettes :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Miel", correct: true },
+      { text: "B. Minéraux", correct: true },
+      { text: "C. Herbes", correct: true },
+      { text: "D. Antibiotiques de synthèse", correct: false }
+    ]
+  },
+  {
+    question: "Continuités pré-modernes :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Traductions vers Europe médiévale", correct: true },
+      { text: "B. Barbiers-chirurgiens", correct: true },
+      { text: "C. Hygiène (Ambroise Paré)", correct: true },
+      { text: "D. Lambeaux codifiés XVIe siècle", correct: false }
+    ]
+  },
+  {
+    question: "‘Pyorrhée alvéolaire’ — chronologie :",
+    difficulty: 2,
+    answers: [
+      { text: "A. XVIIIe–XIXe pour parodontite", correct: true },
+      { text: "B. Début scientifique", correct: true },
+      { text: "C. Premiers gestes chirurgicaux", correct: true },
+      { text: "D. Synonyme de précision XXIe", correct: false }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "Structuration au XXe siècle repose sur…",
+    difficulty: 3,
+    answers: [
+      { text: "A. Rôle bactérien", correct: true },
+      { text: "B. Réaction inflammatoire", correct: true },
+      { text: "C. Étude H. Löe", correct: true },
+      { text: "D. Disparition du détartrage", correct: false }
+    ]
+  },
+  {
+    question: "1950–70 — domaines majeurs :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Orthopériodontie et greffes", correct: true },
+      { text: "B. Lambeaux résectifs/régénérateurs", correct: true },
+      { text: "C. Substitution non chirurgicales", correct: false },
+      { text: "D. Essor opératoire du XXe", correct: true }
+    ]
+  },
+  {
+    question: "XXIe — débridement non chirurgical :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Ultrasons", correct: true },
+      { text: "B. Aéropolissage", correct: true },
+      { text: "C. Lasers", correct: true },
+      { text: "D. Greffes comme première intention", correct: false }
+    ]
+  },
+  {
+    question: "Probiotiques/modulation du microbiote :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Option non chirurgicale", correct: true },
+      { text: "B. Modulation du microbiote", correct: true },
+      { text: "C. Remplace chirurgie", correct: false },
+      { text: "D. Avancée thérapeutique actuelle", correct: true }
+    ]
+  },
+  {
+    question: "Apport islamique — panorama global :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Avicenne : hygiène et bains", correct: true },
+      { text: "B. Al-Zahrawi : instruments", correct: true },
+      { text: "C. Siwak recommandé", correct: true },
+      { text: "D. Transmission via traductions", correct: true }
+    ]
+  },
+  {
+    question: "Antiquité — convergences :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Recettes contre saignements", correct: true },
+      { text: "B. Hippocrate et Galien", correct: true },
+      { text: "C. Détartrage rudimentaire", correct: true },
+      { text: "D. Chirurgie régénératrice codifiée", correct: false }
+    ]
+  },
+  {
+    question: "Moyen Âge/Renaissance — éléments exclus :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Lasers", correct: true },
+      { text: "B. Biomarqueurs", correct: true },
+      { text: "C. Tests génétiques", correct: true },
+      { text: "D. Traductions (Salerne/Montpellier)", correct: false }
+    ]
+  },
+  {
+    question: "XVIIIe–XIXe — progression :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Détartrage développé", correct: true },
+      { text: "B. Chirurgie gingivale", correct: true },
+      { text: "C. Plaque et tartre mis en avant", correct: true },
+      { text: "D. Probiotiques", correct: false }
+    ]
+  },
+  {
+    question: "XXIe — cadre systémique :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Diabète", correct: true },
+      { text: "B. Cardio", correct: true },
+      { text: "C. Grossesse", correct: true },
+      { text: "D. Arthrose", correct: false }
+    ]
+  },
+  {
+    question: "XXIe — précision appliquée :", difficulty: 3,
+    answers: [
+      { text: "A. Biomarqueurs", correct: true },
+      { text: "B. Tests génétiques", correct: true },
+      { text: "C. Abandon hygiène", correct: false },
+      { text: "D. Prise en charge personnalisée", correct: true }
+    ]
+  },
+
+  // D. Difficiles ⭐⭐⭐⭐
+  {
+    question: "Chaînage temporel exact :", difficulty: 4,
+    answers: [
+      { text: "A. XVIIIe : Fauchard", correct: true },
+      { text: "B. XVIIIe–XIXe : pyorrhée", correct: true },
+      { text: "C. XVIIIe–XIXe : chirurgie", correct: true },
+      { text: "D. XXe : négation inflammation", correct: false }
+    ]
+  },
+  {
+    question: "1950–70 — trilogie opératoire :", difficulty: 4,
+    answers: [
+      { text: "A. Lambeaux", correct: true },
+      { text: "B. Résectives", correct: true },
+      { text: "C. Régénératrices", correct: true },
+      { text: "D. Tests génétiques", correct: false }
+    ]
+  },
+  {
+    question: "XXIe — non chirurgical :", difficulty: 4,
+    answers: [
+      { text: "A. Débridement mécanique", correct: true },
+      { text: "B. Antiseptiques locaux", correct: true },
+      { text: "C. Antibiotiques locaux", correct: true },
+      { text: "D. Greffes gingivales", correct: false }
+    ]
+  },
+  {
+    question: "Apport islamique — matières citées :", difficulty: 4,
+    answers: [
+      { text: "A. Myrrhe", correct: true },
+      { text: "B. Clou de girofle", correct: true },
+      { text: "C. Aloès", correct: true },
+      { text: "D. Corticoïdes de synthèse", correct: false }
+    ]
+  },
+  {
+    question: "Vecteurs européens médiévaux :", difficulty: 4,
+    answers: [
+      { text: "A. Traductions latines", correct: true },
+      { text: "B. Salerne et Montpellier", correct: true },
+      { text: "C. Ambroise Paré", correct: true },
+      { text: "D. Probiotiques médiévaux", correct: false }
+    ]
+  },
+  {
+    question: "XXe — données fondatrices :", difficulty: 4,
+    answers: [
+      { text: "A. Rôle bactérien", correct: true },
+      { text: "B. Réaction inflammatoire", correct: true },
+      { text: "C. Étude Löe", correct: true },
+      { text: "D. Suppression détartrage", correct: false }
+    ]
+  },
+  {
+    question: "XXIe — approche systémique :", difficulty: 4,
+    answers: [
+      { text: "A. Diabète", correct: true },
+      { text: "B. Cardio", correct: true },
+      { text: "C. Grossesse", correct: true },
+      { text: "D. Aucun lien", correct: false }
+    ]
+  },
+  {
+    question: "Parodontologie de précision :", difficulty: 4,
+    answers: [
+      { text: "A. Biomarqueurs", correct: true },
+      { text: "B. Tests génétiques", correct: true },
+      { text: "C. Personnalisation", correct: true },
+      { text: "D. Abandon hygiène", correct: false }
+    ]
+  },
+  {
+    question: "Continuités historiques :", difficulty: 4,
+    answers: [
+      { text: "A. Hygiène : Avicenne/Paré", correct: true },
+      { text: "B. Détartrage antique", correct: true },
+      { text: "C. Lambeaux XXe", correct: true },
+      { text: "D. Étiologie bactérienne niée", correct: false }
+    ]
+  },
+  {
+    question: "Pièges chronologiques :", difficulty: 4,
+    answers: [
+      { text: "A. Lasers XXIe", correct: true },
+      { text: "B. Probiotiques XXIe", correct: true },
+      { text: "C. Pyorrhée XVIIIe–XIXe", correct: true },
+      { text: "D. Tests génétiques Fauchard", correct: false }
+    ]
+  },
+
+  // E. Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Non chirurgical du XXIe — éléments listés :", difficulty: 5,
+    answers: [
+      { text: "A. Débridement mécanique", correct: true },
+      { text: "B. Antiseptiques locaux", correct: true },
+      { text: "C. Antibiotiques locaux", correct: true },
+      { text: "D. Lambeaux régénérateurs", correct: false }
+    ]
+  },
+  {
+    question: "Structuration du XXe — éléments :", difficulty: 5,
+    answers: [
+      { text: "A. Bactéries", correct: true },
+      { text: "B. Inflammation", correct: true },
+      { text: "C. Étude Löe", correct: true },
+      { text: "D. Siwak", correct: false }
+    ]
+  },
+  {
+    question: "Apport islamique — affectations :", difficulty: 5,
+    answers: [
+      { text: "A. Avicenne : bains, poudres", correct: true },
+      { text: "B. Al-Zahrawi : instruments chirurgicaux", correct: true },
+      { text: "C. Siwak : antibactérien", correct: true },
+      { text: "D. Barbiers romains", correct: false }
+    ]
+  },
+  {
+    question: "Moyen Âge/Renaissance — exclusions :", difficulty: 5,
+    answers: [
+      { text: "A. Traductions", correct: true },
+      { text: "B. Barbiers-chirurgiens", correct: true },
+      { text: "C. Ambroise Paré", correct: true },
+      { text: "D. Biomarqueurs", correct: false }
+    ]
+  },
+  {
+    question: "XXIe — avancées thérapeutiques actuelles :", difficulty: 5,
+    answers: [
+      { text: "A. Approche systémique (diabète/cardio/grossesse)", correct: true },
+      { text: "B. Précision (biomarqueurs/tests)", correct: true },
+      { text: "C. Non chirurgical (débridement, antiseptiques, antibiotiques, probiotiques)", correct: true },
+      { text: "D. Abandon non chirurgical", correct: false }
+    ]
+  }
+],'Introduction à la Parodontologie': [
+  // A. Bon élève ⭐
+  {
+    question: "La parodontologie est définie comme la spécialité qui s’intéresse aux tissus de soutien des dents, appelés parodonte, composé d’os alvéolaire, ligament parodontal, cément et gencive.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Discipline portant sur les tissus de soutien", correct: true },
+      { text: "B. Parodonte = os alvéolaire, ligament, cément, gencive", correct: true },
+      { text: "C. Parodonte = couronne, collet, racine", correct: false },
+      { text: "D. Le ligament assure la fixation de la racine à l’os alvéolaire", correct: true }
+    ]
+  },
+  {
+    question: "Associez correctement rôle/structure selon l’introduction :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Os alvéolaire → soutien", correct: true },
+      { text: "B. Ligament → fixation racine/os", correct: true },
+      { text: "C. Cément → ancrage du ligament", correct: true },
+      { text: "D. Gencive → expose la racine au milieu buccal", correct: false }
+    ]
+  },
+  {
+    question: "Selon la terminologie, la parodontologie étudie le parodonte sous plusieurs volets tandis que la parodontie en est la pratique clinique.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Parodontologie = étude pluridisciplinaire du parodonte", correct: true },
+      { text: "B. Parodontie = pratique de la parodontologie", correct: true },
+      { text: "C. Parodontologiste = personne qui pratique la parodontie", correct: true },
+      { text: "D. Parodontologue = spécialiste centré sur la recherche", correct: false }
+    ]
+  },
+  {
+    question: "Concernant les parodontopathies :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Gingivite = inflammation de la gencive", correct: true },
+      { text: "B. Parodontite = inflammation de tout le parodonte", correct: true },
+      { text: "C. Parodontolyse = lyse progressive entraînant l’expulsion dentaire", correct: true },
+      { text: "D. Gingivopathie = maladie systémique de l’os basilaire", correct: false }
+    ]
+  },
+  {
+    question: "Au sujet du microbiote :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Microbiote = ensemble bactéries, champignons, protistes (et virus)", correct: true },
+      { text: "B. Commensalisme/mutualisme/parasitisme non létal", correct: true },
+      { text: "C. Pathobionte = opportuniste potentiellement pathogène", correct: true },
+      { text: "D. Microbionte = synonyme d’organe dentaire", correct: false }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "Associez correctement les termes et leurs définitions selon la page « Terminologie ».",
+    difficulty: 2,
+    answers: [
+      { text: "A. Parodonte = ensemble des tissus de soutien", correct: true },
+      { text: "B. Parodontologiste = compétent en parodontologie", correct: true },
+      { text: "C. Parodontiste = pratique la parodontie", correct: true },
+      { text: "D. Parodontologue = généraliste", correct: false }
+    ]
+  },
+  {
+    question: "Les composants parodontaux sont distincts mais fonctionnent comme une unité.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Distincts dans leurs caractéristiques", correct: true },
+      { text: "B. Fonctionnent ensemble comme une seule unité", correct: true },
+      { text: "C. Identiques histologiquement", correct: false },
+      { text: "D. Sans unité fonctionnelle", correct: false }
+    ]
+  },
+  {
+    question: "Associez correctement « organe dentaire » et ses éléments :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Odonte = couronne, collet, racine", correct: true },
+      { text: "B. Parodonte = cément, desmodonte, os, gencive", correct: true },
+      { text: "C. Odonte = uniquement émail et dentine", correct: false },
+      { text: "D. Couronne = émail, dentine, chambre pulpaire", correct: true }
+    ]
+  },
+  {
+    question: "Premières civilisations et âge classique :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Papyrus d’Ebers → gingivopathies", correct: true },
+      { text: "B. Sumériens → cure-dents en or", correct: true },
+      { text: "C. Phéniciens → contention dentaire", correct: true },
+      { text: "D. Hippocrate → microscope", correct: false }
+    ]
+  },
+  {
+    question: "Période chinoise et gréco-romaine :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Bâton à mâcher (Chine)", correct: true },
+      { text: "B. Hippocrate : étiologie parodontopathies", correct: true },
+      { text: "C. Romains : hygiène buccale/brosse", correct: true },
+      { text: "D. Cardano : classification au Ier siècle", correct: false }
+    ]
+  },
+  {
+    question: "Moyen Âge : impulsion religieuse et médecine musulmane.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Siwak : hygiène dentaire", correct: true },
+      { text: "B. Rhazes : bains/poudres dentifrices", correct: true },
+      { text: "C. Abulcassis : instruments détartrage", correct: true },
+      { text: "D. Avicenne : maladies et conseils", correct: true }
+    ]
+  },
+  {
+    question: "À propos d’Abulcassis (Al-Zahraoui) :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Encyclopédie al-Tasrif (chirurgie dentaire)", correct: true },
+      { text: "B. Relation tartre–gingivopathies", correct: true },
+      { text: "C. Instruments de détartrage", correct: true },
+      { text: "D. Découverte radiographie", correct: false }
+    ]
+  },
+  {
+    question: "Renaissance et prémices techniques :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Sabuncuoglu : chirurgie gencive/frein lingual", correct: true },
+      { text: "B. Valescus : élimine tartre avec outils métalliques", correct: true },
+      { text: "C. Paracelse : 'doctrine du calcul'", correct: true },
+      { text: "D. Leeuwenhoek : microscope et microbes", correct: true }
+    ]
+  },
+  {
+    question: "Évolution de la brosse à dents :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Invention chinoise (soies de sanglier)", correct: true },
+      { text: "B. 1498 : première brosse à dents", correct: true },
+      { text: "C. 1780 : modèle moderne (Addis)", correct: true },
+      { text: "D. Leeuwenhoek : maladie de Fauchard", correct: false }
+    ]
+  },
+  {
+    question: "XVIIIe siècle selon le texte :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Fauchard : détartrage, bains, attelles", correct: true },
+      { text: "B. 'Maladie de Fauchard' = tartre/hygiène", correct: true },
+      { text: "C. Hunter : gingivite ulcéro-nécrotique", correct: true },
+      { text: "D. Röntgen : radiographie en 1780", correct: false }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "XIXe siècle – microbiologie et terminologie :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Williams (1897) : biofilm gélatineux", correct: true },
+      { text: "B. Black (1899) : terme 'plaque microbienne'", correct: true },
+      { text: "C. Miller (1890) : sucres → acides → caries", correct: true },
+      { text: "D. Pasteur : carie avant 1800", correct: false }
+    ]
+  },
+  {
+    question: "Innovations fin XIXe :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Röntgen (1895) : radiographie", correct: true },
+      { text: "B. Witzel : étiologie bactérienne", correct: true },
+      { text: "C. Miller : microbiologie orale", correct: true },
+      { text: "D. Sabuncuoglu : chlorhexidine", correct: false }
+    ]
+  },
+  {
+    question: "Début XXe – concepts :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Karolyi (1901) : traumatisme d’occlusion", correct: true },
+      { text: "B. Vincent & Plaut (1904) : gingivite ulcéro-nécrotique", correct: true },
+      { text: "C. Découverte de l’IRM", correct: false },
+      { text: "D. Gouttières de Karolyi", correct: true }
+    ]
+  },
+  {
+    question: "École de Vienne :", difficulty: 3,
+    answers: [
+      { text: "A. Gottlieb : fixation épithélium, histopathologie", correct: true },
+      { text: "B. Orban : histologie → base thérapeutique", correct: true },
+      { text: "C. Kronfeld, Weinmann, Sicher : émigrent USA", correct: true },
+      { text: "D. Weski : invente RTG avec membranes", correct: false }
+    ]
+  },
+  {
+    question: "École de Berlin :", difficulty: 3,
+    answers: [
+      { text: "A. Approche chirurgicale à lambeau", correct: true },
+      { text: "B. Weski : corrèle radiologie/histologie", correct: true },
+      { text: "C. Neumann : chirurgie à lambeau, ostéoplastie", correct: true },
+      { text: "D. Widman : chlorhexidine", correct: false }
+    ]
+  },
+  {
+    question: "États-Unis – contributions :", difficulty: 3,
+    answers: [
+      { text: "A. Avant WWII : chirurgie parodontale", correct: true },
+      { text: "B. Hirschfeld : hygiène buccale", correct: true },
+      { text: "C. Fones (1913) : école d’hygiénistes", correct: true },
+      { text: "D. 1950 : stagnation microbio", correct: false }
+    ]
+  },
+  {
+    question: "Figures majeures (milieu XXe) :", difficulty: 3,
+    answers: [
+      { text: "A. Glickman, Goldman, Orban, Ramfjord, Zander", correct: true },
+      { text: "B. Waerhaug (1952) : The Gingival Pocket", correct: true },
+      { text: "C. Microbes + réponse hôte", correct: true },
+      { text: "D. AAP 1938", correct: false }
+    ]
+  },
+  {
+    question: "Sociétés/journaux :", difficulty: 3,
+    answers: [
+      { text: "A. AAP (1914) Spalding & Hayden", correct: true },
+      { text: "B. Journal of Periodontology (AAP)", correct: true },
+      { text: "C. EFP : EuroPerio + Journal of Clinical Periodontology", correct: true },
+      { text: "D. Periodontology 2000 ; Journal de Parodontologie", correct: true }
+    ]
+  },
+  {
+    question: "XXIe siècle – nouveaux concepts :", difficulty: 3,
+    answers: [
+      { text: "A. Étiologie + mécanismes", correct: true },
+      { text: "B. Risque parodontal/prédisposition", correct: true },
+      { text: "C. Médecine parodontale", correct: true },
+      { text: "D. Abandon du non chirurgical", correct: false }
+    ]
+  },
+  {
+    question: "Suite des avancées XXIe :", difficulty: 3,
+    answers: [
+      { text: "A. Diagnostics microbiologiques/génétiques", correct: true },
+      { text: "B. Traitement non chirurgical + adjuvants", correct: true },
+      { text: "C. Modulation de la réponse hôte", correct: true },
+      { text: "D. Régression des techniques régénératrices", correct: false }
+    ]
+  },
+
+  // D. Difficiles ⭐⭐⭐⭐
+  {
+    question: "Progrès chirurgicaux et régénération :", difficulty: 4,
+    answers: [
+      { text: "A. Protocoles à lambeau", correct: true },
+      { text: "B. Chirurgie plastique rationalisée", correct: true },
+      { text: "C. Techniques régénératrices modernes", correct: true },
+      { text: "D. Cautérisation empirique", correct: false }
+    ]
+  },
+  {
+    question: "Conclusion historique :", difficulty: 4,
+    answers: [
+      { text: "A. Naissance XVIIIe", correct: true },
+      { text: "B. Professionnalisation XIXe", correct: true },
+      { text: "C. Structuration XXe", correct: true },
+      { text: "D. Disparition XXIe", correct: false }
+    ]
+  },
+  {
+    question: "Défis actuels :", difficulty: 4,
+    answers: [
+      { text: "A. Intégrer technologies", correct: true },
+      { text: "B. Structurer l’éducation", correct: true },
+      { text: "C. Santé publique/éthique/recherche", correct: true },
+      { text: "D. Abandon éthique", correct: false }
+    ]
+  },
+  {
+    question: "Hygiène bucco-dentaire (comparatif) :", difficulty: 4,
+    answers: [
+      { text: "A. Ancien : miel, minéraux, siwak", correct: true },
+      { text: "B. Actuel : brossettes, dentifrices fluorés", correct: true },
+      { text: "C. Actuel : probiotiques", correct: true },
+      { text: "D. Ancien : lasers", correct: false }
+    ]
+  },
+  {
+    question: "Traitement mécanique :", difficulty: 4,
+    answers: [
+      { text: "A. Ancien : curettes/scalpels", correct: true },
+      { text: "B. Actuel : ultrasons, aéropolissage, lasers", correct: true },
+      { text: "C. Mini-invasif anti-inflammatoire", correct: true },
+      { text: "D. Ancien : RTG membranes", correct: false }
+    ]
+  },
+  {
+    question: "Traitement médicamenteux :", difficulty: 4,
+    answers: [
+      { text: "A. Ancien : poudres antiseptiques (myrrhe, aloès, vinaigre)", correct: true },
+      { text: "B. Actuel : chlorhexidine, antibiotiques locaux", correct: true },
+      { text: "C. Actuel : modulation de la réponse hôte", correct: true },
+      { text: "D. Ancien : gels à libération contrôlée", correct: false }
+    ]
+  },
+  {
+    question: "Chirurgie parodontale :", difficulty: 4,
+    answers: [
+      { text: "A. Ancien : extractions, gingivectomies rudimentaires", correct: true },
+      { text: "B. Actuel : lambeaux mini-invasifs", correct: true },
+      { text: "C. Actuel : RTG, greffes", correct: true },
+      { text: "D. Ancien : greffes conjonctives standardisées", correct: false }
+    ]
+  },
+  {
+    question: "Régénération/biotechnologies :", difficulty: 4,
+    answers: [
+      { text: "A. Ancien : cautérisation, décoctions", correct: true },
+      { text: "B. Actuel : EMD, PDGF, BMP-2", correct: true },
+      { text: "C. Actuel : cellules souches, ingénierie tissulaire", correct: true },
+      { text: "D. Ancien : thérapie génique randomisée", correct: false }
+    ]
+  },
+  {
+    question: "Lien santé générale :", difficulty: 4,
+    answers: [
+      { text: "A. Ancien : pas de lien clair", correct: true },
+      { text: "B. Actuel : liens diabète/cardio/grossesse", correct: true },
+      { text: "C. Actuel : médecine parodontale", correct: true },
+      { text: "D. Ancien : dépistage génétique", correct: false }
+    ]
+  },
+  {
+    question: "Sources et courants modernes :", difficulty: 4,
+    answers: [
+      { text: "A. Vienne/Berlin : pôles initiaux", correct: true },
+      { text: "B. USA/Scandinavie : leadership", correct: true },
+      { text: "C. AAP fondée par femmes (1914)", correct: false },
+      { text: "D. EuroPerio quinquennal", correct: true }
+    ]
+  },
+
+  // E. Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Associations exhaustives correctes (terminologie) :", difficulty: 5,
+    answers: [
+      { text: "A. Parodontopathie = maladie du parodonte", correct: true },
+      { text: "B. Parodontolyse = lyse tissulaire", correct: true },
+      { text: "C. Parodontite = inflammation globale", correct: true },
+      { text: "D. Gingivite = maladie du cément", correct: false }
+    ]
+  },
+  {
+    question: "Synthèse acteurs et dates :", difficulty: 5,
+    answers: [
+      { text: "A. 1895 Röntgen → radiographie", correct: true },
+      { text: "B. 1897 Williams → plaque adhérente", correct: true },
+      { text: "C. 1899 Black → 'plaque microbienne'", correct: true },
+      { text: "D. 1904 Karolyi → IRM", correct: false }
+    ]
+  },
+  {
+    question: "Regroupement personnes/institutions/journaux :", difficulty: 5,
+    answers: [
+      { text: "A. Spalding & Hayden (1914) → AAP", correct: true },
+      { text: "B. Journal of Periodontology / Journal of Clinical Periodontology", correct: true },
+      { text: "C. Periodontology 2000 / Journal de Parodontologie", correct: true },
+      { text: "D. EFP : EuroPerio (4 ans)", correct: true }
+    ]
+  },
+  {
+    question: "Directives XXIe siècle :", difficulty: 5,
+    answers: [
+      { text: "A. Diagnostics microbio-immuno-génétiques", correct: true },
+      { text: "B. Non chirurgical + adjuvants", correct: true },
+      { text: "C. Modulation réponse hôte", correct: true },
+      { text: "D. Abandon chirurgie plastique", correct: false }
+    ]
+  },
+  {
+    question: "Synthèse finale :", difficulty: 5,
+    answers: [
+      { text: "A. Intégrer percées technologiques", correct: true },
+      { text: "B. Structurer l’enseignement", correct: true },
+      { text: "C. Santé publique et recherche", correct: true },
+      { text: "D. Renoncer à la science parodontale", correct: false }
+    ]
+  }
+],"L’attache épithéliale": [
+  // A. Bon élève ⭐
+  {
+    question: "L’introduction présente le système d’attache unissant organe dentaire et parodonte.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Attache conjonctive = fibres gingivo-dentaires/desmodontales, attache épithéliale = gencive–dent", correct: true },
+      { text: "B. Attache épithéliale relie dentine à gencive sans émail", correct: false },
+      { text: "C. Système d’attache unique à la jonction dento-gingivale (inclut épithélium sulculaire)", correct: true },
+      { text: "D. Union odonte–parodonte = modèle dynamique", correct: true }
+    ]
+  },
+  {
+    question: "Définition de l’attache épithéliale.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Partie apicale de l’épithélium sulculaire entourant la région cervicale", correct: true },
+      { text: "B. Système d’attache cellule–surface calcifiée", correct: true },
+      { text: "C. Structure conjonctive dense entre cément et dentine", correct: false },
+      { text: "D. Entité unique par sa nature cellule–surface calcifiée", correct: true }
+    ]
+  },
+  {
+    question: "Topographie de l’épithélium jonctionnel.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Coronairement : fond du sillon", correct: true },
+      { text: "B. Apicalement : fibres superficielles du desmodonte", correct: true },
+      { text: "C. Vers l’extérieur : conjonctif gingival", correct: true },
+      { text: "D. Apicalement : os alvéolaire cortical", correct: false }
+    ]
+  },
+  {
+    question: "Images histologiques du complexe dento-gingival.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Trois épithéliums visibles (buccal, sulculaire, jonctionnel)", correct: true },
+      { text: "B. Absence de cément au collet", correct: false },
+      { text: "C. Juxtaposition émail–dentine–cément–os", correct: true },
+      { text: "D. Épithélium jonctionnel kératinisé", correct: false }
+    ]
+  },
+  {
+    question: "Types d’épithélium buccal.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Orthokératinisé", correct: true },
+      { text: "B. Parakératinisé", correct: true },
+      { text: "C. Non kératinisé", correct: true },
+      { text: "D. Hyperkératinisé standard", correct: false }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "Construction de l’épithélium de jonction.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Épithélium oral sur lame basale, nombreuses jonctions", correct: true },
+      { text: "B. Épithélium de jonction pluristratifié, épaisseur variable", correct: true },
+      { text: "C. Épaisseur uniforme", correct: false },
+      { text: "D. Épithélium oral kératinisé ou non", correct: true }
+    ]
+  },
+  {
+    question: "Historique microscopique (Black, Gottlieb, Wearhaug).",
+    difficulty: 2,
+    answers: [
+      { text: "A. Black : espace émail–épithélium sulculaire", correct: true },
+      { text: "B. Gottlieb : cuticule primaire et secondaire", correct: true },
+      { text: "C. Wearhaug : manchon épithélial adhérant", correct: true },
+      { text: "D. Stern : absence de lame basale", correct: false }
+    ]
+  },
+  {
+    question: "Concept au microscope électronique (Stern, 1962).",
+    difficulty: 2,
+    answers: [
+      { text: "A. Liaisons via lame basale + hémidesmosomes", correct: true },
+      { text: "B. Lamina lucida + lamina densa", correct: true },
+      { text: "C. Pas d’hémidesmosomes", correct: false },
+      { text: "D. Jonction cellule–émail", correct: true }
+    ]
+  },
+  {
+    question: "Histogenèse (Schroeder & Listgarten, 1977).",
+    difficulty: 2,
+    answers: [
+      { text: "A. Phase pré-éruptive : attache primaire", correct: true },
+      { text: "B. Phase éruptive : transformation primaire→secondaire", correct: true },
+      { text: "C. Phase définitive : disparition de l’épithélium adamantin résiduel", correct: true },
+      { text: "D. Phase récessive : minéralisation de la lame basale", correct: false }
+    ]
+  },
+  {
+    question: "Éléments histologiques alignés dent→conjonctif.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Cuticule, MBI, hémidesmosomes, épithélium de jonction", correct: true },
+      { text: "B. MBE, cément afibrillaire", correct: true },
+      { text: "C. Lamina propria et os = même lame basale", correct: false },
+      { text: "D. Cellule–émail sans couche amorphe", correct: false }
+    ]
+  },
+  {
+    question: "Cuticule dentaire.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Amorphe, non minéralisée, sécrétée par améloblastes", correct: true },
+      { text: "B. Protéines, glycoprotéines, polysaccharides", correct: true },
+      { text: "C. Entre émail et améloblastes réduits", correct: true },
+      { text: "D. Collagénique", correct: false }
+    ]
+  },
+  {
+    question: "Lame basale interne (MBI).",
+    difficulty: 2,
+    answers: [
+      { text: "A. Lamina lucida + densa", correct: true },
+      { text: "B. Supporte cellules non mitotiques", correct: false },
+      { text: "C. Contient collagène IV et glycoprotéines", correct: true },
+      { text: "D. Unique membrane basale gingivale", correct: false }
+    ]
+  },
+  {
+    question: "Hémidesmosomes du JE.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Relient MBI à membrane cytoplasmique", correct: true },
+      { text: "B. Jonctions d’ancrage à la surface dentaire", correct: true },
+      { text: "C. Zone à double membrane basale", correct: true },
+      { text: "D. Remplacent MBE", correct: false }
+    ]
+  },
+  {
+    question: "Épithélium de jonction (JE).",
+    difficulty: 2,
+    answers: [
+      { text: "A. Pavimenteux stratifié non kératinisé", correct: true },
+      { text: "B. Infiltré par leucocytes et monocytes", correct: true },
+      { text: "C. Organisation basale, médiane, coronaire", correct: true },
+      { text: "D. Sans cellules immunitaires", correct: false }
+    ]
+  },
+  {
+    question: "Structures périphériques au collet.",
+    difficulty: 2,
+    answers: [
+      { text: "A. MBE sépare JE/conjonctif", correct: true },
+      { text: "B. Cément afibrillaire sur émail (~2 mm)", correct: true },
+      { text: "C. Bordure linéaire fine, électron-dense", correct: true },
+      { text: "D. Cément afibrillaire acellulaire sans collagène", correct: true }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "Éruption continue (Gottlieb).",
+    difficulty: 3,
+    answers: [
+      { text: "A. Éruption active = dent vers occlusion", correct: true },
+      { text: "B. Éruption passive = migration apicale du JE", correct: true },
+      { text: "C. Cesse à l’occlusion", correct: false },
+      { text: "D. Continue toute la vie", correct: true }
+    ]
+  },
+  {
+    question: "Étapes de l’éruption passive (attache/fond du sillon).",
+    difficulty: 3,
+    answers: [
+      { text: "A. 0–15 ans : attache + fond au niveau de l’émail", correct: true },
+      { text: "B. 15–25 ans : attache au cément, fond à l’émail", correct: true },
+      { text: "C. 25–45 ans : attache et fond au cément (JEC)", correct: true },
+      { text: "D. >45 ans : attache/fond au cément", correct: true }
+    ]
+  },
+  {
+    question: "Adhésion gingivo-dentaire.",
+    difficulty: 3,
+    answers: [
+      { text: "A. MBI + sous-lamina lucida", correct: true },
+      { text: "B. Tonofilaments renforcent la jonction", correct: true },
+      { text: "C. Indépendante des hémidesmosomes", correct: false },
+      { text: "D. Dépend de ces structures", correct: true }
+    ]
+  },
+  {
+    question: "Renouvellement et dynamisme.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Attache change de niveau", correct: true },
+      { text: "B. Mitose basale du JE", correct: true },
+      { text: "C. Turn-over 4–6 jours", correct: true },
+      { text: "D. Réparation lente", correct: false }
+    ]
+  },
+  {
+    question: "Perméabilité du JE.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Espaces intercellulaires larges", correct: true },
+      { text: "B. Barrière sélective MBI", correct: true },
+      { text: "C. Imperméabilité totale", correct: false },
+      { text: "D. Passage de leucocytes", correct: true }
+    ]
+  },
+  {
+    question: "Cicatrisation de l’attache.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Élimination bactérienne", correct: true },
+      { text: "B. Gestion de l’inflammation", correct: true },
+      { text: "C. Disparition du JE", correct: false },
+      { text: "D. Physiologie du JE", correct: true }
+    ]
+  },
+  {
+    question: "Fluide gingival.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Évacue molécules du sulcus", correct: true },
+      { text: "B. Favorise plaque bactérienne", correct: true },
+      { text: "C. Contient anticorps", correct: true },
+      { text: "D. Sans protéines d’adhésion", correct: false }
+    ]
+  },
+  {
+    question: "Fluide gingival — compléments.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Propriétés antimicrobiennes", correct: true },
+      { text: "B. Soutient l’adhésion", correct: true },
+      { text: "C. Remplace la MBE", correct: false },
+      { text: "D. Maintient l’homéostasie buccale", correct: true }
+    ]
+  },
+  {
+    question: "Conclusion : jonction dento-gingivale.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Modèle tissulaire unique", correct: true },
+      { text: "B. Maintient adhésion gencive–dent", correct: true },
+      { text: "C. Barrière protectrice perméable", correct: true },
+      { text: "D. Altération = départ maladie parodontale", correct: true }
+    ]
+  },
+  {
+    question: "Schémas d’éruption (A–B–C).",
+    difficulty: 3,
+    answers: [
+      { text: "A. Avant : conjonctif entre épithéliums", correct: true },
+      { text: "B. Début : fusion épithéliums", correct: true },
+      { text: "C. Cours : migration périphérique", correct: true },
+      { text: "D. Fin : cuticule secondaire", correct: true }
+    ]
+  },
+
+  // D. Difficiles ⭐⭐⭐⭐
+  {
+    question: "Assemblage histologique du JE.", difficulty: 4,
+    answers: [
+      { text: "A. MBI ↔ hémidesmosomes ↔ cellules", correct: true },
+      { text: "B. MBE ↔ séparation JE/conjonctif", correct: true },
+      { text: "C. Cuticule amorphe sur émail", correct: true },
+      { text: "D. Cément afibrillaire acellulaire (~2 mm)", correct: true }
+    ]
+  },
+  {
+    question: "Double membrane basale (JE–gencive).", difficulty: 4,
+    answers: [
+      { text: "A. MBI + MBE présentes", correct: true },
+      { text: "B. MBI vers dent, MBE vers conjonctif", correct: true },
+      { text: "C. Substitution par desmosomes externes", correct: false },
+      { text: "D. Hémidesmosomes sur MBI", correct: true }
+    ]
+  },
+  {
+    question: "Squelette de jonction.", difficulty: 4,
+    answers: [
+      { text: "A. Tonofilaments rejoignent lamina densa", correct: true },
+      { text: "B. Renforcent l’intégrité adhésive", correct: true },
+      { text: "C. Remplacent la sous-lamina lucida", correct: false },
+      { text: "D. Ancrent cellules basales", correct: true }
+    ]
+  },
+  {
+    question: "Épithélium de jonction non kératinisé.", difficulty: 4,
+    answers: [
+      { text: "A. Trois zones différenciées", correct: true },
+      { text: "B. Zone médiane = leucocytes", correct: true },
+      { text: "C. Zone coronaire = cellules aplaties", correct: true },
+      { text: "D. Kératinisation nécessaire", correct: false }
+    ]
+  },
+  {
+    question: "Historique — apports.", difficulty: 4,
+    answers: [
+      { text: "A. Black → espace émail–épithélium", correct: true },
+      { text: "B. Gottlieb → cuticules", correct: true },
+      { text: "C. Wearhaug → manchon adhérent", correct: true },
+      { text: "D. Stern → absence de lame basale", correct: false }
+    ]
+  },
+  {
+    question: "Topographie fonctionnelle (JE 2–3 mm).", difficulty: 4,
+    answers: [
+      { text: "A. Coronairement : fond du sulcus", correct: true },
+      { text: "B. Apicalement : fibres desmodontales", correct: true },
+      { text: "C. Os alvéolaire inclus", correct: false },
+      { text: "D. Bord externe = conjonctif gingival", correct: true }
+    ]
+  },
+  {
+    question: "Perméabilité conservatrice.", difficulty: 4,
+    answers: [
+      { text: "A. Barrière sélective (MBI)", correct: true },
+      { text: "B. Flux cellulaire protecteur", correct: true },
+      { text: "C. Rôle local et général", correct: true },
+      { text: "D. Perméabilité nuisible", correct: false }
+    ]
+  },
+  {
+    question: "Rôle et physiologie.", difficulty: 4,
+    answers: [
+      { text: "A. Éruption continue, migration en 4 étapes", correct: true },
+      { text: "B. Adhésion = MBI + hémidesmosomes + tonofilaments", correct: true },
+      { text: "C. Turn-over rapide = bonne réparation", correct: true },
+      { text: "D. Cicatrisation = MBE seule", correct: false }
+    ]
+  },
+  {
+    question: "Fluide gingival — propriétés.", difficulty: 4,
+    answers: [
+      { text: "A. Favorise plaque et défenses", correct: true },
+      { text: "B. Protéines collantes adhésives", correct: true },
+      { text: "C. Purement transsudatif", correct: false },
+      { text: "D. Antimicrobien", correct: true }
+    ]
+  },
+  {
+    question: "Interface dent–JE.", difficulty: 4,
+    answers: [
+      { text: "A. Bordure linéaire fine, coronaire", correct: true },
+      { text: "B. Cément afibrillaire sur émail cervical", correct: true },
+      { text: "C. MBE sépare JE/conjonctif", correct: true },
+      { text: "D. Cuticule lamellaire collagénique", correct: false }
+    ]
+  },
+
+  // E. Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Phases histogénétiques et topographie.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Attache primaire (pré-éruptive) : MBI + hémidesmosomes entre améloblastes résiduels et émail", correct: true },
+      { text: "B. Attache secondaire : premier contact lame externe / cellules basales épithélium oral", correct: true },
+      { text: "C. Phase définitive : disparition épithélium adamantin résiduel", correct: true },
+      { text: "D. Phase éruptive : espace conjonctif stable permanent", correct: false }
+    ]
+  },
+  {
+    question: "Kératinisation, perméabilité, adhésion.",
+    difficulty: 5,
+    answers: [
+      { text: "A. JE non kératinisé, perméable, barrière sélective", correct: true },
+      { text: "B. Barrière sélective = lame basale interne", correct: true },
+      { text: "C. Adhésion via sous-lamina lucida + hémidesmosomes", correct: true },
+      { text: "D. Kératinisation requise pour réparation rapide", correct: false }
+    ]
+  },
+  {
+    question: "Double membrane basale et implications mécaniques.",
+    difficulty: 5,
+    answers: [
+      { text: "A. MBI côté dent, MBE côté conjonctif", correct: true },
+      { text: "B. Attache forte + échanges sélectifs", correct: true },
+      { text: "C. Tonofilaments inutiles", correct: false },
+      { text: "D. Stabilité malgré remaniements tissulaires", correct: true }
+    ]
+  },
+  {
+    question: "Éruption passive (âges) et position JE / fond du sillon.",
+    difficulty: 5,
+    answers: [
+      { text: "A. 0–15 ans : attache + fond au niveau de l’émail", correct: true },
+      { text: "B. 15–25 ans : attache au cément (JEC), fond à l’émail", correct: true },
+      { text: "C. 25–45 ans : attache + fond au cément (JEC)", correct: true },
+      { text: "D. >45 ans : attache au cément, fond à l’émail", correct: false }
+    ]
+  },
+  {
+    question: "Conclusion globale.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Jonction dento-gingivale = système d’attache parfait, adhésion + perméabilité protectrice", correct: true },
+      { text: "B. Toute altération = point de départ de maladie parodontale", correct: true },
+      { text: "C. Barrière totalement imperméable", correct: false },
+      { text: "D. Remaniements du cément et du conjonctif n’altèrent pas l’adhésion", correct: true }
+    ]
+  }
+],"Le ligament alvéolo-dentaire": [
+  // A. Bon élève ⭐
+  {
+    question: "Le LAD, tissu conjonctif spécialisé, relie la dent à l’os et résiste aux forces masticatoires.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Entre cément radiculaire et os alvéolaire ; fixe la dent", correct: true },
+      { text: "B. Entre émail et os spongieux ; faibles forces", correct: false },
+      { text: "C. Contrecarre des forces importantes", correct: true },
+      { text: "D. Entre dentine coronaire et lamina dura ; décoratif", correct: false }
+    ]
+  },
+  {
+    question: "Morphogenèse du desmodonte.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Dérive du follicule dentaire ; débute avec formation radiculaire et éruption", correct: true },
+      { text: "B. Espace cément–os d’abord TC non organisé ; premiers faisceaux crête alvéolaire", correct: true },
+      { text: "C. Groupes obliques/apical maturent tardivement", correct: true },
+      { text: "D. Faisceaux apicaux apparaissent en premier puis disparaissent", correct: false }
+    ]
+  },
+  {
+    question: "Définition stricte du LAD.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Faisceaux ancrés dans cément et os alvéolaire", correct: true },
+      { text: "B. Dans dentine et périoste lingual", correct: false },
+      { text: "C. Tissu conjonctif spécialisé fibrillaire", correct: true },
+      { text: "D. Dépourvu de cellules/substance fondamentale", correct: false }
+    ]
+  },
+  {
+    question: "Anatomie macroscopique et épaisseur.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Plus fin au tiers moyen, plus large au collet", correct: true },
+      { text: "B. 0,25 mm (11–15 ans) → 0,15 mm (50–70 ans)", correct: true },
+      { text: "C. S’élargit en stress, s’atrophie sans fonction", correct: true },
+      { text: "D. Toujours plus épais en dent temporaire", correct: false }
+    ]
+  },
+  {
+    question: "Histologie : fibres et matrice.",
+    difficulty: 1,
+    answers: [
+      { text: "A. Fibres = 70–80 % MEC, 90 % collagène", correct: true },
+      { text: "B. Collagène I (80 %) et III (~20 %)", correct: true },
+      { text: "C. Polymérisation fibrillaire puis faisceaux", correct: true },
+      { text: "D. Fibres exclusivement élastiques", correct: false }
+    ]
+  },
+
+  // B. Très bon élève ⭐⭐
+  {
+    question: "Groupes de fibres principales (Sharpey).",
+    difficulty: 2,
+    answers: [
+      { text: "A. Crête alvéolaire : oblique vers cément cervical", correct: true },
+      { text: "B. Horizontales : perpendiculaires à l’axe", correct: true },
+      { text: "C. Obliques : du cément vers os, groupe majeur", correct: true },
+      { text: "D. Apical/interradiculaire : faisceaux en éventail", correct: true }
+    ]
+  },
+  {
+    question: "Ligament gingival.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Dans lamina propria, fibres dento/alvéolo-gingivales", correct: true },
+      { text: "B. Faisceaux circulaires + dento-périostés", correct: true },
+      { text: "C. Fibres transseptales reliant dents d’une arcade", correct: true },
+      { text: "D. Faisceaux pulpaires", correct: false }
+    ]
+  },
+  {
+    question: "Fibres oxytalanes.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Pas de fibres élastiques matures ; oxytalanes immatures", correct: true },
+      { text: "B. Fines, 0,2–0,9 µm, sans striation", correct: true },
+      { text: "C. Parallèles à la racine, perpendiculaires au collagène", correct: true },
+      { text: "D. Fibres élastiques matures abondantes", correct: false }
+    ]
+  },
+  {
+    question: "Substance fondamentale.",
+    difficulty: 2,
+    answers: [
+      { text: "A. ≈65 % du LAD ; 70 % d’eau", correct: true },
+      { text: "B. Acide hyaluronique, protéoglycanes, glycoprotéines", correct: true },
+      { text: "C. Constituée d’élastine pure", correct: false },
+      { text: "D. Hydratation <10 %", correct: false }
+    ]
+  },
+  {
+    question: "Populations cellulaires du LAD.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Fibroblastes, ostéo-/cémento-/cellules souches", correct: true },
+      { text: "B. Restes de Malassez", correct: true },
+      { text: "C. Cellules immunitaires", correct: true },
+      { text: "D. Aucune cellule de défense", correct: false }
+    ]
+  },
+  {
+    question: "Fibroblastes.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Cellules fusiformes alignées sur faisceaux", correct: true },
+      { text: "B. Synthèse du collagène", correct: true },
+      { text: "C. Phagocytose du collagène", correct: true },
+      { text: "D. Sans jonctions", correct: false }
+    ]
+  },
+  {
+    question: "Jonctions et transmission de force.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Desmosomes/jonctions serrées", correct: true },
+      { text: "B. Transmission au syncytium fibroblastique", correct: true },
+      { text: "C. Fibronectine = relais", correct: true },
+      { text: "D. Gap junctions seules", correct: false }
+    ]
+  },
+  {
+    question: "Cellules osseuses et cémentaires.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Ostéoblastes/ostéoclastes en surface osseuse", correct: true },
+      { text: "B. Cémentoblastes/cémentoclastes en surface cémentaire", correct: true },
+      { text: "C. Remodelage osseux par ostéoblastes/ostéoclastes", correct: true },
+      { text: "D. Cémentoclastes issus de fibroblastes", correct: false }
+    ]
+  },
+  {
+    question: "Restes épithéliaux de Malassez.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Résidus de la gaine de Hertwig", correct: true },
+      { text: "B. Amas basaux, hémidesmosomes", correct: true },
+      { text: "C. Calcifications possibles (cémenticules)", correct: true },
+      { text: "D. Donnent odontoblastes", correct: false }
+    ]
+  },
+  {
+    question: "Cellules de défense.",
+    difficulty: 2,
+    answers: [
+      { text: "A. Macrophages phagocytaires", correct: true },
+      { text: "B. Mastocytes péri-vasculaires", correct: true },
+      { text: "C. Lymphocytes/plasmocytes/PNN rares hors inflammation", correct: true },
+      { text: "D. Présence constante massive", correct: false }
+    ]
+  },
+
+  // C. Excellent ⭐⭐⭐
+  {
+    question: "Structures calcifiées intraligamentaires.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Cémenticules libres/adhérents", correct: true },
+      { text: "B. Fragments osseux, calcifications dystrophiques", correct: true },
+      { text: "C. Calcifications de Malassez", correct: true },
+      { text: "D. Dentinomes systématiques", correct: false }
+    ]
+  },
+  {
+    question: "Vascularisation artérielle.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Branches artères dentaires sup/inf", correct: true },
+      { text: "B. Trois voies : apicale, gingivale, alvéolaire", correct: true },
+      { text: "C. Peu vascularisé", correct: false },
+      { text: "D. Par chambre pulpaire", correct: false }
+    ]
+  },
+  {
+    question: "Drainage veineux.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Plexus veineux apical", correct: true },
+      { text: "B. Flux LAD plus lent que l’os", correct: true },
+      { text: "C. Pression sanguine influence position de repos", correct: true },
+      { text: "D. Flux toujours plus rapide que l’os", correct: false }
+    ]
+  },
+  {
+    question: "Lymphatiques et innervation.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Lymphatiques vers ganglions sous-maxillaires", correct: true },
+      { text: "B. Innervation sensitive trijéminale", correct: true },
+      { text: "C. Fibres avec vaisseaux, récepteurs proprioceptifs", correct: true },
+      { text: "D. Parasympathique exclusif", correct: false }
+    ]
+  },
+  {
+    question: "Récepteurs et rôle sensoriel.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Récepteurs proprioceptifs fasciculés", correct: true },
+      { text: "B. Sensibilité tactile et douleur", correct: true },
+      { text: "C. Réflexes protecteurs et fonctions digestives", correct: true },
+      { text: "D. Vasoconstriction systémique", correct: false }
+    ]
+  },
+  {
+    question: "Histo-physiologie des fibres.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Crête/horizontales ↔ forces latérales", correct: true },
+      { text: "B. Obliques ↔ forces axiales", correct: true },
+      { text: "C. Apicales ↔ protection neurovasculaire", correct: true },
+      { text: "D. Interradiculaires ↔ torque/luxation", correct: true }
+    ]
+  },
+  {
+    question: "Fibres oxytalanes (rôle).",
+    difficulty: 3,
+    answers: [
+      { text: "A. Régulent le flot vasculaire", correct: true },
+      { text: "B. Remplacent le collagène", correct: false },
+      { text: "C. Immatures, non élastiques matures", correct: true },
+      { text: "D. Déclenchent activement l’éruption", correct: false }
+    ]
+  },
+  {
+    question: "Rôle cellulaire global.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Fibroblastes : turnover élevé", correct: true },
+      { text: "B. Cémentoblastes : maintien insertion", correct: true },
+      { text: "C. Ostéoblastes/ostéoclastes : remaniement", correct: true },
+      { text: "D. Cémentoclastes : résorption physiologique", correct: true }
+    ]
+  },
+  {
+    question: "Fonctions mécaniques et immunitaires.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Fixation dentaire", correct: true },
+      { text: "B. Amortissement hydraulique", correct: true },
+      { text: "C. Rôle immunitaire", correct: true },
+      { text: "D. Ostéointégration naturelle", correct: false }
+    ]
+  },
+  {
+    question: "Nutrition et compression.",
+    difficulty: 3,
+    answers: [
+      { text: "A. Richement vascularisé", correct: true },
+      { text: "B. Compression prolongée → nécrose", correct: true },
+      { text: "C. Aucune atteinte", correct: false },
+      { text: "D. Nutrition/émonctoire assurées", correct: true }
+    ]
+  },
+
+  // D. Difficiles ⭐⭐⭐⭐
+  {
+    question: "Cicatrisation parodontale.",
+    difficulty: 4,
+    answers: [
+      { text: "A. LAD = source cellulaire pluripotente", correct: true },
+      { text: "B. Collagène V accru", correct: true },
+      { text: "C. LAD exclu de la cicatrisation", correct: false },
+      { text: "D. Synthèse de nouvelles fibres", correct: true }
+    ]
+  },
+  {
+    question: "Vieillissement du LAD.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Diminution épaisseur et métabolisme", correct: true },
+      { text: "B. Cellules adipeuses ↑, SF altérée", correct: true },
+      { text: "C. Résistance et réparation ↓", correct: true },
+      { text: "D. Hypervascularisation constante", correct: false }
+    ]
+  },
+  {
+    question: "Radiologie.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Espace radio-clair sous JEC jusqu’à apex", correct: true },
+      { text: "B. S’efface → radio-opaque avec âge", correct: false },
+      { text: "C. Plus réduit en dent permanente", correct: true },
+      { text: "D. S’élargit en stress occlusal", correct: true }
+    ]
+  },
+  {
+    question: "Collagène.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Types I & III (~20 %)", correct: true },
+      { text: "B. Polymérisation fibrillaire", correct: true },
+      { text: "C. Fibres de Sharpey", correct: true },
+      { text: "D. Types II/IV dominants", correct: false }
+    ]
+  },
+  {
+    question: "Plasticité cellulaire.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Clastes = lignée macrophagique", correct: true },
+      { text: "B. Myofibroblastes contractiles", correct: true },
+      { text: "C. Cellules mésenchymateuses → fibro/ostéo/cémento", correct: true },
+      { text: "D. Épithéliales → odontoblastes", correct: false }
+    ]
+  },
+  {
+    question: "Innervation.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Entrée via canaux alvéolaires apicaux", correct: true },
+      { text: "B. Fibres suivant vaisseaux puis libres", correct: true },
+      { text: "C. Autonome sympathique modulant flux", correct: true },
+      { text: "D. Parasympathique exclusif", correct: false }
+    ]
+  },
+  {
+    question: "Groupes de fibres et fonctions croisées.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Obliques ↔ forces axiales", correct: true },
+      { text: "B. Apicales ↔ anti-migration mésiale", correct: true },
+      { text: "C. Interradiculaires ↔ torque/luxation", correct: true },
+      { text: "D. Transseptales ↔ cohésion arcade", correct: true }
+    ]
+  },
+  {
+    question: "Données chiffrées globales.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Fibres = 70–80 % MEC ; SF = 65 % LAD ; eau 70 %", correct: true },
+      { text: "B. Épaisseur : 0,25 → 0,15 mm", correct: true },
+      { text: "C. Oxytalan : 0,2–0,9 µm", correct: true },
+      { text: "D. Flux LAD > os", correct: false }
+    ]
+  },
+  {
+    question: "Physiologie intégrée.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Position de repos = pression sanguine", correct: true },
+      { text: "B. Volume vasculaire influe sur position", correct: true },
+      { text: "C. Flux LAD plus lent", correct: true },
+      { text: "D. Aucun impact clinique", correct: false }
+    ]
+  },
+  {
+    question: "Champs gingival vs alvéolo-dentaire.",
+    difficulty: 4,
+    answers: [
+      { text: "A. Ligament gingival : dento/alvéolo-gingival, circulaire, transseptal", correct: true },
+      { text: "B. Faisceaux LAD : crête, horizontal, oblique, apical, interradiculaire", correct: true },
+      { text: "C. LAD = ligament parodontal", correct: true },
+      { text: "D. Gingival = inséré dans émail", correct: false }
+    ]
+  },
+
+  // E. Très difficiles ⭐⭐⭐⭐⭐
+  {
+    question: "Mise en tension fonctionnelle.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Distorsion → régulation du flux par fibres oxytalanes", correct: true },
+      { text: "B. Amortissement hydraulique", correct: true },
+      { text: "C. Fixation via faisceaux LAD + gingivaux", correct: true },
+      { text: "D. Suppression flux = amélioration repos", correct: false }
+    ]
+  },
+  {
+    question: "Cartographie vasculo-nerveuse.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Artères : apicales, gingivales, alvéolaires", correct: true },
+      { text: "B. Nerfs : apicaux/intra-septaux", correct: true },
+      { text: "C. Autonome sympathique modulant flux", correct: true },
+      { text: "D. Nerfs par chambre pulpaire", correct: false }
+    ]
+  },
+  {
+    question: "Continuité développementale.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Premiers faisceaux crête ; fibroblastes obliques", correct: true },
+      { text: "B. Horizontalisation cervicale après contact occlusal", correct: true },
+      { text: "C. Maturation apicale terminale", correct: true },
+      { text: "D. Obliques disparaissent", correct: false }
+    ]
+  },
+  {
+    question: "Terminologie : LAD vs gencive vs os.",
+    difficulty: 5,
+    answers: [
+      { text: "A. LAD : fibres Sharpey entre cément et os", correct: true },
+      { text: "B. Transseptales : relient dents d’une arcade", correct: true },
+      { text: "C. Cémenticules libres ou adhérents", correct: true },
+      { text: "D. Ostéoclastes pulpaire", correct: false }
+    ]
+  },
+  {
+    question: "Synthèse finale.",
+    difficulty: 5,
+    answers: [
+      { text: "A. Activité métabolique intense", correct: true },
+      { text: "B. Fonctions mécaniques/nutritives/sensorielles", correct: true },
+      { text: "C. Rapports étroits os–dent", correct: true },
+      { text: "D. Comparable à un ligament inerte", correct: false }
+    ]
+  }
+],
+
+
+
+
+    'Système nerveux': [
+      {
+        question: 'ما هو الجزء من الدماغ المسؤول عن التوازن؟',
+        difficulty: 1,
+        answers: [
+          { text: 'المخيخ', correct: true },
+          { text: 'النخاع المستطيل', correct: false },
+          { text: 'المهاد', correct: false },
+          { text: 'القشرة المخية', correct: false }
+        ]
+      },
+      {
+        question: 'ما هو العصب المسؤول عن الرؤية؟',
+        difficulty: 2,
+        answers: [
+          { text: 'العصب السمعي', correct: false },
+          { text: 'العصب البصري', correct: true },
+          { text: 'العصب الوجهي', correct: false },
+          { text: 'العصب الحائر', correct: false }
+        ]
+      }
+      // ➕ أضف المزيد من الأسئلة هنا
+    ]
+  };
+
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "lesson.html";
+  }
+</script>
+<script src="./layout-fix.js"></script>
+
+</body>
+</html>

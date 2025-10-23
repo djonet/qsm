@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- 🔒 حماية الصفحة بـ Firebase -->
+<script type="module">
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  document.documentElement.style.visibility = 'hidden';
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.replace('index.html');
+      return;
+    }
+    try {
+      const ref  = doc(db, 'allowedUsers', user.uid);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        document.documentElement.style.visibility = 'visible';
+      } else {
+        window.location.replace('welcome.html?status=pending');
+      }
+    } catch (e) {
+      console.error('Firebase Auth Error:', e);
+      window.location.replace('welcome.html?status=pending');
+    }
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2,h3 { margin-bottom: 10px; }
+
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty { margin-bottom: 8px; text-align: left; }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1){animation-delay:0.1s;}
+  .star:nth-child(2){animation-delay:0.2s;}
+  .star:nth-child(3){animation-delay:0.3s;}
+  .star:nth-child(4){animation-delay:0.4s;}
+  .star:nth-child(5){animation-delay:0.5s;}
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg,#0096c7,#00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black!important;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black!important;
+  }
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  .control-buttons {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1; min-width: 100px; padding: 10px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white; font-weight: bold;
+    cursor: pointer; transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    .container{width:95%;padding:15px;}
+    .question-text{font-size:16px;}
+    .answer{font-size:15px;padding:10px;}
+    .control-buttons{flex-direction:column;}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h3 id="lessonTitle"></h3>
+  <div id="questionsContainer"></div>
+  <button class="control-buttons" style="background:#444;margin-top:20px" onclick="goBack()">🔙 الرجوع للدروس</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // 🧩 إعداد القيم الافتراضية
+  localStorage.setItem('specialty','طب الأسنان');
+  localStorage.setItem('level','سنة 2');
+  localStorage.setItem('subject','Prothèse');
+
+  const lesson = localStorage.getItem('lesson') || 'Os frontal et éthmoïde';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 أسئلة تجريبية
+  const questionsData = {
+    'Les indices biologiques': [
+  // 1 à 5 — Niveau lecture superficielle ⭐
+  {
+    question: "Les indices biologiques :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Sont des éléments anatomiques", correct: true },
+      { text: "B. Influencent la conception prothétique", correct: true },
+      { text: "C. Se limitent aux tissus mous", correct: false },
+      { text: "D. Sont évalués cliniquement et sur modèles", correct: true }
+    ]
+  },
+  {
+    question: "L’analyse des indices biologiques doit :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Être systématique à l’examen clinique", correct: true },
+      { text: "B. Être reportée sur les modèles d’étude", correct: true },
+      { text: "C. Être négligée si la prothèse est complète", correct: false },
+      { text: "D. Être faite avant toute empreinte", correct: true }
+    ]
+  },
+  {
+    question: "La classification distingue :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Les indices positifs", correct: true },
+      { text: "B. Les indices négatifs", correct: true },
+      { text: "C. Les zones à éviter", correct: true },
+      { text: "D. Les surfaces neutres", correct: false }
+    ]
+  },
+  {
+    question: "Parmi les éléments anatomiques favorables au maxillaire :",
+    difficulty: 1,
+    answers: [
+      { text: "A. La voûte palatine", correct: true },
+      { text: "B. Les tubérosités", correct: true },
+      { text: "C. Les crêtes", correct: true },
+      { text: "D. Le raphé médian", correct: false }
+    ]
+  },
+  {
+    question: "La voûte palatine :",
+    difficulty: 1,
+    answers: [
+      { text: "A. Fait partie du palais dur", correct: true },
+      { text: "B. Offre une surface d’appui importante", correct: true },
+      { text: "C. Assure la sustentation de la prothèse", correct: true },
+      { text: "D. Est une zone à éviter", correct: false }
+    ]
+  },
+
+  // 6 à 15 — Niveau bon élève ⭐⭐
+  {
+    question: "La voûte palatine :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Est un indice très positif", correct: true },
+      { text: "B. Présente une concavité variable", correct: true },
+      { text: "C. Participe à la rétention des dents naturelles", correct: false },
+      { text: "D. Sert de repère occlusal", correct: false }
+    ]
+  },
+  {
+    question: "Les tubérosités maxillaires :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Sont des reliefs osseux fibro-muqueux", correct: true },
+      { text: "B. Sont stables dans le temps", correct: true },
+      { text: "C. Doivent être englobées dans la prothèse", correct: true },
+      { text: "D. Doivent être évitées autant que possible", correct: false }
+    ]
+  },
+  {
+    question: "Les tubérosités limitent :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Les mouvements postéro-antérieurs", correct: true },
+      { text: "B. Les mouvements transversaux", correct: false },
+      { text: "C. Les mouvements verticaux", correct: false },
+      { text: "D. Les mouvements parasites", correct: true }
+    ]
+  },
+  {
+    question: "L’examen clinique des crêtes porte sur :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Leur hauteur", correct: true },
+      { text: "B. Leur largeur", correct: true },
+      { text: "C. Leur régularité", correct: true },
+      { text: "D. Leur résorption osseuse", correct: true }
+    ]
+  },
+  {
+    question: "Les crêtes favorables :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Sont hautes (> 5 mm)", correct: true },
+      { text: "B. Sont larges (≈ 8 mm)", correct: true },
+      { text: "C. Ont des versants presque parallèles", correct: true },
+      { text: "D. Présentent des formes irrégulières", correct: false }
+    ]
+  },
+  {
+    question: "Les crêtes édentées sont capitales pour :",
+    difficulty: 2,
+    answers: [
+      { text: "A. La sustentation", correct: true },
+      { text: "B. La stabilisation", correct: true },
+      { text: "C. Le montage des dents artificielles", correct: true },
+      { text: "D. L’équilibre musculaire", correct: false }
+    ]
+  },
+  {
+    question: "La papille rétro-incisive :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Recouvre le trou palatin antérieur", correct: true },
+      { text: "B. Doit être déchargée ou évitée", correct: true },
+      { text: "C. Sert de repère prothétique", correct: true },
+      { text: "D. Supporte les pressions masticatoires", correct: false }
+    ]
+  },
+  {
+    question: "La compression de la papille rétro-incisive entraîne :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Un risque d’ischémie", correct: true },
+      { text: "B. Une déstabilisation de la prothèse", correct: true },
+      { text: "C. Une hyperkératose protectrice", correct: false },
+      { text: "D. Une nécessité de décharge localisée", correct: true }
+    ]
+  },
+  {
+    question: "Le raphé médian :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Se situe sur la ligne médiane du palais", correct: true },
+      { text: "B. Peut devenir un axe de rotation", correct: true },
+      { text: "C. Est un indice négatif s’il est saillant", correct: true },
+      { text: "D. Favorise la stabilisation", correct: false }
+    ]
+  },
+  {
+    question: "Le torus palatin :",
+    difficulty: 2,
+    answers: [
+      { text: "A. Est une excroissance osseuse centrale", correct: true },
+      { text: "B. Doit être déchargé par la prothèse", correct: true },
+      { text: "C. Peut nécessiter une exérèse chirurgicale", correct: true },
+      { text: "D. Améliore la sustentation", correct: false }
+    ]
+  },
+
+  // 16 à 25 — Niveau très bon ⭐⭐⭐
+  {
+    question: "La ligne de flexion du voile :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Sépare muqueuse libre et adhérente", correct: true },
+      { text: "B. Marque la limite palais dur / voile", correct: true },
+      { text: "C. Constitue une surface d’appui", correct: false },
+      { text: "D. Sert de repère postérieur", correct: true }
+    ]
+  },
+  {
+    question: "Les fossettes palatines :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Sont des repères inconstants", correct: true },
+      { text: "B. Marquent la limite palais dur-voile", correct: true },
+      { text: "C. Définissent la zone de sustentation", correct: false },
+      { text: "D. Guident le bord postérieur", correct: true }
+    ]
+  },
+  {
+    question: "Le ligament ptérygo-maxillaire :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Est sollicité à l’ouverture buccale", correct: true },
+      { text: "B. Peut interférer avec la zone postérieure", correct: true },
+      { text: "C. Stabilise la prothèse", correct: false },
+      { text: "D. Nécessite une décharge localisée", correct: false }
+    ]
+  },
+  {
+    question: "La ligne de réflexion muqueuse :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Délimite tissus fixes et mobiles", correct: true },
+      { text: "B. Ne doit pas être dépassée", correct: true },
+      { text: "C. Sert de repère prothétique", correct: true },
+      { text: "D. Constitue une zone d’appui", correct: false }
+    ]
+  },
+  {
+    question: "Les freins du maxillaire :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Peuvent être médian ou latéraux", correct: true },
+      { text: "B. Doivent rester libres de toute interférence", correct: true },
+      { text: "C. Exigent parfois une chirurgie pré-prothétique", correct: true },
+      { text: "D. Stabilisent la prothèse par traction", correct: false }
+    ]
+  },
+  {
+    question: "Les zones à éviter :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Les papilles bunoïdes", correct: true },
+      { text: "B. Les zones de Schroeder", correct: true },
+      { text: "C. La voûte palatine", correct: false },
+      { text: "D. Les tubérosités", correct: false }
+    ]
+  },
+  {
+    question: "Les papilles bunoïdes :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Bourrelets muqueux irréguliers", correct: true },
+      { text: "B. Situées dans la région antérieure", correct: true },
+      { text: "C. Provoquent déséquilibres prothétiques", correct: true },
+      { text: "D. Toujours investies pour la rétention", correct: false }
+    ]
+  },
+  {
+    question: "Les zones de Schroeder :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Occupent le tiers postérieur de la voûte", correct: true },
+      { text: "B. Se situent de part et d’autre du raphé", correct: true },
+      { text: "C. Présentent une muqueuse variable", correct: true },
+      { text: "D. Offrent un appui idéal", correct: false }
+    ]
+  },
+  {
+    question: "Les indices positifs mandibulaires :",
+    difficulty: 3,
+    answers: [
+      { text: "A. Les crêtes édentées", correct: true },
+      { text: "B. Le trigone rétro-molaire", correct: true },
+      { text: "C. La zone de Fish", correct: true },
+      { text: "D. La niche rétro-molaire", correct: true }
+    ]
+  },
+  {
+    question: "Le trigone rétro-molaire :",
+    difficulty: 3,
+    answers: [
+      { text: "A. À l’aplomb des dents de sagesse", correct: true },
+      { text: "B. Résiste aux déplacements postérieurs", correct: true },
+      { text: "C. Sert de support prothétique", correct: true },
+      { text: "D. Doit être déchargé", correct: false }
+    ]
+  },
+
+  // 26 à 35 — Niveau excellent ⭐⭐⭐⭐
+  {
+    question: "La zone de Fish :",
+    difficulty: 4,
+    answers: [
+      { text: "A. S’étend de la crête édentée à la ligne oblique externe", correct: true },
+      { text: "B. Zone d’appui importante", correct: true },
+      { text: "C. Participe à la sustentation", correct: true },
+      { text: "D. Contre-indiquée en édentement terminal", correct: false }
+    ]
+  },
+  {
+    question: "La niche rétro-molaire :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Sous la ligne oblique interne", correct: true },
+      { text: "B. Permet de prolonger la selle", correct: true },
+      { text: "C. Sans insertion musculaire", correct: true },
+      { text: "D. Doit toujours être dépassée", correct: false }
+    ]
+  },
+  {
+    question: "Plus la ligne mylo-hyoïdienne est basse :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Plus la hauteur exploitée augmente", correct: true },
+      { text: "B. Plus l’indice est positif", correct: true },
+      { text: "C. Moins la crête est favorable", correct: false },
+      { text: "D. Plus la prothèse est stable", correct: true }
+    ]
+  },
+  {
+    question: "Les freins mandibulaires :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Peuvent être médian ou latéraux", correct: true },
+      { text: "B. Nécessitent un aménagement s’ils sont trop proches", correct: true },
+      { text: "C. Leur compression entraîne ulcération", correct: true },
+      { text: "D. Améliorent la rétention s’ils sont hauts", correct: false }
+    ]
+  },
+  {
+    question: "Le ligament ptérygo-mandibulaire :",
+    difficulty: 4,
+    answers: [
+      { text: "A. S’insère en arrière de la tubérosité et du trigone", correct: true },
+      { text: "B. Est sollicité à l’ouverture buccale", correct: true },
+      { text: "C. Peut gêner la zone postérieure", correct: true },
+      { text: "D. Stabilise la prothèse", correct: false }
+    ]
+  },
+  {
+    question: "Les lignes de réflexion muqueuse mandibulaires :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Externe : limite avec joues et lèvres", correct: true },
+      { text: "B. Interne : limite avec plancher buccal", correct: true },
+      { text: "C. Sont des zones d’appui", correct: false },
+      { text: "D. Délimitent l’investissement prothétique", correct: true }
+    ]
+  },
+  {
+    question: "Les tori mandibulaires :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Exostoses inconstantes", correct: true },
+      { text: "B. Siègent sur la table interne près des prémolaires", correct: true },
+      { text: "C. Doivent être éliminés ou évités", correct: true },
+      { text: "D. Constituent un appui fiable", correct: false }
+    ]
+  },
+  {
+    question: "Le frein de la langue :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Doit garder sa liberté physiologique", correct: true },
+      { text: "B. Peut être haut ou bas", correct: true },
+      { text: "C. Difficile à corriger chirurgicalement", correct: true },
+      { text: "D. Stabilise la prothèse par traction", correct: false }
+    ]
+  },
+  {
+    question: "L’examen de la salive permet :",
+    difficulty: 4,
+    answers: [
+      { text: "A. D’évaluer sa quantité", correct: true },
+      { text: "B. Sa qualité et son débit", correct: true },
+      { text: "C. De choisir le matériau d’empreinte", correct: true },
+      { text: "D. De déterminer la technique adaptée", correct: true }
+    ]
+  },
+  {
+    question: "Les indices négatifs spécifiques à la mandibule :",
+    difficulty: 4,
+    answers: [
+      { text: "A. Le frein de la langue", correct: true },
+      { text: "B. La table rétro-incisive", correct: true },
+      { text: "C. Le torus palatin", correct: false },
+      { text: "D. Le ligament ptérygo-maxillaire", correct: false }
+    ]
+  },
+
+  // 36 à 40 — Niveau très difficile ⭐⭐⭐⭐⭐
+  {
+    question: "Les indices négatifs communs aux deux arcades :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Les freins", correct: true },
+      { text: "B. Le ligament ptérygo-maxillaire", correct: true },
+      { text: "C. Les tori", correct: true },
+      { text: "D. Les zones de Schroeder", correct: false }
+    ]
+  },
+  {
+    question: "Les zones stables dans le temps :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Les tubérosités", correct: true },
+      { text: "B. Les crêtes hautes et larges", correct: false },
+      { text: "C. La voûte palatine", correct: false },
+      { text: "D. Les zones de Schroeder", correct: false }
+    ]
+  },
+  {
+    question: "Les zones de Schroeder influencent :",
+    difficulty: 5,
+    answers: [
+      { text: "A. La dépressibilité t...dépressibilité tissulaire", correct: true },
+      { text: "B. L’épaisseur de la muqueuse", correct: true },
+      { text: "C. La position du raphé", correct: false },
+      { text: "D. L’adaptation du bord postérieur", correct: false }
+    ]
+  },
+  {
+    question: "La ligne oblique interne :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Peut créer une contre-dépouille traumatisante", correct: true },
+      { text: "B. Sert de repère dans la niche rétro-molaire", correct: true },
+      { text: "C. Ne doit pas être dépassée si gêne muqueuse", correct: true },
+      { text: "D. Peut limiter le prolongement des selles", correct: true }
+    ]
+  },
+  {
+    question: "L’étude des indices biologiques vise à :",
+    difficulty: 5,
+    answers: [
+      { text: "A. Adapter la conception de la prothèse", correct: true },
+      { text: "B. Identifier les zones favorables", correct: true },
+      { text: "C. Éviter les zones à risque", correct: true },
+      { text: "D. Choisir le matériau et la technique d’empreinte", correct: true }
+    ]
+  }
+],
+
+    'Système nerveux': [
+      {
+        question: 'ما هو الجزء من الدماغ المسؤول عن التوازن؟',
+        difficulty: 1,
+        answers: [
+          { text: 'المخيخ', correct: true },
+          { text: 'النخاع المستطيل', correct: false },
+          { text: 'المهاد', correct: false },
+          { text: 'القشرة المخية', correct: false }
+        ]
+      },
+      {
+        question: 'ما هو العصب المسؤول عن الرؤية؟',
+        difficulty: 2,
+        answers: [
+          { text: 'العصب السمعي', correct: false },
+          { text: 'العصب البصري', correct: true },
+          { text: 'العصب الوجهي', correct: false },
+          { text: 'العصب الحائر', correct: false }
+        ]
+      }
+      // ➕ أضف المزيد من الأسئلة هنا
+    ]
+  };
+
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "lesson.html";
+  }
+
+</script>
+<script src="./layout-fix.js"></script>
+<script src="./translate.js"></script>
+
+
+</body>
+</html>
