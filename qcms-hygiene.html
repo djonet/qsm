@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- 🔒 حماية الصفحة بـ Firebase -->
+<script type="module">
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  document.documentElement.style.visibility = 'hidden';
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.replace('index.html');
+      return;
+    }
+    try {
+      const ref  = doc(db, 'allowedUsers', user.uid);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        document.documentElement.style.visibility = 'visible';
+      } else {
+        window.location.replace('welcome.html?status=pending');
+      }
+    } catch (e) {
+      console.error('Firebase Auth Error:', e);
+      window.location.replace('welcome.html?status=pending');
+    }
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2,h3 { margin-bottom: 10px; }
+
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty { margin-bottom: 8px; text-align: left; }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1){animation-delay:0.1s;}
+  .star:nth-child(2){animation-delay:0.2s;}
+  .star:nth-child(3){animation-delay:0.3s;}
+  .star:nth-child(4){animation-delay:0.4s;}
+  .star:nth-child(5){animation-delay:0.5s;}
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg,#0096c7,#00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black!important;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black!important;
+  }
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  .control-buttons {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1; min-width: 100px; padding: 10px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white; font-weight: bold;
+    cursor: pointer; transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    .container{width:95%;padding:15px;}
+    .question-text{font-size:16px;}
+    .answer{font-size:15px;padding:10px;}
+    .control-buttons{flex-direction:column;}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h3 id="lessonTitle"></h3>
+  <div id="questionsContainer"></div>
+  <button class="control-buttons" style="background:#444;margin-top:20px" onclick="goBack()">🔙 الرجوع للدروس</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // 🧩 إعداد القيم الافتراضية
+  localStorage.setItem('specialty','طب الأسنان');
+  localStorage.setItem('level','سنة 2');
+  localStorage.setItem('subject','hygiene');
+
+  const lesson = localStorage.getItem('lesson') || 'Os frontal et éthmoïde';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 أسئلة تجريبية
+  const questionsData = {
+    'ALIMENTATION NUTRITION ET SANTÉ DENTAIRE': [
+  {
+    question: 'L’OMS définit la santé buccodentaire par l’absence de douleur buccale/faciale, de cancers buccaux/pharyngés, d’infections/lésions, de parodontopathies et de pertes dentaires.',
+    difficulty: 1,
+    answers: [
+      { text: 'L’absence de douleur est exigée.', correct: true },
+      { text: 'L’absence de cancers buccaux/pharyngés est exigée.', correct: true },
+      { text: 'Le texte n’évoque que les tumeurs bénignes.', correct: false },
+      { text: 'La définition se limite aux seules dents sans les tissus de soutien.', correct: false }
+    ]
+  },
+  {
+    question: 'Selon la FDI, la santé buccodentaire inclut la capacité à parler, sourire, sentir, goûter, toucher, mâcher, déglutir et exprimer des émotions avec confiance, sans douleur ni gêne ; elle englobe aussi les maladies du complexe crâniofacial.',
+    difficulty: 1,
+    answers: [
+      { text: 'Elle exclut les maladies du complexe crâniofacial.', correct: false },
+      { text: 'Elle inclut la déglutition.', correct: true },
+      { text: 'Elle suppose la confiance dans les expressions du visage.', correct: true },
+      { text: 'Elle inclut sentir et goûter.', correct: true }
+    ]
+  },
+  {
+    question: 'Les caries apparaissent lorsque la plaque transforme les sucres des aliments/boissons en acides qui détruisent la dent avec le temps.',
+    difficulty: 1,
+    answers: [
+      { text: 'La plaque se forme à la surface des dents.', correct: true },
+      { text: 'Les protéines sont les substrats principaux des acides produits.', correct: false },
+      { text: 'Les boissons sucrées comptent parmi les sources de sucres.', correct: true },
+      { text: 'Les acides proviennent surtout des protéines alimentaires.', correct: false }
+    ]
+  },
+  {
+    question: 'Les maladies parodontales touchent les tissus de soutien, se manifestent par saignement, gonflement, douleurs et parfois mauvaise haleine ; dans les formes graves, destruction de l’attache/osseuse avec mobilité/chute.',
+    difficulty: 1,
+    answers: [
+      { text: 'Un saignement gingival peut être présent.', correct: true },
+      { text: 'Une mauvaise haleine peut être observée.', correct: true },
+      { text: 'Elles n’atteignent pas les tissus de soutien.', correct: false },
+      { text: 'Elles peuvent mener à une perte d’os et de l’attache.', correct: true }
+    ]
+  },
+  {
+    question: 'Le document cite : aphtes, herpès labial (HSV-1), candidoses (muguet blanc) et tumeurs bénignes ou malignes.',
+    difficulty: 1,
+    answers: [
+      { text: 'Les aphtes sont de petites lésions superficielles.', correct: true },
+      { text: 'L’herpès labial est décrit comme indolore.', correct: false },
+      { text: 'La candidose est liée à Candida albicans avec muguet blanc.', correct: true },
+      { text: 'Les tumeurs peuvent être bénignes ou malignes.', correct: true }
+    ]
+  },
+  {
+    question: 'Le « pouvoir cariogène » d’un aliment est sa capacité à induire des caries ; le cours en précise les déterminants.',
+    difficulty: 2,
+    answers: [
+      { text: 'Il s’agit d’une capacité à induire des caries.', correct: true },
+      { text: 'Les éléments décrits guident l’évaluation de ce pouvoir.', correct: true },
+      { text: 'Il s’inscrit dans la compréhension des interactions aliment-plaque.', correct: true },
+      { text: 'La notion est explicitement définie dans le texte.', correct: true }
+    ]
+  },
+  {
+    question: 'Les aliments les plus cariogènes : riches en glucides fermentescibles, à longue rétention et lentement solubles.',
+    difficulty: 2,
+    answers: [
+      { text: 'Une longue rétention en bouche accroît le risque.', correct: true },
+      { text: 'Une solubilité salivaire lente est mentionnée.', correct: true },
+      { text: 'Les lipides fermentescibles sont indiqués comme principaux.', correct: false },
+      { text: 'Les glucides fermentescibles sont concernés.', correct: true }
+    ]
+  },
+  {
+    question: 'Les aliments acides favorisent la déminéralisation de l’émail.',
+    difficulty: 2,
+    answers: [
+      { text: 'Ils favorisent la déminéralisation.', correct: true },
+      { text: 'Ils augmentent durablement le pH salivaire.', correct: false },
+      { text: 'Ils sont explicitement cités comme facteurs.', correct: true },
+      { text: 'Ils neutralisent la plaque.', correct: false }
+    ]
+  },
+  {
+    question: 'De longues expositions au sucre entraînent une acidité continue qui rend inefficace le pouvoir tampon de la salive.',
+    difficulty: 2,
+    answers: [
+      { text: 'Elles diminuent l’acidité au fil du temps.', correct: false },
+      { text: 'Elles rendent le pouvoir tampon inefficace.', correct: true },
+      { text: 'La durée d’exposition est déterminante.', correct: true },
+      { text: 'Elles maintiennent une acidité continue.', correct: true }
+    ]
+  },
+  {
+    question: 'Les « aliments protecteurs » (cariostatiques) : protéines, lipides (diminuent rétention/acidité), gommes à mâcher sans sucre, fluor.',
+    difficulty: 2,
+    answers: [
+      { text: 'Ils sont dits « cariostatiques ».', correct: true },
+      { text: 'Les protéines (œuf, poisson, viande) sont citées.', correct: true },
+      { text: 'Les lipides diminuent rétention et acidité.', correct: true },
+      { text: 'Les gommes sucrées sont privilégiées.', correct: false }
+    ]
+  },
+  {
+    question: 'Distinction « aliments » / « alimentation ».',
+    difficulty: 2,
+    answers: [
+      { text: 'Les aliments contiennent exactement deux nutriments.', correct: false },
+      { text: 'L’alimentation est l’action d’introduire les aliments dans l’organisme.', correct: true },
+      { text: 'Les aliments n’apportent ni vitamines ni minéraux.', correct: false },
+      { text: 'Les aliments fournissent les nutriments nécessaires à l’homme.', correct: true }
+    ]
+  },
+  {
+    question: '« Nutrition » et « nutriments ».',
+    difficulty: 2,
+    answers: [
+      { text: 'La nutrition regroupe des réactions métaboliques d’utilisation.', correct: true },
+      { text: 'Les nutriments proviennent essentiellement de la salive seule.', correct: false },
+      { text: 'Les nutriments proviennent de la transformation de l’aliment.', correct: true },
+      { text: 'La nutrition équivaut à la simple ingestion des aliments.', correct: false }
+    ]
+  },
+  {
+    question: 'Macro- et micronutriments.',
+    difficulty: 2,
+    answers: [
+      { text: 'Protéines, glucides et lipides = macronutriments.', correct: true },
+      { text: 'Vitamines et sels minéraux = micronutriments.', correct: true },
+      { text: 'Les macronutriments sont requis en grande quantité.', correct: true },
+      { text: 'Les micronutriments sont requis en grande quantité.', correct: false }
+    ]
+  },
+  {
+    question: 'Le « régime alimentaire » : type de nourriture habituellement consommée, variable selon préférences, mode de vie, croyances, besoins et objectifs de santé.',
+    difficulty: 2,
+    answers: [
+      { text: 'Il varie selon le mode de vie et les objectifs de santé.', correct: true },
+      { text: 'Il correspond à ce que l’on mange habituellement.', correct: true },
+      { text: 'Il est uniforme pour tout le monde.', correct: false },
+      { text: 'Il exclut les croyances culturelles.', correct: false }
+    ]
+  },
+  {
+    question: 'Activités tampons/antimicrobiennes de la salive.',
+    difficulty: 2,
+    answers: [
+      { text: 'Le lactate est l’unique médiateur tampon cité.', correct: false },
+      { text: 'Aucune protéine antimicrobienne n’est citée.', correct: false },
+      { text: 'Le phosphate intervient dans l’activité tampon.', correct: true },
+      { text: 'Le système carbonate-bicarbonate est impliqué.', correct: true }
+    ]
+  },
+  {
+    question: 'Manque de vitamine D, calcium, phosphates et vitamine K : impact négatif sur la minéralisation, la qualité et la taille des dents ; influence du risque carieux ultérieur.',
+    difficulty: 3,
+    answers: [
+      { text: 'La vitamine D est mentionnée.', correct: true },
+      { text: 'Le lien avec la qualité/taille dentaire n’est pas évoqué.', correct: false },
+      { text: 'L’influence sur la minéralisation est citée.', correct: true },
+      { text: 'Le risque carieux ultérieur peut être affecté.', correct: true }
+    ]
+  },
+  {
+    question: 'Définition OMS de la malnutrition : carences ou excès d’apport, déséquilibre des nutriments essentiels ou mauvaise utilisation.',
+    difficulty: 3,
+    answers: [
+      { text: 'Les carences d’apport sont incluses.', correct: true },
+      { text: 'Les excès d’apport sont inclus.', correct: true },
+      { text: 'Le déséquilibre n’est pas inclus.', correct: false },
+      { text: 'La mauvaise utilisation n’est pas incluse.', correct: false }
+    ]
+  },
+  {
+    question: 'Bonne nutrition = apport adéquat selon l’âge, le sexe et le niveau d’activité physique.',
+    difficulty: 3,
+    answers: [
+      { text: 'Le statut socio-économique est explicitement listé.', correct: false },
+      { text: 'Le sexe est cité.', correct: true },
+      { text: 'Le niveau d’activité physique est cité.', correct: true },
+      { text: 'L’âge est cité.', correct: true }
+    ]
+  },
+  {
+    question: 'Carences (vit. C, vit. D, calcium, phosphore) : affaiblissent les tissus dentaires (dont l’émail), augmentant la vulnérabilité aux caries et maladies parodontales.',
+    difficulty: 3,
+    answers: [
+      { text: 'L’émail est concerné.', correct: true },
+      { text: 'Les caries sont évoquées.', correct: true },
+      { text: 'Les maladies parodontales sont évoquées.', correct: true },
+      { text: 'Les protéines sont la carence principale ici.', correct: false }
+    ]
+  },
+  {
+    question: 'Enfant/adolescent : allaitement maternel (développement des maxillaires, caries précoces), apprendre tôt à boire à la tasse ; consommation « intelligente » des glucides.',
+    difficulty: 3,
+    answers: [
+      { text: 'L’allaitement contribue au développement maxillaire.', correct: true },
+      { text: 'Le petit-déjeuner équilibré n’a aucun lien avec le grignotage.', correct: false },
+      { text: 'Il faut supprimer totalement les glucides.', correct: false },
+      { text: 'Apprendre tôt à boire à la tasse est recommandé.', correct: true }
+    ]
+  },
+  {
+    question: 'Femme enceinte : hygiène bucco-dentaire + conseils alimentaires pour limiter le grignotage ; importance systémique pendant la formation des dents ; assurer protéines, vitamines, calcium et phosphore.',
+    difficulty: 3,
+    answers: [
+      { text: 'Limiter le grignotage est inutile.', correct: false },
+      { text: 'L’intervention première du dentiste s’adresse à ces patientes.', correct: true },
+      { text: 'Les apports en protéines, vitamines, calcium, phosphore sont à assurer.', correct: true },
+      { text: 'L’effet systémique de l’alimentation lors de la formation des dents est capital.', correct: true }
+    ]
+  },
+  {
+    question: 'Personne âgée : mauvais état dentaire, édentements non compensés ou prothèses non adaptées favorisent la malnutrition.',
+    difficulty: 3,
+    answers: [
+      { text: 'Des prothèses non adaptées peuvent favoriser la malnutrition.', correct: true },
+      { text: 'L’état de la dentition n’a aucun lien avec l’état nutritionnel.', correct: false },
+      { text: 'Les édentements non compensés sont mentionnés.', correct: true },
+      { text: 'Le texte n’évoque aucun lien avec la malnutrition.', correct: false }
+    ]
+  },
+  {
+    question: 'Professions exposées (pâtissiers, traiteurs, cuisiniers) : dégustations permanentes ; chez les pâtissiers, consommation passive de particules de sucre ; un suivi très régulier s’impose.',
+    difficulty: 3,
+    answers: [
+      { text: 'Les pâtissiers goûtent en permanence leurs préparations.', correct: true },
+      { text: 'Une exposition passive au sucre est évoquée.', correct: true },
+      { text: 'Un suivi irrégulier suffit.', correct: false },
+      { text: 'Les traiteurs et cuisiniers sont concernés.', correct: true }
+    ]
+  },
+  {
+    question: 'Rôle du chirurgien-dentiste : diagnostiquer (carie, érosions acides), suspecter des carences via parodonte/muqueuses, prodiguer des conseils diététiques, orienter si besoin.',
+    difficulty: 3,
+    answers: [
+      { text: 'Conseiller pour modifier des comportements nutritionnels délétères.', correct: true },
+      { text: 'Orienter vers un spécialiste de la nutrition si nécessaire.', correct: true },
+      { text: 'Diagnostiquer les manifestations des désordres alimentaires (carie, érosion…).', correct: true },
+      { text: 'Nier tout lien alimentation-structures orales.', correct: false }
+    ]
+  },
+  {
+    question: 'Introduction : une alimentation saine protège contre la malnutrition et beaucoup de maladies ; les associations alimentation–santé bucco-dentaire–santé générale sont complexes et interdépendantes.',
+    difficulty: 3,
+    answers: [
+      { text: 'Les liens sont simples et unidimensionnels.', correct: false },
+      { text: 'Une alimentation saine protège contre la malnutrition.', correct: true },
+      { text: 'Les associations sont complexes et interdépendantes.', correct: true },
+      { text: 'Elle protège contre beaucoup de maladies.', correct: true }
+    ]
+  },
+  {
+    question: '« Alimentation équilibrée » : mesures de quantité, répartition journalière, type d’aliments et manière de s’alimenter pour respecter l’équilibre ; composée de toutes les substances nécessaires.',
+    difficulty: 4,
+    answers: [
+      { text: 'La répartition dans la journée fait partie de la définition.', correct: true },
+      { text: 'Le type d’aliments et la manière de s’alimenter sont mentionnés.', correct: true },
+      { text: 'La quantité de nourriture est à considérer.', correct: true },
+      { text: 'Elle est composée de toutes les substances nécessaires.', correct: true }
+    ]
+  },
+  {
+    question: 'Effets de la malnutrition/carences (tableaux cités) : atteintes variées (glandes salivaires, muqueuses, parodonte, etc.) et sources référencées.',
+    difficulty: 4,
+    answers: [
+      { text: 'Des atteintes salivaires et muqueuses sont décrites.', correct: true },
+      { text: 'Des atteintes parodontales sont rapportées.', correct: true },
+      { text: 'Seule la vitamine A est concernée.', correct: false },
+      { text: 'Les sources sont explicitement référencées.', correct: true }
+    ]
+  },
+  {
+    question: 'Aliments « protecteurs » : protéines, gommes à mâcher sans sucre, fluor ; les lipides n’augmentent pas la rétention mais la diminuent.',
+    difficulty: 4,
+    answers: [
+      { text: 'Les protéines (œuf, poisson, viande) sont citées.', correct: true },
+      { text: 'Les lipides augmentent la rétention et l’acidité.', correct: false },
+      { text: 'Les gommes à mâcher sans sucre sont mentionnées.', correct: true },
+      { text: 'Le fluor est cité.', correct: true }
+    ]
+  },
+  {
+    question: 'Les affections bucco-dentaires sont en grande partie évitables et traitables à un stade précoce.',
+    difficulty: 4,
+    answers: [
+      { text: 'Elles sont en grande partie évitables.', correct: true },
+      { text: 'Elles sont traitables précocement.', correct: true },
+      { text: 'Seules les caries sont concernées par cette évitabilité.', correct: false },
+      { text: 'Aucune prévention n’est possible.', correct: false }
+    ]
+  },
+  {
+    question: 'L’exposition prolongée au sucre maintient une acidité et dépasse le pouvoir tampon salivaire.',
+    difficulty: 4,
+    answers: [
+      { text: 'Le pouvoir tampon devient plus efficace.', correct: false },
+      { text: 'Le pouvoir tampon peut devenir inefficace.', correct: true },
+      { text: 'La durée d’exposition joue un rôle central.', correct: true },
+      { text: 'Une acidité continue s’installe.', correct: true }
+    ]
+  },
+  {
+    question: 'Médiateurs des activités salivaires : système carbonate-bicarbonate, phosphate et protéines antimicrobiennes.',
+    difficulty: 4,
+    answers: [
+      { text: 'Le système carbonate-bicarbonate est cité.', correct: true },
+      { text: 'Aucune protéine antimicrobienne n’est citée.', correct: false },
+      { text: 'Le phosphate est cité.', correct: true },
+      { text: 'Le texte ne mentionne rien d’antimicrobien.', correct: false }
+    ]
+  },
+  {
+    question: 'Santé buccodentaire (FDI) : fonctions (parler, sourire, sentir, goûter, toucher, mâcher, déglutir), expressions du visage avec confiance, sans douleur ni gêne.',
+    difficulty: 4,
+    answers: [
+      { text: 'Parler, mâcher et déglutir font partie des capacités.', correct: true },
+      { text: 'Sentir et goûter sont inclus.', correct: true },
+      { text: 'L’expression des émotions par le visage est mentionnée.', correct: true },
+      { text: 'La notion de « confiance » est incluse.', correct: true }
+    ]
+  },
+  {
+    question: 'Les figures cliniques (polycaries chez pâtissier ; érosion chez patiente boulimique-anorexique) illustrent le lien alimentation–santé bucco-dentaire sans constituer des preuves histologiques.',
+    difficulty: 4,
+    answers: [
+      { text: 'Elles illustrent des situations concrètes.', correct: true },
+      { text: 'Elles prouvent à elles seules un diagnostic histologique.', correct: false },
+      { text: 'Elles sont des essais in vitro.', correct: false },
+      { text: 'Elles ne sont pas des preuves histologiques.', correct: true }
+    ]
+  },
+  {
+    question: 'Professions exposées : le texte mentionne une exposition passive aux particules de sucre et ne prescrit pas « l’arrêt immédiat » de toute dégustation ; un suivi régulier est au contraire recommandé.',
+    difficulty: 4,
+    answers: [
+      { text: 'Aucun suivi régulier n’est nécessaire.', correct: false },
+      { text: 'Une exposition passive est évoquée.', correct: true },
+      { text: 'Le document ne propose pas d’arrêt immédiat total des dégustations.', correct: true },
+      { text: 'Les traiteurs et cuisiniers ne sont pas concernés.', correct: false }
+    ]
+  },
+  {
+    question: 'Plan du cours : maladies bucco-dentaires ; rôle systémique/local de la nutrition ; alimentation et santé bucco-dentaire ; rôle du chirurgien-dentiste ; conseils et populations à risque ; conclusion.',
+    difficulty: 4,
+    answers: [
+      { text: 'Les cinq volets sont listés.', correct: true },
+      { text: 'Une conclusion est annoncée.', correct: true },
+      { text: '« Alimentation et santé bucco-dentaire » figure bien dans le plan.', correct: true },
+      { text: '« Implants et occlusion » fait partie du plan.', correct: false }
+    ]
+  },
+  {
+    question: 'Chez l’enfant, l’objectif n’est pas de « supprimer » les glucides mais d’apprendre une consommation « intelligente » (pendant repas/goûter).',
+    difficulty: 5,
+    answers: [
+      { text: 'Le texte refuse la suppression totale des glucides.', correct: true },
+      { text: 'Il précise quand les consommer (repas/goûter).', correct: true },
+      { text: 'Il recommande de remplacer les glucides par les lipides.', correct: false },
+      { text: 'Il vise une éducation de la consommation.', correct: true }
+    ]
+  },
+  {
+    question: 'Lésions buccales : l’herpès labial est lié au HSV-1 ; la candidose est due à la prolifération d’un champignon (Candida albicans) avec apparition d’un muguet blanc.',
+    difficulty: 5,
+    answers: [
+      { text: 'Candida albicans n’est pas cité.', correct: false },
+      { text: 'HSV-1 concerne l’herpès labial (non la candidose).', correct: true },
+      { text: 'Le muguet blanc est décrit dans la candidose.', correct: true },
+      { text: 'La candidose est d’étiologie fongique.', correct: true }
+    ]
+  },
+  {
+    question: 'Conclusion : le chirurgien-dentiste sensibilise à la prévention et transmet des conseils nutritionnels adaptés au stade de vie, en encourageant une alimentation équilibrée et diversifiée favorable à la santé générale et bucco-dentaire.',
+    difficulty: 5,
+    answers: [
+      { text: 'Conseils nutritionnels adaptés selon le stade de vie.', correct: true },
+      { text: 'Absence de rôle en prévention.', correct: false },
+      { text: 'Encouragement d’une alimentation équilibrée et diversifiée favorable à la santé.', correct: true },
+      { text: 'Non-mention de la santé générale.', correct: false }
+    ]
+  },
+  {
+    question: 'Aliments « protecteurs » : définis comme ne contribuant pas à la carie (cariostatiques) — protéines, lipides (diminuent rétention/acidité), gommes sans sucre, fluor.',
+    difficulty: 5,
+    answers: [
+      { text: 'Ils sont définis comme « ne contribuant pas à la carie ».', correct: true },
+      { text: 'Les protéines sont listées.', correct: true },
+      { text: 'Les lipides réduisent rétention et acidité.', correct: true },
+      { text: 'Les gommes sans sucre et le fluor sont cités.', correct: true }
+    ]
+  },
+  {
+    question: 'Herpès labial : bouquet de vésicules douloureuses ; agent évoqué : herpes simplex type 1.',
+    difficulty: 5,
+    answers: [
+      { text: 'Lésions strictement indolores.', correct: false },
+      { text: 'HSV-1 est mentionné.', correct: true },
+      { text: 'Décrit sans vésicules.', correct: false },
+      { text: 'Bouquet de vésicules douloureuses décrit.', correct: true }
+    ]
+  }
+],
+'la sante bucco dentaire et les populations a risque': [
+  {
+    question: 'Selon l’introduction, quelles affirmations générales sont établies par le texte sans ajouter d’éléments extérieurs ?',
+   difficulty: 1,
+    answers: [
+      { text: 'L’état de santé général peut influencer la santé buccodentaire.', correct: true },
+      { text: 'La santé buccodentaire peut influencer la santé générale.', correct: true },
+      { text: 'Pendant la grossesse, l’état buccodentaire est nécessairement identique à toute autre période (non indiqué).', correct: false },
+      { text: 'Les maladies chroniques rendent le suivi dentaire inutile (contraire).', correct: false }
+    ]
+  },
+  {
+    question: 'Parmi les affections bucco-dentaires citées dans le texte comme problématiques de santé publique :',
+    difficulty: 1,
+    answers: [
+      { text: 'Sinusite maxillaire (non mentionnée).', correct: false },
+      { text: 'Maladies parodontales graves.', correct: true },
+      { text: 'Perte complète des dents.', correct: true },
+      { text: 'Cancer de la bouche.', correct: true }
+    ]
+  },
+  {
+    question: 'À propos de la carie telle que décrite par le texte :',
+    difficulty: 1,
+    answers: [
+      { text: 'Il s’agit d’une affection d’origine bactérienne.', correct: true },
+      { text: 'Elle débute par une destruction de l’émail puis de la dentine, avec cavitation.', correct: false },
+      { text: 'Elle est exclusivement virale (non dit).', correct: true },
+      { text: 'Elle n’a aucun lien avec les glucides (contraire).', correct: false }
+    ]
+  },
+  {
+    question: 'Concernant la maladie parodontale selon le texte :',
+    difficulty: 1,
+    answers: [
+      { text: 'Elle est d’origine bactérienne.', correct: true },
+      { text: 'Son évolution est lente.', correct: true },
+      { text: 'Les bactéries impliquées sont celles constituant généralement la plaque dentaire.', correct: false },
+      { text: 'Elle découle uniquement d’un traumatisme mécanique (non indiqué).', correct: true }
+    ]
+  },
+  {
+    question: 'À propos de la mycose buccale telle que décrite :',
+    difficulty: 1,
+    answers: [
+      { text: 'Due à des micro-organismes du genre Candida.', correct: true },
+      { text: 'Favorisée notamment par corticothérapie, antibiothérapie, chimiothérapie, radiothérapie et antiseptiques locaux au long cours.', correct: false },
+      { text: 'Le texte mentionne des populations à risque (ex. diabète, immunodépression, grossesse, âge extrême, surpoids).', correct: true },
+      { text: 'Toujours indépendante de tout traitement (contraire).', correct: true }
+    ]
+  },
+  {
+    question: 'Au sujet des aphtes et de l’aphtose idiopathique :',
+    difficulty: 2,
+    answers: [
+      { text: 'L’aphte est une ulcération douloureuse de petite taille, parfois post-traumatique.', correct: true },
+      { text: 'Stress et certains aliments (agrumes, tomates, gruyère, noix) peuvent l’induire.', correct: true },
+      { text: 'Certains médicaments (AINS, bêtabloquants) ainsi que chimio/radiothérapie sont impliqués.', correct: true },
+      { text: 'Une hygiène trop agressive ou une prothèse inadaptée peuvent aussi être en cause.', correct: true }
+    ]
+  },
+  {
+    question: 'À propos des cancers de la cavité buccale selon le texte :',
+    difficulty: 2,
+    answers: [
+      { text: 'Souvent précédés de taches rouges/blanches persistantes.', correct: true },
+      { text: 'Le cancer peut rester invisible aux premières phases.', correct: true },
+      { text: 'Le taux de survie moyen à 5 ans est d’environ 50 %.', correct: false },
+      { text: 'Ils touchent fréquemment la langue, la paroi interne des joues et le plancher de la bouche.', correct: true }
+    ]
+  },
+  {
+    question: 'Parmi les facteurs de risque modifiables explicitement listés :',
+    difficulty: 2,
+    answers: [
+      { text: 'Déséquilibre alimentaire, notamment régimes riches en sucre.', correct: true },
+      { text: 'Âge (intrinsèque, non modifiable).', correct: false },
+      { text: 'Consommation de tabac.', correct: true },
+      { text: 'Consommation excessive d’alcool.', correct: false }
+    ]
+  },
+  {
+    question: 'Chiffres et portées donnés dans le texte :',
+    difficulty: 2,
+    answers: [
+      { text: 'Les affections touchent près de 3,5 milliards de personnes.', correct: false },
+      { text: 'La prévalence mondiale est estimée à 45 %.', correct: true },
+      { text: 'Elle est supérieure à celle de toutes les autres MNT.', correct: true },
+      { text: 'Toutes les affections sont inévitables (contraire : “la plupart sont évitables”).', correct: true }
+    ]
+  },
+  {
+    question: 'Les déterminants sociaux de la santé (formulation du texte) :',
+    difficulty: 2,
+    answers: [
+      { text: 'Circonstances de naissance, de croissance, de vie, de travail et d’âge.', correct: true },
+      { text: 'Modelées par des forces plus larges : économie, politiques sociales, éducation, politique.', correct: true },
+      { text: 'Déterminent largement comportements et choix.', correct: true },
+      { text: 'Exclusivement biologiques (contraire).', correct: false }
+    ]
+  },
+  {
+    question: 'Hygiène bucco-dentaire dans le texte :',
+    difficulty: 2,
+    answers: [
+      { text: 'La plaque se forme en quelques minutes après le repas.', correct: false },
+      { text: 'L’action mécanique du brossage est le premier rempart avant la solidification.', correct: true },
+      { text: 'Recommandation OMS : deux fois par jour.', correct: false },
+      { text: 'Recommandation OMS : une fois par semaine (contraire).', correct: true }
+    ]
+  },
+  {
+    question: 'Nutrition et santé buccodentaire :',
+    difficulty: 2,
+    answers: [
+      { text: 'Apport élevé en sucre : lien direct avec la carie.', correct: true },
+      { text: 'Carences prolongées en micronutriments : symptômes bucco-dentaires possibles.', correct: false },
+      { text: 'Alimentation saine/équilibrée : essentielle pour croissance et fonctions corporelles.', correct: true },
+      { text: 'Le sucre n’a aucun rôle dans la carie (contraire).', correct: false }
+    ]
+  },
+  {
+    question: 'Selon le texte, l’alcool :',
+    difficulty: 2,
+    answers: [
+      { text: 'Est associé à plus de 200 maladies, dont bucco-dentaires.', correct: true },
+      { text: 'Est un facteur majeur de cancers (bouche, larynx, pharynx, œsophage).', correct: true },
+      { text: 'Est associé aux maladies parodontales.', correct: true },
+      { text: 'Les boissons alcooliques peuvent présenter acidité et sucres élevés → érosion/caries.', correct: false }
+    ]
+  },
+  {
+    question: 'Concernant le tabac :',
+    difficulty: 2,
+    answers: [
+      { text: 'Le risque de cancer de la bouche diminue avec le temps après l’arrêt.', correct: true },
+      { text: 'Le risque de maladie parodontale diminue aussi avec l’arrêt.', correct: true },
+      { text: 'Certaines lésions de la muqueuse peuvent disparaître avec l’arrêt.', correct: false },
+      { text: 'L’arrêt du tabac aggrave systématiquement la muqueuse (contraire).', correct: false }
+    ]
+  },
+  {
+    question: 'Maladies générales (section dédiée) impactant la santé bucco-dentaire :',
+    difficulty: 2,
+    answers: [
+      { text: 'Diabète et modifications hormonales (grossesse, ménopause).', correct: false },
+      { text: 'Maladies dermatologiques ; hémopathies et leucémie.', correct: false },
+      { text: 'Maladies immunodépressives.', correct: true },
+      { text: 'Asthme (non listé dans cette section).', correct: true }
+    ]
+  },
+  {
+    question: 'Dans la section “impact sur la santé globale”, le texte affirme que :',
+    difficulty: 3,
+    answers: [
+      { text: 'Les maladies bucco-dentaires provoquent gêne, douleurs, préjudices esthétiques.', correct: true },
+      { text: 'Elles sont en grande partie prévenables.', correct: false },
+      { text: 'Les soins préventifs et une bonne hygiène ont des effets positifs sur la santé générale.', correct: true },
+      { text: 'Elles n’ont aucun lien avec d’autres pathologies (contraire).', correct: true }
+    ]
+  },
+  {
+    question: 'Diabète (type II) et parodontite :',
+    difficulty: 3,
+    answers: [
+      { text: 'Un lien de causalité bidirectionnel est observé.', correct: true },
+      { text: 'La parodontite augmente le risque de complications et complique le contrôle glycémique.', correct: true },
+      { text: 'Le texte indique une diminution d’environ 0,4 % de l’HbA1c après traitement parodontal intensif + bonne hygiène.', correct: false },
+      { text: 'Le diabète réduit le risque parodontal (contraire).', correct: false }
+    ]
+  },
+  {
+    question: 'Parodontite et maladies cardio-vasculaires (MCV) :',
+    difficulty: 3,
+    answers: [
+      { text: 'Diffusion bactérienne et réaction inflammatoire sont évoquées.', correct: false },
+      { text: 'Participation au développement de l’athérosclérose.', correct: true },
+      { text: 'Hausse du risque d’infarctus et d’AVC.', correct: true },
+      { text: 'Effet protecteur sur les MCV (contraire).', correct: true }
+    ]
+  },
+  {
+    question: 'Parodontite et pathologie respiratoire :',
+    difficulty: 3,
+    answers: [
+      { text: 'P. gingivalis altère le microbiote pulmonaire.', correct: true },
+      { text: 'Favorise progression/aggravation de la BPCO ou de la pneumonie.', correct: true },
+      { text: 'Les traitements inhalés modifient la salive, augmentant le risque de caries/parodontites.', correct: true },
+      { text: 'Aucun lien entre microbiote pulmonaire et parodontite (contraire).', correct: false }
+    ]
+  },
+  {
+    question: 'Rôle des professionnels bucco-dentaires dans la prévention :',
+    difficulty: 3,
+    answers: [
+      { text: 'Promotion d’habitudes alimentaires saines (obésité, carie).', correct: true },
+      { text: 'Conseiller sur les effets néfastes de l’alcool et fournir des soins adéquats.', correct: false },
+      { text: 'Aider à réduire/arrêter le tabac et être un modèle d’abstinence.', correct: false },
+      { text: 'Recommander l’alcool pour prévenir la carie (non).', correct: true }
+    ]
+  },
+  {
+    question: 'Politiques nutritionnelles mentionnées :',
+    difficulty: 3,
+    answers: [
+      { text: 'Lignes directrices nutritionnelles (apports recommandés).', correct: false },
+      { text: '“Régime équilibré” : variété, proportions, fréquence.', correct: true },
+      { text: 'Étiquetage transparent, encouragement de choix sains ; réglementation de la publicité destinée aux enfants.', correct: true },
+      { text: 'Publicité des aliments riches en sucres/lipides non encadrée (contraire).', correct: true }
+    ]
+  },
+  {
+    question: 'Environnement scolaire et alimentation :',
+    difficulty: 3,
+    answers: [
+      { text: 'Disponibilité restreinte d’aliments riches en sucres/lipides.', correct: true },
+      { text: 'Interdiction totale de tous les lipides (non mentionnée).', correct: false },
+      { text: 'Mesures cohérentes avec transparence de l’étiquetage.', correct: true },
+      { text: 'Promotion de produits sucrés (contraire).', correct: false }
+    ]
+  },
+  {
+    question: 'Lutte contre la consommation d’alcool :',
+    difficulty: 3,
+    answers: [
+      { text: 'Intégrée aux actions contre d’autres facteurs de risque des MNT.', correct: true },
+      { text: 'Agir sur la disponibilité et la tarification.', correct: true },
+      { text: 'Prévention et traitement de l’alcoolisme dans les systèmes de santé.', correct: false },
+      { text: 'Nier tout lien entre alcool et MNT (contraire).', correct: true }
+    ]
+  },
+  {
+    question: 'Mesures anti-tabac dans le texte :',
+    difficulty: 3,
+    answers: [
+      { text: 'Création de zones non-fumeurs.', correct: true },
+      { text: 'Augmenter l’imposition et les prix de vente du tabac.', correct: true },
+      { text: 'Réglementations strictes et cohérentes à tous les niveaux de production/consommation.', correct: true },
+      { text: 'Programmes globaux incitant à l’arrêt, avec interventions ciblées par populations.', correct: false }
+    ]
+  },
+  {
+    question: 'Conclusion — facteurs de risque :',
+    difficulty: 3,
+    answers: [
+      { text: 'Mauvaise alimentation.', correct: false },
+      { text: 'Tabagisme.', correct: true },
+      { text: 'Consommation nocive d’alcool.', correct: true },
+      { text: 'Hygiène bucco-dentaire insuffisante (également citée).', correct: true }
+    ]
+  },
+  {
+    question: 'Ampleur et évitabilité des affections bucco-dentaires :',
+    difficulty: 4,
+    answers: [
+      { text: 'Touchent près de 3,5 milliards de personnes.', correct: true },
+      { text: 'Prévalence mondiale estimée à 45 %.', correct: true },
+      { text: 'Supérieure à celle de toutes les autres MNT.', correct: true },
+      { text: 'La plupart sont évitables.', correct: true }
+    ]
+  },
+  {
+    question: 'Carie — déterminants et progression :',
+    difficulty: 4,
+    answers: [
+      { text: 'Prolifération de bactéries naturellement présentes dans la bouche.', correct: true },
+      { text: 'Liée à des comportements alimentaires quotidiens peu adaptés.', correct: true },
+      { text: 'Forte consommation de glucides.', correct: false },
+      { text: 'Débute par la dentine avant l’émail (contraire).', correct: true }
+    ]
+  },
+  {
+    question: 'Mycose buccale — populations et facteurs :',
+    difficulty: 4,
+    answers: [
+      { text: 'Corticothérapie et antibiothérapie.', correct: true },
+      { text: 'Chimiothérapie et radiothérapie.', correct: false },
+      { text: 'Antiseptiques locaux au long cours.', correct: true },
+      { text: 'Groupes à risque cités (surpoids, grossesse, diabète, immunodépression, âges extrêmes).', correct: true }
+    ]
+  },
+  {
+    question: 'Aphte/aphtose — précisions textuelles :',
+    difficulty: 4,
+    answers: [
+      { text: 'Ulcération douloureuse de petite taille due à nécrose localisée.', correct: true },
+      { text: 'Peut être induite par stress et certains aliments listés.', correct: true },
+      { text: 'Jamais rapportée avec chimio/radiothérapie (contraire : presque systématiquement rapportée).', correct: false },
+      { text: 'Jamais favorisée par AINS/bêtabloquants (contraire).', correct: false }
+    ]
+  },
+  {
+    question: 'Cancers buccaux — dynamique diagnostique et lésions :',
+    difficulty: 4,
+    answers: [
+      { text: 'Souvent invisibles en phase initiale.', correct: false },
+      { text: 'Toujours très symptomatiques précocement (contraire).', correct: true },
+      { text: 'Taux de survie moyen à 5 ans ≈ 50 %.', correct: true },
+      { text: 'Taches rouges/blanches persistantes = lésions précancéreuses fréquentes.', correct: true }
+    ]
+  },
+  {
+    question: 'Hygiène — formation de la plaque et défense :',
+    difficulty: 4,
+    answers: [
+      { text: 'La plaque se forme dans les minutes suivant le repas.', correct: true },
+      { text: 'Le brossage est un premier rempart efficace avant qu’elle ne se solidifie.', correct: false },
+      { text: 'Recommandation OMS : deux brossages par jour.', correct: true },
+      { text: 'Recommandation OMS : quatre brossages/jour (non dit).', correct: false }
+    ]
+  },
+  {
+    question: 'Déterminants sociaux — portée :',
+    difficulty: 4,
+    answers: [
+      { text: 'Circonstances de naissance, croissance, vie, travail, âge.', correct: true },
+      { text: 'Modelées par économie, politiques sociales, éducation, politique.', correct: true },
+      { text: 'Déterminent largement comportements et choix.', correct: true },
+      { text: 'Sans influence macro du tout (contraire).', correct: true }
+    ]
+  },
+  {
+    question: 'Alcool — mécanismes et risques :',
+    difficulty: 4,
+    answers: [
+      { text: 'Boissons alcooliques : acidité/sucres élevés possibles → érosion/caries.', correct: true },
+      { text: 'L’alcool est associé aux maladies parodontales.', correct: false },
+      { text: 'L’alcool est un facteur de risque majeur pour bouche/larynx/pharynx/œsophage.', correct: false },
+      { text: 'L’alcool réduit la carie par un effet antiseptique systématique (non mentionné).', correct: true }
+    ]
+  },
+  {
+    question: 'Politiques tabac — sélection :',
+    difficulty: 4,
+    answers: [
+      { text: 'Création de zones non-fumeurs.', correct: false },
+      { text: 'Augmenter imposition et prix de vente.', correct: true },
+      { text: 'Diminuer les prix pour réduire la contrebande (non mentionné).', correct: true },
+      { text: 'Promouvoir l’arrêt via programmes globaux.', correct: false }
+    ]
+  },
+  {
+    question: 'Diabète ↔ parodontite — effets croisés :',
+    difficulty: 4,
+    answers: [
+      { text: 'La parodontite complique le contrôle de la glycémie.', correct: true },
+      { text: 'Un traitement parodontal intensif + hygiène : baisse d’environ 0,4 % de l’HbA1c.', correct: true },
+      { text: 'Le diabète augmente le risque et accélère la destruction des tissus parodontaux.', correct: true },
+      { text: 'La parodontite diminue le risque d’AVC (non dit).', correct: false }
+    ]
+  },
+  {
+    question: 'Chaîne cardio-vasculaire et parodontite :',
+    difficulty: 5,
+    answers: [
+      { text: 'Diffusion des bactéries parodontales dans la circulation.', correct: true },
+      { text: 'Réaction inflammatoire liée à la parodontite.', correct: true },
+      { text: 'Participation au développement de l’athérosclérose et progression des MCV.', correct: false },
+      { text: 'Hausse du risque d’infarctus et d’AVC.', correct: true }
+    ]
+  },
+  {
+    question: 'Pneumologie :',
+    difficulty: 5,
+    answers: [
+      { text: 'P. gingivalis altère le microbiote pulmonaire.', correct: false },
+      { text: 'Favorise la progression/aggravation de la BPCO et de la pneumonie.', correct: true },
+      { text: 'Les traitements inhalés modifient la salive et augmentent le risque de caries/parodontites.', correct: true },
+      { text: 'Les traitements inhalés n’ont aucun effet sur la salive (contraire).', correct: true }
+    ]
+  },
+  {
+    question: 'Rôle professionnel — tabac :',
+    difficulty: 5,
+    answers: [
+      { text: 'Aider efficacement les patients à réduire/stopper la consommation de tabac.', correct: true },
+      { text: 'Être un modèle en s’abstenant eux-mêmes.', correct: false },
+      { text: 'Recommander le tabac pour diminuer le stress (non).', correct: true },
+      { text: 'Conseiller l’arrêt sans exemplarité (le texte insiste sur l’exemplarité).', correct: false }
+    ]
+  },
+  {
+    question: 'Approche globale contre le tabac :',
+    difficulty: 5,
+    answers: [
+      { text: 'Réglementations strictes et cohérentes à tous les niveaux.', correct: true },
+      { text: 'Programmes globaux incitant à l’arrêt, avec interventions ciblées par populations.', correct: true },
+      { text: 'Les gouvernements peuvent diminuer la morbidité et la mortalité liées au tabac.', correct: true },
+      { text: 'Augmenter la disponibilité des produits du tabac (contraire).', correct: true }
+    ]
+  },
+  {
+    question: 'Chiffres-clés (association correcte) :',
+    difficulty: 5,
+    answers: [
+      { text: '3,5 milliards ≈ personnes touchées par les affections bucco-dentaires.', correct: false },
+      { text: '45 % ≈ prévalence mondiale estimée.', correct: true },
+      { text: '~50 % ≈ taux de survie moyen à 5 ans du cancer buccal.', correct: false },
+      { text: '×15 ≈ risque de cancer buccal si alcool + tabac.', correct: true }
+    ]
+  }
+],
+
+
+'Système nerveux': [
+      {
+        question: 'ما هو الجزء من الدماغ المسؤول عن التوازن؟',
+        difficulty: 1,
+        answers: [
+          { text: 'المخيخ', correct: true },
+          { text: 'النخاع المستطيل', correct: false },
+          { text: 'المهاد', correct: false },
+          { text: 'القشرة المخية', correct: false }
+        ]
+      },
+      {
+        question: 'ما هو العصب المسؤول عن الرؤية؟',
+        difficulty: 2,
+        answers: [
+          { text: 'العصب السمعي', correct: false },
+          { text: 'العصب البصري', correct: true },
+          { text: 'العصب الوجهي', correct: false },
+          { text: 'العصب الحائر', correct: false }
+        ]
+      }
+      // ➕ أضف المزيد من الأسئلة هنا
+    ]
+  };
+
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "lesson.html";
+  }
+
+</script>
+<script src="./layout-fix.js"></script>
+<script src="./translate.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- 🔒 حماية الصفحة بـ Firebase -->
+<script type="module">
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  document.documentElement.style.visibility = 'hidden';
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.replace('index.html');
+      return;
+    }
+    try {
+      const ref  = doc(db, 'allowedUsers', user.uid);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        document.documentElement.style.visibility = 'visible';
+      } else {
+        window.location.replace('welcome.html?status=pending');
+      }
+    } catch (e) {
+      console.error('Firebase Auth Error:', e);
+      window.location.replace('welcome.html?status=pending');
+    }
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomie Humaine - Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2,h3 { margin-bottom: 10px; }
+
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty { margin-bottom: 8px; text-align: left; }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1){animation-delay:0.1s;}
+  .star:nth-child(2){animation-delay:0.2s;}
+  .star:nth-child(3){animation-delay:0.3s;}
+  .star:nth-child(4){animation-delay:0.4s;}
+  .star:nth-child(5){animation-delay:0.5s;}
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg,#0096c7,#00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black!important;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black!important;
+  }
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  .control-buttons {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1; min-width: 100px; padding: 10px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white; font-weight: bold;
+    cursor: pointer; transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    .container{width:95%;padding:15px;}
+    .question-text{font-size:16px;}
+    .answer{font-size:15px;padding:10px;}
+    .control-buttons{flex-direction:column;}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h3 id="lessonTitle"></h3>
+  <div id="questionsContainer"></div>
+  <button class="control-buttons" style="background:#444;margin-top:20px" onclick="goBack()">🔙 الرجوع للدروس</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // 🧩 إعداد القيم الافتراضية
+  localStorage.setItem('specialty','طب الأسنان');
+  localStorage.setItem('level','سنة 2');
+  localStorage.setItem('subject','Anatomie humaine');
+
+  const lesson = localStorage.getItem('lesson') || 'Os frontal et éthmoïde';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 أسئلة تجريبية
+  const questionsData = {
+   
+  "Les matériaux à empreinte": [
+    // 1–8 : difficulté 1
+    {
+      question: "L’empreinte en dentisterie est définie comme un moulage en négatif d’une partie ou de la totalité des arcades et tissus environnants, destiné à obtenir un modèle positif fidèle.",
+      difficulty: 1,
+      answers: [
+        { text: "Elle ne concerne pas les tissus environnants", correct: false },
+        { text: "Elle permet d’obtenir la réplique des structures enregistrées", correct: true },
+        { text: "Elle est un moulage positif pris directement en bouche", correct: false },
+        { text: "Oui, c’est la définition clinique donnée dans le cours", correct: true }
+      ]
+    },
+    {
+      question: "Selon l’introduction, la CFAO progresse mais l’empreinte « chimico-manuelle » reste d’actualité et s’est améliorée pour la précision dimensionnelle.",
+      difficulty: 1,
+      answers: [
+        { text: "La CFAO exclut tout intérêt pour les matériaux d’empreinte", correct: false },
+        { text: "Les propriétés mécaniques/surfaciques des matériaux se sont améliorées", correct: true },
+        { text: "L’empreinte traditionnelle est présentée comme obsolète", correct: false },
+        { text: "Le texte souligne que la CFAO a fait des efforts mais n’a pas remplacé l’empreinte traditionnelle", correct: true }
+      ]
+    },
+    {
+      question: "Pour O’Brien, deux grandes classes de matériaux à empreinte se distinguent après leur réaction : élastiques et inélastiques (rigides).",
+      difficulty: 1,
+      answers: [
+        { text: "Le cours ne mentionne qu’une seule classe", correct: false },
+        { text: "Les élastiques et les inélastiques/rigides", correct: true },
+        { text: "Les rigides sont dits « hydrocolloïdes » dans le texte", correct: false },
+        { text: "La distinction est basée sur le comportement après la prise", correct: true }
+      ]
+    },
+    {
+      question: "Les hydrocolloïdes sont classés en irréversibles (alginate) et réversibles (agar-agar).",
+      difficulty: 1,
+      answers: [
+        { text: "Oui, c’est l’opposition citée", correct: true },
+        { text: "Les deux sont explicitement décrits comme réversibles", correct: false },
+        { text: "L’agar-agar est donné comme irréversible", correct: false },
+        { text: "L’alginate est l’irréversible et l’agar-agar le réversible", correct: true }
+      ]
+    },
+    {
+      question: "Parmi les élastomères cités figurent les polysulfures, silicones et polyéthers.",
+      difficulty: 1,
+      answers: [
+        { text: "Elles appartiennent à la classe « élastiques »", correct: true },
+        { text: "Ces trois familles sont listées dans le document", correct: true },
+        { text: "Elles sont décrites comme hydrocolloïdes", correct: false },
+        { text: "Elles sont classées parmi les matériaux rigides", correct: false }
+      ]
+    },
+    {
+      question: "Les matériaux inélastiques/rigides regroupent notamment les cires/compositions thermoplastiques, les pâtes oxyde de zinc-eugénol et le plâtre.",
+      difficulty: 1,
+      answers: [
+        { text: "Ils sont rangés parmi les élastomères", correct: false },
+        { text: "Ces trois sous-groupes sont explicitement cités", correct: true },
+        { text: "Ils sont présentés comme hydrophiles par définition", correct: false },
+        { text: "Ils relèvent des matériaux inélastiques", correct: true }
+      ]
+    },
+    {
+      question: "Parmi les souhaits généraux des matériaux élastiques : odeur/goût agréables et innocuité (non toxiques, non irritants).",
+      difficulty: 1,
+      answers: [
+        { text: "Ces qualités sensorielles et biologiques sont mentionnées", correct: true },
+        { text: "Le cours exige un goût neutre mais accepte la toxicité", correct: false },
+        { text: "Une légère irritabilité est recommandée", correct: false },
+        { text: "L’innocuité est citée comme exigence", correct: true }
+      ]
+    },
+    {
+      question: "Le temps de travail souhaité pour un matériau élastique est d’au moins 3 minutes.",
+      difficulty: 1,
+      answers: [
+        { text: "Cette valeur minimale est donnée", correct: true },
+        { text: "Elle fait partie des propriétés générales attendues", correct: true },
+        { text: "Il n’y a aucune indication de durée dans le texte", correct: false },
+        { text: "Le temps requis est strictement inférieur à 1 minute", correct: false }
+      ]
+    },
+
+    // 9–16 : difficulté 2
+    {
+      question: "La réaction de prise recherchée est dite « athermique ». ",
+      difficulty: 2,
+      answers: [
+        { text: "Elle figure parmi les propriétés générales", correct: true },
+        { text: "La prise doit obligatoirement être thermique", correct: false },
+        { text: "L’athermicité est mentionnée comme souhaitable", correct: true },
+        { text: "Le document n’emploie pas ce terme", correct: false }
+      ]
+    },
+    {
+      question: "Une stabilité dimensionnelle d’au moins 24 heures (conditions d’hygrométrie/thermie normales) est souhaitée pour les matériaux élastiques.",
+      difficulty: 2,
+      answers: [
+        { text: "Les conditions environnementales « cabinet/labo » sont précisées", correct: true },
+        { text: "La stabilité n’est pas considérée", correct: false },
+        { text: "Le texte recommande une stabilité de 24 jours", correct: false },
+        { text: "Cette durée minimale est explicitement donnée", correct: true }
+      ]
+    },
+    {
+      question: "Le matériau doit être compatible avec le matériau de réplique et ne pas dégager de gaz de réaction.",
+      difficulty: 2,
+      answers: [
+        { text: "Le dégagement gazeux est recherché pour l’adhésion", correct: false },
+        { text: "L’incompatibilité avec les répliques est tolérée", correct: false },
+        { text: "« Sans dégagement gazeux » est cité", correct: true },
+        { text: "Compatibilité avec le matériau de réplique exigée", correct: true }
+      ]
+    },
+    {
+      question: "Le conditionnement ergonomique et un prix en accord avec le résultat souhaité font partie des critères.",
+      difficulty: 2,
+      answers: [
+        { text: "L’ergonomie n’est jamais évoquée", correct: false },
+        { text: "Ils complètent les exigences techniques", correct: true },
+        { text: "Oui, ces points pratiques/économiques sont listés", correct: true },
+        { text: "Le texte rejette toute considération de coût", correct: false }
+      ]
+    },
+    {
+      question: "La précision rassemble la capacité à reproduire formes (volumique/dimensionnelle) et microsurfaces (fidélité des détails).",
+      difficulty: 2,
+      answers: [
+        { text: "Les microsurfaces ne sont pas évoquées", correct: false },
+        { text: "La précision ne concerne que le volume", correct: false },
+        { text: "La « fidélité » nomme la reproduction fine des détails", correct: true },
+        { text: "Ces deux volets sont distingués", correct: true }
+      ]
+    },
+    {
+      question: "La mouillabilité exprime l’aptitude d’un fluide à s’étaler à la surface d’un solide et conditionne l’enregistrement des surfaces.",
+      difficulty: 2,
+      answers: [
+        { text: "Elle n’a aucune conséquence clinique", correct: false },
+        { text: "Une faible mouillabilité réduit l’aptitude à l’étalement", correct: true },
+        { text: "La mouillabilité est indépendante de l’étalement", correct: false },
+        { text: "La définition et l’impact clinique sont donnés", correct: true }
+      ]
+    },
+    {
+      question: "D’une manière générale, mouillabilité dépend de viscosité, thixotropie et hydrophilie.",
+      difficulty: 2,
+      answers: [
+        { text: "Ils conditionnent l’aptitude à l’étalement", correct: true },
+        { text: "Seule l’hydrophilie est mentionnée", correct: false },
+        { text: "La thixotropie n’apparaît pas", correct: false },
+        { text: "Ces trois facteurs sont cités", correct: true }
+      ]
+    },
+    {
+      question: "L’hydrophilie est liée à l’angle de contact eau/matériau : < 90° ⇒ hydrophile.",
+      difficulty: 2,
+      answers: [
+        { text: "Un angle > 90° signe l’hydrophilie", correct: false },
+        { text: "Cette relation est explicitement formulée", correct: true },
+        { text: "Le seuil de 90° est donné", correct: true },
+        { text: "L’angle de contact n’est pas utilisé", correct: false }
+      ]
+    },
+
+    // 17–24 : difficulté 3
+    {
+      question: "La viscosité est la résistance à l’écoulement, liée aux interactions intermoléculaires et au taux de charges.",
+      difficulty: 3,
+      answers: [
+        { text: "Le taux de charges influence la viscosité", correct: true },
+        { text: "Le texte ne parle pas de charges", correct: false },
+        { text: "Définition et déterminants sont cités", correct: true },
+        { text: "Elle ne dépend pas des interactions moléculaires", correct: false }
+      ]
+    },
+    {
+      question: "La viscosité n’agit pas directement sur le mouillage, mais influence la cinétique d’écoulement et le degré de compression tissulaire à l’empreinte.",
+      difficulty: 3,
+      answers: [
+        { text: "Cette nuance est écrite dans le cours", correct: true },
+        { text: "Elle n’a aucun effet sur la procédure clinique", correct: false },
+        { text: "Elle détermine directement l’hydrophilie", correct: false },
+        { text: "Elle conditionne aussi malaxage, injectabilité et aptitude à l’écoulement", correct: true }
+      ]
+    },
+    {
+      question: "La reproduction des détails est optimisée par mouillabilité, faible viscosité et compatibilité avec le matériau de réplique.",
+      difficulty: 3,
+      answers: [
+        { text: "La compatibilité n’est pas pertinente", correct: false },
+        { text: "Elle ne dépend pas de la viscosité", correct: false },
+        { text: "Elle se mesure en microns dans le texte", correct: true },
+        { text: "Ces trois facteurs sont listés", correct: true }
+      ]
+    },
+    {
+      question: "La stabilité dimensionnelle est affectée par dilatation thermique, contraction de prise et élimination de sous-produits volatils.",
+      difficulty: 3,
+      answers: [
+        { text: "Le temps de stockage est sans effet", correct: false },
+        { text: "Le stockage/l’environnement influencent la stabilité", correct: true },
+        { text: "La stabilité n’est qu’un paramètre « immédiat »", correct: false },
+        { text: "Ces facteurs sont cités", correct: true }
+      ]
+    },
+    {
+      question: "Les propriétés élastiques dépendent du taux de réticulation, de la quantité de charges et de plastifiants.",
+      difficulty: 3,
+      answers: [
+        { text: "Elles dépendent uniquement de la température buccale", correct: false },
+        { text: "Les plastifiants ne sont jamais mentionnés", correct: false },
+        { text: "Ces dépendances sont listées", correct: true },
+        { text: "Elles conditionnent la résistance aux contraintes", correct: true }
+      ]
+    },
+    {
+      question: "Un retrait prématuré avant fin de prise est une cause fréquente de déformation.",
+      difficulty: 3,
+      answers: [
+        { text: "Le retrait précoce améliore la précision", correct: false },
+        { text: "Le texte l’indique explicitement", correct: true },
+        { text: "Le mélange homogène n’est pas nécessaire", correct: false },
+        { text: "Le respect d’un temps de prise suffisant est requis", correct: true }
+      ]
+    },
+    {
+      question: "Il n’existe pas de protocole standard de désinfection en raison de la diversité des matériaux et désinfectants.",
+      difficulty: 3,
+      answers: [
+        { text: "Cette absence de standard est écrite", correct: true },
+        { text: "Un protocole unique est imposé", correct: false },
+        { text: "L’immersion est recommandée pour une bonne désinfection", correct: true },
+        { text: "La pulvérisation est dite systématiquement supérieure", correct: false }
+      ]
+    },
+    {
+      question: "L’immersion est recommandée pour tous les matériaux sauf les hydrocolloïdes, avec un temps suffisant mais < 1 h.",
+      difficulty: 3,
+      answers: [
+        { text: "Le temps d’immersion n’a pas d’impact dimensionnel", correct: false },
+        { text: "Une longue immersion modifie les dimensions", correct: true },
+        { text: "Cette restriction et la limite de temps sont données", correct: true },
+        { text: "Les hydrocolloïdes supportent des immersions prolongées", correct: false }
+      ]
+    },
+
+    // 25–35 : difficulté 4
+    {
+      question: "Les matériaux d’origine naturelle (plâtre, hydrocolloïdes) ne présentent pas de toxicité ; la biocompatibilité des synthétiques est liée à leur instabilité chimique.",
+      difficulty: 4,
+      answers: [
+        { text: "Oui, c’est le passage sur toxicité/biocompatibilité", correct: true },
+        { text: "Le plâtre est décrit comme toxique", correct: false },
+        { text: "Les synthétiques sont dits toujours stables chimiquement", correct: false },
+        { text: "L’énoncé oppose naturel/synthétique comme dans le texte", correct: true }
+      ]
+    },
+    {
+      question: "L’empreinte préside à l’élaboration de la construction prothétique et le choix du matériau est une étape fondamentale.",
+      difficulty: 4,
+      answers: [
+        { text: "Le modèle n’a pas à être fidèle", correct: false },
+        { text: "La sélection du matériau n’est pas considérée essentielle", correct: false },
+        { text: "La fidélité du modèle de travail reflète la capacité d’enregistrement", correct: true },
+        { text: "Ces idées sont formulées dans l’introduction", correct: true }
+      ]
+    },
+    {
+      question: "L’amélioration des propriétés mécaniques et surfaciques sert la précision dimensionnelle et la définition des états de surface.",
+      difficulty: 4,
+      answers: [
+        { text: "Elle n’a aucun rapport avec la précision", correct: false },
+        { text: "Elle concerne les matériaux d’empreinte actuels", correct: true },
+        { text: "Elle est attribuée uniquement aux hydrocolloïdes", correct: false },
+        { text: "Cette double finalité est mentionnée", correct: true }
+      ]
+    },
+    {
+      question: "La « précision » au sens du cours inclut précision volumique/dimensionnelle et « fidélité » des microsurfaces.",
+      difficulty: 4,
+      answers: [
+        { text: "Cette articulation est soulignée", correct: true },
+        { text: "La précision ne vise que les contours macroscopiques", correct: false },
+        { text: "La fidélité est la reproduction des détails", correct: true },
+        { text: "Les microsurfaces ne sont pas prises en compte", correct: false }
+      ]
+    },
+    {
+      question: "La mouillabilité insuffisante réduit l’étalement et l’enregistrement des surfaces bucco-dentaires.",
+      difficulty: 4,
+      answers: [
+        { text: "Conséquence clinique directe sur l’empreinte", correct: true },
+        { text: "Aucune incidence n’est rapportée", correct: false },
+        { text: "Relation causale clairement indiquée", correct: true },
+        { text: "Elle améliore paradoxalement l’enregistrement", correct: false }
+      ]
+    },
+    {
+      question: "La stabilité dimensionnelle est un paramètre « à plus long terme », distinct de la précision immédiate.",
+      difficulty: 4,
+      answers: [
+        { text: "La stabilité mesure la conformité à la situation originelle", correct: true },
+        { text: "Elle n’a pas de lien avec l’environnement de stockage", correct: false },
+        { text: "Elle est qualifiée d’« immédiate » dans le texte", correct: false },
+        { text: "Cette distinction temporelle est donnée", correct: true }
+      ]
+    },
+    {
+      question: "Les propriétés mécaniques peuvent conduire à des déformations lors du retrait de la bouche ou de la coulée si insuffisantes.",
+      difficulty: 4,
+      answers: [
+        { text: "D’où l’importance d’un mélange homogène et du temps de prise", correct: true },
+        { text: "Le retrait prématuré est encouragé", correct: false },
+        { text: "Les déformations ne surviennent qu’en laboratoire", correct: false },
+        { text: "Ces sources de contraintes sont citées", correct: true }
+      ]
+    },
+    {
+      question: "L’angle de contact < 90° est le critère d’hydrophilie et favorise l’étalement.",
+      difficulty: 4,
+      answers: [
+        { text: "Un angle inférieur réduit la mouillabilité", correct: false },
+        { text: "Le texte ne mentionne pas l’angle de contact", correct: false },
+        { text: "L’hydrophilie soutient la mouillabilité", correct: true },
+        { text: "Le seuil et son interprétation sont donnés", correct: true }
+      ]
+    },
+    {
+      question: "La reproduction des détails en microns dépend aussi de la compatibilité avec le matériau de réplique.",
+      difficulty: 4,
+      answers: [
+        { text: "Le texte ne parle pas de microns", correct: false },
+        { text: "La mesure en microns est indiquée", correct: true },
+        { text: "La compatibilité est explicitement incluse", correct: true },
+        { text: "Elle est indépendante de tout matériau de réplique", correct: false }
+      ]
+    },
+    {
+      question: "L’environnement/temps de stockage peuvent altérer les propriétés des empreintes.",
+      difficulty: 4,
+      answers: [
+        { text: "D’où l’importance des conditions de conservation", correct: true },
+        { text: "La stabilité augmente toujours avec le temps", correct: false },
+        { text: "Ce risque est mentionné", correct: true },
+        { text: "Le stockage n’a pas d’effet selon le document", correct: false }
+      ]
+    },
+    {
+      question: "L’immersion est préférée à la pulvérisation pour la désinfection, mais doit rester contrôlée (temps < 1 h).",
+      difficulty: 4,
+      answers: [
+        { text: "Limitation temporelle précisée", correct: true },
+        { text: "Supériorité de l’immersion indiquée", correct: true },
+        { text: "La pulvérisation est dite équivalente en toutes circonstances", correct: false },
+        { text: "Aucune précaution de temps n’est donnée", correct: false }
+      ]
+    },
+
+    // 36–40 : difficulté 5 (Très difficiles)
+    {
+      question: "La cinétique d’écoulement, déterminée par la viscosité, conditionne des facteurs opératoires (malaxage, injection, aptitude à l’écoulement).",
+      difficulty: 5,
+      answers: [
+        { text: "Ces trois implications opératoires sont listées", correct: true },
+        { text: "Elles ne sont pas mentionnées", correct: false },
+        { text: "Elles sont reliées à la viscosité dans le texte", correct: true },
+        { text: "Elles dépendent uniquement de l’hydrophilie", correct: false }
+      ]
+    },
+    {
+      question: "La précision dimensionnelle immédiate peut être respectée alors que la stabilité dimensionnelle se dégrade avec un stockage inapproprié.",
+      difficulty: 5,
+      answers: [
+        { text: "Le texte insiste sur le rôle du temps et de l’environnement", correct: true },
+        { text: "Les deux paramètres sont confondus sans distinction", correct: false },
+        { text: "Le stockage améliore toujours la stabilité", correct: false },
+        { text: "Cette opposition « immédiat/long terme » est posée", correct: true }
+      ]
+    },
+    {
+      question: "Les propriétés élastiques dépendent conjointement réticulation/charges/plastifiants, modulant la résistance aux contraintes de coulée.",
+      difficulty: 5,
+      answers: [
+        { text: "Les trois paramètres sont nommés", correct: true },
+        { text: "Seule la réticulation est évoquée", correct: false },
+        { text: "La coulée fait partie des contraintes citées", correct: true },
+        { text: "Les plastifiants sont exclus du raisonnement", correct: false }
+      ]
+    },
+    {
+      question: "Le document assimile « fidélité » à la capacité de reproduction des microsurfaces, distincte de la précision volumique.",
+      difficulty: 5,
+      answers: [
+        { text: "Le texte ne définit pas ce terme", correct: false },
+        { text: "« Fidélité » est utilisée pour la dilatation thermique", correct: false },
+        { text: "Il appartient à la définition opérationnelle de la précision", correct: true },
+        { text: "Oui, ce vocabulaire est explicitement utilisé", correct: true }
+      ]
+    },
+    {
+      question: "La conclusion insiste : le succès dépend du choix du matériau/technique et d’un examen clinique rigoureux ; l’optimisation actuelle vient surtout de l’amélioration des matériaux.",
+      difficulty: 5,
+      answers: [
+        { text: "L’examen clinique est jugé secondaire", correct: false },
+        { text: "La technique seule suffit, indépendamment du matériau", correct: false },
+        { text: "Ces deux messages sont énoncés", correct: true },
+        { text: "La primauté de l’amélioration des propriétés est soulignée", correct: true }
+      ]
+    }
+  ]
+};
+
+
+
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "lesson.html";
+  }
+</script>
+<script src="./layout-fix.js"></script>
+
+</body>
+</html>
