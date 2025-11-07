@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <body data-qcm-clean="1">
+    <body data-qcm-paginate="1" data-qcm-page-size="10">
+
 
 <head>
 <!-- 🔒 حماية الصفحة بـ Firebase -->
@@ -3130,6 +3132,133 @@
 </script>
 <script src="./layout-fix.js"></script>
 <script src="./mask_parentheses_in_options.js"></script>
+<script src="touch-boost.js"></script>
+<script>
+/* QCM paginate (one-file) — shows questions in pages of N (default 10) without changing logic/text */
+(function () {
+  if (!document.body || document.body.getAttribute("data-qcm-paginate") !== "1") return;
+
+  // ====== Config ======
+  const PAGE_SIZE = parseInt(document.body.getAttribute("data-qcm-page-size") || "10", 10);
+  const DEFAULT_SELECTORS = [".question", ".qcm-question", ".q-item", ".quiz-item"];
+  const SKIP_TAGS = new Set(["script","style","textarea","code","pre","noscript"]);
+
+  // ====== Minimal CSS injected once ======
+  (function ensureStyle(){
+    if (document.getElementById("qcm-pager-style")) return;
+    const css = `
+      .qcm-pager{display:flex;align-items:center;gap:.75rem;padding:.5rem .75rem;margin:.5rem 0 1rem;
+                 border:1px solid #e5e7eb;border-radius:12px;background:#fafafa;position:sticky;top:0;z-index:5}
+      .qcm-pager .qcm-page-info{font-weight:600}
+      .qcm-pager button{padding:.4rem .7rem;border:1px solid #ddd;background:#fff;border-radius:10px;cursor:pointer;
+                        user-select:none;touch-action:manipulation}
+      .qcm-pager button:disabled{opacity:.5;cursor:not-allowed}
+      .qcm-hidden{display:none!important}
+      /* اختياري: تحسين لقوائم طويلة */
+      .questions,.qcm-list{content-visibility:auto;contain-intrinsic-size:800px}
+    `;
+    const style = document.createElement("style");
+    style.id = "qcm-pager-style"; style.textContent = css;
+    document.head.appendChild(style);
+  })();
+
+  // ====== Helpers ======
+  function findQuestionsContainer() {
+    // إن وُجد عنصر يحدد المحدِّد داخله
+    const marked = document.querySelector("[data-qcm-selector]");
+    if (marked) return marked;
+    // أو حاوٍ شائع للأسئلة
+    return document.querySelector(".questions, .qcm-list, .quiz, #questions, main, .content") || document.body;
+  }
+  function getQuestionSelector(container) {
+    const custom = container.getAttribute("data-qcm-selector");
+    if (custom && custom.trim()) return custom;
+    return DEFAULT_SELECTORS.join(", ");
+  }
+  function collectQuestions(container, selector) {
+    return Array.from(container.querySelectorAll(selector));
+  }
+  function createPager() {
+    const bar = document.createElement("div");
+    bar.className = "qcm-pager";
+    bar.innerHTML = `
+      <button type="button" class="qcm-prev" aria-label="السابق">‹</button>
+      <span class="qcm-page-info" aria-live="polite"></span>
+      <button type="button" class="qcm-next" aria-label="التالي">›</button>
+    `;
+    return bar;
+  }
+  function applyPage(items, pageIndex, pageSize) {
+    const start = pageIndex * pageSize;
+    const end = Math.min(start + pageSize, items.length);
+    for (let i = 0; i < items.length; i++) {
+      items[i].style.display = (i >= start && i < end) ? "" : "none";
+    }
+  }
+
+  // ====== Main init (with retry if content is injected later) ======
+  function initPagination() {
+    const container = findQuestionsContainer();
+    const selector = getQuestionSelector(container);
+    const items = collectQuestions(container, selector);
+    if (!items.length) return false;
+
+    const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+    let page = 0;
+
+    const topPager = createPager();
+    const bottomPager = createPager();
+    container.parentNode.insertBefore(topPager, container);
+    container.parentNode.insertBefore(bottomPager, container.nextSibling);
+
+    function updateUI() {
+      topPager.querySelector(".qcm-page-info").textContent    = `الصفحة ${page + 1} / ${totalPages}`;
+      bottomPager.querySelector(".qcm-page-info").textContent = `الصفحة ${page + 1} / ${totalPages}`;
+      topPager.querySelector(".qcm-prev").disabled    = (page === 0);
+      bottomPager.querySelector(".qcm-prev").disabled = (page === 0);
+      topPager.querySelector(".qcm-next").disabled    = (page >= totalPages - 1);
+      bottomPager.querySelector(".qcm-next").disabled = (page >= totalPages - 1);
+    }
+    function goTo(newPage) {
+      page = Math.max(0, Math.min(totalPages - 1, newPage));
+      applyPage(items, page, PAGE_SIZE);
+      updateUI();
+      container.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // events
+    topPager.querySelector(".qcm-prev").addEventListener("click", () => goTo(page - 1), { passive: true });
+    topPager.querySelector(".qcm-next").addEventListener("click", () => goTo(page + 1), { passive: true });
+    bottomPager.querySelector(".qcm-prev").addEventListener("click", () => goTo(page - 1), { passive: true });
+    bottomPager.querySelector(".qcm-next").addEventListener("click", () => goTo(page + 1), { passive: true });
+
+    // keyboard arrows (اختياري)
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft")  goTo(page - 1);
+      if (e.key === "ArrowRight") goTo(page + 1);
+    }, { passive: true });
+
+    // first render
+    goTo(0);
+    return true;
+  }
+
+  function start() {
+    if (initPagination()) return;
+    // لو لم يجد أسئلة الآن (لأنها تتولد لاحقًا)، راقب DOM وحاول مرة واحدة عند ظهورها
+    const obs = new MutationObserver(() => {
+      if (initPagination()) obs.disconnect();
+    });
+    obs.observe(document.body, { subtree: true, childList: true });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+})();
+</script>
 
 </style>
 </body>
