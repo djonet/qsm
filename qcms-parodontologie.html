@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+<body data-qcm-clean="1">
 
 <head>
 <!-- 🔒 حماية الصفحة بـ Firebase -->
@@ -182,417 +183,418 @@
 
   // 🧠 أسئلة تجريبية
   const questionsData = {
-  'la gencive': [
-  // 1 à 5 — Niveau bon élève ⭐
-  {
-    question: "La gencive fait partie de la fibromuqueuse, recouvre les procès alvéolaires et entoure le collet dentaire ; elle représente le parodonte superficiel.",
-    difficulty: 1,
-    answers: [
-      { text: "A. Partie de la fibromuqueuse", correct: true },
-      { text: "B. Recouvre les procès alvéolaires", correct: true },
-      { text: "C. Entoure le collet des dents", correct: true },
-      { text: "D. Constitue le parodonte profond", correct: false }
-    ]
-  },
-  {
-    question: "La muqueuse buccale est classée en trois types selon Schröder (1981), dont l’un correspond à la muqueuse masticatoire comprenant le palais dur et la gencive.",
-    difficulty: 1,
-    answers: [
-      { text: "A. Muqueuse bordante : palais mou, lèvres, joues, etc.", correct: true },
-      { text: "B. Muqueuse masticatoire : palais dur et gencive", correct: true },
-      { text: "C. Muqueuse spécialisée : face ventrale de la langue", correct: false },
-      { text: "D. Muqueuse spécialisée : surface dorsale de la langue", correct: true }
-    ]
-  },
-  {
-    question: "Le parodonte se divise en deux ensembles, l’un superficiel et l’autre profond, avec des rôles de fixation, recouvrement et protection de la dent.",
-    difficulty: 1,
-    answers: [
-      { text: "A. Parodonte superficiel : gencive", correct: true },
-      { text: "B. Parodonte profond : desmodonte, os alvéolaire, cément", correct: true },
-      { text: "C. Rôle : recouvrement et protection", correct: true },
-      { text: "D. Rôle exclusif : mastication", correct: false }
-    ]
-  },
-  {
-    question: "La gencive marginale entoure la dent comme un collier et constitue la paroi molle du sulcus, séparée de la gencive attachée par un sillon.",
-    difficulty: 1,
-    answers: [
-      { text: "A. Entoure la zone cervicale de la dent", correct: true },
-      { text: "B. Paroi molle du sulcus", correct: true },
-      { text: "C. Séparée de la gencive attachée par le sillon gingival marginal", correct: true },
-      { text: "D. Fusionnée au périoste sur toute son étendue", correct: false }
-    ]
-  },
-  {
-    question: "La gencive papillaire occupe l’embrasure gingivale, sous le point de contact, et relie les pyramides vestibulaire et palatine par un isthme.",
-    difficulty: 1,
-    answers: [
-      { text: "A. Située dans l’espace interproximal", correct: true },
-      { text: "B. Sous le point de contact", correct: true },
-      { text: "C. Reliée par un col/isthme", correct: true },
-      { text: "D. Délimitée uniquement sur les faces linguales", correct: false }
-    ]
-  },
+  
+  "la gencive": [
+    // 1–10 : difficulté 1
+    {
+      question: "La gencive fait partie de la fibromuqueuse, recouvre les processus alvéolaires et entoure le collet dentaire ; elle représente le parodonte superficiel.",
+      difficulty: 1,
+      answers: [
+        { text: "Constitue le parodonte profond", correct: false },
+        { text: "Recouvre les processus alvéolaires", correct: true },
+        { text: "Entoure le collet des dents", correct: true },
+        { text: "Partie de la fibromuqueuse", correct: true }
+      ]
+    },
+    {
+      question: "La muqueuse buccale est classée en trois types selon Schröder (1981), dont l’un correspond à la muqueuse masticatoire comprenant le palais dur et la gencive.",
+      difficulty: 1,
+      answers: [
+        { text: "Muqueuse spécialisée : surface dorsale de la langue", correct: true },
+        { text: "Muqueuse masticatoire : palais dur et gencive", correct: true },
+        { text: "Muqueuse spécialisée : face ventrale de la langue", correct: false },
+        { text: "Muqueuse bordante : palais mou, lèvres, joues, etc.", correct: true }
+      ]
+    },
+    {
+      question: "Le parodonte se divise en deux ensembles, l’un superficiel et l’autre profond, avec des rôles de fixation, recouvrement et protection de la dent.",
+      difficulty: 1,
+      answers: [
+        { text: "Rôle : recouvrement et protection", correct: true },
+        { text: "Parodonte superficiel : gencive", correct: true },
+        { text: "Rôle exclusif : mastication", correct: false },
+        { text: "Parodonte profond : desmodonte, os alvéolaire, cément", correct: true }
+      ]
+    },
+    {
+      question: "La gencive marginale entoure la dent comme un collier et constitue la paroi molle du sulcus, séparée de la gencive attachée par un sillon.",
+      difficulty: 1,
+      answers: [
+        { text: "Entoure la zone cervicale de la dent", correct: true },
+        { text: "Séparée de la gencive attachée par le sillon gingival marginal", correct: true },
+        { text: "Fusionnée au périoste sur toute son étendue", correct: false },
+        { text: "Paroi molle du sulcus", correct: true }
+      ]
+    },
+    {
+      question: "La gencive papillaire occupe l’embrasure gingivale, sous le point de contact, et relie les pyramides vestibulaire et palatine par un isthme.",
+      difficulty: 1,
+      answers: [
+        { text: "Sous le point de contact", correct: true },
+        { text: "Située dans l’espace interproximal", correct: true },
+        { text: "Délimitée uniquement sur les faces linguales", correct: false },
+        { text: "Reliée par un col/isthme", correct: true }
+      ]
+    },
+    {
+      question: "Concernant les repères de la gencive marginale, certains espaces ou sillons sont explicitement décrits lors de l’éruption dentaire.",
+      difficulty: 1,
+      answers: [
+        { text: "Sillon gingivo-dentaire en V, du rebord gingival jusqu’à l’épithélium jonctionnel", correct: true },
+        { text: "Rebord marginal libre à 0,5–2 mm de la JAC", correct: true },
+        { text: "Sillon sous-périosté permanent séparant la gencive libre de l’os", correct: false },
+        { text: "Sillon gingival libre parallèle au rebord gingival (0,5–2,8 mm)", correct: true }
+      ]
+    },
+    {
+      question: "Le sulcus gingival (sillon gingivo-dentaire) présente une morphologie et une profondeur normales chiffrées dans le cours.",
+      difficulty: 1,
+      answers: [
+        { text: "Forme en V autour de la dent", correct: true },
+        { text: "Profondeur normale 1,8 ± 0,6 mm", correct: true },
+        { text: "Profondeur normale 4–6 mm", correct: false },
+        { text: "Limité par l’épithélium de la gencive libre et la surface dentaire", correct: true }
+      ]
+    },
+    {
+      question: "La gencive attachée prolonge la gencive marginale et se fixe solidement aux structures sous-jacentes, la rendant inamovible par rapport au plan osseux.",
+      difficulty: 1,
+      answers: [
+        { text: "Attachée au cément et à l’os sous-jacent", correct: true },
+        { text: "Solidement fixée au périoste", correct: true },
+        { text: "Se limite toujours à la papille interdentaire", correct: false },
+        { text: "Inamovible par rapport au plan osseux", correct: true }
+      ]
+    },
+    {
+      question: "La hauteur de la gencive attachée varie selon les régions antérieures et postérieures, avec des valeurs numériques précisées.",
+      difficulty: 1,
+      answers: [
+        { text: "IC mandibulaire : ~3,3–3,9 mm", correct: true },
+        { text: "En postérieur : valeurs plus faibles autour de 1,8–1,9 mm (PM)", correct: true },
+        { text: "IC maxillaire : ~3,5–4,5 mm", correct: true },
+        { text: "Constante et identique sur toute l’arcade", correct: false }
+      ]
+    },
+    {
+      question: "La ligne mucogingivale sépare clairement deux territoires tissulaires aux insertions différentes.",
+      difficulty: 1,
+      answers: [
+        { text: "Muqueuse buccale détachée des plans profonds", correct: true },
+        { text: "Les freins participent à la rétention", correct: true },
+        { text: "Gencive attachée mobile comme la muqueuse alvéolaire", correct: false },
+        { text: "Sépare la gencive attachée de la muqueuse buccale", correct: true }
+      ]
+    },
 
-  // 6 à 15 — Très bon élève ⭐⭐
-  {
-    question: "Concernant les repères de la gencive marginale, certains espaces ou sillons sont explicitement décrits lors de l’éruption dentaire.",
-    difficulty: 2,
-    answers: [
-      { text: "A. Rebord marginal libre à 0,5–2 mm de la jonction amélo-cémentaire", correct: true },
-      { text: "B. Sillon gingival libre parallèle au rebord gingival (0,5–2,8 mm)", correct: true },
-      { text: "C. Sillon gingivo-dentaire en V, du rebord gingival jusqu’à l’épithélium jonctionnel", correct: true },
-      { text: "D. Sillon sous-périosté permanent séparant la gencive libre de l’os", correct: false }
-    ]
-  },
-  {
-    question: "Le sulcus gingival (sillon gingivo-dentaire) présente une morphologie et une profondeur normales chiffrées dans le cours.",
-    difficulty: 2,
-    answers: [
-      { text: "A. Forme en V autour de la dent", correct: true },
-      { text: "B. Limité par l’épithélium tapissant la gencive libre et la surface dentaire", correct: true },
-      { text: "C. Profondeur normale 1,8 ± 0,6 mm", correct: true },
-      { text: "D. Profondeur normale 4–6 mm", correct: false }
-    ]
-  },
-  {
-    question: "La gencive attachée prolonge la gencive marginale et se fixe solidement aux structures sous-jacentes, la rendant inamovible par rapport au plan osseux.",
-    difficulty: 2,
-    answers: [
-      { text: "A. Attachée au cément et à l’os sous-jacent", correct: true },
-      { text: "B. Solidement fixée au périoste", correct: true },
-      { text: "C. Inamovible par rapport au plan osseux", correct: true },
-      { text: "D. Se limite toujours à la papille interdentaire", correct: false }
-    ]
-  },
-  {
-    question: "La hauteur de la gencive attachée varie selon les régions antérieures et postérieures, avec des valeurs numériques précisées.",
-    difficulty: 2,
-    answers: [
-      { text: "A. Ic maxillaire : ~3,5–4,5 mm", correct: true },
-      { text: "B. Ic mandibulaire : ~3,3–3,9 mm", correct: true },
-      { text: "C. Au niveau postérieur : valeurs plus faibles autour de 1,8–1,9 mm (PM)", correct: true },
-      { text: "D. Constante et identique sur toute l’arcade", correct: false }
-    ]
-  },
-  {
-    question: "La ligne mucogingivale sépare clairement deux territoires tissulaires aux insertions différentes.",
-    difficulty: 2,
-    answers: [
-      { text: "A. Sépare la gencive attachée de la muqueuse buccale", correct: true },
-      { text: "B. Muqueuse buccale détachée des plans profonds", correct: true },
-      { text: "C. Gencive attachée mobile comme la muqueuse alvéolaire", correct: false },
-      { text: "D. Freins participent à la rétention", correct: true }
-    ]
-  },
-  {
-    question: "Les caractéristiques cliniques d’une gencive saine incluent des éléments de couleur, de texture et de volume explicitement listés.",
-    difficulty: 2,
-    answers: [
-      { text: "A. Couleur rose corail influencée par vascularisation, typologie, kératinisation et mélanocytes", correct: true },
-      { text: "B. Texture lisse et ferme, aspect « peau d’orange » vestibulaire", correct: true },
-      { text: "C. Hauteur variable ; 1–2 suffit pour la santé parodontale", correct: true },
-      { text: "D. Contour indépendant de la forme des dents", correct: false }
-    ]
-  },
-  {
-    question: "La consistance et la texture de la gencive sont attribuées à des éléments conjonctifs et épithéliaux décrits.",
-    difficulty: 2,
-    answers: [
-      { text: "A. Fermeté de la GA due au tissu conjonctif collagénique", correct: true },
-      { text: "B. Fibres gingivales contribuant à la fermeté de la GM", correct: true },
-      { text: "C. Texture granitée rappelant la peau d’orange", correct: true },
-      { text: "D. Fermeté liée exclusivement aux hémidesmosomes", correct: false }
-    ]
-  },
-  {
-    question: "Le contour gingival dépend de facteurs occlusaux et anatomiques décrits.",
-    difficulty: 2,
-    answers: [
-      { text: "A. Dépend de la forme des dents et de leur alignement", correct: true },
-      { text: "B. Dépend de la taille et de l’emplacement de la zone de contact proximal", correct: true },
-      { text: "C. Suit un tracé festonné vestibulaire et lingual", correct: true },
-      { text: "D. Strictement rectiligne quelles que soient les dents", correct: false }
-    ]
-  },
-  {
-    question: "La vascularisation de la gencive provient de plusieurs sources anastomosées, dont certaines artères nommément citées.",
-    difficulty: 2,
-    answers: [
-      { text: "A. Sublinguale, mentale, faciale, grande palatine, infra-orbitaire, dentaire postérieure supérieure", correct: true },
-      { text: "B. Vaisseaux du ligament parodontal vers le sillon gingivo-dentaire", correct: true },
-      { text: "C. Artérioles issues des septa interdentaires", correct: true },
-      { text: "D. Exclusivement assurée par l’artère linguale", correct: false }
-    ]
-  },
-  {
-    question: "L’innervation et le drainage lymphatique de la gencive suivent des répartitions régionales précises.",
-    difficulty: 2,
-    answers: [
-      { text: "A. Innervation : branches maxillaires et mandibulaires du trijumeau", correct: true },
-      { text: "B. Drainage vestibulaire/lingual incisif mandibulaire → sous-mentonniers", correct: true },
-      { text: "C. Gencive palatine → cervicaux profonds", correct: true },
-      { text: "D. Gencive vestibulaire maxillaire et prémolaires/molaires mandibulaires → sous-mandibulaires", correct: true }
-    ]
-  },
+    // 11–20 : difficulté 2
+    {
+      question: "Les caractéristiques cliniques d’une gencive saine incluent des éléments de couleur, de texture et de volume explicitement listés.",
+      difficulty: 2,
+      answers: [
+        { text: "Hauteur variable ; 1–2 mm suffisent pour la santé parodontale", correct: true },
+        { text: "Contour indépendant de la forme des dents", correct: false },
+        { text: "Texture lisse et ferme, aspect « peau d’orange » vestibulaire", correct: true },
+        { text: "Couleur rose corail influencée par vascularisation, typologie, kératinisation et mélanocytes", correct: true }
+      ]
+    },
+    {
+      question: "La consistance et la texture de la gencive sont attribuées à des éléments conjonctifs et épithéliaux décrits.",
+      difficulty: 2,
+      answers: [
+        { text: "Fermeté liée exclusivement aux hémidesmosomes", correct: false },
+        { text: "Fibres gingivales contribuant à la fermeté de la GM", correct: true },
+        { text: "Fermeté de la GA due au tissu conjonctif collagénique", correct: true },
+        { text: "Texture granitée rappelant la peau d’orange", correct: true }
+      ]
+    },
+    {
+      question: "Le contour gingival dépend de facteurs occlusaux et anatomiques décrits.",
+      difficulty: 2,
+      answers: [
+        { text: "Strictement rectiligne quelles que soient les dents", correct: false },
+        { text: "Suit un tracé festonné vestibulaire et lingual", correct: true },
+        { text: "Dépend de la taille et de l’emplacement de la zone de contact proximal", correct: true },
+        { text: "Dépend de la forme des dents et de leur alignement", correct: true }
+      ]
+    },
+    {
+      question: "La vascularisation de la gencive provient de plusieurs sources anastomosées, dont certaines artères nommément citées.",
+      difficulty: 2,
+      answers: [
+        { text: "Exclusivement assurée par l’artère linguale", correct: false },
+        { text: "Vaisseaux du ligament parodontal vers le sillon gingivo-dentaire", correct: true },
+        { text: "Artérioles issues des septa interdentaires", correct: true },
+        { text: "Sublinguale, mentale, faciale, grande palatine, infra-orbitaire, dentaire postérieure supérieure", correct: true }
+      ]
+    },
+    {
+      question: "L’innervation et le drainage lymphatique de la gencive suivent des répartitions régionales précises.",
+      difficulty: 2,
+      answers: [
+        { text: "Drainage vestibulaire/lingual incisif mandibulaire → sous-mentonniers", correct: true },
+        { text: "Gencive palatine → cervicaux profonds", correct: true },
+        { text: "Gencive vestibulaire maxillaire et prémolaires/molaires mandibulaires → sous-mandibulaires", correct: true },
+        { text: "Innervation : branches maxillaires et mandibulaires du trijumeau", correct: true }
+      ]
+    },
+    {
+      question: "Associez gencive et plan profond selon la description anatomique donnée.",
+      difficulty: 2,
+      answers: [
+        { text: "GM : tissu mobile comme la muqueuse alvéolaire", correct: false },
+        { text: "GM : paroi molle du sulcus et rebord gingival", correct: true },
+        { text: "GA : attachée au cément, à l’os et au périoste", correct: true },
+        { text: "Papillaire : sous le point de contact interproximal", correct: true }
+      ]
+    },
+    {
+      question: "À propos des distances et repères, identifiez les associations cohérentes avec le texte.",
+      difficulty: 2,
+      answers: [
+        { text: "Sillon gingival libre parallèle au rebord : 0,5–2,8 mm", correct: true },
+        { text: "Sulcus normal : 1,8 ± 0,6 mm", correct: true },
+        { text: "Rebord marginal libre : 0,5–2 mm de la JAC", correct: true },
+        { text: "Sulcus : du rebord gingival à la surface libre de l’épithélium de jonction", correct: true }
+      ]
+    },
+    {
+      question: "Caractéristiques cliniques : précisez les items restituant fidèlement le portrait de la gencive saine.",
+      difficulty: 2,
+      answers: [
+        { text: "Couleur rose corail modulée par kératinisation et mélanocytes", correct: true },
+        { text: "Texture strictement rugueuse sur toute la GA", correct: false },
+        { text: "Contour suivant le collet", correct: true },
+        { text: "Volume lié au réseau vasculaire et aux éléments intercellulaires", correct: true }
+      ]
+    },
+    {
+      question: "Sur la consistance/texture, combinez les éléments décrits comme contribuant à la fermeté.",
+      difficulty: 2,
+      answers: [
+        { text: "Texture granitée « peau d’orange »", correct: true },
+        { text: "Épithélium pavimenteux stratifié à renouvellement lent", correct: false },
+        { text: "Fibres gingivales (fermeté GM)", correct: true },
+        { text: "Tissu conjonctif collagénique (GA ferme)", correct: true }
+      ]
+    },
+    {
+      question: "Vascularisation : recomposez le circuit tel que décrit, en intégrant les zones d’anastomoses.",
+      difficulty: 2,
+      answers: [
+        { text: "Artérioles des septa interdentaires longeant le rebord osseux", correct: true },
+        { text: "Vaisseaux du ligament parodontal : anastomoses vers la zone du sillon", correct: true },
+        { text: "Unique afférence par l’artère faciale", correct: false },
+        { text: "Artérioles supra-périostées : faces vestibulaires/linguales", correct: true }
+      ]
+    },
 
-  // 16 à 25 — Excellent ⭐⭐⭐
-  {
-    question: "Associez gencive et plan approfondi selon la description anatomique donnée.",
-    difficulty: 3,
-    answers: [
-      { text: "A. GM : paroi molle du sulcus et rebord gingival", correct: true },
-      { text: "B. GA : attachée au cément, à l’os et au périoste", correct: true },
-      { text: "C. Papillaire : sous le point de contact interproximal", correct: true },
-      { text: "D. GM : tissulaire mobile comme la muqueuse alvéolaire", correct: false }
-    ]
-  },
-  {
-    question: "À propos des distances et repères, identifiez les associations cohérentes avec le texte.",
-    difficulty: 3,
-    answers: [
-      { text: "A. Rebord marginal libre : 0,5–2 mm de la JAC", correct: true },
-      { text: "B. Sillon gingival libre parallèle au rebord : 0,5–2,8 mm", correct: true },
-      { text: "C. Sulcus : du rebord gingival à la surface libre de l’épithélium de jonction", correct: true },
-      { text: "D. Sulcus normal : 1,8 ± 0,6 mm", correct: true }
-    ]
-  },
-  {
-    question: "Caractéristiques cliniques : précisez les items restituant fidèlement le portrait de la gencive saine.",
-    difficulty: 3,
-    answers: [
-      { text: "A. Couleur rose corail modulée par kératinisation et mélanocytes", correct: true },
-      { text: "B. Volume lié au réseau vasculaire et éléments intercellulaires", correct: true },
-      { text: "C. Contour suivant le collet", correct: true },
-      { text: "D. Texture strictement rugueuse sur toute la GA", correct: false }
-    ]
-  },
-  {
-    question: "Sur la consistance/texture, combinez les éléments décrits comme contribuant à la fermeté.",
-    difficulty: 3,
-    answers: [
-      { text: "A. Tissu conjonctif collagénique (GA ferme)", correct: true },
-      { text: "B. Fibres gingivales (fermeté GM)", correct: true },
-      { text: "C. Épithélium pavimenteux stratifié à renouvellement lent", correct: false },
-      { text: "D. Texture granitée peau d’orange", correct: true }
-    ]
-  },
-  {
-    question: "Vascularisation : recomposez le circuit tel que décrit, en intégrant les zones d’anastomoses.",
-    difficulty: 3,
-    answers: [
-      { text: "A. Artérioles supra-périostées : faces vestibulaires/linguales", correct: true },
-      { text: "B. Vaisseaux du ligament parodontal : anastomoses vers la zone du sillon", correct: true },
-      { text: "C. Artérioles des septa interdentaires longeant rebord osseux", correct: true },
-      { text: "D. Unique afférence par l’artère faciale", correct: false }
-    ]
-  },
-  {
-    question: "Innervation et vascularisation suivent des trajets parallèles.",
-    difficulty: 3,
-    answers: [
-      { text: "A. Nerfs : branches V2/V3 du trijumeau", correct: true },
-      { text: "B. Nerfs suivant le trajet des vaisseaux", correct: true },
-      { text: "C. Vaisseaux issus de grande palatine et infra-orbitaire", correct: true },
-      { text: "D. Innervation unique par le facial", correct: false }
-    ]
-  },
-  {
-    question: "Rôle protecteur : mécanismes épithéliaux mentionnés dans le texte.",
-    difficulty: 3,
-    answers: [
-      { text: "A. Organisation en strates et cohésion intercellulaire", correct: true },
-      { text: "B. Fixation à la lame basale par hémidesmosomes", correct: true },
-      { text: "C. Kératinisation avec desquamation", correct: true },
-      { text: "D. Étanchéité absolue interdisant tout passage cellulaire", correct: false }
-    ]
-  },
-  {
-    question: "Rôle de défense et de nutrition : mécanismes explicitement indiqués.",
-    difficulty: 3,
-    answers: [
-      { text: "A. Leucocytes PMN, macrophages, cellules lymphoïdes au sulcus", correct: true },
-      { text: "B. Sécrétion mucopolysaccharidique du joint de scellement", correct: true },
-      { text: "C. Perméabilité de la jonction gingivo-dentaire", correct: true },
-      { text: "D. Tissu conjonctif = échanges métaboliques capillaires/lymphatiques", correct: true }
-    ]
-  },
-  {
-    question: "Rôle d’émonctoire et consolidation conjonctive : affirmations concordantes.",
-    difficulty: 3,
-    answers: [
-      { text: "A. Desquamation emportant des substances toxiques", correct: true },
-      { text: "B. Tissu conjonctif assurant tonicité/adhérence", correct: true },
-      { text: "C. Renforcement fibrillaire : fibres supra-crestales et ligament circulaire", correct: true },
-      { text: "D. Exclusion des fibres conjonctives", correct: false }
-    ]
-  },
-  {
-    question: "Homéostasie et renouvellement : identifiez les délais cités et leur portée.",
-    difficulty: 3,
-    answers: [
-      { text: "A. Turnover EJ : 4–6 jours", correct: true },
-      { text: "B. Turnover EOS : 4–10 jours", correct: true },
-      { text: "C. Turnover EOG : 7–15 jours", correct: true },
-      { text: "D. Turnover unique 30 jours", correct: false }
-    ]
-  },
+    // 21–30 : difficulté 3
+    {
+      question: "Innervation et vascularisation suivent des trajets parallèles.",
+      difficulty: 3,
+      answers: [
+        { text: "Vaisseaux issus de la grande palatine et de l’infra-orbitaire", correct: true },
+        { text: "Innervation unique par le facial", correct: false },
+        { text: "Nerfs : branches V2/V3 du trijumeau", correct: true },
+        { text: "Nerfs suivant le trajet des vaisseaux", correct: true }
+      ]
+    },
+    {
+      question: "Rôle protecteur : mécanismes épithéliaux mentionnés dans le texte.",
+      difficulty: 3,
+      answers: [
+        { text: "Kératinisation avec desquamation", correct: true },
+        { text: "Organisation en strates et cohésion intercellulaire", correct: true },
+        { text: "Étanchéité absolue interdisant tout passage cellulaire", correct: false },
+        { text: "Fixation à la lame basale par hémidesmosomes", correct: true }
+      ]
+    },
+    {
+      question: "Rôle de défense et de nutrition : mécanismes explicitement indiqués.",
+      difficulty: 3,
+      answers: [
+        { text: "Leucocytes PMN, macrophages, cellules lymphoïdes au sulcus", correct: true },
+        { text: "Tissu conjonctif = échanges métaboliques capillaires/lymphatiques", correct: true },
+        { text: "Sécrétion mucopolysaccharidique du joint de scellement", correct: true },
+        { text: "Perméabilité de la jonction gingivo-dentaire", correct: true }
+      ]
+    },
+    {
+      question: "Rôle d’émonctoire et consolidation conjonctive : affirmations concordantes.",
+      difficulty: 3,
+      answers: [
+        { text: "Exclusion des fibres conjonctives", correct: false },
+        { text: "Tissu conjonctif assurant tonicité/adhérence", correct: true },
+        { text: "Desquamation emportant des substances toxiques", correct: true },
+        { text: "Renforcement fibrillaire : fibres supra-crestales et ligament circulaire", correct: true }
+      ]
+    },
+    {
+      question: "Homéostasie et renouvellement : identifiez les délais cités et leur portée.",
+      difficulty: 3,
+      answers: [
+        { text: "Turnover EJ : 4–6 jours", correct: true },
+        { text: "Turnover EOG : 7–15 jours", correct: true },
+        { text: "Turnover unique 30 jours", correct: false },
+        { text: "Turnover EOS : 4–10 jours", correct: true }
+      ]
+    },
+    {
+      question: "Ligne mucogingivale : précisez son rôle de frontière tissulaire.",
+      difficulty: 3,
+      answers: [
+        { text: "LMG : repère de transition mobilité/immobilité", correct: true },
+        { text: "Muqueuse buccale soudée aux plans profonds", correct: false },
+        { text: "Muqueuse buccale retenue par insertions musculaires et freins", correct: true },
+        { text: "Sépare GA et muqueuse buccale", correct: true }
+      ]
+    },
+    {
+      question: "GA et GM : implications fonctionnelles de leur attache/fixité.",
+      difficulty: 3,
+      answers: [
+        { text: "GM confondue avec la muqueuse alvéolaire", correct: false },
+        { text: "GM libre, formant la paroi du sulcus", correct: true },
+        { text: "GA inamovible par rapport à l’os", correct: true },
+        { text: "GA ferme/élastique, attachée au périoste", correct: true }
+      ]
+    },
+    {
+      question: "Contour et embrasures : facteurs modulant la forme marginale.",
+      difficulty: 3,
+      answers: [
+        { text: "Dépend de l’alignement dentaire sur l’arcade", correct: true },
+        { text: "Suit un tracé festonné vestibulaire et lingual", correct: true },
+        { text: "Dépend de la taille/localisation des zones de contact proximal", correct: true },
+        { text: "Indépendant des contacts proximaux", correct: false }
+      ]
+    },
+    {
+      question: "Caractéristiques cliniques : paramètres couleur/volume/hauteur.",
+      difficulty: 3,
+      answers: [
+        { text: "Volume = cellules/intercellulaires + réseau vasculaire", correct: true },
+        { text: "Hauteur variable ; 1–2 mm suffisante pour santé parodontale", correct: true },
+        { text: "Rose corail, influencée par vascularisation et kératinisation", correct: true },
+        { text: "Hauteur minimale 5–6 mm nécessaire", correct: false }
+      ]
+    },
+    {
+      question: "Vascularisation — sources multiples citées.",
+      difficulty: 3,
+      answers: [
+        { text: "Grande palatine, infra-orbitaire, dentaire postéro-supérieure", correct: true },
+        { text: "Ligament parodontal avec capillaires vers la zone sulculaire", correct: true },
+        { text: "Uniquement septales interdentaires sans anastomoses", correct: false },
+        { text: "Sublinguale, mentale, faciale", correct: true }
+      ]
+    },
 
-  // 26 à 35 — Difficiles ⭐⭐⭐⭐
-  {
-    question: "Sur la ligne mucogingivale, précisez son rôle de frontière tissulaire.",
-    difficulty: 4,
-    answers: [
-      { text: "A. Sépare GA et muqueuse buccale", correct: true },
-      { text: "B. Muqueuse buccale retenue par insertions musculaires et freins", correct: true },
-      { text: "C. Muqueuse buccale soudée aux plans profonds", correct: false },
-      { text: "D. LMG : repère de transition mobilité/immobilité", correct: true }
-    ]
-  },
-  {
-    question: "GA et GM : implications fonctionnelles de leur attache/fixité.",
-    difficulty: 4,
-    answers: [
-      { text: "A. GA ferme/élastique, attachée au périoste", correct: true },
-      { text: "B. GM libre du sulcus", correct: true },
-      { text: "C. GA inamovible par rapport à l’os", correct: true },
-      { text: "D. GM confondue avec muqueuse alvéolaire", correct: false }
-    ]
-  },
-  {
-    question: "Contour et embrasures : facteurs modulant la forme marginale.",
-    difficulty: 4,
-    answers: [
-      { text: "A. Dépend de l’alignement dentaires dépend de l’alignement dentaire sur l’arcade", correct: true },
-{ text: "B. Dépend de la taille/localisation des zones de contact proximal", correct: true },
-{ text: "C. Suit un tracé festonné vestibulaire et lingual", correct: true },
-{ text: "D. Indépendant des contacts proximaux", correct: false }
-]
-},
-{
-question: "Caractéristiques cliniques : paramètres couleur/volume/hauteur",
-difficulty: 4,
-answers: [
-{ text: "A. Rose corail, influencée par vascularisation et kératinisation", correct: true },
-{ text: "B. Volume = cellules/intercellulaires + réseau vasculaire", correct: true },
-{ text: "C. Hauteur variable ; 1–2 suffisante pour santé parodontale", correct: true },
-{ text: "D. Hauteur minimale 5–6 nécessaire", correct: false }
-]
-},
-{
-question: "Vascularisation — sources multiples citées",
-difficulty: 4,
-answers: [
-{ text: "A. Sublinguale, mentale, faciale", correct: true },
-{ text: "B. Grande palatine, infra-orbitaire, dentaire postéro-supérieure", correct: true },
-{ text: "C. Uniquement septales interdentaires sans anastomoses", correct: false },
-{ text: "D. Ligament parodontal avec capillaires vers zone sulculaire", correct: true }
-]
-},
-{
-question: "Drainage lymphatique — associations exactes",
-difficulty: 4,
-answers: [
-{ text: "A. Vestibulaire/linguale incisive mandibulaire → sous-mentonniers", correct: true },
-{ text: "B. Palatine → cervicaux profonds", correct: true },
-{ text: "C. Vestibulaire maxillaire + prémolaires/molaires mandibulaires → sous-mandibulaires", correct: true },
-{ text: "D. Palatine → sous-mentonniers", correct: false }
-]
-},
-{
-question: "Innervation — nerfs et territoires",
-difficulty: 4,
-answers: [
-{ text: "A. Branches maxillaires/mandibulaires du trijumeau", correct: true },
-{ text: "B. Troncs nerveux suivant le trajet des vaisseaux", correct: true },
-{ text: "C. Innervation unique par le VII au vestibule maxillaire", correct: false },
-{ text: "D. Parcours parallèles aux voies vasculaires", correct: true }
-]
-},
-{
-question: "Physiologie — mécanismes protecteurs et d’homéostasie",
-difficulty: 4,
-answers: [
-{ text: "A. Kératinisation transformant une protéine résistante", correct: true },
-{ text: "B. Desquamation après rupture des joints intercellulaires", correct: true },
-{ text: "C. Perméabilité de la jonction aux leucocytes/fluide gingival", correct: true },
-{ text: "D. Imperméabilité complète de l’épithélium de jonction", correct: false }
-]
-},
-{
-question: "Éléments épithélio-conjonctifs — cohésion",
-difficulty: 4,
-answers: [
-{ text: "A. Jonctions intercellulaires assurant cohésion", correct: true },
-{ text: "B. Hémidesmosomes fixant à la lame basale", correct: true },
-{ text: "C. Digitations épithéliales et papilles conjonctives", correct: true },
-{ text: "D. Absence de structure d’attache", correct: false }
-]
-},
-{
-question: "Synthèse « sulcus/attache/jonction » : couples exacts",
-difficulty: 4,
-answers: [
-{ text: "A. Sulcus en V limité par surface dentaire et épithélium libre", correct: true },
-{ text: "B. Fond du sulcus = surface libre de l’épithélium de jonction", correct: true },
-{ text: "C. Sillon gingival libre parallèle au rebord gingival", correct: true },
-{ text: "D. Rebord marginal sur surface amélaire", correct: false }
-]
-},
+    // 31–35 : difficulté 4
+    {
+      question: "Drainage lymphatique — associations exactes.",
+      difficulty: 4,
+      answers: [
+        { text: "Palatine → cervicaux profonds", correct: true },
+        { text: "Palatine → sous-mentonniers", correct: false },
+        { text: "Vestibulaire maxillaire + prémolaires/molaires mandibulaires → sous-mandibulaires", correct: true },
+        { text: "Vestibulaire/linguale incisive mandibulaire → sous-mentonniers", correct: true }
+      ]
+    },
+    {
+      question: "Innervation — nerfs et territoires.",
+      difficulty: 4,
+      answers: [
+        { text: "Innervation unique par le VII au vestibule maxillaire", correct: false },
+        { text: "Parcours parallèles aux voies vasculaires", correct: true },
+        { text: "Troncs nerveux suivant le trajet des vaisseaux", correct: true },
+        { text: "Branches maxillaires/mandibulaires du trijumeau", correct: true }
+      ]
+    },
+    {
+      question: "Physiologie — mécanismes protecteurs et d’homéostasie.",
+      difficulty: 4,
+      answers: [
+        { text: "Imperméabilité complète de l’épithélium de jonction", correct: false },
+        { text: "Desquamation après rupture des joints intercellulaires", correct: true },
+        { text: "Kératinisation rendant l’épithélium plus résistant", correct: true },
+        { text: "Perméabilité de la jonction aux leucocytes/fluide gingival", correct: true }
+      ]
+    },
+    {
+      question: "Éléments épithélio-conjonctifs — cohésion.",
+      difficulty: 4,
+      answers: [
+        { text: "Hémidesmosomes fixant à la lame basale", correct: true },
+        { text: "Absence de structure d’attache", correct: false },
+        { text: "Jonctions intercellulaires assurant la cohésion", correct: true },
+        { text: "Digitations épithéliales et papilles conjonctives", correct: true }
+      ]
+    },
+    {
+      question: "Synthèse « sulcus/attache/jonction » : couples exacts.",
+      difficulty: 4,
+      answers: [
+        { text: "Fond du sulcus = surface libre de l’épithélium de jonction", correct: true },
+        { text: "Sulcus en V limité par surface dentaire et épithélium libre", correct: true },
+        { text: "Sillon gingival libre parallèle au rebord gingival", correct: true },
+        { text: "Rebord marginal sur surface amélaire", correct: false }
+      ]
+    },
 
-// 36 à 40 — Très difficiles ⭐⭐⭐⭐⭐
-{
-question: "Portrait fonctionnel complet de la gencive",
-difficulty: 5,
-answers: [
-{ text: "A. Rôle protecteur : strates, jonctions, hémidesmosomes, kératinisation, desquamation", correct: true },
-{ text: "B. Rôle d’émonctoire : élimination cellules et toxines", correct: true },
-{ text: "C. Rôle nutritif : échanges métaboliques via capillaires/lymphatiques", correct: true },
-{ text: "D. Rôle de défense : joint mucopolysaccharidique, perméabilité leucocytes/fluide", correct: true }
-]
-},
-{
-question: "Associez correctement région → ganglions",
-difficulty: 5,
-answers: [
-{ text: "A. Incisive mandibulaire → sous-mentonniers", correct: true },
-{ text: "B. Palatine → cervicaux profonds", correct: true },
-{ text: "C. Vestibulaire maxillaire + molaires mandibulaires → sous-mandibulaires", correct: true },
-{ text: "D. Palatine → sous-mandibulaires exclusivement", correct: false }
-]
-},
-{
-question: "Durées de renouvellement exactes",
-difficulty: 5,
-answers: [
-{ text: "A. EJ : 4–6 jours", correct: true },
-{ text: "B. EOS : 4–10 jours", correct: true },
-{ text: "C. EOG : 7–15 jours", correct: true },
-{ text: "D. Tous identiques : 7–15 jours", correct: false }
-]
-},
-{
-question: "Couleur/texture/contour selon localisation",
-difficulty: 5,
-answers: [
-{ text: "A. Couleur rose corail modulée par mélanocytes/vascularisation", correct: true },
-{ text: "B. Piqueté « peau d’orange » vestibulaire GA et centre papilles", correct: true },
-{ text: "C. Contour suivant le collet et dépend des dents", correct: true },
-{ text: "D. Piqueté généralisé sur muqueuse alvéolaire mobile", correct: false }
-]
-},
-{
-question: "Synthèse attaches/fibres/adhérence",
-difficulty: 5,
-answers: [
-{ text: "A. Conjonctif assure tonicité et adhérence à dent/alvéole", correct: true },
-{ text: "B. Renforcement : fibres supra-crestales et ligament circulaire", correct: true },
-{ text: "C. Absence d’influence des fibres gingivales", correct: false },
-{ text: "D. GA ferme/élastique grâce au collagène", correct: true }
-]
-}
-],
+    // 36–40 : difficulté 5
+    {
+      question: "Portrait fonctionnel complet de la gencive.",
+      difficulty: 5,
+      answers: [
+        { text: "Rôle protecteur : strates, jonctions, hémidesmosomes, kératinisation, desquamation", correct: true },
+        { text: "Rôle de défense : joint mucopolysaccharidique, perméabilité leucocytes/fluide", correct: true },
+        { text: "Rôle d’émonctoire : élimination de cellules et toxines", correct: true },
+        { text: "Rôle nutritif : échanges métaboliques via capillaires/lymphatiques", correct: true }
+      ]
+    },
+    {
+      question: "Associez correctement région → ganglions.",
+      difficulty: 5,
+      answers: [
+        { text: "Palatine → cervicaux profonds", correct: true },
+        { text: "Vestibulaire maxillaire + molaires mandibulaires → sous-mandibulaires", correct: true },
+        { text: "Palatine → sous-mandibulaires exclusivement", correct: false },
+        { text: "Incisive mandibulaire → sous-mentonniers", correct: true }
+      ]
+    },
+    {
+      question: "Durées de renouvellement exactes.",
+      difficulty: 5,
+      answers: [
+        { text: "EJ : 4–6 jours", correct: true },
+        { text: "EOG : 7–15 jours", correct: true },
+        { text: "EOS : 4–10 jours", correct: true },
+        { text: "Tous identiques : 7–15 jours", correct: false }
+      ]
+    },
+    {
+      question: "Couleur/texture/contour selon localisation.",
+      difficulty: 5,
+      answers: [
+        { text: "Piqueté généralisé sur la muqueuse alvéolaire mobile", correct: false },
+        { text: "Contour suivant le collet et dépendant des dents", correct: true },
+        { text: "Piqueté « peau d’orange » vestibulaire de la GA et centre des papilles", correct: true },
+        { text: "Couleur rose corail modulée par mélanocytes/vascularisation", correct: true }
+      ]
+    },
+    {
+      question: "Synthèse attaches/fibres/adhérence.",
+      difficulty: 5,
+      answers: [
+        { text: "Absence d’influence des fibres gingivales", correct: false },
+        { text: "GA ferme/élastique grâce au collagène", correct: true },
+        { text: "Conjonctif assurant tonicité et adhérence à la dent/alvéole", correct: true },
+        { text: "Renforcement : fibres supra-crestales et ligament circulaire", correct: true }
+      ]
+    }
+  ],
 'Histoire de la parodontologie': [
   // A. Bon élève ⭐
   {
@@ -1775,7 +1777,8 @@ answers: [
       { text: "D. Remaniements du cément et du conjonctif n’altèrent pas l’adhésion", correct: true }
     ]
   }
-],"Le ligament alvéolo-dentaire": [
+],
+"Le ligament alvéolo-dentaire": [
   // A. Bon élève ⭐
   {
     question: "Le LAD, tissu conjonctif spécialisé, relie la dent à l’os et résiste aux forces masticatoires.",
@@ -2233,7 +2236,7 @@ answers: [
       question: "Concernant la composition de la matrice extracellulaire du LAD, quelles propositions reprennent exactement les éléments listés ?",
       difficulty: 1,
       answers: [
-        { text: "Des cellules, vaisseaux et fibres nerveuses enchâssés dans ce stroma", correct: true },
+        { text: "Des cellules, vaisseaux et fibres nerveuses enchâssés dans ce stroma", correct: false },
         { text: "Des fibres et une substance fondamentale", correct: true },
         { text: "Uniquement de la substance fondamentale sans fibres (contradictoire)", correct: false },
         { text: "Des prismes d’émail et des ostéons (structures non citées pour la MEC du LAD)", correct: false }
@@ -2396,7 +2399,7 @@ answers: [
       difficulty: 2,
       answers: [
         { text: "Améloblastes associés (non)", correct: false },
-        { text: "« Myofibrilles » : simples organites intracellulaires et non des cellules (formulation erronée)", correct: false },
+        { text: "« Myofibrilles » : simples organites intracellulaires et non des cellules ", correct: false },
         { text: "De synthèse : biosynthèse des macromolécules de la MEC (surtout collagène) et sécrétion", correct: true },
         { text: "De dégradation : phagocytent/dégradent les fibrilles de collagène via phago-lysosomes", correct: true }
       ]
@@ -2409,7 +2412,7 @@ answers: [
       answers: [
         { text: "Gap junctions exclusivement (non citées)", correct: false },
         { text: "Desmosomes ; joints serrés et joints serrés courts", correct: true },
-        { text: "Elles isolent totalement les cellules de la MEC (contraire à l’idée de transmission)", correct: false },
+        { text: "Elles isolent totalement les cellules de la MEC ", correct: false },
         { text: "Elles coordonnent la transmission de la contraction au système fibroblastique (éruption)", correct: true }
       ]
     },
@@ -3126,6 +3129,8 @@ answers: [
   }
 </script>
 <script src="./layout-fix.js"></script>
+<script src="./mask_parentheses_in_options.js"></script>
 
+</style>
 </body>
 </html>

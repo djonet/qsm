@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
+  <body data-qcm-clean="1">
+
 <head>
 <!-- 🔒 حماية الصفحة بـ Firebase -->
 <script type="module">
@@ -260,7 +262,7 @@
     difficulty: 2,
     answers: [
       { text: "A. Les mouvements postéro-antérieurs", correct: true },
-      { text: "B. Les mouvements transversaux", correct: false },
+      { text: "B. Les mouvements transversaux", correct: true },
       { text: "C. Les mouvements verticaux", correct: false },
       { text: "D. Les mouvements parasites", correct: true }
     ]
@@ -593,30 +595,422 @@
   }
 ],
 
-    'Système nerveux': [
-      {
-        question: 'ما هو الجزء من الدماغ المسؤول عن التوازن؟',
-        difficulty: 1,
-        answers: [
-          { text: 'المخيخ', correct: true },
-          { text: 'النخاع المستطيل', correct: false },
-          { text: 'المهاد', correct: false },
-          { text: 'القشرة المخية', correct: false }
-        ]
-      },
-      {
-        question: 'ما هو العصب المسؤول عن الرؤية؟',
-        difficulty: 2,
-        answers: [
-          { text: 'العصب السمعي', correct: false },
-          { text: 'العصب البصري', correct: true },
-          { text: 'العصب الوجهي', correct: false },
-          { text: 'العصب الحائر', correct: false }
-        ]
+  "Les empreintes en prothèse partielle": [
+    // A. bon élève (difficulty 1) — 5 items
+    {
+      question: "Lors du choix du porte-empreinte du commerce, quelles caractéristiques sont explicitement mentionnées comme possibles dans le cours (sans extrapolation) ?",
+      difficulty: 1,
+      answers: [
+        { text: "Matériau métallique ou plastique", correct: true },
+        { text: "Présence ou absence de perforations", correct: true },
+        { text: "Système d’occlusion intégré", correct: false },
+        { text: "Préférence pour des modèles métalliques pleins avec rétreints", correct: true }
+      ]
+    },
+    {
+      question: "Les tailles de porte-empreintes disponibles sont notées :",
+      difficulty: 1,
+      answers: [
+        { text: "U1 à U5 pour le maxillaire", correct: true },
+        { text: "L1 à L5 pour la mandibule", correct: true },
+        { text: "M1 à M5 pour le maxillaire", correct: false },
+        { text: "U et L selon Upper/Lower", correct: true }
+      ]
+    },
+    {
+      question: "Pour centrer les dents dans le p.e., le critère de sélection principal indiqué est :",
+      difficulty: 1,
+      answers: [
+        { text: "La largeur de l’arcade", correct: true },
+        { text: "La longueur de l’arcade", correct: false },
+        { text: "L’axe d’insertion prothétique prévu", correct: false },
+        { text: "La teinte des dents résiduelles", correct: false }
+      ]
+    },
+    {
+      question: "L’alginate est décrit comme :",
+      difficulty: 1,
+      answers: [
+        { text: "Hydrocolloïde irréversible", correct: true },
+        { text: "Peu onéreux et précis", correct: true },
+        { text: "Matériau se gélifiant rapidement", correct: true },
+        { text: "Réutilisable après gélification", correct: false }
+      ]
+    },
+    {
+      question: "La désinsertion d’une empreinte alginate se fait :",
+      difficulty: 1,
+      answers: [
+        { text: "Après environ 1 min 30 de gélification", correct: true },
+        { text: "Selon l’axe dentaire", correct: true },
+        { text: "Par mouvements lents et répétés de va-et-vient", correct: false },
+        { text: "Par traction franche sur le manche avec aide des index vestibulaires postérieurs", correct: true }
+      ]
+    },
+
+    // B. très bon élève (difficulty 2) — 10 items
+    {
+      question: "L’estimation de la largeur d’arcade peut se faire à l’aide :",
+      difficulty: 2,
+      answers: [
+        { text: "D’un compas à extrémités mousses", correct: true },
+        { text: "D’un pied à coulisse digital", correct: false },
+        { text: "D’un compas à pointes vives", correct: false },
+        { text: "D’un compas de mesure fourni avec la cuillère", correct: true }
+      ]
+    },
+    {
+      question: "Repères mandibulaires pour estimer la largeur :",
+      difficulty: 2,
+      answers: [
+        { text: "Faces internes des trigones", correct: true },
+        { text: "Faces externes des tubérosités", correct: false },
+        { text: "Dernières molaires", correct: false },
+        { text: "Ligne mylohyoïdienne", correct: false }
+      ]
+    },
+    {
+      question: "Repères maxillaires pour estimer la largeur :",
+      difficulty: 2,
+      answers: [
+        { text: "Faces internes des trigones", correct: false },
+        { text: "Faces externes des tubérosités", correct: true },
+        { text: "Dernières molaires", correct: true },
+        { text: "Ligne oblique externe", correct: false }
+      ]
+    },
+    {
+      question: "Lors de l’essayage du p.e., on doit respecter :",
+      difficulty: 2,
+      answers: [
+        { text: "Un espace d’environ 4 mm entre bord du p.e. et faces vestibulaires/palatines-linguales", correct: true },
+        { text: "Une épaisseur minimale de matériau d’enregistrement", correct: true },
+        { text: "Un contact intime du métal avec les dents pour la stabilité", correct: false },
+        { text: "La possibilité que le p.e. de série ne soit pas idéal", correct: true }
+      ]
+    },
+    {
+      question: "Un p.e. insuffisamment étendu (hauteur/largeur) peut être corrigé par :",
+      difficulty: 2,
+      answers: [
+        { text: "Adjonction de cire dure (Moyco)", correct: true },
+        { text: "Pâte thermoplastique", correct: true },
+        { text: "Résine autopolymérisable directement en bouche", correct: false },
+        { text: "Bande d’aluminium adhésive", correct: false }
+      ]
+    },
+    {
+      question: "Avant toute prise d’empreinte, l’essayage sert notamment à :",
+      difficulty: 2,
+      answers: [
+        { text: "Dépister des réflexes nauséeux incoercibles", correct: true },
+        { text: "Enregistrer immédiatement la relation intermaxillaire", correct: false },
+        { text: "Vérifier la tolérance du patient", correct: true },
+        { text: "Déterminer l’axe d’insertion de la PAP définitive", correct: false }
+      ]
+    },
+    {
+      question: "Position du patient pendant l’empreinte :",
+      difficulty: 2,
+      answers: [
+        { text: "Mandibulaire : buste droit", correct: true },
+        { text: "Maxillaire : légèrement incliné vers l’arrière puis redressé", correct: true },
+        { text: "Maxillaire : décubitus dorsal strict", correct: false },
+        { text: "Mandibulaire : tête fortement en hyperextension", correct: false }
+      ]
+    },
+    {
+      question: "Pour l’empreinte préliminaire, la liste de matériel peut comprendre :",
+      difficulty: 2,
+      answers: [
+        { text: "Alginate", correct: true },
+        { text: "Doseur et cuillère graduée", correct: true },
+        { text: "Compas de mesure", correct: true },
+        { text: "Cuillère individuelle en résine fabriquée au laboratoire pour l’empreinte secondaire", correct: false }
+      ]
+    },
+    {
+      question: "Pendant la mise en place du p.e. en partielle, lorsque la voûte palatine est très marquée, il peut être :",
+      difficulty: 2,
+      answers: [
+        { text: "D’abord inséré en région antérieure", correct: true },
+        { text: "Centré puis mis en place lentement", correct: true },
+        { text: "Enfoncé rapidement jusqu’au contact métallique postérieur", correct: false },
+        { text: "Arrêté lorsque le matériau apparaît au-delà des limites postérieures", correct: true }
+      ]
+    },
+    {
+      question: "Pendant l’empreinte, les tissus mous sont :",
+      difficulty: 2,
+      answers: [
+        { text: "Immobilisés par tension labiale", correct: false },
+        { text: "Mobilisés (lèvres, joues, langue)", correct: true },
+        { text: "Maintenus passifs par compresse", correct: false },
+        { text: "Sollicités pour enregistrer les limites fonctionnelles", correct: true }
+      ]
+    },
+
+    // C. excellent (difficulty 3) — 10 items
+    {
+      question: "Concernant les porte-empreintes pour alginate (type de Schreine-makers) :",
+      difficulty: 3,
+      answers: [
+        { text: "Ils sont en métal", correct: true },
+        { text: "Choisis selon la forme du maxillaire édenté", correct: true },
+        { text: "Fournis uniquement en version perforée", correct: false },
+        { text: "Destinés aux empreintes préliminaires", correct: true }
+      ]
+    },
+    {
+      question: "L’enduction digitale pendant le chargement peut concerner :",
+      difficulty: 3,
+      answers: [
+        { text: "Les dents", correct: true },
+        { text: "Les zones de contre-dépouille", correct: true },
+        { text: "Les muqueuses vestibulaires externes distantes", correct: false },
+        { text: "La base de langue", correct: false }
+      ]
+    },
+    {
+      question: "La coulée du modèle après alginate :",
+      difficulty: 3,
+      answers: [
+        { text: "Doit être faite sans délai supérieur à une heure", correct: true },
+        { text: "Peut être reportée 24 heures si l’empreinte est dans l’eau", correct: false },
+        { text: "Suit rinçage et séchage modéré de l’empreinte", correct: true },
+        { text: "S’effectue après application d’un séparateur sur l’alginate", correct: false }
+      ]
+    },
+    {
+      question: "L’évaluation de l’empreinte se fait à partir de trois zones :",
+      difficulty: 3,
+      answers: [
+        { text: "Régions correspondant aux rebords de la future prothèse", correct: true },
+        { text: "Crêtes édentées", correct: true },
+        { text: "Dents", correct: true },
+        { text: "Sillon rétro-mylaire exclusivement", correct: false }
+      ]
+    },
+    {
+      question: "En adaptation du p.e., lorsque certaines zones ne sont pas adaptées aux tissus sous-jacents (palais, crêtes), on peut :",
+      difficulty: 3,
+      answers: [
+        { text: "Corriger localement l’intrados", correct: true },
+        { text: "Ajouter de la cire dure", correct: true },
+        { text: "Réchauffer la pâte thermoplastique", correct: true },
+        { text: "Graver des rainures sur l’émail pour rétention", correct: false }
+      ]
+    },
+    {
+      question: "La mobilisation des lèvres, joues et langue pendant l’empreinte vise surtout à :",
+      difficulty: 3,
+      answers: [
+        { text: "Favoriser l’enregistrement des limites", correct: true },
+        { text: "Réduire les bulles par vibration", correct: false },
+        { text: "Simuler des mouvements fonctionnels", correct: true },
+        { text: "Épaissir l’alginate au niveau occlusal", correct: false }
+      ]
+    },
+    {
+      question: "Pendant la désinsertion, pour favoriser le passage de l’air sous les bords, on s’aide :",
+      difficulty: 3,
+      answers: [
+        { text: "Des index placés dans les parties vestibulaires postérieures", correct: true },
+        { text: "Du manche du p.e. par traction franche", correct: true },
+        { text: "D’un levier métallique interproximal", correct: false },
+        { text: "D’un mouvement selon l’axe dentaire", correct: true }
+      ]
+    },
+    {
+      question: "La taille des modèles obtenus consiste à :",
+      difficulty: 3,
+      answers: [
+        { text: "Meuler au taille-plâtre", correct: true },
+        { text: "Préserver la zone de réflexion muqueuse vestibulaire", correct: true },
+        { text: "Diminuer systématiquement les bords fonctionnels vestibulaires", correct: false },
+        { text: "Obtenir une base régulière", correct: true }
+      ]
+    },
+    {
+      question: "L’observation des moulages porte notamment sur :",
+      difficulty: 3,
+      answers: [
+        { text: "L’importance et la répartition des segments édentés", correct: true },
+        { text: "La visualisation de l’axe des dents", correct: true },
+        { text: "L’épaisseur du ligament alvéolo-dentaire", correct: false },
+        { text: "La position des foramens mentonniers", correct: false }
+      ]
+    },
+    {
+      question: "La conclusion du cours insiste sur trois principes, dont :",
+      difficulty: 3,
+      answers: [
+        { text: "Rigueur dans le choix du porte-empreinte", correct: true },
+        { text: "Rigueur dans la mise en œuvre technique", correct: true },
+        { text: "Bonne connaissance et manipulation correcte des matériaux", correct: true },
+        { text: "Nécessité d’un enregistrement systématique en double mélange", correct: false }
+      ]
+    },
+
+    // D. difficiles (difficulty 4) — 10 items
+    {
+      question: "Lorsque la voûte palatine est très marquée, la mise en place « antérieure d’abord » puis centrage et insertion lente permet surtout de :",
+      difficulty: 4,
+      answers: [
+        { text: "Contrôler l’extension postérieure jusqu’à apparition du matériau au-delà des limites", correct: true },
+        { text: "Éviter des zones de surpression au palais", correct: true },
+        { text: "Garantir un appui métallique postérieur direct", correct: false },
+        { text: "Faciliter le centrage avant l’enfoncement final", correct: true }
+      ]
+    },
+    {
+      question: "Le respect de l’espace de 4 mm entre bord du p.e. et faces vestibulaires/palatines-linguales vise à :",
+      difficulty: 4,
+      answers: [
+        { text: "Ménager une épaisseur suffisante de matériau d’enregistrement", correct: true },
+        { text: "Réduire les tensions sur les tissus", correct: true },
+        { text: "Assurer la rétention par succion sur l’émail", correct: false },
+        { text: "Éviter le contact direct du p.e. avec les dents", correct: true }
+      ]
+    },
+    {
+      question: "Dans l’essayage, le dépistage des patients à réflexes nauséeux incoercibles est important car :",
+      difficulty: 4,
+      answers: [
+        { text: "Il conditionne la tolérance à la prise d’empreinte", correct: true },
+        { text: "Il peut nécessiter des adaptations de la manœuvre", correct: true },
+        { text: "Il impose une anesthésie systématique", correct: false },
+        { text: "Il justifie parfois l’arrêt avant la gélification", correct: false }
+      ]
+    },
+    {
+      question: "Concernant le choix de la taille :",
+      difficulty: 4,
+      answers: [
+        { text: "Les dents doivent être centrées dans le p.e.", correct: true },
+        { text: "Le choix se fait surtout selon la largeur de l’arcade", correct: true },
+        { text: "L’indice U/L encode Upper/Lower", correct: true },
+        { text: "La longueur antéro-postérieure prime toujours sur la largeur", correct: false }
+      ]
+    },
+    {
+      question: "Pour prolonger un p.e. jugé insuffisant en hauteur/largeur :",
+      difficulty: 4,
+      answers: [
+        { text: "Cire dure (Moyco)", correct: true },
+        { text: "Pâte thermoplastique", correct: true },
+        { text: "Gutta-percha chauffée", correct: false },
+        { text: "Colle cyanoacrylate seule", correct: false }
+      ]
+    },
+    {
+      question: "Pendant la technique de prise d’empreinte, la séquence correcte comprend :",
+      difficulty: 4,
+      answers: [
+        { text: "Charger le p.e.", correct: true },
+        { text: "Enduire au doigt dents et contre-dépouilles si nécessaire", correct: true },
+        { text: "Mobiliser lèvres/joues/langue", correct: true },
+        { text: "Déposer un film d’alginate sur la langue pour stabilité", correct: false }
+      ]
+    },
+    {
+      question: "La séquence de coulée illustrée comprend :",
+      difficulty: 4,
+      answers: [
+        { text: "Malaxage du plâtre", correct: true },
+        { text: "Dépôt du plâtre dans l’empreinte", correct: true },
+        { text: "Préparation du plâtre de base du modèle et finition", correct: true },
+        { text: "Dessiccation forcée de l’alginate avant coulage", correct: false }
+      ]
+    },
+    {
+      question: "Le rinçage puis séchage modéré de l’empreinte avant coulée :",
+      difficulty: 4,
+      answers: [
+        { text: "Est explicitement recommandé", correct: true },
+        { text: "Vise à éviter l’excès d’eau en surface", correct: true },
+        { text: "Permet de prolonger la stabilité dimensionnelle au-delà d’une heure", correct: false },
+        { text: "S’inscrit avant la coulée rapide du modèle", correct: true }
+      ]
+    },
+    {
+      question: "À propos des porte-empreintes métalliques pleins avec rétreints :",
+      difficulty: 4,
+      answers: [
+        { text: "Ils sont donnés en préférence dans le cours", correct: true },
+        { text: "Les rétreints favorisent la rétention du matériau", correct: true },
+        { text: "Ils sont incompatibles avec l’alginate", correct: false },
+        { text: "Ils appartiennent aux p.e. du commerce", correct: true }
+      ]
+    },
+    {
+      question: "Lors de la désinsertion, un « mouvement franc et net » :",
+      difficulty: 4,
+      answers: [
+        { text: "Limite les déformations de l’alginate", correct: true },
+        { text: "Se combine avec une traction dans l’axe dentaire", correct: true },
+        { text: "Doit être remplacé par un balancement latéral répété", correct: false },
+        { text: "Peut être aidé par l’introduction d’air sous les bords", correct: true }
+      ]
+    },
+
+    // E. Très difficiles (difficulty 5) — 5 items
+    {
+      question: "En adaptation, lorsque « certaines zones ne sont pas suffisamment adaptées aux tissus sous-jacents (palais, crêtes) », la stratégie implicite couvre :",
+      difficulty: 5,
+      answers: [
+        { text: "Correction sélective de l’intrados du p.e.", correct: true },
+        { text: "Adjonctions localisées de cire/pâte thermo pour ajustement", correct: true },
+        { text: "Augmentation volontaire des surpressions pour stabiliser", correct: false },
+        { text: "Recherche d’un appui homogène sur les tissus", correct: true }
+      ]
+    },
+    {
+      question: "Dans la logique d’évaluation en trois zones (rebords, crêtes édentées, dents), une empreinte préliminaire acceptable doit :",
+      difficulty: 5,
+      answers: [
+        { text: "Reproduire les régions destinées aux bords prothétiques", correct: true },
+        { text: "Montrer des crêtes lisibles sans bulles majeures", correct: true },
+        { text: "Comporter volontairement des déformations sur les dents pour dégagement", correct: false },
+        { text: "Présenter des dents nettes sans arrachements", correct: true }
+      ]
+    },
+    {
+      question: "La préservation de la zone de réflexion muqueuse vestibulaire lors de la taille du modèle implique :",
+      difficulty: 5,
+      answers: [
+        { text: "De ne pas meuler cette zone critique", correct: true },
+        { text: "D’éviter de réduire les reliefs enregistrés", correct: true },
+        { text: "De rectifier la base sans amputer les limites fonctionnelles", correct: true },
+        { text: "De supprimer systématiquement les zones vestibulaires pour faciliter l’articulation", correct: false }
+      ]
+    },
+    {
+      question: "L’observation des moulages après coulée peut éclairer la planification en visualisant :",
+      difficulty: 5,
+      answers: [
+        { text: "L’axe des dents", correct: true },
+        { text: "L’importance/répartition des édentements", correct: true },
+        { text: "La position du foramen grand palatin", correct: false },
+        { text: "La présence de contre-dépouilles sur les dents moulées", correct: true }
+      ]
+    },
+    {
+      question: "La conclusion du cours fixe trois conditions de succès ; en déduire la conséquence pratique immédiate la plus fidèle au texte :",
+      difficulty: 5,
+      answers: [
+        { text: "Un échec résulte souvent d’un défaut de rigueur (choix du p.e. ou technique)", correct: true },
+        { text: "La maîtrise des matériaux est déterminante", correct: true },
+        { text: "L’usage d’un matériau onéreux garantit le succès", correct: false },
+        { text: "Les trois principes doivent être respectés conjointement", correct: true }
+           ]
       }
       // ➕ أضف المزيد من الأسئلة هنا
     ]
   };
+
+
+    
 
   const questions = questionsData[lesson] || [];
   const container = document.getElementById("questionsContainer");
@@ -702,6 +1096,7 @@
 <script src="./layout-fix.js"></script>
 <script src="./translate.js"></script>
 
+<script src="./mask_parentheses_in_options.js"></script>
 
 </body>
 </html>
