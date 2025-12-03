@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <body data-qcm-clean="1">
+
+<head>
+<!-- 🔒 حماية الصفحة بـ Firebase -->
+<script type="module">
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
+    authDomain: "qcm-djo.firebaseapp.com",
+    projectId: "qcm-djo",
+    storageBucket: "qcm-djo.firebasestorage.app",
+    messagingSenderId: "384943172069",
+    appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
+    measurementId: "G-13MC1GT4HM"
+  };
+
+  document.documentElement.style.visibility = 'hidden';
+
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.replace('index.html');
+      return;
+    }
+    try {
+      const ref  = doc(db, 'allowedUsers', user.uid);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        document.documentElement.style.visibility = 'visible';
+      } else {
+        window.location.replace('welcome.html?status=pending');
+      }
+    } catch (e) {
+      console.error('Firebase Auth Error:', e);
+      window.location.replace('welcome.html?status=pending');
+    }
+  });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomie Humaine - Qcms BY DJO</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: radial-gradient(circle at top,#d9faff,#aee4f5,#7fd4e8);
+    margin: 0; padding: 20px; color: white;
+  }
+  .container {
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  h2,h3 { margin-bottom: 10px; }
+
+  .question-block {
+    background: rgba(30,30,30,0.85);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .question-block:hover { transform: scale(1.02); }
+
+  @keyframes starFade {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .difficulty { margin-bottom: 8px; text-align: left; }
+  .star {
+    font-size: 22px;
+    display: inline-block;
+    color: gold;
+    opacity: 0;
+    animation: starFade 0.5s forwards;
+  }
+  .star:nth-child(1){animation-delay:0.1s;}
+  .star:nth-child(2){animation-delay:0.2s;}
+  .star:nth-child(3){animation-delay:0.3s;}
+  .star:nth-child(4){animation-delay:0.4s;}
+  .star:nth-child(5){animation-delay:0.5s;}
+
+  .question-text { font-weight: bold; margin-bottom: 15px; font-size: 18px; }
+  .answers { display: grid; gap: 10px; }
+  .answer {
+    background: rgba(255,255,255,0.12);
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    color: white;
+    user-select: none;
+  }
+  .answer:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+  .answer.selected {
+    background: linear-gradient(135deg,#0096c7,#00b4d8);
+    color: black;
+    border: 1px solid #48cae4;
+    box-shadow: 0 0 12px rgba(72,202,228,0.7);
+    transform: scale(1.04);
+  }
+  .correct {
+    background: linear-gradient(135deg,#00e676,#00c853)!important;
+    color: black!important;
+  }
+  .incorrect {
+    background: linear-gradient(135deg,#ef5350,#c62828)!important;
+    color: black!important;
+  }
+  .feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    animation: pulse 1s ease;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .feedback.correct { background: rgba(0,200,0,0.3); }
+  .feedback.incorrect { background: rgba(200,0,0,0.3); }
+
+  .control-buttons {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  .control-buttons button {
+    flex: 1; min-width: 100px; padding: 10px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg,#00b4d8,#48cae4);
+    color: white; font-weight: bold;
+    cursor: pointer; transition: 0.3s;
+  }
+  .control-buttons button:hover { transform: scale(1.05); }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    .container{width:95%;padding:15px;}
+    .question-text{font-size:16px;}
+    .answer{font-size:15px;padding:10px;}
+    .control-buttons{flex-direction:column;}
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h3 id="lessonTitle"></h3>
+  <div id="questionsContainer"></div>
+  <button class="control-buttons" style="background:#444;margin-top:20px" onclick="goBack()">🔙 الرجوع للدروس</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // 🧩 إعداد القيم الافتراضية
+  localStorage.setItem('specialty','طب الأسنان');
+  localStorage.setItem('level','سنة 2');
+  localStorage.setItem('subject','Anatomie humaine');
+
+  const lesson = localStorage.getItem('lesson') || 'Os frontal et éthmoïde';
+  document.getElementById('lessonTitle').textContent = `الدرس: ${lesson}`;
+
+  // 🧠 أسئلة تجريبية
+  const questionsData = {
+   
+  "Qestions de cours": [
+    {
+      "question": "Selon le texte, la profession du dentiste exige principalement une formation...",
+      "difficulty": 1,
+      "answers": [
+        { "text": "limitée aux traitements esthétiques uniquement", "correct": false },
+        { "text": "qui combine théorie et compétences manuelles délicates", "correct": true },
+        { "text": "centrée principalement sur l'utilisation des prothèses amovibles", "correct": false },
+        { "text": "fondée sur un haut niveau de développement et un entraînement constant", "correct": true }
+      ]
+    },
+    {
+      "question": "Le rôle du dental therapist inclut...",
+      "difficulty": 1,
+      "answers": [
+        { "text": "uniquement la chirurgie des dents de sagesse", "correct": false },
+        { "text": "le traitement des caries et de leurs complications", "correct": true },
+        { "text": "la fabrication directe d'implants dentaires", "correct": false },
+        { "text": "l'examen initial de la cavité buccale", "correct": true }
+      ]
+    },
+    {
+      "question": "Selon le cours, la peau appartient...",
+      "difficulty": 1,
+      "answers": [
+        { "text": "uniquement au système nerveux périphérique", "correct": false },
+        { "text": "au système tégumentaire", "correct": true },
+        { "text": "exclusivement au système endocrinien", "correct": false },
+        { "text": "à un ensemble comprenant cheveux et ongles", "correct": true }
+      ]
+    },
+    {
+      "question": "Les hormones, selon le texte, sont des sécrétions...",
+      "difficulty": 1,
+      "answers": [
+        { "text": "libérées par des glandes sans canal", "correct": true },
+        { "text": "produites exclusivement par les reins", "correct": false },
+        { "text": "responsables uniquement de la respiration", "correct": false },
+        { "text": "impliquées dans les réactions chimiques cellulaires", "correct": true }
+      ]
+    },
+    {
+      "question": "Selon 'Medical English vs General English', Medical English sert à...",
+      "difficulty": 1,
+      "answers": [
+        { "text": "écrire des rapports et discuter des cas", "correct": true },
+        { "text": "lire la recherche et employer une terminologie précise", "correct": true },
+        { "text": "communiquer uniquement dans la vie quotidienne", "correct": false },
+        { "text": "expliquer la douleur en termes très simples uniquement", "correct": false }
+      ]
+    },
+    {
+      "question": "Le dentist-prosthodontist intervient surtout lorsque...",
+      "difficulty": 2,
+      "answers": [
+        { "text": "l'enfant présente des dents de lait cariées", "correct": false },
+        { "text": "les méthodes thérapeutiques ne suffisent plus", "correct": true },
+        { "text": "seule une extraction de sagesse est requise", "correct": false },
+        { "text": "la fonction masticatoire doit être restaurée", "correct": true }
+      ]
+    },
+    {
+      "question": "Le dentiste-orthodontiste corrige...",
+      "difficulty": 2,
+      "answers": [
+        { "text": "l'alignement dentaire et les troubles de l'occlusion", "correct": true },
+        { "text": "uniquement les inflammations du nerf trijumeau", "correct": false },
+        { "text": "exclusivement les maladies de la muqueuse", "correct": false },
+        { "text": "les anomalies pouvant affecter la diction", "correct": true }
+      ]
+    },
+    {
+      "question": "Le periodontist traite...",
+      "difficulty": 2,
+      "answers": [
+        { "text": "les tissus osseux et gingivaux soutenant les dents", "correct": true },
+        { "text": "la gingivite, la stomatite et la periodontite", "correct": true },
+        { "text": "les appareils orthodontiques non amovibles", "correct": false },
+        { "text": "uniquement les caries de surface", "correct": false }
+      ]
+    },
+    {
+      "question": "Le dental surgeon prend en charge...",
+      "difficulty": 2,
+      "answers": [
+        { "text": "les extractions impossibles à traiter autrement", "correct": true },
+        { "text": "la fabrication de couronnes au laboratoire", "correct": false },
+        { "text": "les chirurgies complexes de la mâchoire", "correct": true },
+        { "text": "la correction du calendrier de rendez-vous", "correct": false }
+      ]
+    },
+    {
+      "question": "Le pediatric dentist doit maîtriser...",
+      "difficulty": 2,
+      "answers": [
+        { "text": "les particularités du développement dentaire", "correct": true },
+        { "text": "uniquement la pose d'implants", "correct": false },
+        { "text": "seulement la chirurgie esthétique", "correct": false },
+        { "text": "la psychologie de l'enfant", "correct": true }
+      ]
+    },
+    {
+      "question": "Le dental technician est décrit comme...",
+      "difficulty": 2,
+      "answers": [
+        { "text": "responsable de diagnostiquer les maladies", "correct": false },
+        { "text": "chargé exclusivement des extractions", "correct": false },
+        { "text": "un spécialiste dans la fabrication des prothèses", "correct": true },
+        { "text": "le collaborateur direct du dentist-orthopedist", "correct": true }
+      ]
+    },
+    {
+      "question": "Le système squelettique assure...",
+      "difficulty": 2,
+      "answers": [
+        { "text": "la production des hormones du stress", "correct": false },
+        { "text": "la formation de cellules sanguines dans la moelle", "correct": true },
+        { "text": "la protection des organes", "correct": true },
+        { "text": "l'élimination de la sueur", "correct": false }
+      ]
+    },
+    {
+      "question": "Le système musculaire inclut...",
+      "difficulty": 2,
+      "answers": [
+        { "text": "uniquement les nerfs sensitifs", "correct": false },
+        { "text": "seulement le diaphragme", "correct": false },
+        { "text": "les tendons qui relient les muscles aux os", "correct": true },
+        { "text": "les muscles squelettiques, lisses et cardiaques", "correct": true }
+      ]
+    },
+    {
+      "question": "Le système respiratoire assure...",
+      "difficulty": 2,
+      "answers": [
+        { "text": "la fabrication de vitamine D", "correct": false },
+        { "text": "l'évacuation du CO2 vers l'extérieur", "correct": true },
+        { "text": "la production de cellules immunitaires", "correct": false },
+        { "text": "l'échange des gaz entre l'air et le sang", "correct": true }
+      ]
+    },
+    {
+      "question": "L'anglais général, selon le cours, aide à...",
+      "difficulty": 2,
+      "answers": [
+        { "text": "créer un lien de confiance", "correct": true },
+        { "text": "rédiger uniquement des rapports scientifiques", "correct": false },
+        { "text": "assurer la précision terminologique", "correct": false },
+        { "text": "parler aux patients avec des mots simples", "correct": true }
+      ]
+    },
+    {
+      "question": "Dans le système cardiovasculaire, le sang...",
+      "difficulty": 3,
+      "answers": [
+        { "text": "transporte uniquement l'oxygène", "correct": false },
+        { "text": "transporte nutriments et hormones vers les cellules", "correct": true },
+        { "text": "aide à maintenir température et équilibre hydrique", "correct": true },
+        { "text": "est produit par le système lymphatique", "correct": false }
+      ]
+    },
+    {
+      "question": "Le système lymphatique...",
+      "difficulty": 3,
+      "answers": [
+        { "text": "produit certains globules blancs spécialisés", "correct": true },
+        { "text": "assure la production de vitamine D", "correct": false },
+        { "text": "défend l'organisme contre les micro-organismes nocifs", "correct": true },
+        { "text": "intervient dans l'élimination du CO2", "correct": false }
+      ]
+    },
+    {
+      "question": "Le système digestif...",
+      "difficulty": 3,
+      "answers": [
+        { "text": "décompose les grosses molécules pour les absorber", "correct": true },
+        { "text": "maintient l'équilibre acidobasique", "correct": false },
+        { "text": "élimine les déchets métaboliques produits par les cellules", "correct": false },
+        { "text": "comprend dents, langue, estomac, intestins et glandes associées", "correct": true }
+      ]
+    },
+    {
+      "question": "Le système urinaire, selon le texte...",
+      "difficulty": 3,
+      "answers": [
+        { "text": "produit les hormones de croissance", "correct": false },
+        { "text": "est uniquement responsable de la digestion", "correct": false },
+        { "text": "aide au maintien de l'équilibre eau-sel", "correct": true },
+        { "text": "élimine les déchets du corps sous forme d'urine", "correct": true }
+      ]
+    },
+    {
+      "question": "En orthodontie, le traitement dure...",
+      "difficulty": 3,
+      "answers": [
+        { "text": "un mois seulement dans tous les cas", "correct": false },
+        { "text": "selon l'âge, le degré de la maladie et le type d'appareil", "correct": true },
+        { "text": "exclusivement 2 ans sans variation", "correct": false },
+        { "text": "entre 1,5 et 3 ans", "correct": true }
+      ]
+    },
+    {
+      "question": "Chez le dental therapist, les soins préventifs incluent...",
+      "difficulty": 3,
+      "answers": [
+        { "text": "l'installation de prothèses complètes", "correct": false },
+        { "text": "la pose d'implants", "correct": false },
+        { "text": "le retrait de plaque et tartre", "correct": true },
+        { "text": "la détection des premiers signes de carie", "correct": true }
+      ]
+    },
+    {
+      "question": "La chirurgie orale traite aussi...",
+      "difficulty": 3,
+      "answers": [
+        { "text": "exclusivement les dents cassées", "correct": false },
+        { "text": "les inflammations du nerf trijumeau", "correct": true },
+        { "text": "uniquement la correction esthétique", "correct": false },
+        { "text": "les affections des glandes salivaires", "correct": true }
+      ]
+    },
+    {
+      "question": "Dans 'Business English', il sert à...",
+      "difficulty": 3,
+      "answers": [
+        { "text": "rédiger e-mails professionnels et rapports", "correct": true },
+        { "text": "servir seulement aux présentations visuelles", "correct": false },
+        { "text": "communiquer dans des réunions et négociations", "correct": true },
+        { "text": "remplacer entièrement l'anglais médical", "correct": false }
+      ]
+    },
+    {
+      "question": "Les compétences essentielles en Business English comprennent...",
+      "difficulty": 3,
+      "answers": [
+        { "text": "seulement la discussion de cas cliniques", "correct": false },
+        { "text": "les compétences de présentation et de négociation", "correct": true },
+        { "text": "la rédaction professionnelle et la communication interculturelle", "correct": true },
+        { "text": "uniquement la mémorisation du vocabulaire médical", "correct": false }
+      ]
+    },
+    {
+      "question": "Dans la gestion de cabinet, on retrouve des termes comme...",
+      "difficulty": 3,
+      "answers": [
+        { "text": "invoice, schedule, supplier", "correct": true },
+        { "text": "uniquement des termes liés à la biologie cellulaire", "correct": false },
+        { "text": "seulement des mots relatifs aux nerfs et muscles", "correct": false },
+        { "text": "quotation, appointment, stock", "correct": true }
+      ]
+    },
+    {
+      "question": "La description de la peau souligne qu'elle...",
+      "difficulty": 4,
+      "answers": [
+        { "text": "n'influence jamais la température corporelle", "correct": false },
+        { "text": "ne contient aucun récepteur sensoriel", "correct": false },
+        { "text": "participe à la production de vitamine D", "correct": true },
+        { "text": "forme une barrière protectrice contre l'environnement", "correct": true }
+      ]
+    },
+    {
+      "question": "Les glandes endocrines se distinguent car...",
+      "difficulty": 4,
+      "answers": [
+        { "text": "elles régulent uniquement la respiration", "correct": false },
+        { "text": "leurs hormones contrôlent croissance et métabolisme", "correct": true },
+        { "text": "elles nécessitent un réseau complexe de canaux", "correct": false },
+        { "text": "elles libèrent leurs produits directement dans le sang", "correct": true }
+      ]
+    },
+    {
+      "question": "Le système nerveux...",
+      "difficulty": 4,
+      "answers": [
+        { "text": "coordonne les sensations et transmet des instructions", "correct": true },
+        { "text": "sert uniquement à la contraction cardiaque", "correct": false },
+        { "text": "régule la plupart des activités corporelles", "correct": true },
+        { "text": "exclut toute participation des organes sensoriels", "correct": false }
+      ]
+    },
+    {
+      "question": "Le rôle de la langue dans le système digestif inclut...",
+      "difficulty": 4,
+      "answers": [
+        { "text": "une fonction essentielle dans la préparation du bol alimentaire", "correct": true },
+        { "text": "la production des hormones endocriniennes", "correct": false },
+        { "text": "la participation à la déglutition et au mouvement alimentaire", "correct": true },
+        { "text": "la défense immunitaire lymphatique directe", "correct": false }
+      ]
+    },
+    {
+      "question": "Un dental technician doit connaître...",
+      "difficulty": 4,
+      "answers": [
+        { "text": "les méthodes radiologiques nécessaires au choix du traitement", "correct": true },
+        { "text": "seulement les procédures d'extraction", "correct": false },
+        { "text": "uniquement les techniques de blanchiment", "correct": false },
+        { "text": "la pharmacologie spécialisée, les matériaux et les diagnostics", "correct": true }
+      ]
+    },
+    {
+      "question": "Une dent amovible est décrite comme...",
+      "difficulty": 4,
+      "answers": [
+        { "text": "la solution la plus simple et la plus rapide", "correct": true },
+        { "text": "incapable de restaurer la mastication", "correct": false },
+        { "text": "réservée uniquement aux enfants", "correct": false },
+        { "text": "naturelle d'apparence, durable et moins coûteuse", "correct": true }
+      ]
+    },
+    {
+      "question": "Selon le texte, la profession dentist nécessite...",
+      "difficulty": 4,
+      "answers": [
+        { "text": "uniquement des connaissances théoriques", "correct": false },
+        { "text": "aucune formation continue", "correct": false },
+        { "text": "une pratique régulière pour maintenir les compétences", "correct": true },
+        { "text": "une main sûre capable de travail délicat", "correct": true }
+      ]
+    },
+    {
+      "question": "Les rôles du cardiovascular system incluent...",
+      "difficulty": 4,
+      "answers": [
+        { "text": "contrôler la croissance musculaire", "correct": false },
+        { "text": "transporter oxygène, nutriments et hormones", "correct": true },
+        { "text": "défendre contre les infections et réguler la température", "correct": true },
+        { "text": "produire uniquement des globules blancs", "correct": false }
+      ]
+    },
+    {
+      "question": "Le lymphatic system...",
+      "difficulty": 4,
+      "answers": [
+        { "text": "constitue une part essentielle de l'immunité", "correct": true },
+        { "text": "règle la motricité digestive", "correct": false },
+        { "text": "retourne l'excès de liquide au sang", "correct": true },
+        { "text": "est responsable du transport d'oxygène", "correct": false }
+      ]
+    },
+    {
+      "question": "La différence entre Medical et General English est que...",
+      "difficulty": 4,
+      "answers": [
+        { "text": "l'autre facilite la connexion humaine", "correct": true },
+        { "text": "l'un assure la précision scientifique", "correct": true },
+        { "text": "aucun ne concerne la communication avec les patients", "correct": false },
+        { "text": "l'un remplace complètement l'autre", "correct": false }
+      ]
+    },
+    {
+      "question": "L'intégration des systèmes corporels est décrite comme...",
+      "difficulty": 5,
+      "answers": [
+        { "text": "un ajustement constant aux changements internes et externes", "correct": true },
+        { "text": "une absence totale de corrélation structure-fonction", "correct": false },
+        { "text": "une coopération indispensable entre systèmes spécialisés", "correct": true },
+        { "text": "un fonctionnement totalement indépendant de chaque système", "correct": false }
+      ]
+    },
+    {
+      "question": "La fonction du système musculaire inclut...",
+      "difficulty": 5,
+      "answers": [
+        { "text": "une contribution directe à la production de chaleur corporelle", "correct": true },
+        { "text": "uniquement la mobilité des articulations", "correct": false },
+        { "text": "la régulation hormonale principale", "correct": false },
+        { "text": "le maintien de la posture et la circulation des matériaux", "correct": true }
+      ]
+    },
+    {
+      "question": "En orthodontie, avant la pose d'appareils...",
+      "difficulty": 5,
+      "answers": [
+        { "text": "une réhabilitation complète de la cavité buccale est nécessaire", "correct": true },
+        { "text": "aucun examen préalable n'est requis", "correct": false },
+        { "text": "une extraction peut être indiquée par le dental surgeon", "correct": true },
+        { "text": "l'âge n'influence jamais le traitement", "correct": false }
+      ]
+    },
+    {
+      "question": "Les exigences d'une candidature universitaire incluent...",
+      "difficulty": 5,
+      "answers": [
+        { "text": "aucun document administratif", "correct": false },
+        { "text": "uniquement un CV", "correct": false },
+        { "text": "une preuve de compétence linguistique et un entretien éventuel", "correct": true },
+        { "text": "une lettre de motivation et des relevés académiques", "correct": true }
+      ]
+    },
+    {
+      "question": "Les exigences pour une demande d'emploi comprennent...",
+      "difficulty": 5,
+      "answers": [
+        { "text": "uniquement la preuve de niveau d'anglais", "correct": false },
+        { "text": "seulement un formulaire sans communication", "correct": false },
+        { "text": "un CV et une cover letter", "correct": true },
+        { "text": "un email professionnel et une préparation à l'entretien", "correct": true }
+      ]
+    }
+  ] , 
+
+  
+  "EMD 2025": [
+    {
+      "question": "What is the main responsibility of a dental therapist?",
+      "difficulty": 1,
+      "answers": [
+        { "text": "Removing wisdom teeth", "correct": false },
+        { "text": "Performing plastic surgery", "correct": false },
+        { "text": "Treating caries and pulpitis", "correct": true },
+        { "text": "Making dental implants", "correct": false }
+      ]
+    },
+    {
+      "question": "Which dental specialist focuses on artificial teeth replacement?",
+      "difficulty": 1,
+      "answers": [
+        { "text": "Orthodontist", "correct": false },
+        { "text": "Prosthodontist", "correct": true },
+        { "text": "Dental technician", "correct": false },
+        { "text": "Periodontist", "correct": false }
+      ]
+    },
+    {
+      "question": "Pediatric dentistry is mainly focused on:",
+      "difficulty": 1,
+      "answers": [
+        { "text": "Children's oral health", "correct": true },
+        { "text": "Elderly patients", "correct": false },
+        { "text": "Gum surgery", "correct": false },
+        { "text": "X-ray analysis", "correct": false }
+      ]
+    },
+    {
+      "question": "Which system includes the skin, hair, and nails?",
+      "difficulty": 1,
+      "answers": [
+        { "text": "Digestive system", "correct": false },
+        { "text": "Skeletal system", "correct": false },
+        { "text": "Integumentary system", "correct": true },
+        { "text": "Endocrine system", "correct": false }
+      ]
+    },
+    {
+      "question": "What is the main function of the skeletal system?",
+      "difficulty": 1,
+      "answers": [
+        { "text": "Supporting the body and making blood cells", "correct": true },
+        { "text": "Producing hormones", "correct": false },
+        { "text": "Pumping blood", "correct": false },
+        { "text": "Regulating body temperature", "correct": false }
+      ]
+    },
+    {
+      "question": "Why is microbiology important in dentistry?",
+      "difficulty": 2,
+      "answers": [
+        { "text": "To design dental implants", "correct": false },
+        { "text": "To understand tooth shapes", "correct": false },
+        { "text": "To calculate doses of anesthesia", "correct": false },
+        { "text": "To prevent infections and disease", "correct": true }
+      ]
+    },
+    {
+      "question": "What is the importance of staying flexible when making future plans?",
+      "difficulty": 2,
+      "answers": [
+        { "text": "It allows you to stick rigidly to your initial plans", "correct": false },
+        { "text": "It prevents you from adjusting to new opportunities or challenges", "correct": false },
+        { "text": "It helps you adapt to changes and embrace new opportunities", "correct": true },
+        { "text": "It limits your ability to achieve your goals", "correct": false }
+      ]
+    },
+    {
+      "question": "Which list of words has the final 's' pronounced as /s/?",
+      "difficulty": 2,
+      "answers": [
+        { "text": "picks-smiles-learns-helps", "correct": false },
+        { "text": "facts-mixes-packs-lacks", "correct": false },
+        { "text": "graphs-fixes-laughed-flames", "correct": false },
+        { "text": "Treats-clothes-implants-sticks", "correct": true }
+      ]
+    },
+    {
+      "question": "When applying to university, why is it important to meet deadlines and submit all required documents correctly and on time?",
+      "difficulty": 2,
+      "answers": [
+        { "text": "Random", "correct": false },
+        { "text": "Trivial", "correct": false },
+        { "text": "Necessary", "correct": true },
+        { "text": "Crucial", "correct": true }
+      ]
+    },
+    {
+      "question": "What's the past form of 'to hurt'?",
+      "difficulty": 2,
+      "answers": [
+        { "text": "Hurted", "correct": false },
+        { "text": "Huren", "correct": false },
+        { "text": "Hurt", "correct": true },
+        { "text": "Hart", "correct": false }
+      ]
+    },
+    {
+      "question": "What is the plural of 'tooth'?",
+      "difficulty": 2,
+      "answers": [
+        { "text": "tooths", "correct": false },
+        { "text": "theetis", "correct": false },
+        { "text": "toothers", "correct": false },
+        { "text": "teeth", "correct": true }
+      ]
+    },
+    {
+      "question": "Which university admission program involves reciprocal agreements between institutions, allowing students to study at a partner university while paying tuition to their home institution?",
+      "difficulty": 2,
+      "answers": [
+        { "text": "Provider program", "correct": false },
+        { "text": "Direct enrollment program", "correct": false },
+        { "text": "Exchange program", "correct": true },
+        { "text": "All the above", "correct": false }
+      ]
+    },
+    {
+      "question": "What is the opposite of 'extraction'?",
+      "difficulty": 2,
+      "answers": [
+        { "text": "Removal", "correct": false },
+        { "text": "Insertion", "correct": true },
+        { "text": "Cleaning", "correct": false },
+        { "text": "Filling", "correct": false }
+      ]
+    },
+    {
+      "question": "What is/are the synonym(s) of the word 'issue' in a dental/medical context?",
+      "difficulty": 2,
+      "answers": [
+        { "text": "Lesion", "correct": true },
+        { "text": "Decay", "correct": false },
+        { "text": "Oral", "correct": false },
+        { "text": "Tooth", "correct": false }
+      ]
+    },
+    {
+      "question": "Gingivitis is a condition that affects the:",
+      "difficulty": 2,
+      "answers": [
+        { "text": "Tongue", "correct": false },
+        { "text": "Gums", "correct": true },
+        { "text": "Jaw", "correct": false },
+        
+      ]
+    },
+    {
+      "question": "What is the main purpose of radiology in dentistry?",
+      "difficulty": 3,
+      "answers": [
+        { "text": "Measuring the thickness of the gums", "correct": false },
+        { "text": "Performing surgeries in the mouth", "correct": false },
+        { "text": "Fixing damaged tooth surfaces", "correct": false },
+        { "text": "Finding hidden problems in the teeth", "correct": true }
+      ]
+    },
+    {
+      "question": "How many areas of medical knowledge does a dental student need to acquire a solid foundation in?",
+      "difficulty": 3,
+      "answers": [
+        { "text": "10", "correct": false },
+        { "text": "9", "correct": false },
+        { "text": "12", "correct": true },
+        { "text": "11", "correct": false }
+      ]
+    },
+    {
+      "question": "What is/are the adjective form(s) of the word 'anesthesia'?",
+      "difficulty": 3,
+      "answers": [
+        { "text": "anesthetic", "correct": true },
+        { "text": "anesthetical", "correct": false },
+        { "text": "anesthesion", "correct": false },
+        { "text": "anesthesiatic", "correct": false }
+       ]
+    }
+  ]
+};
+
+
+  const questions = questionsData[lesson] || [];
+  const container = document.getElementById("questionsContainer");
+
+  questions.forEach((q) => {
+    const block = document.createElement("div");
+    block.className = "question-block";
+    const selectedAnswers = new Set();
+    const correctAnswers = q.answers.filter(a => a.correct).map(a => a.text);
+
+    let starsHTML = "";
+    for (let s = 1; s <= 5; s++) {
+      starsHTML += `<span class="star" style="color:${s <= q.difficulty ? 'gold' : 'rgba(255,255,255,0.2)'};">★</span>`;
+    }
+
+    block.innerHTML = `
+      <div class="difficulty">${starsHTML}</div>
+      <div class="question-text">${q.question}</div>
+      <div class="answers">
+        ${q.answers.map(a => `<div class="answer">${a.text}</div>`).join("")}
+      </div>
+      <div class="control-buttons">
+        <button class="submit">✅ هذه هي إجابتي</button>
+        <button class="reset">🔁 إعادة المحاولة</button>
+        <button class="show-solution" style="display:none;">💡 عرض الإجابة الصحيحة</button>
+      </div>
+    `;
+
+    const answersDivs = block.querySelectorAll(".answer");
+    answersDivs.forEach(ans => {
+      ans.onclick = () => {
+        ans.classList.toggle("selected");
+        const text = ans.textContent;
+        if (selectedAnswers.has(text)) selectedAnswers.delete(text);
+        else selectedAnswers.add(text);
+      };
+    });
+
+    block.querySelector(".submit").onclick = () => {
+      const selected = Array.from(selectedAnswers);
+      block.querySelectorAll(".feedback").forEach(fb => fb.remove());
+      const feedback = document.createElement("div");
+      feedback.className = "feedback";
+
+      if (selected.length === 0) {
+        feedback.textContent = "❗ لم تختر أي إجابة";
+        feedback.classList.add("incorrect");
+      } else if (selected.length === correctAnswers.length && selected.every(t => correctAnswers.includes(t))) {
+        feedback.textContent = "✅ إجابتك صحيحة!";
+        feedback.classList.add("correct");
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        feedback.textContent = "❌ إجابتك خاطئة";
+        feedback.classList.add("incorrect");
+      }
+
+      block.appendChild(feedback);
+      block.querySelector(".show-solution").style.display = "inline-block";
+    };
+
+    block.querySelector(".reset").onclick = () => {
+      selectedAnswers.clear();
+      block.querySelectorAll(".answer").forEach(a => a.classList.remove("selected","correct","incorrect"));
+      block.querySelectorAll(".feedback").forEach(f => f.remove());
+      block.querySelector(".show-solution").style.display = "none";
+    };
+
+    block.querySelector(".show-solution").onclick = () => {
+      answersDivs.forEach(ans => {
+        if (correctAnswers.includes(ans.textContent)) ans.classList.add("correct");
+        else ans.classList.add("incorrect");
+      });
+    };
+
+    container.appendChild(block);
+  });
+
+  function goBack() {
+    window.location.href = "lesson.html";
+  }
+</script>
+<script src="./layout-fix.js"></script>
+<script src="./mask_parentheses_in_options.js"></script>
+
+</body>
+</html>

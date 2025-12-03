@@ -40,7 +40,8 @@ const QCMS = {
             { text: "C. Pulpe", correct: true },
             { text: "D. Langue", correct: false }
           ]
-        }
+        },
+ 
       ],
       "hygiene": [
         {
@@ -195,6 +196,174 @@ const QCMS = {
         }
       ]
     }
+  }
+  ,"2025": {
+    1: {
+      "Anglais": [
+        {
+          "question": "1. What is the main responsibility of a dental therapist?",
+          "answers": [
+            { "text": "a. Removing wisdom teeth", "correct": false },
+            { "text": "b. Performing plastic surgery", "correct": false },
+            { "text": "c. Treating caries and pulpitis", "correct": true },
+            { "text": "d. Making dental implants", "correct": false }
+          ]
+        },
+        {
+          "question": "2. Which dental specialist focuses on artificial teeth replacement?",
+          "answers": [
+            { "text": "a. Orthodontist", "correct": false },
+            { "text": "b. Prosthodontist", "correct": true },
+            { "text": "c. Dental technician", "correct": false },
+            { "text": "d. Periodontist", "correct": false }
+          ]
+        },
+        {
+          "question": "3. Pediatric dentistry is mainly focused on:",
+          "answers": [
+            { "text": "a. Children's oral health", "correct": true },
+            { "text": "b. Elderly patients", "correct": false },
+            { "text": "c. Gum surgery", "correct": false },
+            { "text": "d. X-ray analysis", "correct": false }
+          ]
+        },
+        {
+          "question": "4. Which system includes the skin, hair, and nails?",
+          "answers": [
+            { "text": "a. Digestive system", "correct": false },
+            { "text": "b. Skeletal system", "correct": false },
+            { "text": "c. Integumentary system", "correct": true },
+            { "text": "d. Endocrine system", "correct": false }
+          ]
+        },
+        {
+          "question": "5. What is the main function of the skeletal system?",
+          "answers": [
+            { "text": "a. Supporting the body and making blood cells", "correct": true },
+            { "text": "b. Producing hormones", "correct": false },
+            { "text": "c. Pumping blood", "correct": false },
+            { "text": "d. Regulating body temperature", "correct": false }
+          ]
+        },
+        {
+          "question": "6. Why is microbiology important in dentistry?",
+          "answers": [
+            { "text": "a. To design dental implants", "correct": false },
+            { "text": "b. To understand tooth shapes", "correct": false },
+            { "text": "c. To calculate doses of anesthesia", "correct": false },
+            { "text": "d. To prevent infections and disease", "correct": true }
+          ]
+        },
+        {
+          "question": "7. What is the importance of staying flexible when making future plans?",
+          "answers": [
+            { "text": "a. It allows you to stick rigidly to your initial plans", "correct": false },
+            { "text": "b. It prevents you from adjusting to new opportunities or challenges", "correct": false },
+            { "text": "c. It helps you adapt to changes and embrace new opportunities", "correct": true },
+            { "text": "d. It limits your ability to achieve your goals", "correct": false }
+          ]
+        },
+        {
+          "question": "8. Which list of words has the final 's' pronounced as /s/?",
+          "answers": [
+            { "text": "a. picks-smiles-learns-helps", "correct": false },
+            { "text": "b. facts-mixes-packs-lacks", "correct": false },
+            { "text": "c. graphs-fixes-laughed-flames", "correct": false },
+            { "text": "d. Treats-clothes-implants-sticks", "correct": true }
+          ]
+        },
+        {
+          "question": "9. When applying to university, why is it important to meet deadlines and submit all required documents correctly and on time?",
+          "answers": [
+            { "text": "a. Random", "correct": false },
+            { "text": "b. Trivial", "correct": false },
+            { "text": "c. Necessary", "correct": true },
+            { "text": "d. Crucial", "correct": true }
+          ]
+        },
+        {
+          "question": "10. What's the past form of 'to hurt'?",
+          "answers": [
+            { "text": "a. Hurted", "correct": false },
+            { "text": "b. Huren", "correct": false },
+            { "text": "c. Hurt", "correct": true },
+            { "text": "d. Hart", "correct": false }
+          ]
+        },
+        {
+          "question": "11. What is the plural of 'tooth'?",
+          "answers": [
+            { "text": "a. tooths", "correct": false },
+            { "text": "b. theetis", "correct": false },
+            { "text": "c. toothers", "correct": false },
+            { "text": "d. teeth", "correct": true }
+          ]
+        },
+        {
+          "question": "12. Which university admission program involves reciprocal agreements between institutions, allowing students to study at a partner university while paying tuition to their home institution?",
+          "answers": [
+            { "text": "a. Provider program", "correct": false },
+            { "text": "b. Direct enrollment program", "correct": false },
+            { "text": "c. Exchange program", "correct": true },
+            { "text": "d. All the above", "correct": false }
+          ]
+        },
+        {
+          "question": "13. What is the opposite of 'extraction'?",
+          "answers": [
+            { "text": "a. Removal", "correct": false },
+            { "text": "b. Insertion", "correct": true },
+            { "text": "c. Cleaning", "correct": false },
+            { "text": "d. Filling", "correct": false }
+          ]
+        },
+        {
+          "question": "14. What is/are the synonym(s) of the word 'issue' in a dental/medical context?",
+          "answers": [
+            { "text": "a. Lesion", "correct": true },
+            { "text": "b. Decay", "correct": false },
+            { "text": "c. Oral", "correct": false },
+            { "text": "d. Tooth", "correct": false }
+          ]
+        },
+        {
+          "question": "15. Gingivitis is a condition that affects the:",
+          "answers": [
+            { "text": "a. Tongue", "correct": false },
+            { "text": "b. Gums", "correct": true },
+            { "text": "c. Jaw", "correct": false },
+            { "text": "d. Teeth", "correct": false }
+          ]
+        },
+        {
+          "question": "16. What is the main purpose of radiology in dentistry?",
+          "answers": [
+            { "text": "a. Measuring the thickness of the gums", "correct": false },
+            { "text": "b. Performing surgeries in the mouth", "correct": false },
+            { "text": "c. Fixing damaged tooth surfaces", "correct": false },
+            { "text": "d. Finding hidden problems in the teeth", "correct": true }
+          ]
+        },
+        {
+          "question": "17. How many areas of medical knowledge does a dental student need to acquire a solid foundation in?",
+          "answers": [
+            { "text": "a. 10", "correct": false },
+            { "text": "b. 9", "correct": false },
+            { "text": "c. 12", "correct": true },
+            { "text": "d. 11", "correct": false }
+          ]
+        },
+        {
+          "question": "18. What is/are the adjective form(s) of the word 'anesthesia'?",
+          "answers": [
+            { "text": "a. anesthetic", "correct": true },
+            { "text": "b. anesthetical", "correct": false },
+            { "text": "c. anesthesion", "correct": false },
+            { "text": "d. anesthesiatic", "correct": false }
+          ]
+        }
+      ]
+    }
   },
 
   2023: {
@@ -239,6 +408,210 @@ const QCMS = {
       ]
     }
   },
+  2025: {
+    1: {
+      "hygiene": [
+        {
+          question: "QCM 1 : Parmi les affirmations suivantes concernant le fluor ; laquelle est fausse :",
+          answers: [
+            { text: "A. Le fluor est un gaz de couleur jaune verdâtre", correct: false },
+            { text: "B. Le fluor est l’élément le plus électronégatif", correct: false },
+            { text: "C. Le fluor est situé dans le septième groupe de la classification périodique", correct: false },
+            { text: "D. Le fluor est essentiel pour prévenir la carie dentaire, mais un excès peut provoquer la fluorose", correct: false },
+            { text: "E. Le fluor est un métal alcalin", correct: true }
+          ]
+        },
+        {
+          question: "QCM 2 : Quelle est la principale source du fluorure pour la reminéralisation de l’émail :",
+          answers: [
+            { text: "A. L’eau potable fluorée", correct: false },
+            { text: "B. Les aliments riches en fluorure", correct: false },
+            { text: "C. Le fluorure de calcium déposé sur la surface de l’émail", correct: true },
+            { text: "D. Les compléments alimentaires en fluorure", correct: false },
+            { text: "E. Les dentifrices fluorés uniquement", correct: false }
+          ]
+        },
+        {
+          question: "QCM 3 : Quel est le rôle de pH dans la déminéralisation de l’émail :",
+          answers: [
+            { text: "A. Un pH bas favorise la déminéralisation", correct: true },
+            { text: "B. Un pH élevé favorise la déminéralisation", correct: false },
+            { text: "C. Le pH n’a pas d’influence", correct: false },
+            { text: "D. Un pH neutre est toujours optimal", correct: false },
+            { text: "E. Un pH bas favorise la reminéralisation", correct: false }
+          ]
+        },
+        {
+          question: "QCM 4 : Selon le modèle de Leavell et Clark la prévention peut être définie comme :",
+          answers: [
+            { text: "A. Un traitement curatif des pathologies", correct: false },
+            { text: "B. Un ensemble d’interventions pour maintenir ou améliorer la santé", correct: true },
+            { text: "C. Une approche exclusivement individuelle de la santé bucco-dentaire", correct: false },
+            { text: "D. Un concept uniquement applicable aux maladies chroniques", correct: false },
+            { text: "E. Une méthode pour accélérer la guérison d’une maladie", correct: false }
+          ]
+        },
+        {
+          question: "QCM 5 : La dentisterie communautaire s’inspire particulièrement du concept de :",
+          answers: [
+            { text: "A. Traitement curatif de la carie", correct: false },
+            { text: "B. Santé individuelle centrée sur le patient", correct: false },
+            { text: "C. Prévention primaire", correct: false },
+            { text: "D. Santé communautaire et approche préventive", correct: true },
+            { text: "E. Surmédicalisation et iatrogénie", correct: false }
+          ]
+        },
+        {
+          question: "QCM 6 : Les niveaux de prévention selon Leavell et Clark comprennent :",
+          answers: [
+            { text: "A. Primaire ; secondaire et tertiaire", correct: false },
+            { text: "B. Primaire, secondaire, tertiaire, primordiale et quaternaire", correct: true },
+            { text: "C. Seule la prévention primaire et secondaire", correct: false },
+            { text: "D. Uniquement la prévention secondaire et tertiaire", correct: false },
+            { text: "E. Aucune de ces réponses n’est correcte", correct: false }
+          ]
+        },
+        {
+          question: "QCM 7 : La dentisterie communautaire selon l’ADA peut être caractérisée comme :",
+          answers: [
+            { text: "A. Une pratique dentaire centrée exclusivement sur le traitement des caries", correct: false },
+            { text: "B. Une approche individuelle de la santé bucco-dentaire", correct: false },
+            { text: "C. Un ensemble d’actions visant à améliorer la santé bucco-dentaire au niveau de la communauté", correct: true },
+            { text: "D. Une discipline médicale ne nécessitant pas de formation spécifique", correct: false },
+            { text: "E. Une approche uniquement axée sur la recherche scientifique", correct: false }
+          ]
+        },
+        {
+          question: "QCM 8 : La dentisterie communautaire utilise les outils suivants pour atteindre ses objectifs :",
+          answers: [
+            { text: "A. Uniquement le traitement des maladies bucco-dentaires", correct: false },
+            { text: "B. La recherche, la promotion de la santé, l’éducation à la santé et des programmes de prévention", correct: true },
+            { text: "C. Des soins isolés", correct: false },
+            { text: "D. Des approches centrées sur l’individu", correct: false },
+            { text: "E. Des méthodes basées sur des essais cliniques", correct: false }
+          ]
+        },
+        {
+          question: "QCM 9 : Selon les objectifs d’éducation sanitaire ; un enfant bien formé doit être capable de :",
+          answers: [
+            { text: "A. Connaître les maladies de sa cavité buccale", correct: false },
+            { text: "B. Identifier les facteurs de risque de la carie", correct: false },
+            { text: "C. Se brosser les dents avant et après avoir mangé", correct: false },
+            { text: "D. Éviter les substances cariogènes", correct: true },
+            { text: "E. Toutes les réponses sont justes", correct: false }
+          ]
+        },
+        {
+          question: "QCM 10 : Les objectifs d’éducation sanitaire visent principalement à :",
+          answers: [
+            { text: "A. Responsabiliser l’enfant de la santé de ses dents", correct: true },
+            { text: "B. Motiver l’enfant à éviter l’alimentation cariogène", correct: true },
+            { text: "C. Motiver l’enfant à coopérer aux soins dentaires", correct: true },
+            { text: "D. Isoler les enfants ayant des problèmes de santé bucco-dentaire", correct: false },
+            { text: "E. Toutes les réponses sont justes", correct: false }
+          ]
+        },
+        {
+          question: "QCM 11 : Dans une main, les régions les plus riches en germes sont :",
+          answers: [
+            { text: "A. Les ongles", correct: true },
+            { text: "B. Les espaces interdigitaux", correct: true },
+            { text: "C. Les plis cutanés", correct: true },
+            { text: "D. Les poignets", correct: true },
+            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
+          ]
+        },
+        {
+          question: "QCM 12 : Les règles de base à l’hygiène des mains consistent à :",
+          answers: [
+            { text: "A. Enlever les bijoux", correct: true },
+            { text: "B. Enlever les montres", correct: true },
+            { text: "C. Avoir les ongles courts sans vernis", correct: true },
+            { text: "D. Remonter les vêtements vers l’avant-bras", correct: true },
+            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
+          ]
+        },
+        {
+          question: "QCM 13 : L’habillement adéquat :",
+          answers: [
+            { text: "A. Permet d’éviter d’amener sur la place du travail des germes venant de l’extérieur", correct: true },
+            { text: "B. Permet d’éviter d’amener à son domicile les germes qui viennent du cabinet", correct: true },
+            { text: "C. Porter un masque permet seulement de ne pas inspirer les bactéries du patient", correct: false },
+            { text: "D. Porter des gants diminue le risque de contaminer et de se faire contaminer", correct: true },
+            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
+          ]
+        },
+        {
+          question: "QCM 14 : La désinfection des surfaces :",
+          answers: [
+            { text: "A. A pour but d’éliminer les micro-organismes présents dans la salle de traitement", correct: true },
+            { text: "B. A pour but d’éliminer les micro-organismes présents dans le fauteuil dentaire uniquement", correct: false },
+            { text: "C. A pour principe d’aller du haut vers le bas", correct: true },
+            { text: "D. A pour principe d’aller du plus propre au plus sale", correct: true },
+            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
+          ]
+        },
+        {
+          question: "QCM 15 : Les déchets d’activité de soin à risque infectieux (DASRI) :",
+          answers: [
+            { text: "A. De couleur jaune", correct: true },
+            { text: "B. Remplis aux deux tiers (2/3)", correct: true },
+            { text: "C. Fermés par un double nœud", correct: true },
+            { text: "D. Une fois remplis, doivent être incinérés (brûlés)", correct: true },
+            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
+          ]
+        },
+        {
+          question: "QCM 16 : Les objets piquants coupants et tranchants (PCT) doivent être mis dans un collecteur :",
+          answers: [
+            { text: "A. Il s’agit d’un sachet en plastique fin", correct: false },
+            { text: "B. Il doit être à usage unique", correct: true },
+            { text: "C. Une fois rempli et fermé, le collecteur PCT peut être réouvert sans risque de contamination", correct: false },
+            { text: "D. Une fois rempli, le collecteur PCT doit être incinéré (brûlé)", correct: true },
+            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
+          ]
+        },
+        {
+          question: "QCM 17 : À propos de la loi relative à la santé :",
+          answers: [
+            { text: "A. La dernière version du code a été publiée en 02 juillet 2018", correct: true },
+            { text: "B. La dernière version de la loi remonte au 16 février 1985", correct: false },
+            { text: "C. Elle compte au total 450 articles", correct: true },
+            { text: "D. C’est l’ensemble des textes régissant, cadrant et réglementant tout ce qui concerne le secteur de la santé dans notre pays", correct: true },
+            { text: "E. C’est un code de santé international", correct: false }
+          ]
+        },
+        {
+          question: "QCM 18 : Parmi les principes édictés par le code de santé publique :",
+          answers: [
+            { text: "A. L’accès équitable aux soins de santé", correct: true },
+            { text: "B. L’accès universel aux soins de santé", correct: true },
+            { text: "C. La gratuité des soins", correct: true },
+            { text: "D. La prévention et la promotion de la santé", correct: true },
+            { text: "E. La réhabilitation", correct: true }
+          ]
+        },
+        {
+          question: "QCM 19 : Selon la loi de santé, l’exercice des professions de santé est soumis aux conditions suivantes :",
+          answers: [
+            { text: "A. Être titulaire d’un diplôme algérien requis ou d’un titre reconnu", correct: true },
+            { text: "B. Jouir de ses droits civiques", correct: true },
+            { text: "C. Avoir passé le service militaire", correct: false },
+            { text: "D. Ne pas avoir fait l’objet d’une condamnation pénale incompatible avec l’exercice de la profession", correct: true },
+            { text: "E. Avoir les capacités physiques et mentales compatibles avec la profession", correct: true }
+          ]
+        },
+        {
+          question: "QCM 20 : Selon le code de santé publique, tout professionnel de santé doit respecter les règles déontologiques suivantes :",
+          answers: [
+            { text: "A. Aucun acte médical, aucun traitement ne peut être pratiqué sans le consentement libre et éclairé du patient", correct: true },
+          { text: "B. Même dans l’extrême urgence, le professionnel ne peut passer outre le consentement", correct: false },
+          { text: "C. Le médecin doit respecter la volonté du patient après l’avoir informé des conséquences de ses choix", correct: true },
+          { text: "D. L’information donnée au patient porte uniquement sur le traitement", correct: false },
+          { text: "E. Les droits des mineurs ou incapables sont exercés par les parents ou représentants légaux", correct: true }
+          ]
+        }
+      ],
 
   2024: {
     1: {
@@ -664,211 +1037,7 @@ const QCMS = {
       ]
     }
   },
-
-  2025: {
-    1: {
-      "hygiene": [
-        {
-          question: "QCM 1 : Parmi les affirmations suivantes concernant le fluor ; laquelle est fausse :",
-          answers: [
-            { text: "A. Le fluor est un gaz de couleur jaune verdâtre", correct: false },
-            { text: "B. Le fluor est l’élément le plus électronégatif", correct: false },
-            { text: "C. Le fluor est situé dans le septième groupe de la classification périodique", correct: false },
-            { text: "D. Le fluor est essentiel pour prévenir la carie dentaire, mais un excès peut provoquer la fluorose", correct: false },
-            { text: "E. Le fluor est un métal alcalin", correct: true }
-          ]
-        },
-        {
-          question: "QCM 2 : Quelle est la principale source du fluorure pour la reminéralisation de l’émail :",
-          answers: [
-            { text: "A. L’eau potable fluorée", correct: false },
-            { text: "B. Les aliments riches en fluorure", correct: false },
-            { text: "C. Le fluorure de calcium déposé sur la surface de l’émail", correct: true },
-            { text: "D. Les compléments alimentaires en fluorure", correct: false },
-            { text: "E. Les dentifrices fluorés uniquement", correct: false }
-          ]
-        },
-        {
-          question: "QCM 3 : Quel est le rôle de pH dans la déminéralisation de l’émail :",
-          answers: [
-            { text: "A. Un pH bas favorise la déminéralisation", correct: true },
-            { text: "B. Un pH élevé favorise la déminéralisation", correct: false },
-            { text: "C. Le pH n’a pas d’influence", correct: false },
-            { text: "D. Un pH neutre est toujours optimal", correct: false },
-            { text: "E. Un pH bas favorise la reminéralisation", correct: false }
-          ]
-        },
-        {
-          question: "QCM 4 : Selon le modèle de Leavell et Clark la prévention peut être définie comme :",
-          answers: [
-            { text: "A. Un traitement curatif des pathologies", correct: false },
-            { text: "B. Un ensemble d’interventions pour maintenir ou améliorer la santé", correct: true },
-            { text: "C. Une approche exclusivement individuelle de la santé bucco-dentaire", correct: false },
-            { text: "D. Un concept uniquement applicable aux maladies chroniques", correct: false },
-            { text: "E. Une méthode pour accélérer la guérison d’une maladie", correct: false }
-          ]
-        },
-        {
-          question: "QCM 5 : La dentisterie communautaire s’inspire particulièrement du concept de :",
-          answers: [
-            { text: "A. Traitement curatif de la carie", correct: false },
-            { text: "B. Santé individuelle centrée sur le patient", correct: false },
-            { text: "C. Prévention primaire", correct: false },
-            { text: "D. Santé communautaire et approche préventive", correct: true },
-            { text: "E. Surmédicalisation et iatrogénie", correct: false }
-          ]
-        },
-        {
-          question: "QCM 6 : Les niveaux de prévention selon Leavell et Clark comprennent :",
-          answers: [
-            { text: "A. Primaire ; secondaire et tertiaire", correct: false },
-            { text: "B. Primaire, secondaire, tertiaire, primordiale et quaternaire", correct: true },
-            { text: "C. Seule la prévention primaire et secondaire", correct: false },
-            { text: "D. Uniquement la prévention secondaire et tertiaire", correct: false },
-            { text: "E. Aucune de ces réponses n’est correcte", correct: false }
-          ]
-        },
-        {
-          question: "QCM 7 : La dentisterie communautaire selon l’ADA peut être caractérisée comme :",
-          answers: [
-            { text: "A. Une pratique dentaire centrée exclusivement sur le traitement des caries", correct: false },
-            { text: "B. Une approche individuelle de la santé bucco-dentaire", correct: false },
-            { text: "C. Un ensemble d’actions visant à améliorer la santé bucco-dentaire au niveau de la communauté", correct: true },
-            { text: "D. Une discipline médicale ne nécessitant pas de formation spécifique", correct: false },
-            { text: "E. Une approche uniquement axée sur la recherche scientifique", correct: false }
-          ]
-        },
-        {
-          question: "QCM 8 : La dentisterie communautaire utilise les outils suivants pour atteindre ses objectifs :",
-          answers: [
-            { text: "A. Uniquement le traitement des maladies bucco-dentaires", correct: false },
-            { text: "B. La recherche, la promotion de la santé, l’éducation à la santé et des programmes de prévention", correct: true },
-            { text: "C. Des soins isolés", correct: false },
-            { text: "D. Des approches centrées sur l’individu", correct: false },
-            { text: "E. Des méthodes basées sur des essais cliniques", correct: false }
-          ]
-        },
-        {
-          question: "QCM 9 : Selon les objectifs d’éducation sanitaire ; un enfant bien formé doit être capable de :",
-          answers: [
-            { text: "A. Connaître les maladies de sa cavité buccale", correct: false },
-            { text: "B. Identifier les facteurs de risque de la carie", correct: false },
-            { text: "C. Se brosser les dents avant et après avoir mangé", correct: false },
-            { text: "D. Éviter les substances cariogènes", correct: true },
-            { text: "E. Toutes les réponses sont justes", correct: false }
-          ]
-        },
-        {
-          question: "QCM 10 : Les objectifs d’éducation sanitaire visent principalement à :",
-          answers: [
-            { text: "A. Responsabiliser l’enfant de la santé de ses dents", correct: true },
-            { text: "B. Motiver l’enfant à éviter l’alimentation cariogène", correct: true },
-            { text: "C. Motiver l’enfant à coopérer aux soins dentaires", correct: true },
-            { text: "D. Isoler les enfants ayant des problèmes de santé bucco-dentaire", correct: false },
-            { text: "E. Toutes les réponses sont justes", correct: false }
-          ]
-        },
-        {
-          question: "QCM 11 : Dans une main, les régions les plus riches en germes sont :",
-          answers: [
-            { text: "A. Les ongles", correct: true },
-            { text: "B. Les espaces interdigitaux", correct: true },
-            { text: "C. Les plis cutanés", correct: true },
-            { text: "D. Les poignets", correct: true },
-            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
-          ]
-        },
-        {
-          question: "QCM 12 : Les règles de base à l’hygiène des mains consistent à :",
-          answers: [
-            { text: "A. Enlever les bijoux", correct: true },
-            { text: "B. Enlever les montres", correct: true },
-            { text: "C. Avoir les ongles courts sans vernis", correct: true },
-            { text: "D. Remonter les vêtements vers l’avant-bras", correct: true },
-            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
-          ]
-        },
-        {
-          question: "QCM 13 : L’habillement adéquat :",
-          answers: [
-            { text: "A. Permet d’éviter d’amener sur la place du travail des germes venant de l’extérieur", correct: true },
-            { text: "B. Permet d’éviter d’amener à son domicile les germes qui viennent du cabinet", correct: true },
-            { text: "C. Porter un masque permet seulement de ne pas inspirer les bactéries du patient", correct: false },
-            { text: "D. Porter des gants diminue le risque de contaminer et de se faire contaminer", correct: true },
-            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
-          ]
-        },
-        {
-          question: "QCM 14 : La désinfection des surfaces :",
-          answers: [
-            { text: "A. A pour but d’éliminer les micro-organismes présents dans la salle de traitement", correct: true },
-            { text: "B. A pour but d’éliminer les micro-organismes présents dans le fauteuil dentaire uniquement", correct: false },
-            { text: "C. A pour principe d’aller du haut vers le bas", correct: true },
-            { text: "D. A pour principe d’aller du plus propre au plus sale", correct: true },
-            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
-          ]
-        },
-        {
-          question: "QCM 15 : Les déchets d’activité de soin à risque infectieux (DASRI) :",
-          answers: [
-            { text: "A. De couleur jaune", correct: true },
-            { text: "B. Remplis aux deux tiers (2/3)", correct: true },
-            { text: "C. Fermés par un double nœud", correct: true },
-            { text: "D. Une fois remplis, doivent être incinérés (brûlés)", correct: true },
-            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
-          ]
-        },
-        {
-          question: "QCM 16 : Les objets piquants coupants et tranchants (PCT) doivent être mis dans un collecteur :",
-          answers: [
-            { text: "A. Il s’agit d’un sachet en plastique fin", correct: false },
-            { text: "B. Il doit être à usage unique", correct: true },
-            { text: "C. Une fois rempli et fermé, le collecteur PCT peut être réouvert sans risque de contamination", correct: false },
-            { text: "D. Une fois rempli, le collecteur PCT doit être incinéré (brûlé)", correct: true },
-            { text: "E. Toutes les propositions précédentes sont fausses", correct: false }
-          ]
-        },
-        {
-          question: "QCM 17 : À propos de la loi relative à la santé :",
-          answers: [
-            { text: "A. La dernière version du code a été publiée en 02 juillet 2018", correct: true },
-            { text: "B. La dernière version de la loi remonte au 16 février 1985", correct: false },
-            { text: "C. Elle compte au total 450 articles", correct: true },
-            { text: "D. C’est l’ensemble des textes régissant, cadrant et réglementant tout ce qui concerne le secteur de la santé dans notre pays", correct: true },
-            { text: "E. C’est un code de santé international", correct: false }
-          ]
-        },
-        {
-          question: "QCM 18 : Parmi les principes édictés par le code de santé publique :",
-          answers: [
-            { text: "A. L’accès équitable aux soins de santé", correct: true },
-            { text: "B. L’accès universel aux soins de santé", correct: true },
-            { text: "C. La gratuité des soins", correct: true },
-            { text: "D. La prévention et la promotion de la santé", correct: true },
-            { text: "E. La réhabilitation", correct: true }
-          ]
-        },
-        {
-          question: "QCM 19 : Selon la loi de santé, l’exercice des professions de santé est soumis aux conditions suivantes :",
-          answers: [
-            { text: "A. Être titulaire d’un diplôme algérien requis ou d’un titre reconnu", correct: true },
-            { text: "B. Jouir de ses droits civiques", correct: true },
-            { text: "C. Avoir passé le service militaire", correct: false },
-            { text: "D. Ne pas avoir fait l’objet d’une condamnation pénale incompatible avec l’exercice de la profession", correct: true },
-            { text: "E. Avoir les capacités physiques et mentales compatibles avec la profession", correct: true }
-          ]
-        },
-        {
-          question: "QCM 20 : Selon le code de santé publique, tout professionnel de santé doit respecter les règles déontologiques suivantes :",
-          answers: [
-            { text: "A. Aucun acte médical, aucun traitement ne peut être pratiqué sans le consentement libre et éclairé du patient", correct: true },
-          { text: "B. Même dans l’extrême urgence, le professionnel ne peut passer outre le consentement", correct: false },
-          { text: "C. Le médecin doit respecter la volonté du patient après l’avoir informé des conséquences de ses choix", correct: true },
-          { text: "D. L’information donnée au patient porte uniquement sur le traitement", correct: false },
-          { text: "E. Les droits des mineurs ou incapables sont exercés par les parents ou représentants légaux", correct: true }
-          ]
-        }
-      ],
+  
       "Parodontologie": [
         {
           question: "Quel terme désigne une maladie du parodonte ?",
