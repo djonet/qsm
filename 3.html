@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leçon d'Extraction Dentaire | درس قلع الأسنان</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --accent-light: #ffebee;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --light-color: #f8f9fa;
+            --dark-color: #2c3e50;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Cairo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            direction: ltr;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a252f 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+            margin-bottom: 40px;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .author {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: inline-block;
+            border-left: 3px solid var(--accent-color);
+            border-right: 3px solid var(--accent-color);
+        }
+
+        /* Navigation */
+        .nav-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: var(--primary-color);
+        }
+
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            color: white;
+            transition: var(--transition);
+            text-align: center;
+            flex-grow: 1;
+            min-width: 150px;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .tab.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-bottom: 3px solid var(--accent-color);
+            font-weight: 600;
+        }
+
+        .tab i {
+            margin-right: 8px;
+        }
+
+        /* Table Content */
+        .table-container {
+            display: none;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin-bottom: 40px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .table-container.active {
+            display: block;
+        }
+
+        .table-title {
+            background: linear-gradient(to right, var(--secondary-color), #2980b9);
+            color: white;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-title i {
+            font-size: 1.3rem;
+        }
+
+        .bilingual-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bilingual-table th {
+            background-color: #f1f8ff;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 15px 10px;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .bilingual-table td {
+            padding: 15px 10px;
+            border-bottom: 1px solid #eaeaea;
+            vertical-align: top;
+        }
+
+        .bilingual-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .french-cell {
+            text-align: left;
+            border-right: 1px solid #eaeaea;
+            font-weight: 500;
+            color: #2c3e50;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .arabic-cell {
+            text-align: right;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 500;
+            color: #2c3e50;
+            direction: rtl;
+            padding-right: 15px;
+        }
+
+        .highlight {
+            background-color: var(--accent-light);
+            color: #c0392b;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent-color);
+            border-right: 3px solid var(--accent-color);
+            display: inline-block;
+        }
+
+        .hint-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--secondary-color);
+            padding: 12px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .hint-box i {
+            color: var(--secondary-color);
+            margin-right: 5px;
+        }
+
+        .arabic-hint {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            border-left: none;
+            border-right: 4px solid var(--secondary-color);
+            border-radius: 6px 0 0 6px;
+        }
+
+        .arabic-hint i {
+            margin-right: 0;
+            margin-left: 5px;
+        }
+
+        /* Wisdom Teeth Section */
+        .wisdom-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .wisdom-part {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .wisdom-title {
+            background: linear-gradient(to right, var(--warning-color), #e67e22);
+            color: white;
+            padding: 18px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            max-width: 700px;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .bilingual-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tab {
+                min-width: 120px;
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .table-title {
+                font-size: 1.3rem;
+                padding: 15px;
+            }
+            
+            .bilingual-table th,
+            .bilingual-table td {
+                padding: 10px 8px;
+                font-size: 0.9rem;
+            }
+            
+            .wisdom-section {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                border-right: none;
+            }
+            
+            .tab.active {
+                border-bottom: 3px solid var(--accent-color);
+                border-right: none;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-container, footer {
+                display: none;
+            }
+            
+            .table-container {
+                display: block !important;
+                box-shadow: none;
+                margin-bottom: 20px;
+                page-break-inside: avoid;
+            }
+            
+            .bilingual-table {
+                border: 1px solid #ddd;
+            }
+            
+            .bilingual-table th {
+                background-color: #f1f1f1 !important;
+                color: #000 !important;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            .highlight {
+                background-color: #ffebee !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-tooth"></i>
+                    <div>
+                        <h1>Leçon d'Extraction Dentaire</h1>
+                        <h1>درس قلع الأسنان</h1>
+                    </div>
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <p class="subtitle">Guide complet pour les étudiants en médecine dentaire | دليل شامل لطلاب طب الأسنان</p>
+                <div class="author">réalisé par BANABBES DJIHAD | إعداد: بَنَّابِس جِهَاد</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="nav-container">
+            <div class="nav-tabs">
+                <div class="tab active" data-tab="table1">
+                    <i class="fas fa-book-medical"></i> Définitions | التعريفات
+                </div>
+                <div class="tab" data-tab="table2">
+                    <i class="fas fa-tooth"></i> Indications Locales | الدواعي الموضعية
+                </div>
+                <div class="tab" data-tab="table3">
+                    <i class="fas fa-heartbeat"></i> Indications Générales | الدواعي العامة
+                </div>
+                <div class="tab" data-tab="table4">
+                    <i class="fas fa-exclamation-triangle"></i> Contre-indications | الموانع
+                </div>
+                <div class="tab" data-tab="table5">
+                    <i class="fas fa-user-friends"></i> États Physiologiques | الحالات الفسيولوجية
+                </div>
+                <div class="tab" data-tab="table6">
+                    <i class="fas fa-teeth"></i> DDS - ضرس العقل
+                </div>
+            </div>
+        </div>
+
+        <!-- Table 1: Définitions Fondamentales -->
+        <div class="table-container active" id="table1">
+            <div class="table-title">
+                <i class="fas fa-book-medical"></i>
+                Tableau 1: Définitions Fondamentales | الجدول 1: التعريفات الأساسية
+            </div>
+            <table class="bilingual-table">
+                <thead>
+                    <tr>
+                        <th width="20%">Concept (Français)</th>
+                        <th width="20%">المفهوم (Arabe)</th>
+                        <th width="25%">Explication Basée sur la Source (Français)</th>
+                        <th width="25%">الشرح المستند إلى المصدر (Arabe)</th>
+                        <th width="10%">Astuce pour la Mémorisation<br>حيلة للحفظ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">L'Extraction</span></td>
+                        <td class="arabic-cell"><span class="highlight">القلع (الاجتثاث)</span></td>
+                        <td class="french-cell">Ensemble des manœuvres qui permettent de sortir la dent de son alvéole, selon un axe de sortie, tout en respectant l'intégrité des tissus voisins.</td>
+                        <td class="arabic-cell">مجموعة المناورات التي تسمح بإخراج السن من حفرتها السنخية (alvéole)، وفقاً لمحور الخروج، مع احترام سلامة الأنسجة المجاورة.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> تذكر: <strong>خروج السن</strong> مع <strong>احترام الأنسجة</strong>.</div>
+                            <div class="hint-box arabic-hint"><i class="fas fa-lightbulb"></i> Rappel: <strong>Sortie de la dent</strong> avec <strong>respect des tissus</strong>.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">L'Extraction Simple</span></td>
+                        <td class="arabic-cell"><span class="highlight">القلع البسيط</span></td>
+                        <td class="french-cell">Acte chirurgical qui consiste à pratiquer l'avulsion d'un organe dentaire, sans anomalie de structure, de forme et de position, avec un contexte local et général non susceptible de compliquer la réalisation de l'acte.</td>
+                        <td class="arabic-cell">إجراء جراحي لقلع عضو سني ليس به شذوذ في التركيب أو الشكل أو الموضع، وفي سياق موضعي وعام لا يعرض إجراء العملية للمضاعفات.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> تذكر: <strong>بسيط = لا شذوذ ولا مضاعفات</strong>.</div>
+                            <div class="hint-box arabic-hint"><i class="fas fa-lightbulb"></i> Rappel: <strong>Simple = pas d'anomalie ni de complications</strong>.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">L'Extraction Chirurgicale</span></td>
+                        <td class="arabic-cell"><span class="highlight">القلع الجراحي</span></td>
+                        <td class="french-cell">Technique chirurgicale, moins traumatisante, qui permet de découvrir une partie ou la totalité de la partie radiculaire de la dent à extraire.</td>
+                        <td class="arabic-cell">تقنية جراحية، أقل رضوضاً (moins traumatisante)، تسمح بالكشف عن جزء أو كل الجزء الجذري للسن المراد قلعه.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> تذكر: <strong>جراحي = كشف الجذر</strong>.</div>
+                            <div class="hint-box arabic-hint"><i class="fas fa-lightbulb"></i> Rappel: <strong>Chirurgical = découvrir la racine</strong>.</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 2: Indications d'Ordre Local -->
+        <div class="table-container" id="table2">
+            <div class="table-title">
+                <i class="fas fa-tooth"></i>
+                Tableau 2: Indications d'Ordre Local | الجدول 2: دواعي القلع ذات الطبيعة الموضعية
+            </div>
+            <table class="bilingual-table">
+                <thead>
+                    <tr>
+                        <th width="20%">Indication Locale (Français)</th>
+                        <th width="20%">الداعي الموضعي (Arabe)</th>
+                        <th width="25%">Détails Clés Basés sur la Source (Français)</th>
+                        <th width="25%">التفاصيل الأساسية (Arabe)</th>
+                        <th width="10%">Astuce (حيلة)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Infections dentaires</span></td>
+                        <td class="arabic-cell"><span class="highlight">الالتهابات السنية</span></td>
+                        <td class="french-cell">Dents jugées irrécupérables, responsables d'accidents infectieux (cellulite, ostéite), lésions apicales importantes, ou dents en désincclusion/avec antécédents de péricoronarite.</td>
+                        <td class="arabic-cell">الأسنان غير القابلة للاسترداد، المسؤولة عن حوادث التهابية (مثل التهاب النسيج الخلوي أو التهاب العظم)، أو التي بها آفات ذروية متقدمة، أو الأسنان التي لم تبرز بالكامل أو التي لها تاريخ من التهاب حول التاج.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>I</strong> comme <strong>I</strong>nfection grave ou <strong>I</strong>rrécupérable.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Atteintes parodontales</span></td>
+                        <td class="arabic-cell"><span class="highlight">آفات دواعم السن</span></td>
+                        <td class="french-cell">Maladie parodontale non prise en charge entraînant une perte osseuse importante et des mobilités dentaires avec dénudation radiculaire.</td>
+                        <td class="arabic-cell">أمراض دواعم السن غير المعالجة التي تسبب فقداناً كبيراً للعظم وحركة الأسنان (mobilités dentaires) مع انحسار جذري.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>P</strong> comme <strong>P</strong>erte Osseuse.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Anomalies de position</span></td>
+                        <td class="arabic-cell"><span class="highlight">شذوذ الموضع</span></td>
+                        <td class="french-cell">Toute dent en malposition qui ne participe pas à la fonction (mastication) ou qui crée une disgrâce esthétique, après échec ou impossibilité d'une thérapeutique orthodontique.</td>
+                        <td class="arabic-cell">أي سن في موضع خاطئ لا تشارك في الوظيفة (مثل المضغ)، أو تسبب تشوهاً جمالياً، إذا فشل أو تعذر العلاج التقويمي.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>A</strong> comme <strong>A</strong>esthétique ou <strong>A</strong>fonctionnel.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Traumatismes</span></td>
+                        <td class="arabic-cell"><span class="highlight">الصدمات</span></td>
+                        <td class="french-cell">Dent source de traumatisme de la muqueuse buccale (ulcération, hyperplasie) si la solution conservatrice est écartée ; ou fracture coronaire et/ou radiculaire importante rendant l'avulsion inévitable.</td>
+                        <td class="arabic-cell">إذا كانت السن تسبب رضاً لمخاطية الفم (تقرح، فرط تنسج)؛ أو في حال كسر كبير في التاج و/أو الجذر لا يمكن معه تجنب القلع.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>T</strong> comme <strong>T</strong>rauma (fracture).</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Indications prothétiques</span></td>
+                        <td class="arabic-cell"><span class="highlight">دواعي تعويضية</span></td>
+                        <td class="french-cell">Pour établir un plan d'occlusion convenable ; dents isolées ou en malpositions sévères ; lorsqu'une dent ne peut être utilisée dans un projet prothétique.</td>
+                        <td class="arabic-cell">إنشاء خط إطباق مناسب، أو الأسنان المنعزلة، أو الأسنان في مواضع خاطئة شديدة، أو إذا لم يكن بالإمكان استخدام السن في مشروع تعويضي.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>P</strong> comme <strong>P</strong>rojet Prothétique.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Indications orthodontiques</span></td>
+                        <td class="arabic-cell"><span class="highlight">دواعي تقويمية</span></td>
+                        <td class="french-cell">Dents ectopiques si on ne peut pas les repositionner ; anomalies de nombre (en excès) ; pour corriger un alignement ; ou pour stabiliser un résultat orthodontique et éviter les récidives.</td>
+                        <td class="arabic-cell">الأسنان المنتبذة (ectopiques) إذا لم يكن بالإمكان إعادة وضعها، أو في حالة زيادة العدد، أو لتصحيح التراصف، أو لتثبيت نتيجة التقويم وتجنب الانتكاسات.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>O</strong> comme <strong>O</strong>bjectif (Alignement/Stabilité).</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Indications iatrogènes</span></td>
+                        <td class="arabic-cell"><span class="highlight">دواعي علاجية المنشأ</span></td>
+                        <td class="french-cell">Faux canaux non traitables ; fractures radiculaires (hors traumatismes) ; dents dépulpées sur les piliers de prothèse conjointe.</td>
+                        <td class="arabic-cell">القنوات الخاطئة (faux canaux) غير القابلة للعلاج، كسور الجذور (غير الرضية)، أو الأسنان الملبسة (dépulpées) المستخدمة كدعائم للجسور.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>I</strong> comme <strong>I</strong>ntervention Ratée.</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 3: Indications d'Ordre Général -->
+        <div class="table-container" id="table3">
+            <div class="table-title">
+                <i class="fas fa-heartbeat"></i>
+                Tableau 3: Indications d'Ordre Général | الجدول 3: دواعي القلع ذات الطبيعة العامة
+            </div>
+            <table class="bilingual-table">
+                <thead>
+                    <tr>
+                        <th width="20%">Indication Générale (Français)</th>
+                        <th width="20%">الداعي العام (Arabe)</th>
+                        <th width="25%">Détails Clés Basés sur la Source (Français)</th>
+                        <th width="25%">التفاصيل الأساسية (العربية)</th>
+                        <th width="10%">Astuce (حيلة)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Pathologies systémiques</span></td>
+                        <td class="arabic-cell"><span class="highlight">الأمراض الجهازية</span></td>
+                        <td class="french-cell"><strong>Cardiaques</strong> (risque infectieux: valvulopathies, prothèses valvulaires) ; <strong>Diabète</strong> (tout foyer infectieux déstabilise le diabète) ; <strong>Greffe d'organe</strong> (suppression des dents irrécupérables avant immunosuppression) ; <strong>Cancer</strong> (mise en état de la cavité orale avant chimio/radiothérapie cervico-faciale).</td>
+                        <td class="arabic-cell"><strong>القلب</strong> (خطر العدوى: اعتلالات الصمامات، الصمامات الاصطناعية)؛ <strong>السكري</strong> (أي بؤرة التهابية سنية تسبب اختلال توازن السكري)؛ <strong>زرع الأعضاء</strong> (إزالة الأسنان غير القابلة للاسترداد قبل العلاج المثبط للمناعة)؛ <strong>السرطان</strong> (تهيئة تجويف الفم قبل العلاج الكيميائي والإشعاعي).</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> Mémorisez le sigle <strong>C-D-G-C</strong> (Cardio, Diabète, Greffe, Cancer).</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Prises médicamenteuses</span></td>
+                        <td class="arabic-cell"><span class="highlight">تناول الأدوية</span></td>
+                        <td class="french-cell">Médicaments ayant un retentissement local (saignement, nécrose osseuse, retard de cicatrisation) ou général (diminution de l'immunité). Exemples : Anti-TNFα, Corticoïdes, Immunosuppresseurs (risque infectieux post-extractionnel) ; <strong>Bisphosphonates</strong> (favorisent la nécrose osseuse).</td>
+                        <td class="arabic-cell">الأدوية التي قد يكون لها تأثير موضعي (نزيف، نخر عظمي، تأخر الشفاء) أو عام (نقص المناعة). يجب إزالة أي سن غير قابلة للاسترداد قبل بدء العلاج. مثال: <strong>البيسفوسفونات</strong> (تعرض لنخر عظمي).</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> Pensez aux <strong>3 R</strong> : <strong>R</strong>isque infectieux (Corticoïdes), <strong>R</strong>isque de nécrose (Bisphosphonates).</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Infections à distance</span></td>
+                        <td class="arabic-cell"><span class="highlight">البؤر الالتهابية عن بعد</span></td>
+                        <td class="french-cell">Une dent, infectée (cariée, parodontale, apicale) ou saine, peut être responsable d'une infection septique ou aseptique à distance (dent focale). Agit par <strong>bactériémie</strong>, <strong>toxémie</strong> ou <strong>pyophagie</strong> (ingestion de pus). Peut affecter le cœur (RAA), les reins (glomérulonéphrite) ou la peau (pelade).</td>
+                        <td class="arabic-cell">يمكن لسن مصابة (بالتسوس أو دواعم السن) أو تبدو سليمة أن تكون بؤرة (foyer infectieux) تتسبب في عدوى جهازية عبر <strong>بكتيريا الدم</strong> أو <strong>سموم الدم</strong> أو <strong>بلع القيح</strong>. قد تؤثر على القلب، الكلى، أو الرئة.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> Le <strong>FOYER</strong> affecte tous les <strong>APPAREILS</strong> du corps.</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 4: Contre-indications et Précautions -->
+        <div class="table-container" id="table4">
+            <div class="table-title">
+                <i class="fas fa-exclamation-triangle"></i>
+                Tableau 4: Contre-indications et Précautions | الجدول 4: موانع القلع والاحتياطات
+            </div>
+            <div style="padding: 20px; background-color: #fff8e1; border-bottom: 1px solid #ffecb3;">
+                <p style="margin-bottom: 10px;"><strong>Rappel | تذكير:</strong> Il n'existe pas de contre-indications absolues à l'avulsion dentaire, mais seulement des contre-indications <strong>temporaires ou transitoires</strong> nécessitant un report de l'acte. Une collaboration étroite avec le médecin traitant est essentielle.</p>
+                <p style="font-family: 'Cairo', sans-serif; direction: rtl; text-align: right;"><strong>تذكير:</strong> لا توجد موانع حقيقية للقلع، بل هي موانع <strong>مؤقتة أو عابرة</strong> تتطلب تأجيل الإجراء. يجب العمل بتعاون وثيق مع الطبيب المعالج.</p>
+            </div>
+            <table class="bilingual-table">
+                <thead>
+                    <tr>
+                        <th width="20%">Contre-indication (Français)</th>
+                        <th width="20%">المانع (Arabe)</th>
+                        <th width="25%">Mesure/Détails Basés sur la Source (Français)</th>
+                        <th width="25%">الإجراء/التفاصيل (العربية)</th>
+                        <th width="10%">Astuce (حيلة)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Contre-indications locales (Infection aiguë)</span></td>
+                        <td class="arabic-cell"><span class="highlight">موانع موضعية (عدوى حادة)</span></td>
+                        <td class="french-cell">Cellulites ou Péricoronarites. L'avulsion à chaud est difficile (échec de l'anesthésie, risque de diffusion, trismus). Il faut d'abord <strong>refroidir l'infection</strong> par traitement médicamenteux et drainage, puis extraire <strong>à froid</strong>.</td>
+                        <td class="arabic-cell">التهاب النسيج الخلوي أو التهاب حول التاج. القلع "على الساخن" صعب بسبب فشل التخدير وخطر انتشار العدوى. يجب "تبريد" الالتهاب أولاً بالعلاج الدوائي والبزل، ثم إجراء القلع <strong>"على البارد"</strong>.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>A FROID</strong> : Ne jamais extraire dans un milieu Chaud.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Pathologies à risque infectieux</span></td>
+                        <td class="arabic-cell"><span class="highlight">أمراض بخطر العدوى</span></td>
+                        <td class="french-cell">Cardiopathies à risque d'endocardite infectieuse (Prophylaxie : 2g d'amoxicilline 1h avant). Diabète non équilibré. Patients immunodéprimés (IRC, SIDA, corticothérapie au long cours).</td>
+                        <td class="arabic-cell">اعتلالات القلب بخطر التهاب الشغاف المعدي (الوقاية بالمضادات الحيوية: 2غ أموكسيسيلين قبل ساعة). السكري غير المتوازن. المرضى مثبطو المناعة (قصور كلوي، إيدز، علاج بالكورتيكويد).</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>P</strong> comme <strong>P</strong>rophylaxie (Antibiotique).</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Pathologies à risque hémorragique</span></td>
+                        <td class="arabic-cell"><span class="highlight">أمراض بخطر النزيف</span></td>
+                        <td class="french-cell"><strong>Malformations artérioveineuses (MAV) intra-osseuses</strong> : le dentiste doit reconnaître les signes pour <strong>ne pas procéder</strong> à l'avulsion, au risque d'hémorragie cataclysmique. Troubles de l'hémostase (Hémophilie, Sintrom) : S'assurer que le risque est maitrisé.</td>
+                        <td class="arabic-cell"><strong>التشوهات الشريانية الوريدية داخل العظم (MAV)</strong> : تجنب القلع لتفادي النزيف الكارثي الذي قد يؤدي إلى الوفاة. اضطرابات الإرقاء (مثل الهيموفيليا، وسينتروم): يجب التأكد من <strong>السيطرة على النزيف</strong> (مثل INR بين 2 و 4 للمرضى تحت سينتروم).</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>MAÎTRISER</strong> : Vérifiez l'INR et les plaquettes.</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 5: États Physiologiques Particuliers -->
+        <div class="table-container" id="table5">
+            <div class="table-title">
+                <i class="fas fa-user-friends"></i>
+                Tableau 5: États Physiologiques Particuliers | الجدول 5: حالات فسيولوجية خاصة
+            </div>
+            <table class="bilingual-table">
+                <thead>
+                    <tr>
+                        <th width="20%">Catégorie (Français)</th>
+                        <th width="20%">الفئة (Arabe)</th>
+                        <th width="25%">Considérations et Mesures (Français)</th>
+                        <th width="25%">الاعتبارات والإجراءات (العربية)</th>
+                        <th width="10%">Astuce (حيلة)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Enfant</span></td>
+                        <td class="arabic-cell"><span class="highlight">الطفل</span></td>
+                        <td class="french-cell">La <strong>dent de 6 ans</strong> est la clé de l'occlusion, sa conservation est primordiale. Indications d'avulsion des dents temporaires : carie irréversible, abcès, blocage de l'éruption des dents permanentes. Éviter les avulsions précoces. Si avulsion inévitable, poser un <strong>mainteneur d'espace</strong>.</td>
+                        <td class="arabic-cell"><strong>الضرس الدائم ذو الـ 6 سنوات</strong> هو مفتاح الإطباق، وحفظه أساسي. دواعي قلع الأسنان اللبنية: تسوس غير قابل للعلاج، خراجات، إعاقة بزوغ الأسنان الدائمة. يجب تجنب القلع المبكر. إذا كان القلع حتمياً، يجب تركيب <strong>حافظ مسافة</strong>.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>enfant = 6 ans + mainteneur d'espace.</strong></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Femme Enceinte</span></td>
+                        <td class="arabic-cell"><span class="highlight">الحامل</span></td>
+                        <td class="french-cell">L'avulsion est possible, mais si le geste n'est pas une urgence, il est préférable de le <strong>temporiser après l'accouchement</strong>.</td>
+                        <td class="arabic-cell">القلع ممكن تماماً، ولكن <strong>يُفضل التأجيل</strong> بعد الولادة إذا لم يكن الإجراء حالة طارئة.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>Temporiser</strong> si non-urgence.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="french-cell"><span class="highlight">Personne Âgée</span></td>
+                        <td class="arabic-cell"><span class="highlight">المسن</span></td>
+                        <td class="french-cell">Tenir compte des éventuelles pathologies et <strong>associations de traitements</strong> (polymédication) avant toute avulsion dentaire.</td>
+                        <td class="arabic-cell">يجب مراعاة الأمراض المحتملة و<strong>توليفة العلاجات (associations de traitement)</strong> قبل أي قلع.</td>
+                        <td class="arabic-cell">
+                            <div class="hint-box"><i class="fas fa-lightbulb"></i> <strong>Polymédication</strong> (مراجعة الأدوية).</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Table 6: DDS - ضرس العقل -->
+        <div class="table-container" id="table6">
+            <div class="table-title">
+                <i class="fas fa-teeth"></i>
+                Tableau 6: Indications et Contre-indications de la DDS | الجدول 6: دواعي وموانع قلع ضرس العقل
+            </div>
+            
+            <div class="wisdom-section">
+                <!-- Partie A: Indications -->
+                <div class="wisdom-part">
+                    <div class="wisdom-title">
+                        <i class="fas fa-list-check"></i>
+                        Partie A: Indications | الجزء أ: دواعي القلع
+                    </div>
+                    <table class="bilingual-table">
+                        <thead>
+                            <tr>
+                                <th width="25%">Cas (Français)</th>
+                                <th width="25%">الحالة (العربية)</th>
+                                <th width="25%">Indications (Français)</th>
+                                <th width="25%">الدواعي (العربية)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="french-cell"><span class="highlight">A. Symptomatique Pathologique</span></td>
+                                <td class="arabic-cell"><span class="highlight">عرضية ومرضية</span></td>
+                                <td class="french-cell">Cellulite, abcès, ostéomyélite ; Parodontopathie ; Carie ou pathologie pulpaire <strong>symptomatique non traitable</strong> ; Fracture symptomatique.</td>
+                                <td class="arabic-cell">التهاب النسيج الخلوي، الخراج، التهاب العظم؛ أمراض دواعم السن؛ تسوس أو آفة لبية/ذروية <strong>عرضية غير قابلة للعلاج</strong>؛ كسر عرضي.</td>
+                            </tr>
+                            <tr>
+                                <td class="french-cell"><span class="highlight">B. Symptomatique Non Pathologique</span></td>
+                                <td class="arabic-cell"><span class="highlight">عرضية وغير مرضية</span></td>
+                                <td class="french-cell"><strong>Péricoronarite récidivante</strong> et/ou résistante ; Résorption interne/externe de la dent adjacente ; Perturbation de l'occlusion dynamique.</td>
+                                <td class="arabic-cell"><strong>التهاب حول التاج متكرر</strong> و/أو مقاوم للعلاج؛ امتصاص داخلي/خارجي للسن المجاورة؛ إخلال بالإطباق الديناميكي.</td>
+                            </tr>
+                            <tr>
+                                <td class="french-cell"><span class="highlight">C. Asymptomatique Pathologique</span></td>
+                                <td class="arabic-cell"><span class="highlight">لا عرضية ومرضية</span></td>
+                                <td class="french-cell">DDS en rapport avec un <strong>kyste ou une tumeur</strong> (bénigne ou maligne) ; DDS située dans un <strong>trait de fracture mandibulaire</strong> ; Carie ou pathologie pulpaire <strong>asymptomatique non traitable</strong>.</td>
+                                <td class="arabic-cell">ضرس العقل مرتبط <strong>بكيس أو ورم</strong>؛ موجود في <strong>خط كسر الفك السفلي</strong>؛ تسوس أو آفة لبية/ذروية <strong>لا عرضية غير قابلة للعلاج</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td class="french-cell"><span class="highlight">D. Asymptomatique Non Pathologique</span></td>
+                                <td class="arabic-cell"><span class="highlight">لا عرضية وغير مرضية</span></td>
+                                <td class="french-cell">Situations de vie spécifiques (prévention avant grossesse, voyage, expédition militaire) ; Préparation à la <strong>chirurgie orthognathique</strong> ; <strong>Besoin orthodontique</strong> (faciliter le déplacement distal de la 2ème molaire).</td>
+                                <td class="arabic-cell">حالات حياتية محددة (لمنع المشاكل في أوقات غير مناسبة مثل الحمل أو السفر)؛ تحضير <strong>للجراحة التقويمية للفكين</strong>؛ <strong>الحاجة التقويمية</strong> (لتسهيل حركة الضرس الثاني للخلف).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Partie B: Contre-indications -->
+                <div class="wisdom-part">
+                    <div class="wisdom-title">
+                        <i class="fas fa-ban"></i>
+                        Partie B: Contre-indications | الجزء ب: موانع قلع ضرس العقل
+                    </div>
+                    <table class="bilingual-table">
+                        <thead>
+                            <tr>
+                                <th width="25%">Contre-indication (Français)</th>
+                                <th width="25%">المانع (العربية)</th>
+                                <th width="25%">Détails Clés (Français)</th>
+                                <th width="25%">التفاصيل الأساسية (العربية)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="french-cell"><span class="highlight">Positionnement spontané probable</span></td>
+                                <td class="arabic-cell"><span class="highlight">احتمال الوضع الطبيعي التلقائي</span></td>
+                                <td class="french-cell">Probabilité de positionnement spontané sur l'arcade.</td>
+                                <td class="arabic-cell">احتمال وضع السن تلقائياً في القوس السنية.</td>
+                            </tr>
+                            <tr>
+                                <td class="french-cell"><span class="highlight">Dent incluse asymptomatique</span></td>
+                                <td class="arabic-cell"><span class="highlight">سن مطمورة لا عرضية</span></td>
+                                <td class="french-cell">Dent incluse dans l'os, asymptomatique et/ou sans pathologie.</td>
+                                <td class="arabic-cell">سن مطمورة في العظم، لا عرضية و/أو لا ترتبط بمرض.</td>
+                            </tr>
+                            <tr>
+                                <td class="french-cell"><span class="highlight">Dent fonctionnelle et saine</span></td>
+                                <td class="arabic-cell"><span class="highlight">سن وظيفية وسليمة</span></td>
+                                <td class="french-cell">Dents bien positionnées, fonctionnelles, asymptomatiques, sans pathologie carieuse avec un parodonte sain.</td>
+                                <td class="arabic-cell">الأسنان في موضع جيد، وظيفية، لا عرضية، دون أمراض تسوس ومع دواعم سن سليمة.</td>
+                            </tr>
+                            <tr>
+                                <td class="french-cell"><span class="highlight">Alternative thérapeutique possible</span></td>
+                                <td class="arabic-cell"><span class="highlight">إمكانية العلاج البديل</span></td>
+                                <td class="french-cell">Si l'avulsion d'autres dents ou traitement orthodontique avec repositionnement correct de la dent est possible.</td>
+                                <td class="arabic-cell">إذا كان من الممكن قلع أسنان أخرى أو إجراء علاج تقويمي يؤدي إلى وضع صحيح للسن.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-tooth footer-logo"></i>
+                </div>
+                <div class="author">réalisé par BANABBES DJIHAD | إعداد: بَنَّابِس جِهَاد</div>
+                <p class="footer-text">Leçon d'Extraction Dentaire - Guide complet pour les étudiants en médecine dentaire. Cette ressource éducative vise à faciliter la mémorisation des concepts clés en chirurgie dentaire.</p>
+                <p class="footer-text" style="font-family: 'Cairo', sans-serif; direction: rtl;">درس قلع الأسنان - دليل شامل لطلاب طب الأسنان. يهدف هذا المورد التعليمي إلى تسهيل حفظ المفاهيم الأساسية في جراحة الأسنان.</p>
+                <p><i class="far fa-copyright"></i> 2023 - Pour usage éducatif uniquement</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const tableContainers = document.querySelectorAll('.table-container');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target table
+                    tableContainers.forEach(container => {
+                        container.classList.remove('active');
+                        if (container.id === targetTab) {
+                            container.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Highlight important terms on click
+            const highlights = document.querySelectorAll('.highlight');
+            highlights.forEach(highlight => {
+                highlight.addEventListener('click', function() {
+                    this.style.backgroundColor = '#ffcc80';
+                    setTimeout(() => {
+                        this.style.backgroundColor = '';
+                    }, 1000);
+                });
+            });
+            
+            // Print functionality
+            const printButton = document.createElement('button');
+            printButton.innerHTML = '<i class="fas fa-print"></i> Imprimer la Leçon | طباعة الدرس';
+            printButton.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 50px;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                font-weight: 500;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: var(--transition);
+            `;
+            printButton.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#1a252f';
+            });
+            printButton.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'var(--primary-color)';
+            });
+            printButton.addEventListener('click', function() {
+                window.print();
+            });
+            document.body.appendChild(printButton);
+        });
+    </script>
+</body>
+</html>

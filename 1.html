@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درس: التعقيم والتطهير في طب الأسنان - Asepsie, Antisepsie et Stérilisation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .header .author {
+            font-size: 1.2rem;
+            font-style: italic;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+        }
+
+        /* Navigation */
+        .nav-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-tab {
+            padding: 12px 20px;
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .nav-tab:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .nav-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .concept-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .concept-table thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .concept-table th {
+            padding: 18px 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .concept-table tbody tr {
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+        }
+
+        .concept-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .concept-table td {
+            padding: 18px 15px;
+            vertical-align: top;
+        }
+
+        /* Bilingual text styling */
+        .bilingual {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .french-text {
+            flex: 1;
+            padding-right: 15px;
+            text-align: left;
+            border-right: 1px dashed #ddd;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .arabic-text {
+            flex: 1;
+            padding-left: 15px;
+            text-align: right;
+            direction: rtl;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2c3e50;
+        }
+
+        .highlight {
+            background-color: rgba(231, 76, 60, 0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .highlight:hover {
+            background-color: rgba(231, 76, 60, 0.25);
+        }
+
+        /* Color-coded rows */
+        .row-asepsie {
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .row-antisepsie {
+            border-left: 5px solid var(--success-color);
+        }
+
+        .row-desinfection {
+            border-left: 5px solid var(--warning-color);
+        }
+
+        .row-sterilisation {
+            border-left: 5px solid var(--danger-color);
+        }
+
+        /* Waste management color boxes */
+        .color-box {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            margin-right: 10px;
+            vertical-align: middle;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .color-black {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .color-yellow {
+            background-color: #f1c40f;
+        }
+
+        .color-red {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .nav-tab {
+                min-width: 150px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .bilingual {
+                flex-direction: column;
+                margin-bottom: 15px;
+            }
+            
+            .french-text {
+                padding-right: 0;
+                border-right: none;
+                border-bottom: 1px dashed #ddd;
+                padding-bottom: 8px;
+                margin-bottom: 8px;
+                width: 100%;
+            }
+            
+            .arabic-text {
+                padding-left: 0;
+                width: 100%;
+                text-align: left;
+                direction: ltr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .header {
+                padding: 20px 0;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .concept-table th, .concept-table td {
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <div class="container">
+            <h1>Asepsie, Antisepsie et Stérilisation</h1>
+            <h2>التعقيم والتطهير والتعقيم</h2>
+            <div class="author">Réalisé par BANABBES DJIHAD - إعداد: بن عباس جهاد</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Navigation Tabs -->
+        <div class="nav-container">
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-target="definitions">
+                    <i class="fas fa-book"></i> Définitions Fondamentales - المفاهيم الأساسية
+                </div>
+                <div class="nav-tab" data-target="chain">
+                    <i class="fas fa-link"></i> Chaîne d'Asepsie - سلسلة مكافحة العدوى
+                </div>
+                <div class="nav-tab" data-target="process">
+                    <i class="fas fa-cogs"></i> Processus de Stérilisation - مراحل تعقيم الأدوات
+                </div>
+                <div class="nav-tab" data-target="waste">
+                    <i class="fas fa-trash-alt"></i> Gestion des Déchets - إدارة النفايات
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        
+        <!-- Section 1: Definitions Fondamentales -->
+        <section id="definitions" class="content-section active">
+            <h2 class="section-title"><i class="fas fa-book-open"></i> Définitions Fondamentales - المفاهيم الأساسية</h2>
+            <p class="bilingual">
+                <span class="french-text">Ce tableau présente les concepts fondamentaux pour la maîtrise de l'infection, essentiels au cabinet dentaire.</span>
+                <span class="arabic-text">يقدم هذا الجدول المفاهيم الأساسية للتحكم في العدوى، الضرورية في عيادة طب الأسنان.</span>
+            </p>
+            
+            <div class="table-container">
+                <table class="concept-table">
+                    <thead>
+                        <tr>
+                            <th width="25%">Concept (Français) - المفهوم (فرنسي)</th>
+                            <th width="45%">Explication Détaillée et Rôle - شرح مفصل ودور</th>
+                            <th width="30%">Astuce pour la Mémoire - حيلة للحفظ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-asepsie">
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">ASEPSIE</span></span>
+                                    <span class="arabic-text"><span class="highlight">التعقيم</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Vient du grec « a » (absence) et « sepsis » (putréfaction). L'asepsie est un ensemble de mesures visant à <span class="highlight">empêcher tout apport exogène de micro-organismes</span>. Elle signifie l'<span class="highlight">"absence d'infection"</span>. Elle est obtenue par la stérilisation et la désinfection.</span>
+                                    <span class="arabic-text">مصطلح يوناني يعني "أ" (غياب) و"سيبسيس" (تعفن). التعقيم هو مجموعة من الإجراءات التي تهدف إلى <span class="highlight">منع أي دخول للميكروبات من الخارج</span>. وهو يعني <span class="highlight">"غياب العدوى"</span>. ويتم تحقيقها من خلال التعقيم والتطهير.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">A</span>sepsie = <span class="highlight">A</span>bsence de contamination.</span>
+                                    <span class="arabic-text"><span class="highlight">التعقيم</span> = <span class="highlight">غياب</span> التلوث.</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="row-antisepsie">
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">ANTISEPSIE</span></span>
+                                    <span class="arabic-text"><span class="highlight">التطهير</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Vient de anti (contre) septos (microbes). C'est une opération permettant d'<span class="highlight">éliminer ou de tuer les micro-organismes</span> présents sur les <span class="highlight">tissus vivants</span> (peau saine, muqueuses, plaies). Son résultat est momentané.</span>
+                                    <span class="arabic-text">مصطلح من "أنتي" (ضد) و"سيبتوس" (ميكروبات). هي عملية تهدف إلى <span class="highlight">القضاء على الميكروبات أو قتلها</span> الموجودة على <span class="highlight">الأنسجة الحية</span> (جلد سليم، الأغشية المخاطية، الجروح). نتيجتها مؤقتة.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Anti</span>sepsie = Action <span class="highlight">Contre</span> sur le <span class="highlight">Vivant</span>.</span>
+                                    <span class="arabic-text"><span class="highlight">التطهير</span> = فعل <span class="highlight">ضد</span> على <span class="highlight">الكائن الحي</span>.</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="row-desinfection">
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">DÉSINFECTION</span></span>
+                                    <span class="arabic-text"><span class="highlight">التطهير (للأسطح)</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">S'applique aux <span class="highlight">surfaces inertes contaminées</span> qui ne sont pas stérilisables. Elle détruit tous les micro-organismes pathogènes à l'exception des <span class="highlight">spores</span>. L'objet désinfecté n'est pas toujours stérile.</span>
+                                    <span class="arabic-text">تطبق على <span class="highlight">الأسطح الملوثة غير الحية</span> التي لا يمكن تعقيمها. تدمر جميع الميكروبات الممرضة باستثناء <span class="highlight">الأبواغ</span>. الجسم المطهر ليس دائماً معقماً.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Désin</span>fection = S'applique aux <span class="highlight">Surfaces</span>.</span>
+                                    <span class="arabic-text"><span class="highlight">التطهير</span> = يطبق على <span class="highlight">الأسطح</span>.</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="row-sterilisation">
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">STÉRILISATION</span></span>
+                                    <span class="arabic-text"><span class="highlight">التعقيم الكامل</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Opération qui rend un produit <span class="highlight">exempt de micro-organismes viables</span>. Elle assure la destruction de tous les micro-organismes pathogènes, <span class="highlight">y compris les spores</span>. Elle permet de conserver cet état stérile pendant une période de temps.</span>
+                                    <span class="arabic-text">عملية تجعل المنتج <span class="highlight">خالياً من الميكروبات القابلة للحياة</span>. تضمن تدمير جميع الميكروبات الممرضة، <span class="highlight">بما في ذلك الأبواغ</span>. تسمح بالحفاظ على هذه الحالة المعقمة لفترة من الزمن.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Stérili</span>sation = Destruction <span class="highlight">Totale</span>.</span>
+                                    <span class="arabic-text"><span class="highlight">التعقيم الكامل</span> = تدمير <span class="highlight">شامل</span> (يشمل الأبواغ).</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 2: Chaîne d'Asepsie -->
+        <section id="chain" class="content-section">
+            <h2 class="section-title"><i class="fas fa-link"></i> La Chaîne d'Asepsie au Cabinet Dentaire - سلسلة مكافحة العدوى</h2>
+            <p class="bilingual">
+                <span class="french-text">La maîtrise de l'infection passe par le respect des règles d'hygiène à travers quatre domaines clés.</span>
+                <span class="arabic-text">يتحقق التحكم في العدوى من خلال احترام قواعد النظافة عبر أربعة مجالات رئيسية.</span>
+            </p>
+            
+            <div class="table-container">
+                <table class="concept-table">
+                    <thead>
+                        <tr>
+                            <th width="25%">Domaine - المجال</th>
+                            <th width="50%">Règles Clés et Procédures - القواعد والإجراءات الرئيسية</th>
+                            <th width="25%">Habileté de Mémorisation - كيفية الحفظ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Hygiène du Personnel</span></span>
+                                    <span class="arabic-text"><span class="highlight">نظافة الطاقم الطبي</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Préalables au lavage des mains</span> (Ongles courts, pas de bijoux, pas de vernis). Le port des <span class="highlight">gants</span> doit être précédé d'une hygiène des mains. Le lavage ou la désinfection des gants est proscrit. La <span class="highlight">friction hygiénique</span> (produit hydro alcoolique) est la procédure de référence.</span>
+                                    <span class="arabic-text"><span class="highlight">المتطلبات السابقة لغسل اليدين</span> (أظافر قصيرة، لا مجوهرات، لا طلاء أظافر). يجب أن يسبق ارتداء <span class="highlight">القفازات</span> نظافة اليدين. يحظر غسل أو تطهير القفازات. <span class="highlight">التعقيم بالكحول</span> (منتج كحولي مائي) هو الإجراء المرجعي.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">La règle des "<span class="highlight">4 Non</span>" et "<span class="highlight">1 Oui</span>" pour les mains.</span>
+                                    <span class="arabic-text">قاعدة "<span class="highlight">4 لا</span>" و "<span class="highlight">1 نعم</span>" لليدين.</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Le Patient</span></span>
+                                    <span class="arabic-text"><span class="highlight">المريض</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Diminuer le risque de contamination (croisée ou endogène) par l'<span class="highlight">antisepsie buccale</span> et l'utilisation de <span class="highlight">champs opératoires</span> ou de la digue dentaire pour réduire la contamination des aérosols.</span>
+                                    <span class="highlight">المريض</span> يجب أن يكون <span class="highlight">محمياً ومعالجاً</span> (عبر التطهير الفموي والحواجز).</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">P</span>atient = <span class="highlight">P</span>rotégé et traité.</span>
+                                    <span class="arabic-text"><span class="highlight">المريض</span> = <span class="highlight">محمي ومعالج</span>.</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Postes de Travail et Locaux</span></span>
+                                    <span class="arabic-text"><span class="highlight">محطات العمل والمرافق</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Le plan du cabinet doit être conçu pour favoriser l'asepsie. Le nettoyage doit se faire des <span class="highlight">zones les plus propres vers les plus sales</span>. Le bionettoyage se réalise en trois étapes : Pré-nettoyage, Nettoyage (détergent), puis Application d'un désinfectant.</span>
+                                    <span class="arabic-text">يجب تصميم مخطط العيادة لتعزيز التعقيم. يجب أن يتم التنظيف من <span class="highlight">المناطق الأنظف إلى الأكثر اتساخاً</span>. يتم التنظيف البيولوجي في ثلاث خطوات: ما قبل التنظيف، التنظيف (بالمنظف)، ثم تطبيق المطهر.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Nettoyer du "<span class="highlight">Propre au Sale</span>".</span>
+                                    <span class="arabic-text">تنظيف من "<span class="highlight">النظيف إلى القذر</span>".</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Stérilisation du Matériel</span></span>
+                                    <span class="arabic-text"><span class="highlight">تعقيم الأدوات</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Suivi d'une chaîne en <span class="highlight">8 étapes</span> (Pré-désinfection → Nettoyage → Rinçage → Séchage → Conditionnement → Stérilisation → Contrôles → Stockage).</span>
+                                    <span class="arabic-text">يتبع سلسلة من <span class="highlight">8 خطوات</span> (ما قبل التطهير → التنظيف → الشطف → التجفيف → التعبئة → التعقيم → الضوابط → التخزين).</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Mémoriser les <span class="highlight">8 étapes</span> dans l'ordre.</span>
+                                    <span class="arabic-text">احفظ <span class="highlight">الخطوات الثماني</span> بالترتيب.</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 3: Processus de Stérilisation -->
+        <section id="process" class="content-section">
+            <h2 class="section-title"><i class="fas fa-cogs"></i> Processus de Stérilisation et Traçabilité - مراحل تعقيم الأدوات وتتبعها</h2>
+            <p class="bilingual">
+                <span class="french-text">La stérilisation fait référence au traitement du matériel médical réutilisable.</span>
+                <span class="arabic-text">يشير التعقيم إلى معالجة الأدوات الطبية القابلة لإعادة الاستخدام.</span>
+            </p>
+            
+            <div class="table-container">
+                <table class="concept-table">
+                    <thead>
+                        <tr>
+                            <th width="25%">Étape Clé - الخطوة الرئيسية</th>
+                            <th width="50%">Description de la Procédure - وصف الإجراء</th>
+                            <th width="25%">Point Crucial - النقطة الحاسمة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Pré-désinfection</span></span>
+                                    <span class="arabic-text"><span class="highlight">ما قبل التطهير</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Premier traitement des instruments souillés pour <span class="highlight">réduire la contamination initiale</span> et permettre une manipulation sans danger. Nécessite un <span class="highlight">rinçage abondant</span> à l'eau courante (5 minutes au moins).</span>
+                                    <span class="arabic-text">المعالجة الأولى للأدوات الملوثة <span class="highlight">لتقليل التلوث الأولي</span> والسماح بالتعامل دون خطر. يتطلب <span class="highlight">شطفاً وفيراً</span> بالماء الجاري (5 دقائق على الأقل).</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Sécurité du personnel</span> (Manipulation sans danger).</span>
+                                    <span class="arabic-text"><span class="highlight">سلامة الطاقم</span> (التعامل دون خطر).</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Nettoyage (Ultrasons/Machine)</span></span>
+                                    <span class="arabic-text"><span class="highlight">التنظيف (الموجات فوق الصوتية/الآلة)</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">But: Enlever les salissures pour garantir l'efficacité du traitement ultérieur, car <span class="highlight">on ne stérilise que ce qui est propre</span>. Le nettoyage par ultrasons dure <span class="highlight">15 à 20 minutes</span> à <span class="highlight">30-45°C</span>.</span>
+                                    <span class="arabic-text">الهدف: إزالة الأوساخ لضمان فعالية المعالجة اللاحقة، لأن <span class="highlight">نقوم فقط بتعقيم ما هو نظيف</span>. يستغرق التنظيف بالموجات فوق الصوتية <span class="highlight">15 إلى 20 دقيقة</span> عند <span class="highlight">30-45 درجة مئوية</span>.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">L'efficacité de la stérilisation dépend de la <span class="highlight">propreté du matériel</span>.</span>
+                                    <span class="arabic-text">تعتمد فعالية التعقيم على <span class="highlight">نظافة الأدوات</span>.</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Stérilisation (Autoclave)</span></span>
+                                    <span class="arabic-text"><span class="highlight">التعقيم (الأوتوكلاف)</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Méthode de référence : <span class="highlight">vapeur d'eau saturée sous pression</span>. La méthode recommandée est le <span class="highlight">cycle de type B</span>.</span>
+                                    <span class="arabic-text">الطريقة المرجعية: <span class="highlight">بخار الماء المشبع تحت الضغط</span>. الطريقة الموصى بها هي <span class="highlight">دورة النوع B</span>.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Température recommandée : <span class="highlight">134°C</span> maintenue pendant <span class="highlight">18 minutes</span>.</span>
+                                    <span class="arabic-text">درجة الحرارة الموصى بها: <span class="highlight">134 درجة مئوية</span> محفوظة لمدة <span class="highlight">18 دقيقة</span>.</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Contrôles (Post-stérilisation)</span></span>
+                                    <span class="arabic-text"><span class="highlight">الضوابط (بعد التعقيم)</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Vérification de l'intégrité de l'emballage, l'<span class="highlight">absence d'humidité</span> (un sachet humide n'assure plus la stérilité) et le <span class="highlight">virage des indicateurs</span> (changement de couleur).</span>
+                                    <span class="arabic-text">التحقق من سلامة العبوة، <span class="highlight">غياب الرطوبة</span> (الكيس الرطب لا يضمن التعقيم) و <span class="highlight">تغير المؤشرات</span> (تغير اللون).</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Un sachet humide doit être considéré comme <span class="highlight">non stérile</span>.</span>
+                                    <span class="arabic-text">يجب اعتبار الكيس الرطب <span class="highlight">غير معقم</span>.</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Traçabilité</span></span>
+                                    <span class="arabic-text"><span class="highlight">التتبع</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Capacité à <span class="highlight">suivre un instrument</span> donné depuis sa stérilisation jusqu'à son utilisation finale chez le patient. Nécessite l'enregistrement des paramètres du cycle et l'impression d'étiquettes.</span>
+                                    <span class="arabic-text">القدرة على <span class="highlight">تتبع أداة</span> معينة من تعقيمها حتى استخدامها النهائي لدى المريض. يتطلب تسجيل معلمات الدورة وطباعة الملصقات.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">Suivi des soins</span> (Historique de l'instrument).</span>
+                                    <span class="arabic-text"><span class="highlight">متابعة الرعاية</span> (سجل الأداة).</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 4: Gestion des Déchets -->
+        <section id="waste" class="content-section">
+            <h2 class="section-title"><i class="fas fa-trash-alt"></i> Gestion des Déchets - إدارة النفايات</h2>
+            <p class="bilingual">
+                <span class="french-text">Le tri doit se faire dès la production des déchets, chaque filière ayant un code couleur réglementaire.</span>
+                <span class="arabic-text">يجب أن يتم الفرز فور إنتاج النفايات، حيث أن كل مسار له رمز لوني تنظيمي.</span>
+            </p>
+            
+            <div class="table-container">
+                <table class="concept-table">
+                    <thead>
+                        <tr>
+                            <th width="25%">Catégorie (Français) - الفئة (فرنسي)</th>
+                            <th width="20%">Filière (Couleur) - المسار (اللون)</th>
+                            <th width="30%">Exemples - الأمثلة</th>
+                            <th width="25%">Règle de Sécurité - قاعدة السلامة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">DAOM</span> (Déchets assimilés aux ordures ménagères)</span>
+                                    <span class="arabic-text"><span class="highlight">النفايات المماثلة للنفايات المنزلية</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="color-box color-black"></span> <span class="highlight">NOIRE</span></span>
+                                    <span class="arabic-text"><span class="color-box color-black"></span> <span class="highlight">الأسود</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Housses papier, emballages plastiques (non souillés).</span>
+                                    <span class="arabic-text">أغطية ورقية، عبوات بلاستيكية (غير ملوثة).</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Suivent le circuit des ordures ménagères.</span>
+                                    <span class="arabic-text">تتبع مسار النفايات المنزلية.</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">DASRI</span> (Déchets d'activités de soins à risque infectieux)</span>
+                                    <span class="arabic-text"><span class="highlight">نفايات أنشطة الرعاية ذات الخطورة المعدية</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="color-box color-yellow"></span> <span class="highlight">JAUNE</span></span>
+                                    <span class="arabic-text"><span class="color-box color-yellow"></span> <span class="highlight">الأصفر</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Matériels piquants/coupants (aiguilles), déchets mous infectés, gants, seringues souillés par du sang ou liquide biologique.</span>
+                                    <span class="arabic-text">الأدوات الحادة/القاطعة (الإبر)، النفايات الناعمة المعدية، القفازات، المحاقن الملوثة بالدم أو السوائل البيولوجية.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Ne jamais dépasser la limite de remplissage des collecteurs rigides (<span class="highlight">2/3</span>).</span>
+                                    <span class="arabic-text">لا تتجاوز أبداً حد تعبئة حاويات التجميع الصلبة (<span class="highlight">2/3</span>).</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="highlight">DRCT</span> (Déchets de soins à risques chimiques et/ou toxiques)</span>
+                                    <span class="arabic-text"><span class="highlight">نفايات الرعاية ذات المخاطر الكيميائية و/أو السامة</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text"><span class="color-box color-red"></span> <span class="highlight">ROUGE</span></span>
+                                    <span class="arabic-text"><span class="color-box color-red"></span> <span class="highlight">الأحمر</span></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Mercure (amalgames dentaires), films radiologiques (sels d'argent), médicaments périmés, solvants.</span>
+                                    <span class="arabic-text">الزئبق (حشوات الأسنان)، أفلام الأشعة (أملاح الفضة)، الأدوية منتهية الصلاحية، المذيبات.</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="bilingual">
+                                    <span class="french-text">Exigent une filière d'élimination spécifique.</span>
+                                    <span class="arabic-text">تتطلب مسار إزالة محدد.</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="bilingual" style="background-color: #f8f9fa; padding: 20px; border-radius: var(--border-radius); margin-top: 20px;">
+                <div class="french-text">
+                    <h3 style="color: var(--primary-color); margin-bottom: 10px;"><i class="fas fa-lightbulb"></i> Astuce pour la Mémoire - حيلة للحفظ</h3>
+                    <p>Pensez aux feux de circulation : <span class="highlight">Noir</span> (STOP, déchet ordinaire), <span class="highlight">Jaune</span> (ATTENTION, risque infectieux), <span class="highlight">Rouge</span> (DANGER, risque chimique/toxique).</p>
+                </div>
+                <div class="arabic-text">
+                    <h3 style="color: var(--primary-color); margin-bottom: 10px; text-align: right;"><i class="fas fa-lightbulb"></i> تذكير لحفظ النفايات</h3>
+                    <p style="text-align: right;">فكر في إشارات المرور: <span class="highlight">الأسود</span> (توقف، نفايات عادية)، <span class="highlight">الأصفر</span> (انتبه، خطر معدٍ)، <span class="highlight">الأحمر</span> (خطر، خطر كيميائي/سام).</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 - Cours d'Asepsie, Antisepsie et Stérilisation pour Étudiants en Médecine Dentaire</p>
+            <p>درس التعقيم والتطهير لطلاب طب الأسنان - Réalisé par BANABBES DJIHAD</p>
+        </div>
+    </div>
+
+    <script>
+        // Tab navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const sections = document.querySelectorAll('.content-section');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show active section
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === targetId) {
+                            section.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Highlight important terms on hover
+            const highlights = document.querySelectorAll('.highlight');
+            highlights.forEach(highlight => {
+                highlight.addEventListener('mouseenter', function() {
+                    const frenchText = this.textContent;
+                    // Find and highlight corresponding Arabic text (simplified approach)
+                    const allHighlights = document.querySelectorAll('.highlight');
+                    allHighlights.forEach(h => {
+                        if (h !== this && h.textContent !== frenchText) {
+                            h.style.backgroundColor = 'rgba(231, 76, 60, 0.25)';
+                        }
+                    });
+                });
+                
+                highlight.addEventListener('mouseleave', function() {
+                    const allHighlights = document.querySelectorAll('.highlight');
+                    allHighlights.forEach(h => {
+                        h.style.backgroundColor = 'rgba(231, 76, 60, 0.15)';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
