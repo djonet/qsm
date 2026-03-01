@@ -183,2163 +183,1230 @@
 
   // 🧠 أسئلة تجريبية
   const questionsData = {
-    
-'Fonctions oro-faciales': [
+    '1.embyologie': 
+  [
   {
-    question: 'Selon l’introduction, le fonctionnement et l’interaction des fonctions de la sphère oro-faciale peuvent avoir une incidence sur…',
-    difficulty: 1,
-    answers: [
-      { text: 'le développement cranio-facial (théorie de Moss) et donc la morphologie', correct: true },
-      { text: 'la croissance des sinus mais sans relation avec la forme cranio-faciale', correct: false },
-      { text: 'les rapports des mâchoires entre elles via l’action musculaire', correct: true },
-      { text: 'la position des dents comme conséquence du « jeu des muscles »', correct: true }
+    "question": "À propos des périodes du développement humain :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La période fœtale est caractérisée uniquement par l'apparition de nouveaux organes.", "correct": false },
+      { "text": "B. La période fœtale débute à la 8ème semaine et se poursuit jusqu'au terme.", "correct": true },
+      { "text": "C. Le développement précoce se termine par la formation du squelette ossifié.", "correct": false },
+      { "text": "D. La période embryonnaire s'étend du début de la 4ème à la fin de la 7ème semaine.", "correct": true }
     ]
   },
   {
-    question: 'Une fonction est définie comme…',
-    difficulty: 1,
-    answers: [
-      { text: 'l’ensemble des actes accomplis par une structure (organe ou système)', correct: true },
-      { text: 'en vue d’un résultat déterminé', correct: true },
-      { text: 'un ensemble d’actes sans lien avec une structure anatomique précise', correct: false },
-      { text: 'un processus autonome indifférent au résultat', correct: false }
+    "question": "Concernant la 3ème semaine de développement :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le disque embryonnaire est encore composé de seulement deux feuillets primitifs.", "correct": false },
+      { "text": "B. On assiste à la métamérisation des somites et à la constitution de l'ébauche cardiaque.", "correct": true },
+      { "text": "C. Les arcs branchiaux mandibulaire et hyoïdien sont déjà totalement formés.", "correct": false },
+      { "text": "D. Elle est caractérisée par la gastrulation avec l'apparition du mésoblaste et du canal cordal.", "correct": true }
     ]
   },
   {
-    question: 'La respiration physiologique se caractérise par…',
-    difficulty: 1,
-    answers: [
-      { text: 'une ventilation naso-nasale (inspiration-expiration)', correct: true },
-      { text: 'un contact entre le voile du palais et la langue', correct: true },
-      { text: 'une bouche fermée hermétiquement pour la ventilation nasale', correct: true },
-      { text: 'une inspiration nasale et une expiration buccale au repos', correct: false }
+    "question": "La formation du stomodéum (bouche primitive) :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Il correspond à une saillie de l'extrémité céphalique de l'embryon.", "correct": false },
+      { "text": "B. Il est délimité entre la partie ventrale du prosencéphale et l'ébauche cardiaque.", "correct": true },
+      { "text": "C. Il est entièrement tapissé par l'endoderme pharyngé dès le début.", "correct": false },
+      { "text": "D. Son apparition est liée à l'augmentation du volume de la cavité amniotique.", "correct": true }
     ]
   },
   {
-    question: 'L’apparition de la respiration survient…',
-    difficulty: 1,
-    answers: [
-      { text: 'dès la naissance avec le premier cri', correct: true },
-      { text: 'uniquement après l’éruption des premières dents', correct: false },
-      { text: 'en lien avec le libre passage de l’air par les fosses nasales', correct: true },
-      { text: 'indépendamment de tout obstacle des voies nasales', correct: false }
+    "question": "Les bourgeons faciaux et leur origine :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le développement des bourgeons faciaux dépend des mitoses des cellules de la crête neurale.", "correct": true },
+      { "text": "B. Les bourgeons maxillaires naissent directement du bourgeon naso-frontal.", "correct": false },
+      { "text": "C. Les bourgeons mandibulaires forment le plafond du stomodéum.", "correct": false },
+      { "text": "D. Le bourgeon frontal est le plus volumineux, il est impair et médian.", "correct": true }
     ]
   },
   {
-    question: 'La ventilation buccale…',
-    difficulty: 1,
-    answers: [
-      { text: 'd’effort est la seule forme physiologique', correct: true },
-      { text: 'devient habituelle en cas d’obstacle nasal', correct: true },
-      { text: 'est toujours pathologique même à l’effort', correct: false },
-      { text: 'peut être mixte si l’obstacle n’est que partiel', correct: false }
+    "question": "Les mécanismes de fusion des bourgeons :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Une condition biologique majeure est la compétence de l'ectoderme par mort cellulaire.", "correct": true },
+      { "text": "B. La fusion nécessite la mésodermisation, c'est-à-dire la dégénérescence des cellules épithéliales de surface.", "correct": true },
+      { "text": "C. Le liquide amniotique n'a aucune influence sur le contact entre les bourgeons.", "correct": false },
+      { "text": "D. Les bourgeons fusionnent sans contact préalable entre les parois épiblastiques.", "correct": false }
     ]
   },
   {
-    question: 'Le rôle de la respiration, tel que décrit, comprend…',
-    difficulty: 2,
-    answers: [
-      { text: 'le filtrage et la désinfection de l’air', correct: true },
-      { text: 'l’humidification et le réchauffement de l’air ambiant', correct: true },
-      { text: 'une modification au niveau de la pyramide nasale, fosses nasales et sinus', correct: true },
-      { text: 'la digestion initiale des aliments par turbulence nasale', correct: false }
+    "question": "Les dérivés des bourgeons mandibulaires et nasaux :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le bourgeon nasal externe forme la totalité de la lèvre supérieure.", "correct": false },
+      { "text": "B. Les deux bourgeons mandibulaires fusionnent sur la ligne médiane pour constituer le menton.", "correct": true },
+      { "text": "C. La fusion des bourgeons maxillaires entre eux forme le plancher buccal.", "correct": false },
+      { "text": "D. Le bourgeon nasal interne participe à la formation du philtrum et du seuil narinaire.", "correct": true }
     ]
   },
   {
-    question: 'La déglutition chez le jeune adulte…',
-    difficulty: 2,
-    answers: [
-      { text: 'survient 500 à 2000 fois/jour', correct: true },
-      { text: 'dure environ une seconde', correct: true },
-      { text: 'nécessite l’arrêt de la respiration', correct: true },
-      { text: 'se poursuit pendant le sommeil à 30 à 60/h', correct: false }
+    "question": "Le modelage de la face au 4ème mois :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Les yeux quittent leur position latérale pour prendre une position frontale.", "correct": true },
+      { "text": "B. Les ailes du nez s'effacent pour donner un aspect plat au visage.", "correct": false },
+      { "text": "C. Les paupières et les sourcils ne sont pas encore visibles à ce stade.", "correct": false },
+      { "text": "D. La bouche, initialement en accent circonflexe, devient horizontale et se rétrécit.", "correct": true }
     ]
   },
   {
-    question: 'La fréquence de déglutition…',
-    difficulty: 2,
-    answers: [
-      { text: 'augmente pendant les repas jusqu’à ~300 fois/h', correct: true },
-      { text: 'hors repas chute à ~10 fois/h', correct: true },
-      { text: 'pendant le sommeil est de ~2 à 6/h', correct: true },
-      { text: 'maximale lors des stades profonds du sommeil', correct: false }
+    "question": "Le cloisonnement du stomodéum et le palais primaire :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le contact entre les bourgeons maxillaires et nasaux constitue le 'mur épithélial de Hochstetter'.", "correct": true },
+      { "text": "B. La disparition de ce mur permet la constitution du palais primaire par le mésenchyme de la crête neurale.", "correct": true },
+      { "text": "C. Le palais primaire sépare définitivement les fosses nasales du pharynx.", "correct": false },
+      { "text": "D. Le palais primaire se forme au cours de la 9ème semaine embryonnaire.", "correct": false }
     ]
   },
   {
-    question: 'Les phases de la déglutition adulte comprennent…',
-    difficulty: 2,
-    answers: [
-      { text: 'phase buccale', correct: true },
-      { text: 'phase pharyngée', correct: true },
-      { text: 'phase œsophagienne', correct: true },
-      { text: 'phase laryngée continue', correct: false }
+    "question": "Le développement du palais secondaire :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Les processus palatins se redressent au-dessus de la langue avant de se souder sur la ligne médiane.", "correct": true },
+      { "text": "B. La soudure des processus palatins s'effectue d'arrière en avant.", "correct": false },
+      { "text": "C. Il se forme par la soudure des processus palatins issus des bourgeons maxillaires supérieurs.", "correct": true },
+      { "text": "D. Sa formation est totalement indépendante de la croissance du septum nasal.", "correct": false }
     ]
   },
   {
-    question: 'Concernant la phase buccale…',
-    difficulty: 2,
-    answers: [
-      { text: 'l’orbiculaire des lèvres se contracte', correct: true },
-      { text: 'le voile du palais s’élève et l’épiglotte s’abaisse', correct: true },
-      { text: 'la langue crée une onde péristaltique vers l’arrière', correct: true },
-      { text: 'la mandibule reste ouverte sans contact d’ICM', correct: false }
+    "question": "La formation du massif lingual :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La partie moyenne est issue du développement du tubercule impair de His.", "correct": true },
+      { "text": "B. L'accolement des différentes ébauches linguales se fait selon une ligne droite horizontale.", "correct": false },
+      { "text": "C. La formation de la langue débute après la fermeture complète du palais secondaire.", "correct": false },
+      { "text": "D. La partie antérieure est formée par deux éminences issues des bourgeons mandibulaires.", "correct": true }
     ]
   },
   {
-    question: 'Durant la phase buccale, on observe aussi…',
-    difficulty: 2,
-    answers: [
-      { text: 'la contraction du masséter et contact en I.C.M.', correct: true },
-      { text: 'une onde de déformation linguale antérieure', correct: true },
-      { text: 'un contrôle volontaire possible', correct: true },
-      { text: 'une descente de l’épiglotte pendant l’inspiration', correct: false }
+    "question": "Les mécanismes d'ossification crânio-faciale :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'ossification primaire est régie exclusivement par le périoste.", "correct": false },
+      { "text": "B. Tous les os de la face sont d'origine enchondrale pure.", "correct": false },
+      { "text": "C. L'os de substitution nécessite un tuteur cartilagineux dérivé du scléroblastème.", "correct": true },
+      { "text": "D. Les os de membrane (voûte et face) dérivent directement du tissu conjonctif sans matrice cartilagineuse.", "correct": true }
     ]
   },
   {
-    question: 'La maturation de la déglutition dépend…',
-    difficulty: 2,
-    answers: [
-      { text: 'des modifications de l’environnement buccal', correct: true },
-      { text: 'de la maturation des circuits nerveux', correct: true },
-      { text: 'du changement du mode de nutrition', correct: true },
-      { text: 'exclusivement de l’âge', correct: false }
+    "question": "Le chondro-crâne :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Il constitue la forme définitive et immuable du crâne adulte.", "correct": false },
+      { "text": "B. À la 7ème semaine, il forme la capsule nasale embryonnaire en avant.", "correct": true },
+      { "text": "C. Il tire son origine des cellules de la crête neurale et du mésoderme para-axial.", "correct": true },
+      { "text": "D. Il s'étend initialement de la zone occipitale vers le futur sphénoïde.", "correct": false }
     ]
   },
   {
-    question: 'Transition de la déglutition…',
-    difficulty: 2,
-    answers: [
-      { text: 'débute vers 18 mois', correct: true },
-      { text: 'occlusion fonctionnelle vers 6 ans → déglutition adulte', correct: true },
-      { text: 'persistance infantile normale après 10 ans', correct: false },
-      { text: 'persistance après 10 ans = dysfonctionnelle', correct: true }
+    "question": "Le cartilage de Meckel :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Il disparaît totalement sans laisser de trace ligamentaire.", "correct": false },
+      { "text": "B. Sa zone moyenne est le centre principal d'ossification de la branche montante.", "correct": false },
+      { "text": "C. Sa portion dorsale tympanique donne naissance à une partie des osselets de l'oreille.", "correct": true },
+      { "text": "D. Il représente le cartilage du 1er arc mandibulaire.", "correct": true }
     ]
   },
   {
-    question: 'Chez le nouveau-né, la déglutition…',
-    difficulty: 2,
-    answers: [
-      { text: 'est réflexe, déclenchée par stimulation labiale', correct: true },
-      { text: 's’accompagne d’une macroglossie naturelle', correct: true },
-      { text: 'implique les muscles péri-buccaux', correct: true },
-      { text: 'repose sur une occlusion molaire serrée', correct: false }
+    "question": "Le cartilage de Reichert :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Sa partie moyenne se transforme en corps de l'occipital.", "correct": false },
+      { "text": "B. Il participe à la formation de la petite corne de l'os hyoïde et de l'apophyse styloïde.", "correct": true },
+      { "text": "C. Il est situé au-dessus du cartilage de Meckel.", "correct": false },
+      { "text": "D. Il correspond au cartilage du 2ème arc branchial.", "correct": true }
     ]
   },
   {
-    question: 'La déglutition adulte se caractérise par…',
-    difficulty: 2,
-    answers: [
-      { text: 'arcades serrées, occlusion molaire', correct: true },
-      { text: 'lèvres jointes non contractées', correct: true },
-      { text: 'pointe linguale appui palatin antérieur', correct: true },
-      { text: 'absence totale d’activité faciale', correct: false }
+    "question": "Dérivés osseux du chondro-crâne :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le corps du sphénoïde et la partie pétreuse du temporal en sont issus.", "correct": true },
+      { "text": "B. Le maxillaire supérieur est un os induit directement par le chondro-crâne.", "correct": false },
+      { "text": "C. La voûte crânienne est le principal dérivé du chondro-crâne.", "correct": false },
+      { "text": "D. Il induit la formation de l'ethmoïde et du cornet inférieur.", "correct": true }
     ]
   },
   {
-    question: 'La déglutition fœtale…',
-    difficulty: 3,
-    answers: [
-      { text: 'décelable dès la 13e semaine', correct: true },
-      { text: 'correspond à la déglutition du liquide amniotique', correct: true },
-      { text: 'nécessite des arcades dentaires', correct: false },
-      { text: 'prépare les fonctions oro-faciales ultérieures', correct: true }
+    "question": "Ossification du maxillaire supérieur :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'ossification se fait à partir d'un modèle cartilagineux enchondral.", "correct": false },
+      { "text": "B. C'est un os de nature exclusivement membraneuse naissant en dehors de la capsule nasale.", "correct": true },
+      { "text": "C. Il possède deux centres d'ossification : le prémaxillaire (point A) et le post-maxillaire (point B).", "correct": true },
+      { "text": "D. Le centre prémaxillaire se situe au-dessous de l'orbite.", "correct": false }
     ]
   },
   {
-    question: 'Chez l’enfant en denture temporaire puis mixte…',
-    difficulty: 3,
-    answers: [
-      { text: 'l’éruption modifie la dynamique linguale', correct: true },
-      { text: 'l’orbiculaire perd son rôle de joint puissant', correct: true },
-      { text: 'la « boîte à langue » s’agrandit, contact molaire fréquent', correct: true },
-      { text: 'propulsion linguale augmente après 10 ans', correct: false }
+    "question": "Détails des centres d'ossification maxillaires :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le centre post-maxillaire forme l'apophyse malaire et le plancher de l'orbite.", "correct": true },
+      { "text": "B. Le centre prémaxillaire forme la totalité de la branche montante du maxillaire.", "correct": false },
+      { "text": "C. Le centre prémaxillaire forme l'épine nasale antérieure et la zone incisive.", "correct": true },
+      { "text": "D. Les deux centres ne fusionnent jamais, restant séparés par le mur dentaire.", "correct": false }
     ]
   },
   {
-    question: 'La déglutition mature résulte de l’activité coordonnée…',
-    difficulty: 3,
-    answers: [
-      { text: 'des muscles faciaux (orbiculaire, buccinateur, menton)', correct: true },
-      { text: 'des élévateurs et abaisseurs mandibulaires', correct: true },
-      { text: 'des seuls muscles laryngés', correct: false },
-      { text: 'd’un schéma neuromusculaire coordonné respiration/occlusion', correct: true }
+    "question": "Formation de la mandibule :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Elle a une origine complexe : c'est à la fois un os de membrane et un os de substitution.", "correct": true },
+      { "text": "B. L'ossification débute sur la face interne du cartilage de Meckel.", "correct": false },
+      { "text": "C. Le cartilage de Meckel se transforme intégralement en branche horizontale.", "correct": false },
+      { "text": "D. Le premier noyau osseux apparaît vers le 40ème jour au voisinage du trou mentonnier.", "correct": true }
     ]
   },
   {
-    question: 'La mastication, première étape de la digestion, implique…',
-    difficulty: 3,
-    answers: [
-      { text: 'coupure, écrasement, broyage', correct: true },
-      { text: 'coordination dents, lèvres, joues, langue', correct: true },
-      { text: 'préparation du bol alimentaire', correct: true },
-      { text: 'uniquement des mouvements de propulsion', correct: false }
+    "question": "Croissance de la région condylienne :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Ce cartilage est issu directement de la transformation du cartilage de Meckel.", "correct": false },
+      { "text": "B. Le cartilage condylien est présent dès le stade morula.", "correct": false },
+      { "text": "C. Il se forme à partir d'un noyau initial et prend la forme d'une carotte.", "correct": true },
+      { "text": "D. Le cartilage condylien est le centre le plus important de la croissance mandibulaire.", "correct": true }
     ]
   },
   {
-    question: 'Le cycle masticatoire…',
-    difficulty: 3,
-    answers: [
-      { text: 'enchaîne abaissements/élévations, propulsion/rétropulsion, diduction', correct: true },
-      { text: 'séquence ~15 cycles', correct: true },
-      { text: 'durée fixe de 0,25 s quel que soit l’aliment', correct: false },
-      { text: 'plus long avec aliment dur', correct: true }
-    ]
-  },
-  {
-    question: 'Types de mastication observés…',
-    difficulty: 3,
-    answers: [
-      { text: 'unilatérale (12 %)', correct: true },
-      { text: 'bilatérale (8 %)', correct: true },
-      { text: 'unilatérale alternée (80 %)', correct: true },
-      { text: 'bilatérale alternée (50 %)', correct: false }
-    ]
-  },
-  {
-    question: 'Plan frontal du cycle masticatoire…',
-    difficulty: 3,
-    answers: [
-      { text: 'abaissement, écart côté non travaillant, retour ligne médiane', correct: true },
-      { text: 'écart vertical : 16–18 mm', correct: true },
-      { text: 'écart latéral : 5–6 mm', correct: true },
-      { text: 'durée phase ouverture : ~36 %', correct: true }
-    ]
-  },
-  {
-    question: 'Phase de fermeture (plan frontal)…',
-    difficulty: 3,
-    answers: [
-      { text: 'remontée mandibulaire avec contacts selon bol', correct: true },
-      { text: 'recentrage ligne médiane', correct: true },
-      { text: 'à 3 mm d’ouverture → décalage latéral ~3 mm', correct: true },
-      { text: 'absence de contacts pour tous aliments', correct: false }
-    ]
-  },
-  {
-    question: 'Fin de fermeture et broyage…',
-    difficulty: 3,
-    answers: [
-      { text: 'cuspides vestibulaires mandibulaires sous celles maxillaires', correct: true },
-      { text: 'ralentissement de la remontée', correct: true },
-      { text: 'frottements interdentaires si aliments mous', correct: true },
-      { text: 'contacts obligatoires dès premiers cycles', correct: false }
-    ]
-  },
-  {
-    question: 'Phase d’intercuspidation…',
-    difficulty: 3,
-    answers: [
-      { text: 'clôt le cycle', correct: true },
-      { text: 'n’existe pas', correct: false },
-      { text: 'après broyage lorsque dents se touchent', correct: true },
-      { text: 'au début de l’ouverture', correct: false }
-    ]
-  },
-  {
-    question: 'Maturation de la mastication…',
-    difficulty: 4,
-    answers: [
-      { text: 'fonction apprise liée à l’éruption des dents temporaires', correct: true },
-      { text: 'se développe avec passage liquide→solide', correct: true },
-      { text: 'vers deux ans', correct: true },
-      { text: 'ressemble à adulte qu’en denture définitive', correct: true }
-    ]
-  },
-  {
-    question: 'Plan sagittal et horizontal du cycle masticatoire…',
-    difficulty: 4,
-    answers: [
-      { text: 'plan horizontal : forme ovalaire ou circulaire', correct: true },
-      { text: 'plan sagittal : mentionné sans chiffres', correct: true },
-      { text: 'trajectoire horizontale rectiligne', correct: false },
-      { text: 'variabilité soulignée', correct: true }
-    ]
-  },
-  {
-    question: 'La phonation est…',
-    difficulty: 4,
-    answers: [
-      { text: 'fonction de relation participant au langage', correct: true },
-      { text: 'réalisée par appareil autre que le larynx', correct: false },
-      { text: 'utilisant organes de respiration/nutrition', correct: true },
-      { text: 'dépendante de deux conduites superposées', correct: true }
-    ]
-  },
-  {
-    question: 'Les conduites de la phonation comprennent…',
-    difficulty: 4,
-    answers: [
-      { text: 'conduites phonatoires : système pneumo-trachéo-laryngo-pharyngé', correct: true },
-      { text: 'conduites articulatoires : voyelles et consonnes', correct: true },
-      { text: 'conduites phonatoires entièrement apprises', correct: false },
-      { text: 'conduites articulatoires influencées par le milieu', correct: true }
-    ]
-  },
-  {
-    question: 'Activité des systèmes pendant la phonation…',
-    difficulty: 4,
-    answers: [
-      { text: 'laryngien : vibration pendant expiration', correct: true },
-      { text: 'bucco-pharyngien : activité discontinue', correct: true },
-      { text: 'entre consonnes : son laryngé = voyelles', correct: true },
-      { text: 'laryngien : actif à l’inspiration', correct: false }
-    ]
-  },
-  {
-    question: 'À propos des phonèmes…',
-    difficulty: 4,
-    answers: [
-      { text: 'supports élémentaires du langage', correct: true },
-      { text: 'constitués de voyelles et consonnes', correct: true },
-      { text: 'incluent des diphtongues', correct: false },
-      { text: 'définis sans classification supplémentaire', correct: true }
-    ]
-  },
-  {
-    question: 'Relation forme-fonction (conclusion)…',
-    difficulty: 4,
-    answers: [
-      { text: 'forme et fonction étroitement liées', correct: true },
-      { text: 'morphologie adulte = activité musculaire', correct: true },
-      { text: 'muscles déterminent rapports mâchoires et dents', correct: true },
-      { text: 'forme cranio-faciale indépendante des muscles', correct: false }
-    ]
-  },
-  {
-    question: 'Respiration buccale ou mixte…',
-    difficulty: 4,
-    answers: [
-      { text: 'due à un obstacle nasal', correct: true },
-      { text: 'bouche fermée nécessaire à ventilation nasale', correct: true },
-      { text: 'obstacle nasal sans incidence', correct: false },
-      { text: 'ventilation buccale d’effort physiologique', correct: true }
-    ]
-  },
-  {
-    question: 'Phase buccale de déglutition — enchaînement :',
-    difficulty: 4,
-    answers: [
-      { text: 'contraction labiale discrète, arrêt respiratoire', correct: true },
-      { text: 'abaissement de l’épiglotte', correct: true },
-      { text: 'onde linguale propulsant le bol', correct: true },
-      { text: 'lèvres entrouvertes nécessaires', correct: false }
-    ]
-  },
-  {
-    question: 'Paramètres quantifiés du cycle masticatoire :',
-    difficulty: 4,
-    answers: [
-      { text: 'ouverture verticale ~16–18 mm', correct: true },
-      { text: 'écart latéral ~5–6 mm', correct: true },
-      { text: 'durée relative ouverture ~36 %', correct: true },
-      { text: 'décalage latéral 3 mm à 3 mm d’ouverture', correct: true }
-    ]
-  },
-  {
-    question: 'Fréquence de déglutition — piège :',
-    difficulty: 5,
-    answers: [
-      { text: '300 fois/h pendant repas', correct: true },
-      { text: '10 fois/h hors repas', correct: true },
-      { text: '2–6/h pendant sommeil', correct: true },
-      { text: 'nulle la nuit', correct: false }
-    ]
-  },
-  {
-    question: 'Intégration respiration-déglutition-larynx :',
-    difficulty: 5,
-    answers: [
-      { text: 'arrêt respiratoire et élévation du voile', correct: true },
-      { text: 'abaissement de l’épiglotte', correct: true },
-      { text: 'contact d’ICM', correct: true },
-      { text: 'inspiration forcée', correct: false }
-    ]
-  },
-  {
-    question: 'Chronologie de maturation de la déglutition :',
-    difficulty: 5,
-    answers: [
-      { text: 'mouvements fœtaux dès 13e semaine', correct: true },
-      { text: 'nouveau-né : acte réflexe et macroglossie', correct: true },
-      { text: 'denture mixte : boîte à langue agrandie', correct: true },
-      { text: 'propulsion linguale normale après 10 ans', correct: false }
-    ]
-  },
-  {
-    question: 'Synthèse mastication (séquence et contacts) :',
-    difficulty: 5,
-    answers: [
-      { text: 'séquence ≈ 15 cycles', correct: true },
-      { text: 'aliments durs : contacts absents aux premiers cycles', correct: true },
-      { text: 'aliments mous : contacts possibles en fin de cycle', correct: true },
-      { text: 'contacts toujours précoces', correct: false }
-    ]
-  },
-  {
-    question: 'Phonation (double conduite et produits) :',
-    difficulty: 5,
-    answers: [
-      { text: 'conduites phonatoires innées produisant la voix', correct: true },
-      { text: 'conduites articulatoires : voyelles/consonnes', correct: true },
-      { text: 'entre consonnes : son laryngé = voyelles', correct: true },
-      { text: 'phonèmes ne comprennent pas les consonnes', correct: false }
-    ]
-  }
-],'Introduction à l’Orthopédie Dento-Faciale' : [
-  {
-    question: 'Définition et champ : l’ODF est présentée comme partie de l’odontologie/stomatologie qui étudie et traite des troubles liés aux anomalies…',
-    difficulty: 1,
-    answers: [
-      { text: 'de la forme des mâchoires', correct: true },
-      { text: 'de la position des dents', correct: true },
-      { text: 'des organes viscéraux cervicaux uniquement', correct: false },
-      { text: 'de la face et des maxillaires dans leur développement', correct: true }
-    ]
-  },
-  {
-    question: 'Selon la SFODF et Bassigny, l’ODF vise entre autres à…',
-    difficulty: 1,
-    answers: [
-      { text: 'rétablir un équilibre fonctionnel et une bonne mastication', correct: true },
-      { text: 'aider à prévenir les maladies des dents et de leur support', correct: true },
-      { text: 'ignorer l’harmonie du visage au profit de la seule occlusion', correct: false },
-      { text: 'améliorer l’harmonie du visage et de la denture', correct: true }
-    ]
-  },
-  {
-    question: 'Orthodontie vs ODF (distinction historique) :',
-    difficulty: 1,
-    answers: [
-      { text: 'ODF : modification de la croissance des mâchoires', correct: true },
-      { text: 'Orthodontie : positions dentaires, formes des arcades et rapports', correct: true },
-      { text: 'En 1978, l’AAO a admis ODF comme synonyme acceptable', correct: true },
-      { text: 'ODF n’a aucun lien avec les rapports d’arcades', correct: false }
-    ]
-  },
-  {
-    question: 'Définition d’« anomalie » en ODF :',
-    difficulty: 1,
-    answers: [
-      { text: 'une variation par rapport à la moyenne', correct: true },
-      { text: 'un ensemble de variations morphologiques et fonctionnelles', correct: true },
-      { text: 'ne peut entraîner de préjudice esthétique ni fonctionnel', correct: false },
-      { text: 'peut porter atteinte au développement harmonieux', correct: true }
-    ]
-  },
-  {
-    question: 'Buts généraux de l’ODF explicités :',
-    difficulty: 1,
-    answers: [
-      { text: 'esthétique du visage et de la denture', correct: true },
-      { text: 'fonctions oro-faciales satisfaisantes', correct: true },
-      { text: 'santé bucco-dentaire', correct: true },
-      { text: 'confort et bien-être', correct: true }
-    ]
-  },
-  {
-    question: 'Anomalies morphologiques — exemples donnés :',
-    difficulty: 2,
-    answers: [
-      { text: 'absence ou inclusion d’un germe dentaire', correct: true },
-      { text: 'dysharmonie taille dents / taille maxillaires', correct: true },
-      { text: 'anomalies des relations d’arcades dans les trois sens', correct: true },
-      { text: 'rapports base du crâne–maxillaires', correct: true }
-    ]
-  },
-  {
-    question: 'Structures osseuses et « trois sens de l’espace » :',
-    difficulty: 2,
-    answers: [
-      { text: 'réduction/augmentation du volume d’un maxillaire', correct: true },
-      { text: 'aucune répercussion fonctionnelle ou esthétique', correct: false },
-      { text: 'appartiennent aux anomalies morphologiques', correct: true },
-      { text: 'tissus mous jamais mentionnés', correct: false }
-    ]
-  },
-  {
-    question: 'Anomalies fonctionnelles (énoncées dans le texte) :',
-    difficulty: 2,
-    answers: [
-      { text: 'anomalies cinétiques des relations d’arcades', correct: true },
-      { text: 'anomalies de déglutition, ventilation, phonation, mastication', correct: true },
-      { text: 'seules les anomalies morphologiques sont concernées', correct: false },
-      { text: 'peuvent contribuer à un préjudice fonctionnel', correct: true }
-    ]
-  },
-  {
-    question: 'Champ élargi ajouté à l’étude des anomalies orthodontiques :',
-    difficulty: 2,
-    answers: [
-      { text: 'malformations congénitales (fentes labiales/palatines)', correct: true },
-      { text: 'séquelles de syndromes cranio-faciaux', correct: true },
-      { text: 'séquelles de traumatismes faciaux', correct: true },
-      { text: 'seules les malformations extra-faciales incluses', correct: false }
-    ]
-  },
-  {
-    question: 'Principe « que traiter en ODF » :',
-    difficulty: 2,
-    answers: [
-      { text: 'anomalies portant atteinte à la croissance/aspect', correct: true },
-      { text: 'anomalies nuisant aux fonctions orales/nasales', correct: true },
-      { text: 'anomalies exposant les dents aux traumatismes', correct: true },
-      { text: 'anomalies sans conséquence clinique', correct: false }
-    ]
-  },
-  {
-    question: 'Circonstances à considérer en plus des indications :',
-    difficulty: 2,
-    answers: [
-      { text: 'facteurs favorisant caries', correct: true },
-      { text: 'facteurs favorisant lésions parodontales', correct: true },
-      { text: 'facteurs favorisant troubles articulaires', correct: true },
-      { text: 'facteurs systémiques non cités', correct: false }
-    ]
-  },
-  {
-    question: 'Rôle de l’omnipraticien face aux anomalies :',
-    difficulty: 2,
-    answers: [
-      { text: 'apprécier nature et amplitude des anomalies', correct: true },
-      { text: 'rechercher causes et effets', correct: true },
-      { text: 'connaître possibilités et limites thérapeutiques', correct: true },
-      { text: 'différer tout diagnostic', correct: false }
-    ]
-  },
-  {
-    question: 'Dimension psycho-sociale citée :',
-    difficulty: 2,
-    answers: [
-      { text: 'un beau sourire → meilleure estime de soi', correct: true },
-      { text: 'esthétique dissociée de toute finalité fonctionnelle', correct: false },
-      { text: 'esthétique et fonction conjointes', correct: true },
-      { text: 'harmonie de la denture avec celle du visage', correct: true }
-    ]
-  },
-  {
-    question: 'Santé et confort (synthèse) :',
-    difficulty: 2,
-    answers: [
-      { text: 'alignement → nettoyage plus facile', correct: true },
-      { text: 'bonne occlusion → moins de tensions', correct: true },
-      { text: 'ATM non évoquée', correct: false },
-      { text: 'objectifs complètent esthétique', correct: true }
-    ]
-  },
-  {
-    question: 'Conclusion du cours : l’ODF/Orthodontie est…',
-    difficulty: 2,
-    answers: [
-      { text: 'un art scientifique', correct: true },
-      { text: 'visant l’optimum individuel esthétique/fonctionnel', correct: true },
-      { text: 'obtenu par moyens biologiques et mécaniques', correct: true },
-      { text: 'fondé sur protocole unique standardisé', correct: false }
-    ]
-  },
-  {
-    question: 'Étymologie (introduction) :',
-    difficulty: 3,
-    answers: [
-      { text: 'orthodontie = dents droites', correct: true },
-      { text: 'orthopédie = redressement de la croissance', correct: true },
-      { text: 'ODF = étude exclusive des ATM', correct: false },
-      { text: 'ODF relève de l’odontologie/stomatologie', correct: true }
-    ]
-  },
-  {
-    question: 'Logique « anomalie vs moyenne » et indication :',
-    difficulty: 3,
-    answers: [
-      { text: 'anomalie = variation par rapport à la moyenne', correct: true },
-      { text: 'toute variation impose traitement', correct: false },
-      { text: 'indication = situation génératrice de handicap', correct: true },
-      { text: 'développement harmonieux compromis', correct: true }
-    ]
-  },
-  {
-    question: 'Trois registres rassemblés dans le texte :',
-    difficulty: 3,
-    answers: [
-      { text: 'morphologique (dents, os, tissus mous)', correct: true },
-      { text: 'fonctionnel (déglutition, ventilation, etc.)', correct: true },
-      { text: 'malformations/séquelles', correct: true },
-      { text: 'uniquement morphologique', correct: false }
-    ]
-  },
-  {
-    question: 'Relations d’arcades « trois sens de l’espace » :',
-    difficulty: 3,
-    answers: [
-      { text: 'aux relations d’arcades', correct: true },
-      { text: 'au volume des maxillaires', correct: true },
-      { text: 'aux tissus mous exclusivement', correct: false },
-      { text: 'aux descriptions morphologiques globales', correct: true }
-    ]
-  },
-  {
-    question: 'Exemples précis de tissus mous donnés :',
-    difficulty: 3,
-    answers: [
-      { text: 'brièveté de la lèvre supérieure', correct: true },
-      { text: 'langue trop volumineuse', correct: true },
-      { text: 'anomalies d’insertion des freins', correct: true },
-      { text: 'défauts parodontaux', correct: true }
-    ]
-  },
-  {
-    question: 'Distinction historique maintenue pédagogiquement :',
-    difficulty: 3,
-    answers: [
-      { text: 'ODF : croissance des mâchoires (enfants)', correct: true },
-      { text: 'Orthodontie : positions dentaires et rapports', correct: true },
-      { text: 'synonymie interdit d’employer l’un pour l’autre', correct: false },
-      { text: 'distinction garde intérêt explicatif', correct: true }
-    ]
-  },
-  {
-    question: 'Préjudices potentiels explicités :',
-    difficulty: 3,
-    answers: [
-      { text: 'psychiques', correct: true },
-      { text: 'esthétiques', correct: true },
-      { text: 'fonctionnels', correct: true },
-      { text: 'aucun retentissement facial', correct: false }
-    ]
-  },
-  {
-    question: 'Enjeux de santé publique évoqués :',
-    difficulty: 3,
-    answers: [
-      { text: 'exposition des dents aux traumatismes', correct: true },
-      { text: 'lésions parodontales favorisées', correct: true },
-      { text: 'troubles articulaires possibles', correct: true },
-      { text: 'prévention sans rapport à l’ODF', correct: false }
-    ]
-  },
-  {
-    question: 'Place de l’équilibre fonctionnel :',
-    difficulty: 3,
-    answers: [
-      { text: 'rétabli selon SFODF', correct: true },
-      { text: 'lié à la fonction masticatrice', correct: true },
-      { text: 'dissocié des malformations', correct: false },
-      { text: 'objectif fondamental de l’ODF', correct: true }
-    ]
-  },
-  {
-    question: 'Objet de l’analyse clinique initiale :',
-    difficulty: 3,
-    answers: [
-      { text: 'nature et amplitude des anomalies', correct: true },
-      { text: 'recherche étiologique', correct: true },
-      { text: 'méconnaissance volontaire des limites', correct: false },
-      { text: 'diagnostic avant choix thérapeutique', correct: true }
-    ]
-  },
-  {
-    question: 'Logique décisionnelle : on traitera en priorité les anomalies…',
-    difficulty: 4,
-    answers: [
-      { text: 'portant atteinte à la croissance/aspect', correct: true },
-      { text: 'nuisibles aux fonctions', correct: true },
-      { text: 'exposant aux traumatismes', correct: true },
-      { text: 'statistiquement minoritaires', correct: false }
-    ]
-  },
-  {
-    question: '« Trois sens de l’espace » : implications :',
-    difficulty: 4,
-    answers: [
-      { text: 'orientation antéro-postérieure', correct: true },
-      { text: 'dimension transversale', correct: true },
-      { text: 'dimension verticale', correct: true },
-      { text: 'uniquement verticale', correct: false }
-    ]
-  },
-  {
-    question: 'Interdisciplinarité implicite du champ :',
-    difficulty: 4,
-    answers: [
-      { text: 'odontologie', correct: true },
-      { text: 'stomatologie', correct: true },
-      { text: 'chirurgie extra-faciale seule', correct: false },
-      { text: 'prise en compte des ATM', correct: true }
-    ]
-  },
-  {
-    question: 'Portée de la conclusion sur l’optimum individuel :',
-    difficulty: 4,
-    answers: [
-      { text: 'dimension esthétique', correct: true },
-      { text: 'dimension fonctionnelle', correct: true },
-      { text: 'standardisation universelle', correct: false },
-      { text: 'moyens biologiques/mécaniques', correct: true }
-    ]
-  },
-  {
-    question: 'Cohérence « but ↔ indication » :',
-    difficulty: 4,
-    answers: [
-      { text: 'buts justifient tri des indications', correct: true },
-      { text: 'indications fondées sur handicaps/objectifs', correct: true },
-      { text: 'moyenne statistique suffit', correct: false },
-      { text: 'diagnostic relie ces axes', correct: true }
-    ]
-  },
-  {
-    question: 'Exemples d’anomalies morphologiques citées :',
-    difficulty: 4,
-    answers: [
-      { text: 'dysharmonie dents/maxillaires', correct: true },
-      { text: 'anomalies base du crâne–maxillaires', correct: true },
-      { text: 'anomalies tissus mous', correct: true },
-      { text: 'anomalies cinétiques', correct: false }
-    ]
-  },
-  {
-    question: 'Exemples d’anomalies fonctionnelles citées :',
-    difficulty: 4,
-    answers: [
-      { text: 'déglutition', correct: true },
-      { text: 'ventilation', correct: true },
-      { text: 'phonation', correct: true },
-      { text: 'morphogenèse maxillaire', correct: false }
-    ]
-  },
-  {
-    question: 'Compléments à l’étude des anomalies orthodontiques :',
-    difficulty: 4,
-    answers: [
-      { text: 'malformations congénitales', correct: true },
-      { text: 'séquelles syndromes cranio-faciaux', correct: true },
-      { text: 'séquelles traumatismes', correct: true },
-      { text: 'anomalies dentaires isolées', correct: false }
-    ]
-  },
-  {
-    question: 'Chaîne opératoire attendue chez tout praticien :',
-    difficulty: 4,
-    answers: [
-      { text: 'constater → analyser → diagnostiquer', correct: true },
-      { text: 'connaître moyens thérapeutiques', correct: true },
-      { text: 's’abstenir de diagnostiquer', correct: false },
-      { text: 'orienter la prise en charge', correct: true }
-    ]
-  },
-  {
-    question: 'Énoncés exacts concernant les buts :',
-    difficulty: 4,
-    answers: [
-      { text: 'esthétique et estime de soi', correct: true },
-      { text: 'fonctions oro-faciales', correct: true },
-      { text: 'santé bucco-dentaire', correct: true },
-      { text: 'confort musculaire/ATM', correct: true }
-    ]
-  },
-  {
-    question: 'Lecture croisée « définition/indications/buts » :',
-    difficulty: 5,
-    answers: [
-      { text: 'définition : anomalies de forme et position', correct: true },
-      { text: 'indications : croissance, fonctions, traumatismes', correct: true },
-      { text: 'buts : esthétique, fonction, santé, confort', correct: true },
-      { text: 'conclusion : protocole unique', correct: false }
-    ]
-  },
-  {
-    question: 'Distinction historique et décision de 1978 (AAO) :',
-    difficulty: 5,
-    answers: [
-      { text: 'ODF (croissance) vs orthodontie (positions)', correct: true },
-      { text: '1978 : synonymie acceptée', correct: true },
-      { text: 'interdiction d’utiliser orthodontie', correct: false },
-      { text: 'distinction garde intérêt didactique', correct: true }
-    ]
-  },
-  {
-    question: '« On ne traite pas une anomalie pour elle-même » implique que…',
-    difficulty: 5,
-    answers: [
-      { text: 'variation ≠ indication', correct: true },
-      { text: 'indication = handicap ou risque', correct: true },
-      { text: 'facteurs caries/parodonte/ATM considérés', correct: true },
-      { text: 'absence d’impact = traitement immédiat', correct: false }
-    ]
-  },
-  {
-    question: 'Cartographie des exemples fournis :',
-    difficulty: 5,
-    answers: [
-      { text: 'anomalies dentaires', correct: true },
-      { text: 'dysharmonie dentaire–maxillaire', correct: true },
-      { text: 'relations d’arcades (3 sens)', correct: true },
-      { text: 'anomalies de sourire selon des plans anthropométriques', correct: false }
-    ]
-  },
-  {
-    question: 'Synthèse finale (statut de l’ODF/orthodontie) :',
-    difficulty: 5,
-    answers: [
-      { text: 'art scientifique', correct: true },
-      { text: 'moyens biologiques et mécaniques', correct: true },
-      { text: 'optimum individuel esthétique et fonctionnel', correct: true },
-      { text: 'absence de référence à l’ATM dans le confort', correct: false }
-    ]
-  }
-], 'Les critères d’harmonie du visage': [
-  {
-    question: 'Selon l’introduction, l’harmonie du visage résulte d’une disposition équilibrée…',
-    difficulty: 1,
-    answers: [
-      { text: 'des modelés, aplats, dépressions et proéminences', correct: false },
-      { text: 'des proportions et de la symétrie', correct: true },
-      { text: 'des mimiques et expressions uniquement', correct: false },
-      { text: 'des unités (front, nez, lèvres, menton, pommettes, joues) appréciées au repos', correct: true }
-    ]
-  },
-  {
-    question: '« Anthropométrie » signifie, d’après la définition donnée, un ensemble de techniques de mesure…',
-    difficulty: 1,
-    answers: [
-      { text: 'utilisées en anthropobiologie', correct: true },
-      { text: 'et dans le domaine de la justice', correct: true },
-      { text: 'visant à standardiser la beauté au-delà de la normalité moyenne', correct: false },
-      { text: 'où « anthropos » = homme et « métrie » = mesure/évaluation', correct: true }
-    ]
-  },
-  {
-    question: 'Parmi les points médians listés :',
-    difficulty: 1,
-    answers: [
-      { text: 'Trichion (Tri) se situe à l’intersection de la racine des cheveux', correct: false },
-      { text: 'Nasion (Na) est au niveau de la suture fronto-nasale', correct: true },
-      { text: 'Stomion (St) est la jonction des lèvres sur le plan sagittal médian', correct: true },
-      { text: 'Tragion (Tr) est explicitement un point médian', correct: false }
-    ]
-  },
-  {
-    question: 'Plans décrits :',
-    difficulty: 1,
-    answers: [
-      { text: 'Francfort : horizontal, passant par porion et infra-orbitaire', correct: false },
-      { text: 'Izard : perpendiculaire à Francfort, passant par la glabelle', correct: true },
-      { text: 'Simon : perpendiculaire à Francfort, passant par l’infra-orbitaire', correct: true },
-      { text: 'E de Ricketts : plan horizontal de la glabelle à l’ophryon', correct: false }
-    ]
-  },
-  {
-    question: 'À propos des étages du visage (de face), le texte précise que :',
-    difficulty: 1,
-    answers: [
-      { text: 'frontal (trichion → ophryon), nasal (ophryon → sous-nasal), buccal (sous-nasal → menton)', correct: true },
-      { text: 'ils doivent être égaux', correct: true },
-      { text: 'l’étage buccal se subdivise en trois niveaux sensiblement égaux', correct: true },
-      { text: 'la symétrie absolue miroir existe naturellement', correct: false }
-    ]
-  },
-  {
-    question: 'Concernant la normalité vs esthétique :',
-    difficulty: 2,
-    answers: [
-      { text: 'Atteindre la normalité est le premier but du traitement orthodontique', correct: true },
-      { text: 'La beauté est un supplément espéré', correct: true },
-      { text: 'La moyenne a un intérêt clinique prioritaire', correct: false },
-      { text: 'On peut être normal sans être beau', correct: true }
-    ]
-  },
-  {
-    question: 'De face, les plans horizontaux cités :',
-    difficulty: 2,
-    answers: [
-      { text: 'joignent pupilles, ailes du nez, commissures labiales, tragus', correct: true },
-      { text: 'sont parallèles entre eux', correct: true },
-      { text: 'sont perpendiculaires au plan sagittal médian', correct: true },
-      { text: 'croisent le plan d’Izard au menton par définition', correct: false }
-    ]
-  },
-  {
-    question: 'Profil selon Izard/Simon :',
-    difficulty: 2,
-    answers: [
-      { text: 'Orthofrontal : menton à égale distance des plans d’Izard et de Simon', correct: true },
-      { text: 'Transfrontal : menton légèrement en avant', correct: true },
-      { text: 'Cisfrontal : menton légèrement en arrière', correct: true },
-      { text: 'Orthognathe : menton en arrière du plan de Francfort selon la définition donnée', correct: false }
-    ]
-  },
-  {
-    question: 'Ligne esthétique E de Ricketts :',
-    difficulty: 2,
-    answers: [
-      { text: 'relie la pointe du nez au pogonion cutané', correct: true },
-      { text: 'sert à évaluer l’harmonie labiale du profil cutané', correct: true },
-      { text: 'profil rectiligne : lèvre sup. 1 mm en arrière de E, lèvre inf. affleure E', correct: true },
-      { text: 'profil concave : lèvres en avant de E', correct: false }
-    ]
-  },
-  {
-    question: 'Équilibre du modelé :',
-    difficulty: 2,
-    answers: [
-      { text: 'saillies et dépressions doivent être concordantes', correct: true },
-      { text: 'nez pointu accepté si lèvres/menton saillants avec sillons profonds', correct: true },
-      { text: 'nez pointu harmonieux même si bouche/menton plats', correct: false },
-      { text: 'acceptabilité dépend d’un adoucissement équilibré', correct: true }
-    ]
-  },
-  {
-    question: 'Largeur de la fente labiale (Ricketts) :',
-    difficulty: 2,
-    answers: [
-      { text: 'classée de 1 à 5 selon largeur', correct: true },
-      { text: '« 3 » : entre moitié de chaque narine et chaque plan bipupillaire', correct: true },
-      { text: 'proportions harmonieuses : commissures à mi-chemin entre ailes du nez et plans pupillaires', correct: true },
-      { text: '« 1 » = largeur supérieure au bipupillaire', correct: false }
-    ]
-  },
-  {
-    question: 'Lèvres au repos :',
-    difficulty: 2,
-    answers: [
-      { text: 'jointives et compétentes, sans tension', correct: true },
-      { text: 'lèvre sup. couvre ~70% de la surface vestibulaire de l’incisive sup.', correct: true },
-      { text: 'bord incisif sup. dépasse <3 mm du bord inférieur labial sup.', correct: true },
-      { text: 'lèvre inf. recouvre ~50% de l’incisive sup.', correct: false }
-    ]
-  },
-  {
-    question: 'Sur la forme des lèvres :',
-    difficulty: 2,
-    answers: [
-      { text: 'lèvres trop minces peuvent évoquer une sévérité', correct: true },
-      { text: 'appréciation intègre épaisseur, forme, longueur, largeur bicommissurale', correct: true },
-      { text: 'lèvres saillantes demandent chéiloplastie systématique', correct: false },
-      { text: 'lèvres saillantes demandent dépressions équilibrées', correct: true }
-    ]
-  },
-  {
-    question: 'Dents et expression :',
-    difficulty: 2,
-    answers: [
-      { text: 'incisives doivent présenter surface unie et brillante', correct: true },
-      { text: 'relation incisive–stomion visible en parole/sourire', correct: true },
-      { text: 'canines marquées = agressivité', correct: true },
-      { text: 'petites incisives latérales arrondies = féminité', correct: true }
-    ]
-  },
-  {
-    question: 'Le sourire (généralités) :',
-    difficulty: 2,
-    answers: [
-      { text: 'réunit dessin des courbes des lèvres en mouvement', correct: true },
-      { text: 'contraste des couleurs (rouge/dents)', correct: true },
-      { text: 'expression de joie', correct: true },
-      { text: 'lèvre inférieure recouvre les incisives supérieures', correct: false }
-    ]
-  },
-  {
-    question: 'Sourire — position des lèvres :',
-    difficulty: 3,
-    answers: [
-      { text: 'au sourire, bord lèvre sup. ≈ hauteur des collets des incisives sup.', correct: true },
-      { text: 'lèvre inférieure ne doit pas recouvrir les incisives supérieures', correct: true },
-      { text: 'si elle les recouvre légèrement, c’est type I', correct: false },
-      { text: 'ces critères précèdent classification de Barat', correct: true }
-    ]
-  },
-  {
-    question: 'Classification de Barat :',
-    difficulty: 3,
-    answers: [
-      { text: 'Type I : bord libre lèvre sup. au-dessus de la ligne intercommissurale', correct: true },
-      { text: 'Type II : coïncide avec la ligne intercommissurale', correct: true },
-      { text: 'Type III : au-dessous', correct: true },
-      { text: 'Type IV : à mi-distance des commissures', correct: false }
-    ]
-  },
-  {
-    question: 'Menton (caractères) :',
-    difficulty: 3,
-    answers: [
-      { text: 'relation étroite avec position du nez et des lèvres', correct: true },
-      { text: 'peut être plat, proéminent ou fuyant', correct: true },
-      { text: 'forme ovalaire ou carrée', correct: true },
-      { text: 'toujours défini comme transfrontal s’il est proéminent', correct: false }
-    ]
-  },
-  {
-    question: 'Dysharmonies buccales :',
-    difficulty: 3,
-    answers: [
-      { text: 'apparaissent quand la position harmonieuse des lèvres est rompue', correct: true },
-      { text: 'Ricketts en propose 10 types', correct: true },
-      { text: 'se limitent à la biprotrusion labiale', correct: false },
-      { text: 'peuvent traduire vieillissement (ex. birétrusion)', correct: true }
-    ]
-  },
-  {
-    question: 'Biprotrusion vs birétrusion :',
-    difficulty: 3,
-    answers: [
-      { text: 'Biprotrusion : deux lèvres en avant de E', correct: true },
-      { text: 'Birétrusion : deux lèvres en arrière de E', correct: true },
-      { text: 'Birétrusion : nez et menton paraissent plus proéminents', correct: true },
-      { text: 'Biprotrusion : nez/menton s’effacent', correct: true }
-    ]
-  },
-  {
-    question: 'Lèvres courtes / contraction labiale :',
-    difficulty: 3,
-    answers: [
-      { text: 'Lèvres courtes : dents sup. apparentes', correct: true },
-      { text: 'Contraction labiale : protrusion incisives sup. impose effort de fermeture', correct: true },
-      { text: 'Les deux décrivent le même mécanisme causal', correct: false },
-      { text: 'Les deux perturbent la compétence labiale', correct: true }
-    ]
-  },
-  {
-    question: 'Contraction du menton / sillon labio-mentonnier :',
-    difficulty: 3,
-    answers: [
-      { text: 'Contraction du menton : « peau d’orange », élévation chronique de la houppe', correct: true },
-      { text: 'Sillon labio-mentonnier : contraction plus inférieure', correct: true },
-      { text: 'Les deux confondues avec succion labiale', correct: false },
-      { text: 'Perturbations péri-orales décrites', correct: true }
-    ]
-  },
-  {
-    question: 'Succion labiale inférieure :',
-    difficulty: 3,
-    answers: [
-      { text: 'lèvre inférieure placée derrière incisives sup.', correct: true },
-      { text: 'tic de succion, lèvre inférieure disparaît presque', correct: true },
-      { text: 'entraîne nécessairement un type III de Barat', correct: false },
-      { text: 'cité par Ricketts comme un des 10 types', correct: true }
-    ]
-  },
-  {
-    question: 'Proversion sup. / Éversion inf. :',
-    difficulty: 3,
-    answers: [
-      { text: 'Proversion sup. : lèvre sup. charnue dépasse E', correct: true },
-      { text: 'lèvre inf. en bonne relation sagittale', correct: true },
-      { text: 'Éversion inf. : due à protrusion inférieure ou rétrusion sup.', correct: true },
-      { text: 'Éversion inf. : lèvre inf. peut couper le plan', correct: true }
-    ]
-  },
-  {
-    question: 'Effets thérapeutiques :',
-    difficulty: 3,
-    answers: [
-      { text: 'Résultats orthopédiques influencent proportions', correct: true },
-      { text: 'Force extra-buccale peut modifier convexité chez jeune', correct: true },
-      { text: 'Lèvres suivent recul incisif à moitié ou 2/3', correct: true },
-      { text: 'Orthodontie aligne arcades et corrige sourire gingival', correct: true }
-    ]
-  },
-  {
-    question: 'Objectifs esthétiques :',
-    difficulty: 4,
-    answers: [
-      { text: 'proportionner étages du visage et éviter disproportion', correct: true },
-      { text: 'orienter incisives sup. pour paraître droites', correct: true },
-      { text: 'ignorer physiologie mandibulaire', correct: false },
-      { text: 'viser stabilité du visage', correct: true }
-    ]
-  },
-  {
-    question: 'Normalité, moyenne, beauté :',
-    difficulty: 4,
-    answers: [
-      { text: 'On confond souvent normalité, esthétique et moyenne', correct: true },
-      { text: 'Arranger selon la moyenne n’a pas d’intérêt clinique', correct: true },
-      { text: 'On ne peut être beau si non normal', correct: true },
-      { text: 'La moyenne est objectif thérapeutique central', correct: false }
-    ]
-  },
-  {
-    question: 'Plan sagittal médian et parallélisme :',
-    difficulty: 4,
-    answers: [
-      { text: 'passe entre yeux, nez, philtrum, menton', correct: true },
-      { text: 'est rectiligne', correct: true },
-      { text: 'plans horizontaux parallèles et perpendiculaires au sagittal', correct: true },
-      { text: 'symétrie absolue naturelle', correct: false }
-    ]
-  },
-  {
-    question: 'Profils E de Ricketts :',
-    difficulty: 4,
-    answers: [
-      { text: 'Profil rectiligne : lèvre sup. ~1 mm en arrière de E', correct: true },
-      { text: 'Profil concave : lèvres en arrière de E', correct: true },
-      { text: 'Profil convexe : lèvres en avant de E', correct: true },
-      { text: 'Profil concave : lèvre sup. seule en avant', correct: false }
-    ]
-  },
-  {
-    question: 'Bouche et harmonie locale :',
-    difficulty: 4,
-    answers: [
-      { text: 'rapports équilibrés avec structures environnantes', correct: true },
-      { text: 'appréciation conjointe de largeur, longueur, épaisseur', correct: true },
-      { text: 'compétence labiale dépend aussi de dysmorphoses', correct: true },
-      { text: 'seule l’épaisseur détermine harmonie', correct: false }
-    ]
-  },
-  {
-    question: 'Incisives et visibilité :',
-    difficulty: 4,
-    answers: [
-      { text: 'surface unie/brillante', correct: true },
-      { text: 'relation incisive–stomion saillante en parole', correct: true },
-      { text: 'relation incisive–stomion maximale à bouche fermée', correct: false },
-      { text: 'canines et latérales participent à l’expression', correct: true }
-    ]
-  },
-  {
-    question: 'Sourire de Barat :',
-    difficulty: 4,
-    answers: [
-      { text: 'Type I : supra-commissural', correct: true },
-      { text: 'Type II : coïncide avec ligne intercommissurale', correct: true },
-      { text: 'Type III : infra-commissural', correct: true },
-      { text: 'Type II impose couverture incisives supérieures', correct: false }
-    ]
-  },
-  {
-    question: 'Contraction péri-orale :',
-    difficulty: 4,
-    answers: [
-      { text: 'listée comme type de dysharmonie', correct: true },
-      { text: 'explicitement détaillée', correct: false },
-      { text: 'logique de perturbations labiales', correct: true },
-      { text: 'mentionnée sans description longue', correct: true }
-    ]
-  },
-  {
-    question: 'Thérapeutique : force extra-buccale et âge :',
-    difficulty: 4,
-    answers: [
-      { text: 'modifie convexité du profil chez jeune', correct: true },
-      { text: 'gouttière permet force extra-buccale intense', correct: true },
-      { text: 'effet identique chez adulte', correct: false },
-      { text: 'retentissement sur proportions de la face', correct: true }
-    ]
-  },
-  {
-    question: 'Orthodontie et lèvres vs incisives :',
-    difficulty: 4,
-    answers: [
-      { text: 'lèvres suivent recul incisives à moitié–2/3', correct: true },
-      { text: 'corrige sourire gingival et aligne arcades', correct: true },
-      { text: 'effet neutre sur alignement', correct: false },
-      { text: 'contribue à stabilité esthétique', correct: true }
-    ]
-  },
-  {
-    question: 'Plans et relations croisées :',
-    difficulty: 5,
-    answers: [
-      { text: 'Plan d’Izard : perpendiculaire à Francfort', correct: true },
-      { text: 'Plan de Simon : perpendiculaire à Francfort par infra-orbitaire', correct: true },
-      { text: 'Ligne E : relie nez–pogonion, lecture labiale', correct: true },
-      { text: 'Plan de Francfort : vertical par définition', correct: false }
-    ]
-  },
-  {
-    question: 'Étages buccaux — répartitions :',
-    difficulty: 5,
-    answers: [
-      { text: 'Lèvre sup. : sous-nasal → stomion', correct: true },
-      { text: 'Lèvre inf. : stomion → sillon labio-mentonnier', correct: true },
-      { text: 'Menton : sillon labio-mentonnier → point menton', correct: true },
-      { text: 'répartition inégale recommandée', correct: false }
-    ]
-  },
-  {
-    question: 'Dysharmonies (précisions) :',
-    difficulty: 5,
-    answers: [
-      { text: 'Proversion sup. : lèvre sup. dépasse E', correct: true },
-      { text: 'Éversion inf. : lèvre inf. en avant, peut couper plan', correct: true },
-      { text: 'Birétrusion : vieillissement, nez/menton proéminents', correct: true },
-      { text: 'Biprotrusion : impose contraction péri-orale', correct: false }
-    ]
-  },
-  {
-    question: 'Conclusion et conduite clinique :',
-    difficulty: 5,
-    answers: [
-      { text: 'but : corriger anomalie dento-faciale et viser beauté', correct: true },
-      { text: 'refus de standardisation, individualiser', correct: true },
-      { text: 'personnalisation nécessaire', correct: true },
-      { text: 'priorité à la moyenne universelle', correct: false }
-    ]
-  },
-  {
-    question: 'Champs de l’anthropométrie et points repères :',
-    difficulty: 5,
-    answers: [
-      { text: 'Anthropométrie : mesures humaines en anthropobiologie et justice', correct: true },
-      { text: 'Points : médians/latéraux, osseux/cutanés', correct: true },
-      { text: 'Tragion : point latéral au niveau du porion', correct: true },
-      { text: 'Ophryon : point latéral', correct: false }
+    "question": "Cartilages secondaires de la mandibule :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Tous les cartilages secondaires se transforment en ligaments stylo-hyoïdiens.", "correct": false },
+      { "text": "B. Le cartilage condylien est le seul des cartilages secondaires qui persiste après la naissance.", "correct": true },
+      { "text": "C. Ils apparaissent dès la 3ème semaine de développement précoce.", "correct": false },
+      { "text": "D. Les cartilages angulaires et coracoïdiens sont transitoires et disparaissent à la naissance.", "correct": true }
     ]
   }
 ],
-  "Imagerie en orthodontie": [
-    {
-      question: "Selon l’introduction, le choix du nombre et du type de clichés doit viser prioritairement…",
-      difficulty: 1,
-      answers: [
-        { text: "la multiplication systématique des incidences pour éviter tout flou", correct: false },
-        { text: "la réduction du temps de lecture au détriment de l’irradiation", correct: false },
-        { text: "l’obtention d’un maximum de renseignements avec irradiation minimale", correct: true },
-        { text: "l’examen des seules ATM sans autres structures", correct: false }
-      ]
-    },
-    {
-      question: "Le protocole classique d’exploration radiologique en orthopédie dento-faciale comprend d’emblée…",
-      difficulty: 1,
-      answers: [
-        { text: "une imagerie sectionnelle systématique avant toute clinique", correct: false },
-        { text: "exclusivement des téléradiographies", correct: false },
-        { text: "une radiographie du poignet en première intention", correct: false },
-        { text: "une évaluation clinique, puis un bilan conventionnel, puis une imagerie sectionnelle si nécessaire", correct: true }
-      ]
-    },
-    {
-      question: "La panoramique dentaire est décrite comme…",
-      difficulty: 1,
-      answers: [
-        { text: "une technique réservée aux dents temporaires uniquement", correct: false },
-        { text: "le cliché de base de toute investigation radiologique en ODF", correct: true },
-        { text: "un examen inutile pour l’ATM", correct: false },
-        { text: "un examen sans possibilité de compléments", correct: false }
-      ]
-    },
-    {
-      question: "Parmi les avantages de la panoramique dentaire, on retrouve qu’elle…",
-      difficulty: 1,
-      answers: [
-        { text: "supprime tout besoin d’examens complémentaires antérieurs", correct: false },
-        { text: "interdit l’étude des sinus maxillaires", correct: false },
-        { text: "impose un coût élevé et une irradiation forte", correct: false },
-        { text: "autorise la comparaison bilatérale et replace le système dentaire dans son environnement", correct: true }
-      ]
-    },
-    {
-      question: "Une téléradiographie se caractérise notamment par…",
-      difficulty: 1,
-      answers: [
-        { text: "une absence d’orientation déterminée de la tête", correct: false },
-        { text: "un agrandissement volontaire des structures latérales", correct: false },
-        { text: "une distance fixe sujet-source de 1,50 à 4 m pour standardiser les clichés", correct: true },
-        { text: "un passage du rayon central par le plan de Francfort", correct: false }
-      ]
-    },
-    {
-      question: "La nécessité de prescrire des clichés complémentaires survient lorsqu’une anomalie est découverte…",
-      difficulty: 2,
-      answers: [
-        { text: "uniquement sur les clichés occlusaux", correct: false },
-        { text: "au cours de l’examen de routine", correct: true },
-        { text: "seulement chez l’adulte", correct: false },
-        { text: "jamais si la panoramique est de bonne qualité", correct: false }
-      ]
-    },
-    {
-      question: "Dans le bilan conventionnel, les clichés endo-buccaux comprennent…",
-      difficulty: 2,
-      answers: [
-        { text: "des IRM et des tomographies", correct: false },
-        { text: "des incidences axiales exclusivement", correct: false },
-        { text: "un orthopantomogramme agrandi uniquement", correct: false },
-        { text: "des rétro-alvéolaires, des bitewings et des occlusaux", correct: true }
-      ]
-    },
-    {
-      question: "La panoramique dentaire, en tant que tomographie en couche épaisse, présente souvent des flous…",
-      difficulty: 2,
-      answers: [
-        { text: "uniquement au niveau des condyles, sans impact antérieur", correct: false },
-        { text: "qui rendent toujours les mesures millimétriques très fiables", correct: false },
-        { text: "dans les secteurs antérieurs, justifiant des clichés complémentaires", correct: true },
-        { text: "que l’on corrige en diminuant la distance source-objet", correct: false }
-      ]
-    },
-    {
-      question: "Parmi les limites de la panoramique, on cite…",
-      difficulty: 2,
-      answers: [
-        { text: "la possibilité de mesurer précisément toutes les distances", correct: false },
-        { text: "la variabilité des distances film-objet et source-objet selon les régions anatomiques", correct: true },
-        { text: "l’absence de superpositions de structures", correct: false },
-        { text: "la neutralité complète vis-à-vis des inclinaisons incisives", correct: false }
-      ]
-    },
-    {
-      question: "Le cliché rétro-alvéolaire en incidence orthoradiale permet, pour des dents non encore sur l’arcade,…",
-      difficulty: 2,
-      answers: [
-        { text: "d’évaluer l’âge osseux", correct: false },
-        { text: "d’analyser la symétrie transversale des maxillaires", correct: false },
-        { text: "d’obtenir une reconstruction 3D automatique", correct: false },
-        { text: "de calculer la largeur mésio-distale du secteur exploré", correct: true }
-      ]
-    },
-    {
-      question: "Les clichés occlusaux (mordu occlusal) sont utilisés pour…",
-      difficulty: 2,
-      answers: [
-        { text: "remplacer toute téléradiographie de profil", correct: false },
-        { text: "mesurer l’âge dentaire à partir de l’ATM", correct: false },
-        { text: "localiser des dents incluses dans les trois plans de l’espace", correct: true },
-        { text: "visualiser le ménisque des ATM", correct: false }
-      ]
-    },
-    {
-      question: "Principe n°1 des téléradiographies : augmenter la distance sujet-source…",
-      difficulty: 2,
-      answers: [
-        { text: "augmente volontairement l’agrandissement latéral", correct: false },
-        { text: "réduit l’agrandissement des structures latérales jusqu’à le rendre négligeable", correct: true },
-        { text: "n’a aucun effet sur la standardisation", correct: false },
-        { text: "sert uniquement à imager les parties molles", correct: false }
-      ]
-    },
-    {
-      question: "Principe n°2 des téléradiographies : une distance constante sujet-source permet…",
-      difficulty: 2,
-      answers: [
-        { text: "d’éviter tout recours au céphalostat", correct: false },
-        { text: "d’ignorer l’orientation de la tête", correct: false },
-        { text: "d’obtenir des mesures 3D automatiques", correct: false },
-        { text: "la reproductibilité de clichés successifs et leur comparaison", correct: true }
-      ]
-    },
-    {
-      question: "En « norma lateralis », la tête est placée…",
-      difficulty: 2,
-      answers: [
-        { text: "face à la cassette, olives parallèles au rayon", correct: false },
-        { text: "en hyperflexion, rayon tangent au plan sagittal", correct: false },
-        { text: "joue gauche au contact de la cassette, rayon central passant par le centre des olives auriculaires", correct: true },
-        { text: "menton reculé, rayon passant par le plan de Francfort", correct: false }
-      ]
-    },
-    {
-      question: "L’incidence frontale (« norma frontalis ») sert surtout à…",
-      difficulty: 2,
-      answers: [
-        { text: "mesurer l’âge osseux", correct: false },
-        { text: "apprécier la symétrie des structures et les rapports transversaux des maxillaires", correct: true },
-        { text: "voir les ménisques des ATM", correct: false },
-        { text: "supprimer les superpositions mandibulaires", correct: false }
-      ]
-    },
-    {
-      question: "L’incidence axiale (« norma axialis ») implique…",
-      difficulty: 3,
-      answers: [
-        { text: "une flexion antérieure et un rayon parallèle au plan sagittal", correct: false },
-        { text: "un contact mentonnier avec la cassette", correct: false },
-        { text: "un centrage sur les sinus uniquement", correct: false },
-        { text: "une hyperextension de la tête et un rayon perpendiculaire au plan de Francfort cutané", correct: true }
-      ]
-    },
-    {
-      question: "Parmi les intérêts de l’incidence de profil en téléradiographie, on cite…",
-      difficulty: 3,
-      answers: [
-        { text: "uniquement le contrôle des appareillages amovibles", correct: false },
-        { text: "diagnostic et plan de traitement, contrôle des effets, recherches, prévisions de croissance", correct: true },
-        { text: "l’étude du ménisque de l’ATM", correct: false },
-        { text: "l’évaluation des parties molles faciales en 3D", correct: false }
-      ]
-    },
-    {
-      question: "La numérisation en odontologie concerne…",
-      difficulty: 3,
-      answers: [
-        { text: "uniquement l’impression finale des clichés argentiques", correct: false },
-        { text: "la suppression de toute acquisition radiologique", correct: false },
-        { text: "l’étape du recueil de l’image, permettant un contrôle thérapeutique immédiat avec moindre irradiation", correct: true },
-        { text: "la reconstruction systématique 3D sans capteur", correct: false }
-      ]
-    },
-    {
-      question: "La RadioVisioGraphie (RVG) est décrite comme…",
-      difficulty: 3,
-      answers: [
-        { text: "une technique analogique à développement chimique accéléré", correct: false },
-        { text: "un scanner volumique à détecteurs matriciels", correct: false },
-        { text: "une IRM dédiée aux ATM", correct: false },
-        { text: "un système d’imagerie numérique direct apparu vers 1985, remplaçant le film par un capteur en bouche", correct: true }
-      ]
-    },
-    {
-      question: "Avec la RVG, l’image…",
-      difficulty: 3,
-      answers: [
-        { text: "n’est pas stockable", correct: false },
-        { text: "apparaît sur un écran, peut être agrandie, comparée, ou tirée sur papier par imprimante", correct: true },
-        { text: "ne peut pas être comparée à d’autres", correct: false },
-        { text: "ne peut jamais être imprimée", correct: false }
-      ]
-    },
-    {
-      question: "La TDM (scanner RX) est indiquée pour…",
-      difficulty: 3,
-      answers: [
-        { text: "remplacer toute radiographie endo-buccale", correct: false },
-        { text: "visualiser précisément les parties molles", correct: false },
-        { text: "étudier plan par plan des structures complexes lorsque les techniques simples sont insuffisantes", correct: true },
-        { text: "standardiser l’orientation en céphalostat", correct: false }
-      ]
-    },
-    {
-      question: "Selon le texte, la TDM permet entre autres…",
-      difficulty: 3,
-      answers: [
-        { text: "la visualisation du ménisque de l’ATM en mouvement", correct: false },
-        { text: "la mesure de l’âge dentaire par bitewings", correct: false },
-        { text: "l’objectivation des fentes palatines uniquement", correct: false },
-        { text: "l’analyse d’inclusions dentaires complexes ou multiples et la recherche d’ankylose ou résorption", correct: true }
-      ]
-    },
-    {
-      question: "Parmi les limites de la TDM, on retrouve…",
-      difficulty: 3,
-      answers: [
-        { text: "une dose systématiquement six fois moindre que le CBCT", correct: false },
-        { text: "faible visibilité des structures de faible densité et artefacts (cinétiques, métalliques)", correct: true },
-        { text: "la parfaite visualisation des parties molles", correct: false },
-        { text: "l’absence de toute irradiation", correct: false }
-      ]
-    },
-    {
-      question: "L’IRM, en ODF, a pour principal intérêt…",
-      difficulty: 3,
-      answers: [
-        { text: "la mesure de la largeur mésio-distale des dents", correct: false },
-        { text: "la détection des ankyloses radiculaires", correct: false },
-        { text: "l’étude de la composante neuromusculaire de la sphère oro-faciale", correct: true },
-        { text: "l’évaluation des axes dentaires inclus", correct: false }
-      ]
-    },
-    {
-      question: "Le CBCT est rendu possible par…",
-      difficulty: 3,
-      answers: [
-        { text: "une plaque argentique épaisse", correct: false },
-        { text: "un balayage exclusivement plan-par-plan", correct: false },
-        { text: "la suppression des reconstructions multiplanaires", correct: false },
-        { text: "des détecteurs matriciels de grandes dimensions permettant l’exploration d’un volume en une rotation", correct: true }
-      ]
-    },
-    {
-      question: "Parmi les intérêts cliniques du CBCT, figurent explicitement…",
-      difficulty: 4,
-      answers: [
-        { text: "la visualisation du ménisque de l’ATM en dynamique", correct: false },
-        { text: "l’analyse des dents surnuméraires, des dents incluses, des résorptions ou ankyloses dentaires", correct: true },
-        { text: "l’étude détaillée des parties molles faciales", correct: false },
-        { text: "la suppression de tout artefact cinétique", correct: false }
-      ]
-    },
-    {
-      question: "Le CBCT aide aussi à…",
-      difficulty: 4,
-      answers: [
-        { text: "mesurer l’âge osseux à partir du poignet", correct: false },
-        { text: "remplacer systématiquement les clichés rétro-alvéolaires", correct: false },
-        { text: "objectiver les morphologies dentaires avant éruption et les axes des dents incluses avec leurs relations adjacentes", correct: true },
-        { text: "évaluer la composante neuromusculaire", correct: false }
-      ]
-    },
-    {
-      question: "Dans le contexte des mini-vis ou mini-plaques, le CBCT…",
-      difficulty: 4,
-      answers: [
-        { text: "remplace l’IRM pour le ménisque", correct: false },
-        { text: "interdit toute reconstitution 3D", correct: false },
-        { text: "est inutile pour les fentes palatines", correct: false },
-        { text: "sert à analyser l’anatomie osseuse lors de leur placement", correct: true }
-      ]
-    },
-    {
-      question: "Avantage dosimétrique du CBCT par rapport au scanner :",
-      difficulty: 4,
-      answers: [
-        { text: "équivalence stricte des doses", correct: false },
-        { text: "dose d’irradiation jusqu’à six fois inférieure", correct: true },
-        { text: "dose supérieure mais plus rapide", correct: false },
-        { text: "dose inconnue et non comparable", correct: false }
-      ]
-    },
-    {
-      question: "Concernant l’acquisition CBCT, le texte précise que la machine…",
-      difficulty: 4,
-      answers: [
-        { text: "impose plusieurs rotations avec rotation inverse obligatoire", correct: false },
-        { text: "ne fournit que des coupes coronales", correct: false },
-        { text: "peut acquérir un cube d’environ 13 cm de côté en une seule acquisition et autoriser des reconstitutions dans toute angulation", correct: true },
-        { text: "exige un agrandissement panoramique préalable", correct: false }
-      ]
-    },
-    {
-      question: "Parmi les limites du CBCT, on note…",
-      difficulty: 4,
-      answers: [
-        { text: "l’absence complète d’artéfacts métalliques", correct: false },
-        { text: "une impossibilité d’examiner les dents incluses", correct: false },
-        { text: "une dose toujours supérieure à la TDM", correct: false },
-        { text: "l’insuffisance de précision pour l’étude des parties molles et des artéfacts possibles (bas de gamme, cinétiques)", correct: true }
-      ]
-    },
-    {
-      question: "Différences « 3D vs traditionnelle » rapportées : l’imagerie 3D offre…",
-      difficulty: 4,
-      answers: [
-        { text: "un stockage plus complexe des films et chimies", correct: false },
-        { text: "des images plus rapides, plus faciles et plus précises, améliorant planification et résultats", correct: true },
-        { text: "une impossibilité d’envoi par courriel", correct: false },
-        { text: "une qualité similaire sans bénéfice temporel", correct: false }
-      ]
-    },
-    {
-      question: "Le bilan global « pour un faible coût et la moindre exposition au rayonnement » est cité comme…",
-      difficulty: 4,
-      answers: [
-        { text: "une limite de la téléradiographie", correct: false },
-        { text: "un inconvénient de l’IRM", correct: false },
-        { text: "un avantage de la panoramique dentaire", correct: true },
-        { text: "un défaut du CBCT", correct: false }
-      ]
-    },
-    {
-      question: "Les limites de la panoramique incluent notamment…",
-      difficulty: 4,
-      answers: [
-        { text: "absence de tout effet d’agrandissement", correct: false },
-        { text: "visualisation précise des parties molles", correct: false },
-        { text: "indépendance totale des compétences de l’opérateur et de l’observateur", correct: false },
-        { text: "impossibilité de mesures de tailles et distances et superposition de structures", correct: true }
-      ]
-    },
-    {
-      question: "Les incidences obliques mésiale ou distale en rétro-alvéolaire servent à…",
-      difficulty: 4,
-      answers: [
-        { text: "analyser la symétrie cranio-faciale globale", correct: false },
-        { text: "préciser la localisation des dents ectopiques", correct: true },
-        { text: "apprécier les fentes palatines en 3D", correct: false },
-        { text: "mesurer l’âge osseux", correct: false }
-      ]
-    },
-    {
-      question: "Associez incidence et critère positionnel exact décrits :",
-      difficulty: 5,
-      answers: [
-        { text: "« norma lateralis » : rayon passant par le plan de Francfort", correct: false },
-        { text: "« norma frontalis » : rayon principal parallèle à la ligne des olives auriculaires", correct: true },
-        { text: "« norma lateralis » : perpendiculaire au plan sagittal médian, joue gauche contre la cassette", correct: true },
-        { text: "« norma axialis » : hyperextension, rayon perpendiculaire au plan de Francfort cutané", correct: true }
-      ]
-    },
-    {
-      question: "Choisissez l’ensemble fidèle aux « principes » des téléradiographies :",
-      difficulty: 5,
-      answers: [
-        { text: "distance variable pour s’adapter au patient ; centrage sur les sinus", correct: false },
-        { text: "rapprochement systématique pour agrandir les structures latérales", correct: false },
-        { text: "distance sujet-source fixe et constante ⇒ reproductibilité ; rayon central par centre des olives auriculaires", correct: true },
-        { text: "orientation de la tête non déterminée", correct: false }
-      ]
-    },
-    {
-      question: "Cochez les affirmations exactes concernant la TDM, en croisant intérêts et limites tels qu’énoncés :",
-      difficulty: 5,
-      answers: [
-        { text: "excellente pour visualiser les canaux mandibulaires à cause de leur faible densité", correct: false },
-        { text: "utile pour foyers d’ankylose/résorption et atteintes dégénératives ou congénitales de l’ATM", correct: true },
-        { text: "visualise le ménisque de l’ATM", correct: false },
-        { text: "sujette à artéfacts cinétiques et métalliques", correct: true }
-      ]
-    },
-    {
-      question: "À propos des apports du CBCT listés, sélectionnez les propositions conformes :",
-      difficulty: 5,
-      answers: [
-        { text: "étude prioritaire de la composante neuromusculaire orofaciale", correct: false },
-        { text: "mise en évidence de résorptions radiculaires", correct: true },
-        { text: "analyse des fentes palatines ; relations des dents incluses avec structures adjacentes", correct: true },
-        { text: "précision suffisante pour les parties molles", correct: false }
-      ]
-    },
-    {
-      question: "Selon le texte sur la numérisation et la RVG, quel regroupement est exact ?",
-      difficulty: 5,
-      answers: [
-        { text: "numérisation = suppression du recueil d’image ; RVG = film argentique", correct: false },
-        { text: "RVG = détecteur matriciel volumique à rotation unique", correct: false },
-        { text: "grâce à Francis Mouyen, l’image numérisée entre au cabinet avec moindre irradiation et contrôle immédiat ; RVG = capteur en bouche, image agrandissable et imprimable", correct: true },
-        { text: "contrôle thérapeutique différé, irradiation accrue", correct: false }
-      ]
-    }
-  ],
-  "EMD 1 2024": [
-    {
-      "question": "1- la lèvre supérieure :",
-      "answers": [
-        { "text": "couvre environ 30% de la surface vestibulaire des incisives supérieures", "correct": false },
-        { "text": "couvre environ 70% de la surface vestibulaire des incisives inférieures", "correct": false },
-        { "text": "sa longueur est le 1/3 de l'étage inférieur de visage", "correct": true },
-        { "text": "au repos elle doit être contracter.", "correct": false }
-      ]
-    },
-    {
-      "question": "2- La biscrusion labiale est une :",
-      "answers": [
-        { "text": "Départemental base de dent à la force de la ligne « E » est héritique de Ricketts", "correct": true },
-        { "text": "La lèvre supérieure en avant et la lèvre inférieure en arrière de la ligne « E » est héritique de Ricketts", "correct": false },
-        { "text": "Départemental base de dent à la force de la ligne « E » est héritique de Ricketts", "correct": false },
-        { "text": "La lèvre supérieure en arrière et la lèvre inférieure en avant de la ligne « E » est héritique de Ricketts.", "correct": false }
-      ]
-    },
-    {
-      "question": "3- Les objectifs esthétiques du traitement :",
-      "answers": [
-        { "text": "proportionner les étages de la face", "correct": true },
-        { "text": "diminuer l'étage nasal", "correct": false },
-        { "text": "finir avec un profil type cérémonial", "correct": false },
-        { "text": "toutes les réponses fausses.", "correct": false }
-      ]
-    },
-    {
-      "question": "4- la ventilation nasale nécessite :",
-      "answers": [
-        { "text": "Le filme passage de l'air par les fosses nasales", "correct": true },
-        { "text": "La position haute et postérieure de la langue", "correct": false },
-        { "text": "La contraction visible des lèvres", "correct": false },
-        { "text": "La présence de contact entre la langue et les molaires", "correct": false }
-      ]
-    },
-    {
-      "question": "5- la déglutition primaire ou infantile",
-      "answers": [
-        { "text": "Est physiologique chez l'adulte", "correct": false },
-        { "text": "Est physiologique chez l'animal", "correct": false },
-        { "text": "Toujours associer à une respiration basculée", "correct": false },
-        { "text": "Toutes les réponses sont fausses.", "correct": true }
-      ]
-    },
-    {
-      "question": "6- la mastication physiologique est :",
-      "answers": [
-        { "text": "Unilatérale", "correct": false },
-        { "text": "Bilatérale alternée", "correct": false },
-        { "text": "unilatérale alternée", "correct": true },
-        { "text": "Bilatérale", "correct": false }
-      ]
-    },
-    {
-      "question": "7- le cycle masticatoire :",
-      "answers": [
-        { "text": "Est plus court quand l’aliment est dur", "correct": false },
-        { "text": "A une forme ellipsoïde dans le plan frontal", "correct": true },
-        { "text": "Peut durer une minute en moyenne", "correct": false },
-        { "text": "De forme atypique dans le plan sagittal.", "correct": false }
-      ]
-    },
-    {
-      "question": "8- La radiographie panoramique :",
-      "answers": [
-        { "text": "Permet de réaliser des mensurations précises.", "correct": false },
-        { "text": "C’est un cliché de débrouillage prescrit en deuxième intention.", "correct": false },
-        { "text": "C’est une image d’une couche fine.", "correct": false },
-        { "text": "Donne une image bidimensionnelle.", "correct": true }
-      ]
-    },
-    {
-      "question": "9- Le bilan dentaire en orthodontie nécessite :",
-      "answers": [
-        { "text": "Le scanner", "correct": false },
-        { "text": "La téléradiographie", "correct": false },
-        { "text": "La radio du poignet", "correct": false },
-        { "text": "La radio panoramique", "correct": true }
-      ]
-    },
-    {
-      "question": "10- La téléradiographie de profil présente un grand intérêt pour :",
-      "answers": [
-        { "text": "L’analyse des anomalies transversales", "correct": false },
-        { "text": "La localisation des dents incluses", "correct": false },
-        { "text": "Le contrôle des effets d’un traitement et prévision de la croissance", "correct": true },
-        { "text": "Toutes les réponses sont justes", "correct": false }
-      ]
-    },
-    {
-      "question": "11- La contrainte :",
-      "answers": [
-        { "text": "c’est le nombre des millimètres d’allongement par millimètre de longueur", "correct": false },
-        { "text": "c’est une réaction interne à une force externe", "correct": true },
-        { "text": "c’est une réaction externe à une force externe", "correct": false },
-        { "text": "c’est une déformation élastique", "correct": false }
-      ]
-    },
-    {
-      "question": "12- La limite élastique des fils :",
-      "answers": [
-        { "text": "Représente la rigidité des matériaux", "correct": false },
-        { "text": "C’est un des paramètres de la déformation permanente.", "correct": false },
-        { "text": "Sa valeur est constante", "correct": false },
-        { "text": "Toutes les réponses sont fausses", "correct": true }
-      ]
-    },
-    {
-      "question": "13- La résilience :",
-      "answers": [
-        { "text": "C’est la capacité d’un alliage à être transformé en fil", "correct": false },
-        { "text": "C’est la résistance à la rupture", "correct": true },
-        { "text": "Ne change pas avec le traitement mécanique et thermique", "correct": false },
-        { "text": "Elle exprime la malléabilité", "correct": false }
-      ]
-    },
-    {
-      "question": "14- L'acier inoxydable :",
-      "answers": [
-        { "text": "Un fil à base de fer et chrome", "correct": false },
-        { "text": "Un fil à base de fer et de cobalt", "correct": false },
-        { "text": "Rigide", "correct": true },
-        { "text": "Très résilient", "correct": false }
-      ]
-    },
-    {
-      "question": "15- Les attaches orthodontiques :",
-      "answers": [
-        { "text": "Sont généralement fabriquées en acier inoxydable ou en nickel titane", "correct": false },
-        { "text": "Composées d’une gorge-base – des plots", "correct": true },
-        { "text": "Composées d’une lumière horizontale – crochet – tube", "correct": false },
-        { "text": "Composées d’une gorge-bague – des plots", "correct": false }
-      ]
-    },
-    {
-      "question": "16- L'acide fluorhydrique :",
-      "answers": [
-        { "text": "Est l’agent de préparation le plus répandu en ODF", "correct": false },
-        { "text": "Son action consiste à déménager les surfaces de l’émail", "correct": false },
-        { "text": "Sa concentration est de 10% appliqué pendant 5 minutes", "correct": false },
-        { "text": "Utilisé pour le mordançage des surfaces céramique avant le collage", "correct": true }
-      ]
-    },
-    {
-      "question": "17- Les forces extra-buccales ou extra-orales :",
-      "answers": [
-        { "text": "Sont utilisées uniquement pour l’ancrage", "correct": false },
-        { "text": "Leur appui est toujours cervical", "correct": false },
-        { "text": "Leur direction d’action est antéro-postérieure", "correct": false },
-        { "text": "Toutes les réponses sont fausses", "correct": true }
-      ]
-    },
-    {
-      "question": "18- Pedgewise étymologiquement veut dire :",
-      "answers": [
-        { "text": "Adapter les dents supérieures et inférieures", "correct": false },
-        { "text": "Insérer le fil par le petit côté", "correct": true },
-        { "text": "Coller les brackets sur toutes les dents", "correct": false },
-        { "text": "Utiliser des arcs sectionnels", "correct": false }
-      ]
-    },
-    {
-      "question": "19- La période « pré-opératoire » chez l’enfant :",
-      "answers": [
-        { "text": "Se caractérise par un vocabulaire très limité et l’enfant n’est pas apte à la réflexion", "correct": false },
-        { "text": "Cette période dure jusqu’à l’âge de 5 ans", "correct": false },
-        { "text": "Le praticien peut communiquer avec l’enfant et lui donner des instructions simples", "correct": true },
-        { "text": "L’enfant à cette période peut commencer à faire preuve de logique", "correct": false }
-      ]
-    },
-    {
-      "question": "20- Lors de la consultation du jeune patient « enfant » le praticien doit respecter certains impératifs :",
-      "answers": [
-        { "text": "Programmez la consultation en fin de journée", "correct": false },
-        { "text": "Le praticien consulte l’enfant sans la présence des parents", "correct": false },
-        { "text": "Elle passe par trois temps : l’écoute – l’objectivisation – la personnalisation", "correct": true },
-        { "text": "Toutes les réponses sont fausses", "correct": false }
-      ]
-    }
-  ],
+
+'2.phénomenes de croissace':[
+  {
+    "question": "Concernant les notions fondamentales de croissance et maturation :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La maturation se mesure uniquement par l'augmentation de la taille en cm/an.", "correct": false },
+      { "text": "B. La maturation est un phénomène qualitatif lié à la différenciation et à l'accès à la fonction.", "correct": true },
+      { "text": "C. La croissance est un phénomène régulier et linéaire tout au long de la vie.", "correct": false },
+      { "text": "D. La croissance est un processus biologique quantitatif impliquant une augmentation de volume et de poids.", "correct": true }
+    ]
+  },
+  {
+    "question": "À propos de la courbe de croissance staturale de Bjork :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La croissance s'annule totalement vers 12 ans chez les garçons.", "correct": false },
+      { "text": "B. La période juvénile (ou grande enfance) présente une pente de courbe très faible.", "correct": true },
+      { "text": "C. Le pic pubertaire survient en moyenne à 14 ans chez les filles.", "correct": false },
+      { "text": "D. La période infantile se caractérise par un taux de croissance très élevé de la naissance à 6 mois.", "correct": true }
+    ]
+  },
+  {
+    "question": "Sur l'estimation de la croissance faciale :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'âge civil suffit à lui seul pour déterminer précisément le potentiel de croissance restant.", "correct": false },
+      { "text": "B. Les variations de la taille de l'individu et des maxillaires sont globalement synchrones.", "correct": true },
+      { "text": "C. La courbe de Bjork permet de suivre la croissance faciale sans tenir compte de la croissance staturale.", "correct": false },
+      { "text": "D. L'âge biologique est un repère plus fiable que l'âge civil pour situer un sujet sur la courbe de croissance.", "correct": true }
+    ]
+  },
+  {
+    "question": "Concernant l'âge pubertaire et l'âge dentaire :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'apparition des premières règles survient environ 17 mois après le pic de croissance.", "correct": true },
+      { "text": "B. L'âge pubertaire est le meilleur repère car il se situe systématiquement avant le pic de croissance.", "correct": false },
+      { "text": "C. L'âge dentaire est facultatif dans l'évaluation du développement du massif facial.", "correct": false },
+      { "text": "D. L'âge dentaire correspond au stade d'évolution de la denture à un moment donné du développement.", "correct": true }
+    ]
+  },
+  {
+    "question": "À propos de la radiographie du poignet et de la main (Maturation osseuse) :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le stade 'union' (U) marque la soudure entre la diaphyse et l'épiphyse.", "correct": true },
+      { "text": "B. Le stade 'capsulaire' (cap) se définit par une épiphyse qui déborde la diaphyse.", "correct": true },
+      { "text": "C. L'étude de la main est limitée aux sujets âgés de 5 à 8 ans.", "correct": false },
+      { "text": "D. Le stade 'lenticulaire' (=) indique que l'épiphyse est plus étroite que la diaphyse.", "correct": false }
+    ]
+  },
+  {
+    "question": "Chronologie de maturation phalangienne avant le pic pubertaire :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le stade S (sésamoïde) coïncide exactement avec le pic pubertaire.", "correct": false },
+      { "text": "B. Le stade PP2 = apparaît environ deux ans avant le pic de croissance pubertaire.", "correct": true },
+      { "text": "C. Le stade PP1 cap apparaît 2 ans avant le pic.", "correct": false },
+      { "text": "D. Le stade MP3 = se situe environ un an avant le pic de croissance.", "correct": true }
+    ]
+  },
+  {
+    "question": "Concernant l'apparition de l'os sésamoïde (Stade S) :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Il apparaît en moyenne 9 mois avant le pic chez les filles et 12 mois avant chez les garçons.", "correct": true },
+      { "text": "B. Son apparition marque la fin de la période de croissance active.", "correct": false },
+      { "text": "C. Il est visible sur la phalange distale du 5ème doigt.", "correct": false },
+      { "text": "D. Il se situe au regard de la face interne de la diaphyse de la 1ère phalange du pouce.", "correct": true }
+    ]
+  },
+  {
+    "question": "Sur les stades de maturation après le pic pubertaire :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le stade MP3 cap apparaît environ un an après le pic de croissance.", "correct": true },
+      { "text": "B. Le stade DP3 u survient un à deux ans après le pic de croissance.", "correct": true },
+      { "text": "C. MP3 u est le premier signe du pic de croissance.", "correct": false },
+      { "text": "D. Le stade PP3 u marque le début du pic pubertaire.", "correct": false }
+    ]
+  },
+  {
+    "question": "À propos de l'ossification membraneuse :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Ce mode d'ossification donne naissance aux os de la voûte du crâne et de la face.", "correct": true },
+      { "text": "B. L'ossification membraneuse concerne principalement les os des membres et du squelette axial.", "correct": false },
+      { "text": "C. L'os se forme directement à partir d'un blastème mésenchymateux sans maquette cartilagineuse.", "correct": true },
+      { "text": "D. Elle débute par la formation de cartilage hyalin qui se minéralise.", "correct": false }
+    ]
+  },
+  {
+    "question": "Caractéristiques de l'ossification enchondrale :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Elle donne naissance aux os de la base du crâne et au squelette axial.", "correct": true },
+      { "text": "B. Elle ne concerne jamais la mandibule.", "correct": false },
+      { "text": "C. Elle est caractérisée par une croissance uniquement appositionnelle.", "correct": false },
+      { "text": "D. Elle s'effectue par substitution d'une maquette cartilagineuse provenant du blastème.", "correct": true }
+    ]
+  },
+  {
+    "question": "Concernant la croissance suturale (Syndesmoses) :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Elles sont constituées de cartilage hyalin à double action.", "correct": false },
+      { "text": "B. Elles assurent uniquement l'union des os sans rôle physiologique dans la croissance.", "correct": false },
+      { "text": "C. Elles n'ont pas de potentiel de croissance propre et nécessitent des stimulateurs (tensions).", "correct": true },
+      { "text": "D. Les syndesmoses sont des reliquats de la lame conjonctive primaire.", "correct": true }
+    ]
+  },
+  {
+    "question": "À propos des synchondroses :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Elles disparaissent totalement à la naissance.", "correct": false },
+      { "text": "B. Elles agissent comme des épiphyses à double action avec une croissance bilatérale.", "correct": true },
+      { "text": "C. Elles se situent entre les os d'origine enchondrale où persiste une ébauche de cartilage.", "correct": true },
+      { "text": "D. Elles ont un pouvoir adaptatif passif soumis uniquement aux tensions musculaires.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le mécanisme de croissance remodelante :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. C'est un phénomène qui ne concerne que la période néonatale.", "correct": false },
+      { "text": "B. Il sert uniquement à augmenter le volume sans maintenir la forme de l'os.", "correct": false },
+      { "text": "C. Ce processus permet à la fois la croissance et le déplacement de la pièce osseuse.", "correct": true },
+      { "text": "D. Il combine l'apposition d'os nouveau et la résorption d'os ancien sur la face opposée.", "correct": true }
+    ]
+  },
+  {
+    "question": "Facteurs endocriniens influençant la croissance (Intrinsèques) :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'hypophyse est la seule glande impliquée dans la croissance osseuse.", "correct": false },
+      { "text": "B. Les hormones thyroïdiennes agissent en synergie avec la STH pour augmenter son action.", "correct": true },
+      { "text": "C. Les hormones sexuelles stimulent indéfiniment la croissance en longueur.", "correct": false },
+      { "text": "D. La somathormone (STH) active la croissance par voie indirecte.", "correct": true }
+    ]
+  },
+  {
+    "question": "Influence des facteurs nutritionnels et socio-économiques :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Sur le plan qualitatif, le facteur protéique est déterminant pour la croissance.", "correct": true },
+      { "text": "B. Les vitamines A et D n'ont aucun impact sur l'ostéogenèse.", "correct": false },
+      { "text": "C. L'influence socio-économique est aujourd'hui le facteur prédominant dans les sociétés occidentales.", "correct": false },
+      { "text": "D. Une sous-alimentation peut retarder la croissance tandis qu'une suralimentation peut l'accélérer.", "correct": true }
+    ]
+  },
+  {
+    "question": "Impact des facteurs affectifs sur la croissance :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le retard de croissance lié à l'affect est irréversible même en changeant de climat.", "correct": false },
+      { "text": "B. Une carence maternelle peut entraîner des arrêts de croissance par diminution de la STH.", "correct": true },
+      { "text": "C. Il existe un mécanisme psycho-neuro-endocrinien reliant l'équilibre affectif à la croissance.", "correct": true },
+      { "text": "D. Les troubles affectifs n'ont aucune répercussion sur les fonctions de la sphère buccale.", "correct": false }
+    ]
+  },
+  {
+    "question": "Facteurs locaux et croissance faciale :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le périoste possède une couche profonde ostéogénique et une capacité résorptive.", "correct": true },
+      { "text": "B. Les os de la face ne sont influencés que par des messages génétiques intrinsèques.", "correct": false },
+      { "text": "C. L'activité musculaire intervient de façon prépondérante sur la morphogénèse osseuse.", "correct": true },
+      { "text": "D. Le rapport périoste-muscle est secondaire dans la croissance faciale.", "correct": false }
+    ]
+  },
+  {
+    "question": "Intérêt de l'étude de la croissance en ODF :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Déterminer le moment propice pour utiliser ou éliminer la croissance durant le traitement.", "correct": true },
+      { "text": "B. La croissance n'influence que l'étiologie mais pas le choix thérapeutique.", "correct": false },
+      { "text": "C. Ignorer la croissance pour se concentrer uniquement sur l'appareillage multi-attaches.", "correct": false },
+      { "text": "D. Établir un pronostic fiable sur la réussite du traitement et la stabilité (contention).", "correct": true }
+    ]
+  },
+  {
+    "question": "Particularités de l'ossification mandibulaire :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Sa croissance est totalement indépendante du rythme de la croissance staturale.", "correct": false },
+      { "text": "B. Elle suit un mode d'ossification purement enchondral primaire comme le fémur.", "correct": false },
+      { "text": "C. Elle se distingue par l'apparition ultérieure de cartilages secondaires.", "correct": true },
+      { "text": "D. La mandibule est initialement un os de membrane.", "correct": true }
+    ]
+  },
+  {
+    "question": "Résumé des mécanismes d'ossification :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Les synchondroses sont des sutures membraneuses séparant les os de la voûte.", "correct": false },
+      { "text": "B. L'ossification enchondrale transforme le cartilage hyalin en tissu osseux lamellaire compact.", "correct": true },
+      { "text": "C. Les os de substitution sont issus de l'ossification membraneuse.", "correct": false },
+      { "text": "D. L'ossification membraneuse forme l'os à partir d'un centre primaire en 'tache d'huile'.", "correct": true }
+    ]
+  }
+],
+
+'3.Croissance du maxillaire supérieur':
+[
+  {
+    "question": "À propos du développement embryonnaire du maxillaire supérieur :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Les points d'ossification apparaissent à l'intérieur de la capsule nasale.", "correct": false },
+      { "text": "B. Il prend naissance à partir de deux zones d'ossification apparaissant au 2ème mois intra-utérin.", "correct": true },
+      { "text": "C. Son origine est principalement cartilagineuse (enchondrale).", "correct": false },
+      { "text": "D. C'est un os de nature exclusivement membraneuse.", "correct": true }
+    ]
+  },
+  {
+    "question": "Le centre d'ossification prémaxillaire (Point A) donne naissance à :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'apophyse malaire.", "correct": false },
+      { "text": "B. Les procès alvéolaires de la région incisive.", "correct": true },
+      { "text": "C. Le plancher de l'orbite.", "correct": false },
+      { "text": "D. L'épine nasale antérieure.", "correct": true }
+    ]
+  },
+  {
+    "question": "Concernant le centre post-maxillaire (Point B) :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Il donne naissance aux procès alvéolaires de la région incisive.", "correct": false },
+      { "text": "B. Il est situé initialement au-dessous de l'orbite.", "correct": true },
+      { "text": "C. Il fusionne avec le point A au 5ème mois de la vie intra-utérine.", "correct": true },
+      { "text": "D. Il participe à la formation de la partie postérieure de la branche montante.", "correct": false }
+    ]
+  },
+  {
+    "question": "La soudure des deux centres d'ossification (A et B) se caractérise par :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La formation de la suture incisivo-canine comme zone de jonction.", "correct": true },
+      { "text": "B. Une fusion tardive survenant uniquement après la naissance.", "correct": false },
+      { "text": "C. Une séparation totale maintenue par le cartilage de Meckel.", "correct": false },
+      { "text": "D. La persistance des deux canaux incisifs s'ouvrant dans la fossette du même nom.", "correct": true }
+    ]
+  },
+  {
+    "question": "L'accroissement en largeur du maxillaire est assuré par :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'action de la suture maxillo-malaire.", "correct": true },
+      { "text": "B. L'activité de la suture médio-palatine (inter-maxillaire et inter-palatine).", "correct": true },
+      { "text": "C. Une résorption osseuse systématique au niveau des tubérosités.", "correct": false },
+      { "text": "D. L'activité exclusive de la suture fronto-nasale.", "correct": false }
+    ]
+  },
+  {
+    "question": "Concernant l'aspect clinique de la suture inter-palatine :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Elle devient totalement inactive dès l'âge de 5 ans.", "correct": false },
+      { "text": "B. Elle n'est pas synostosée avant l'âge adulte.", "correct": true },
+      { "text": "C. Sa fermeture précoce est la règle chez l'enfant de 6 ans.", "correct": false },
+      { "text": "D. Elle permet une action orthopédique pour l'élargissement du palais.", "correct": true }
+    ]
+  },
+  {
+    "question": "Le remodelage osseux en largeur se traduit par :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Un élargissement postérieur du palais par allongement divergent de l'arcade.", "correct": true },
+      { "text": "B. Une résorption massive sur toutes les faces externes du maxillaire.", "correct": false },
+      { "text": "C. Une convergence des arcades dentaires vers l'avant.", "correct": false },
+      { "text": "D. Une apposition osseuse au niveau des tubérosités lors de l'éruption des molaires.", "correct": true }
+    ]
+  },
+  {
+    "question": "Les sutures participant à la croissance verticale et antéro-postérieure incluent :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La suture ptérygo-palatine.", "correct": true },
+      { "text": "B. La suture fronto-maxillaire.", "correct": true },
+      { "text": "C. La symphyse mentonnière.", "correct": false },
+      { "text": "D. La suture inter-nasale uniquement.", "correct": false }
+    ]
+  },
+  {
+    "question": "À propos de la suture maxillo-palatine (palatine transverse) :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Chez l'adulte, sa position correspond à la 2ème molaire permanente.", "correct": true },
+      { "text": "B. Elle reste fixe durant toute la croissance par rapport aux dents.", "correct": false },
+      { "text": "C. À la naissance, elle se situe au niveau des germes des 2ème molaires temporaires.", "correct": true },
+      { "text": "D. Elle disparaît totalement avant l'âge de 2 ans.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le mécanisme de 'descente du palais' implique :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Une apposition osseuse sur la face inférieure (buccale) du palais.", "correct": true },
+      { "text": "B. Une résorption sur la face buccale pour creuser la voûte.", "correct": false },
+      { "text": "C. Une apposition sur la face nasale pour augmenter l'épaisseur.", "correct": false },
+      { "text": "D. Une résorption osseuse sur la face supérieure (nasale) du palais.", "correct": true }
+    ]
+  },
+  {
+    "question": "La croissance remodelante verticale du maxillaire dépend de :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La résorption systématique de l'épine nasale antérieure.", "correct": false },
+      { "text": "B. L'atrophie des procès alvéolaires après l'éruption dentaire.", "correct": false },
+      { "text": "C. L'apposition osseuse sur les faces interne et inférieure en région antérieure.", "correct": true },
+      { "text": "D. La croissance des procès alvéolaires, particulièrement importante.", "correct": true }
+    ]
+  },
+  {
+    "question": "Dans le sens antéro-postérieur, le remodelage alvéolaire antérieur montre :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Une stabilité totale sans aucun mouvement osseux.", "correct": false },
+      { "text": "B. Une apposition dans les parties inférieure et palatine.", "correct": true },
+      { "text": "C. Une résorption dans la partie antérieure.", "correct": true },
+      { "text": "D. Une apposition massive sur la face labiale des incisives.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le rôle de la tubérosité maxillaire dans la croissance est :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. De bloquer la croissance du sinus maxillaire.", "correct": false },
+      { "text": "B. De réduire la longueur de l'arcade dentaire.", "correct": false },
+      { "text": "C. De repousser le maxillaire vers l'avant par réaction.", "correct": true },
+      { "text": "D. De s'accroître vers l'arrière contre l'apophyse ptérygoïde.", "correct": true }
+    ]
+  },
+  {
+    "question": "Le sinus maxillaire évolue durant la croissance :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Par un processus de comblement osseux progressif.", "correct": false },
+      { "text": "B. Sous l'influence de la croissance verticale et des phénomènes de dentition.", "correct": true },
+      { "text": "C. En restant de taille constante de la naissance à l'âge adulte.", "correct": false },
+      { "text": "D. D'une forme ovoïde initiale vers une forme pyramidale définitive.", "correct": true }
+    ]
+  },
+  {
+    "question": "Concernant la croissance des os malaires (zygomatiques) :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Ils subissent une apposition sur leur face externe.", "correct": true },
+      { "text": "B. Ils se développent exclusivement à partir du cartilage de la cloison.", "correct": false },
+      { "text": "C. Ils présentent une résorption sur leur face externe pour affiner la joue.", "correct": false },
+      { "text": "D. Ils sont d'origine membraneuse.", "correct": true }
+    ]
+  },
+  {
+    "question": "La croissance des cavités orbitaires se caractérise par :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Une stabilité dimensionnelle dès la naissance.", "correct": false },
+      { "text": "B. Une augmentation de hauteur liée aux sutures fronto-maxillaire et fronto-malaire.", "correct": true },
+      { "text": "C. Une croissance presque terminée vers l'âge de 5 ans.", "correct": true },
+      { "text": "D. Une croissance continue et rapide jusqu'à 25 ans.", "correct": false }
+    ]
+  },
+  {
+    "question": "Au niveau du plancher de l'orbite :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'apposition au niveau du plancher s'oppose à la descente du côté interne.", "correct": true },
+      { "text": "B. La paroi interne subit une résorption pour déplacer l'orbite vers le milieu.", "correct": false },
+      { "text": "C. La partie externe devient plus basse que la partie interne.", "correct": true },
+      { "text": "D. Le plancher s'élève globalement pour réduire le volume orbitaire.", "correct": false }
+    ]
+  },
+  {
+    "question": "La croissance des os nasaux (propres du nez) :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Débute au 3ème mois à partir de points d'ossification membraneux.", "correct": true },
+      { "text": "B. Est indépendante du développement de la capsule nasale.", "correct": false },
+      { "text": "C. S'arrête totalement dans toutes ses parties dès l'âge de 5 ans.", "correct": false },
+      { "text": "D. Est influencée par le septum nasal cartilagineux qui les déplace vers l'avant.", "correct": true }
+    ]
+  },
+  {
+    "question": "Après l'âge de 10 ans, la région nasale évolue ainsi :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La partie supérieure s'élargit de façon prédominante par rapport à la base.", "correct": false },
+      { "text": "B. Toute la pyramide nasale cesse définitivement sa croissance.", "correct": false },
+      { "text": "C. La partie inférieure continue de se développer transversalement et verticalement.", "correct": true },
+      { "text": "D. La partie supérieure (entre les orbites) ne s'accroît plus.", "correct": true }
+    ]
+  },
+  {
+    "question": "Le septum nasal cartilagineux joue un rôle car :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Il freine la croissance du maxillaire supérieur vers l'avant.", "correct": false },
+      { "text": "B. Il est responsable du positionnement plus antérieur du nez en fin de croissance.", "correct": true },
+      { "text": "C. Il s'ossifie complètement dès le deuxième mois de la vie intra-utérine.", "correct": false },
+      { "text": "D. Il entraîne le déplacement vers l'avant des os propres du nez.", "correct": true }
+    ]
+  }
+],
+
+'5.Croissance de la mandibule':
+[
+  {
+    "question": "Concernant l'origine embryologique de la mandibule :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Elle est issue du bourgeon mandibulaire, partie inférieure du premier arc branchial.", "correct": true },
+      { "text": "B. Son ossification nécessite impérativement le cartilage de Meckel comme tuteur.", "correct": true },
+      { "text": "C. Le cartilage de Meckel agit comme un inducteur direct de la croissance osseuse.", "correct": false },
+      { "text": "D. Elle dérive exclusivement du deuxième arc branchial.", "correct": false }
+    ]
+  },
+  {
+    "question": "Sur le mode d'ossification mandibulaire, on peut affirmer que :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. C'est un os de membrane car une partie dérive directement du tissu conjonctif.", "correct": true },
+      { "text": "B. C'est un os de substitution car certaines zones proviennent de cartilages secondaires.", "correct": true },
+      { "text": "C. L'ossification est uniquement de type enchondrale dès le début du développement.", "correct": false },
+      { "text": "D. La branche horizontale se forme uniquement par remplacement d'un modèle cartilagineux.", "correct": false }
+    ]
+  },
+  {
+    "question": "À propos du premier noyau osseux mandibulaire :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Il apparaît vers le 40ème jour de la vie intra-utérine.", "correct": true },
+      { "text": "B. Il se situe initialement au voisinage du futur trou mentonnier.", "correct": true },
+      { "text": "C. Il apparaît au centre du cartilage de Meckel par ossification directe.", "correct": false },
+      { "text": "D. Il se forme à la fin du deuxième trimestre de grossesse.", "correct": false }
+    ]
+  },
+  {
+    "question": "Concernant les cartilages secondaires de la mandibule :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Ils apparaissent vers le 3ème ou 4ème mois de la vie intra-utérine.", "correct": true },
+      { "text": "B. Les cartilages angulaire et coronoïdien disparaissent avant la naissance.", "correct": true },
+      { "text": "C. Le cartilage condylien est le premier à disparaître après la naissance.", "correct": false },
+      { "text": "D. Ils sont tous issus d'un prolongement direct du cartilage de Meckel.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le cartilage condylien se caractérise par :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Sa persistance après la naissance, contrairement aux autres cartilages secondaires.", "correct": true },
+      { "text": "B. Son rôle de centre de croissance le plus important pour la mandibule.", "correct": true },
+      { "text": "C. Une forme de disque plat situé au-dessus de l'épine de Spix.", "correct": false },
+      { "text": "D. Une croissance qui s'effectue exclusivement vers le bas et l'arrière.", "correct": false }
+    ]
+  },
+  {
+    "question": "Les mécanismes de croissance post-natale incluent :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La croissance suturale au niveau de la symphyse mentonnière.", "correct": true },
+      { "text": "B. Le remodelage périosté combinant apposition et résorption osseuse.", "correct": true },
+      { "text": "C. La croissance cartilagineuse au niveau de l'apophyse coronoïde.", "correct": false },
+      { "text": "D. Une activité de la synchondrose symphysaire qui persiste jusqu'à l'adolescence.", "correct": false }
+    ]
+  },
+  {
+    "question": "À propos de la croissance en largeur de la mandibule :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Elle dépend de la synchondrose symphysaire durant les premiers mois de vie.", "correct": true },
+      { "text": "B. Elle résulte de l'allongement vertical et postérieur plaçant les condyles en dehors.", "correct": true },
+      { "text": "C. Elle est principalement due à une apposition osseuse sur la face interne du ramus.", "correct": false },
+      { "text": "D. Elle s'arrête brutalement dès la naissance du nourrisson.", "correct": false }
+    ]
+  },
+  {
+    "question": "La croissance en hauteur de la mandibule est assurée par :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'activité du cartilage condylien.", "correct": true },
+      { "text": "B. Le développement du bord supérieur des procès alvéolaires.", "correct": true },
+      { "text": "C. La résorption continue du bord inférieur de la mandibule.", "correct": false },
+      { "text": "D. L'ossification membraneuse exclusive de la région mentonnière.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le remodelage de la branche montante (ramus) implique :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Une résorption de son bord antérieur pour libérer de l'espace dentaire.", "correct": true },
+      { "text": "B. Une apposition sur son bord postérieur grâce au périoste.", "correct": true },
+      { "text": "C. Une apposition sur le bord antérieur pour renforcer la structure osseuse.", "correct": false },
+      { "text": "D. Une résorption postérieure permettant l'avancée globale de la face.", "correct": false }
+    ]
+  },
+  {
+    "question": "Selon Bjork, les taux de croissance condylienne sont de :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. 3 mm par an durant la période juvénile.", "correct": true },
+      { "text": "B. 5,5 mm par an durant la période pubertaire.", "correct": true },
+      { "text": "C. 10 mm par an en moyenne durant toute la croissance.", "correct": false },
+      { "text": "D. Une croissance nulle vers l'arrière et l'extérieur.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le col du condyle subit un remodelage spécifique par :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Résorption de sa face interne.", "correct": true },
+      { "text": "B. Apposition d'os nouveau sur sa face externe.", "correct": true },
+      { "text": "C. Apposition sur toutes ses faces pour augmenter son diamètre global.", "correct": false },
+      { "text": "D. Un mécanisme purement cartilagineux sans intervention périostée.", "correct": false }
+    ]
+  },
+  {
+    "question": "L'apophyse coronoïde se développe :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Sous l'influence de la traction du muscle temporal.", "correct": true },
+      { "text": "B. Par apposition sur sa face interne et résorption sur sa face externe.", "correct": true },
+      { "text": "C. Indépendamment de toute fonction masticatoire dès la naissance.", "correct": false },
+      { "text": "D. Principalement par une croissance dirigée vers le bas et l'avant.", "correct": false }
+    ]
+  },
+  {
+    "question": "Concernant la croissance de la branche horizontale :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'allongement du corps est lié à la résorption du bord antérieur du ramus.", "correct": true },
+      { "text": "B. La face externe est uniquement le siège d'une apposition osseuse.", "correct": true },
+      { "text": "C. La face interne est uniquement le siège d'une résorption osseuse.", "correct": false },
+      { "text": "D. Ce processus s'achève systématiquement avant l'éruption des premières molaires.", "correct": false }
+    ]
+  },
+  {
+    "question": "La croissance du menton se caractérise par :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Un dépôt périosté autour de la base et du sommet de la symphyse.", "correct": true },
+      { "text": "B. Un recul relatif des procès alvéolaires accentuant sa proéminence.", "correct": true },
+      { "text": "C. Une ossification enchondrale directe de la pointe mentonnière.", "correct": false },
+      { "text": "D. Une croissance qui débute précocement durant la vie embryonnaire.", "correct": false }
+    ]
+  },
+  {
+    "question": "Les signes d'une rotation mandibulaire antérieure (Bjork) incluent :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Un condyle dirigé verticalement avec un col épais.", "correct": true },
+      { "text": "B. Une symphonie mentonnière épaisse dite en 'bulbe d'oignon'.", "correct": true },
+      { "text": "C. Une branche montante étroite et courte.", "correct": false },
+      { "text": "D. Un étage inférieur de la face augmenté.", "correct": false }
+    ]
+  },
+  {
+    "question": "Les signes d'une rotation mandibulaire postérieure incluent :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Un condyle dirigé en arrière avec un col fin.", "correct": true },
+      { "text": "B. Une forte courbure antégoniaque et une symphyse en 'goutte d'eau'.", "correct": true },
+      { "text": "C. Un bord inférieur de la mandibule parfaitement horizontal.", "correct": false },
+      { "text": "D. Un canal dentaire très courbé.", "correct": false }
+    ]
+  },
+  {
+    "question": "À propos du canal dentaire inférieur :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Il est courbe dans les cas de rotation antérieure.", "correct": true },
+      { "text": "B. Il est rectiligne dans les cas de rotation postérieure.", "correct": true },
+      { "text": "C. Sa forme ne dépend jamais de la direction de la croissance mandibulaire.", "correct": false },
+      { "text": "D. Il se situe toujours au-dessus de l'épine de Spix chez l'adulte.", "correct": false }
+    ]
+  },
+  {
+    "question": "La synchondrose symphysaire :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Permet la croissance en largeur de la mandibule.", "correct": true },
+      { "text": "B. Voit son activité cesser avant la fin de la première année de vie.", "correct": true },
+      { "text": "C. Est le seul moteur de la croissance mandibulaire chez l'adulte.", "correct": false },
+      { "text": "D. Fusionne dès le 4ème mois de la vie intra-utérine.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le rôle des facteurs fonctionnels dans la croissance :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Les muscles et les praxies influencent le développement final.", "correct": true },
+      { "text": "B. La fonction masticatoire stimule l'édification de l'apophyse coronoïde.", "correct": true },
+      { "text": "C. Le potentiel de croissance est exclusivement déterminé par la génétique.", "correct": false },
+      { "text": "D. L'environnement local n'a aucun impact sur les effets rotationnels.", "correct": false }
+    ]
+  },
+  {
+    "question": "En conclusion sur la croissance mandibulaire :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Sa complexité nécessite de comprendre l'évolution des dysmorphoses.", "correct": true },
+      { "text": "B. Le clinicien peut intervenir sur la croissance et ses effets rotationnels.", "correct": true },
+      { "text": "C. La mandibule est un os fixe qui suit passivement la base du crâne.", "correct": false },
+      { "text": "D. Le cartilage de Meckel reste le centre de croissance majeur chez l'enfant.", "correct": false }
+    ]
+  }
+],
 
 
+'4.Croissance de la voute et de la base du crane':
+[
+  {
+    "question": "Concernant les mécanismes d'ossification du crâne, quelles affirmations sont exactes ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le crâne est la seule partie du squelette où il n'existe qu'un seul type d'ossification.", "correct": false },
+      { "text": "B. La base du crâne se développe essentiellement par ossification enchondrale.", "correct": true },
+      { "text": "C. L'ossification enchondrale concerne la totalité de la calvaria.", "correct": false },
+      { "text": "D. La voûte crânienne est majoritairement issue d'une ossification membraneuse.", "correct": true }
+    ]
+  },
+  {
+    "question": "Quels éléments participent à la constitution de la voûte crânienne ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le corps du sphénoïde uniquement.", "correct": false },
+      { "text": "B. L'écaille des temporaux et la partie supérieure de l'occipital.", "correct": true },
+      { "text": "C. L'os ethmoïde dans sa totalité.", "correct": false },
+      { "text": "D. La partie verticale de l'os frontal et les os pariétaux.", "correct": true }
+    ]
+  },
+  {
+    "question": "À propos de la structure histologique des os du crâne, que peut-on dire ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Le péricrâne est situé entre la dure-mère et l'os.", "correct": false },
+      { "text": "B. La lame interne est recouverte par l'endocrâne qui donne insertion aux méninges.", "correct": true },
+      { "text": "C. La lame interne est composée exclusivement de cartilage hyalin.", "correct": false },
+      { "text": "D. La lame externe est recouverte à l'extérieur par le péricrâne.", "correct": true }
+    ]
+  },
+  {
+    "question": "Parmi les sutures ou synchondroses suivantes, lesquelles sont classées comme sagittales ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La suture métopique.", "correct": true },
+      { "text": "B. La synchondrose ethmoïdo-sphénoïdale.", "correct": false },
+      { "text": "C. La synchondrose sphéno-occipitale.", "correct": false },
+      { "text": "D. La synchondrose intra-occipitale antérieure.", "correct": true }
+    ]
+  },
+  {
+    "question": "Quels mécanismes régissent la croissance de la voûte ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La croissance se fait par apposition externe et résorption interne jusqu'à 6 ans.", "correct": true },
+      { "text": "B. L'augmentation de la taille du cerveau tend à écarter les bords des sutures.", "correct": true },
+      { "text": "C. Les sutures de la voûte répondent par une résorption au niveau de leurs bords.", "correct": false },
+      { "text": "D. La croissance est totalement indépendante du développement cérébral.", "correct": false }
+    ]
+  },
+  {
+    "question": "Concernant les fontanelles situées sur la ligne médiane :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La fontanelle antérieure est la première à se souder.", "correct": false },
+      { "text": "B. La fontanelle bregmatique (antérieure) se ferme vers l'âge de 2 ans.", "correct": true },
+      { "text": "C. La fontanelle postérieure se ferme généralement à l'âge de 2 ans.", "correct": false },
+      { "text": "D. La fontanelle lambdatique (postérieure) se ferme vers l'âge de 2 mois.", "correct": true }
+    ]
+  },
+  {
+    "question": "À propos des fontanelles latérales du crâne :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Les fontanelles ptériques se ferment vers l'âge de 2 à 3 mois.", "correct": true },
+      { "text": "B. Il n'existe que deux fontanelles latérales au total.", "correct": false },
+      { "text": "C. Les fontanelles astériques sont situées au point d'union frontal-pariétal.", "correct": false },
+      { "text": "D. Les fontanelles astériques se ferment vers l'âge de 2 ans.", "correct": true }
+    ]
+  },
+  {
+    "question": "Quels facteurs influencent la croissance de la base ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Elle est liée à la croissance du cerveau et au jeu des synchondroses.", "correct": true },
+      { "text": "B. L'accroissement en épaisseur s'effectue principalement par apposition.", "correct": true },
+      { "text": "C. La base ne subit aucun changement après la naissance.", "correct": false },
+      { "text": "D. Sa croissance est exclusivement membranaire comme celle de la voûte.", "correct": false }
+    ]
+  },
+  {
+    "question": "Concernant la croissance antéro-postérieure de la base :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La synchondrose inter-sphénoïdale est active durant les 6 premiers mois de la vie.", "correct": true },
+      { "text": "B. La synchondrose sphéno-occipitale se ferme dès l'âge de 5 ans.", "correct": false },
+      { "text": "C. La synchondrose ethmoïdo-sphénoïdale reste active jusqu'à l'âge de 3 ans.", "correct": true },
+      { "text": "D. Toutes les sutures de la base se ferment simultanément à la naissance.", "correct": false }
+    ]
+  },
+  {
+    "question": "Cette structure est capitale en ODF car :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Elle reste active jusqu'à l'âge adulte.", "correct": true },
+      { "text": "B. Elle ne participe qu'à l'accroissement en largeur du crâne.", "correct": false },
+      { "text": "C. Elle se ferme à l'âge de 3 ans comme la suture métopique.", "correct": false },
+      { "text": "D. Elle joue un rôle majeur dans l'accroissement en longueur de la base.", "correct": true }
+    ]
+  },
+  {
+    "question": "Que peut-on affirmer sur la zone située en avant de la selle turcique ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Cette zone reste la plus active jusqu'à la fin de la croissance faciale.", "correct": false },
+      { "text": "B. La selle turcique se déplace continuellement vers l'avant.", "correct": false },
+      { "text": "C. Sa croissance suturale est prépondérante durant les premières années de la vie.", "correct": true },
+      { "text": "D. Sa dimension (du frontal à la selle turcique) est établie très tôt.", "correct": true }
+    ]
+  },
+  {
+    "question": "Quels changements morphologiques affectent le frontal ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'os frontal ne subit aucune modification par apposition/résorption.", "correct": false },
+      { "text": "B. Une apposition à la face antérieure forme les arcades sourcilières.", "correct": true },
+      { "text": "C. Une résorption interne produit les sinus frontaux.", "correct": true },
+      { "text": "D. Le front devient plus bombé avec l'âge chez l'adulte.", "correct": false }
+    ]
+  },
+  {
+    "question": "L'accroissement transversal de la base est assuré par :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'apposition au niveau de l'écaille de l'occipital uniquement.", "correct": false },
+      { "text": "B. La synchondrose sphéno-occipitale.", "correct": false },
+      { "text": "C. Les sutures para-médianes de la lame criblée actives jusqu'à 3 ans.", "correct": true },
+      { "text": "D. La suture métopique qui est active jusqu'à 3 ans.", "correct": true }
+    ]
+  },
+  {
+    "question": "Concernant les sutures longitudinales :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Les synchondroses du temporal sont actives jusqu'à 15 ans.", "correct": false },
+      { "text": "B. Les synchondroses de l'os temporal se ferment entre 1 et 3 ans.", "correct": true },
+      { "text": "C. La suture métopique reste ouverte jusqu'à l'âge adulte.", "correct": false },
+      { "text": "D. Les synchondroses entre le corps et les ailes du sphénoïde se ferment à 1 an.", "correct": true }
+    ]
+  },
+  {
+    "question": "Le temporal subit des modifications importantes, notamment :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. La formation des cavités glénoïdes.", "correct": true },
+      { "text": "B. Une résorption externe massive empêchant toute croissance.", "correct": false },
+      { "text": "C. Une ossification purement membraneuse de son rocher.", "correct": false },
+      { "text": "D. L'édification des apophyses mastoïdes et la formation du CAE.", "correct": true }
+    ]
+  },
+  {
+    "question": "Pourquoi l'orthodontiste étudie-t-il la base du crâne ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Car la base du crâne n'a aucune influence sur la position des maxillaires.", "correct": false },
+      { "text": "B. Pour comprendre la flexion de la base et son influence sur l'architecture faciale.", "correct": true },
+      { "text": "C. Pour exploiter la direction de la croissance dans le plan de traitement.", "correct": true },
+      { "text": "D. Parce que l'orthodontie ne traite que les dents sans lien avec le squelette.", "correct": false }
+    ]
+  },
+  {
+    "question": "Anatomiquement, la base est divisée en :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Un étage postérieur contenant le foramen magnum.", "correct": true },
+      { "text": "B. Un étage supérieur contenant les sinus frontaux.", "correct": false },
+      { "text": "C. Un étage moyen contenant le rocher (organes de l'audition).", "correct": true },
+      { "text": "D. Un étage antérieur formé exclusivement par l'os pariétal.", "correct": false }
+    ]
+  },
+  {
+    "question": "D'après l'étude des structures :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. L'ethmoïde n'apparaît qu'au niveau de la base du crâne.", "correct": true },
+      { "text": "B. L'os frontal est absent de la base du crâne.", "correct": false },
+      { "text": "C. Le sphénoïde appartient uniquement à la voûte crânienne.", "correct": false },
+      { "text": "D. Les pariétaux n'occupent que la calvaria (voûte).", "correct": true }
+    ]
+  },
+  {
+    "question": "Sur la face interne et externe de la base :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Il n'y a aucun mouvement de remodelage sur la base après 2 ans.", "correct": false },
+      { "text": "B. La face externe subit une résorption pour diminuer le volume crânien.", "correct": false },
+      { "text": "C. Une résorption interne répond à la croissance intense du cerveau.", "correct": true },
+      { "text": "D. On note une apposition sur la face externe de la base du crâne.", "correct": true }
+    ]
+  },
+  {
+    "question": "En conclusion, la croissance de la base :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "A. Est totalement indépendante du jeu des sutures.", "correct": false },
+      { "text": "B. Entraîne en partie la croissance de la face.", "correct": true },
+      { "text": "C. N'a aucun rapport avec l'accroissement du cerveau.", "correct": false },
+      { "text": "D. Est un phénomène complexe influencé par de multiples facteurs.", "correct": true }
+    ]
+  }
+], 
 
 
-  "Les fonctions oro-faciales": [
-    {
-      "question": "Q1. Selon les sources, une fonction est définie comme l'ensemble des actes accomplis par une structure définie. Cette structure peut être :",
-      "answers": [
-        { "text": "A. Un organe.", "correct": true },
-        { "text": "B. Un système.", "correct": true },
-        { "text": "C. Une cellule nerveuse.", "correct": false },
-        { "text": "D. Une pathologie.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q2. La fonction respiratoire est un phénomène vital destiné à assurer :",
-      "answers": [
-        { "text": "A. Le filtrage de l'air ambiant.", "correct": true },
-        { "text": "B. Le réchauffement de l'air ambiant.", "correct": true },
-        { "text": "C. L'élaboration du langage oral.", "correct": false },
-        { "text": "D. La modification chimique du bol alimentaire.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q3. La ventilation nasale physiologique nécessite :",
-      "answers": [
-        { "text": "A. La fermeture hermétique de la bouche.", "correct": true },
-        { "text": "B. Le libre passage de l'air par les fosses nasales.", "correct": true },
-        { "text": "C. La présence d'un obstacle qui empêche le passage d'air.", "correct": false },
-        { "text": "D. La contraction du muscle masséter.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q4. La respiration physiologique est naso-nasale et implique :",
-      "answers": [
-        { "text": "A. Le contact entre le voile du palais et de la langue.", "correct": true },
-        { "text": "B. L'inspiration par le nez.", "correct": true },
-        { "text": "C. L'expiration par la bouche.", "correct": false },
-        { "text": "D. Une contraction buccale d'effort.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q5. La déglutition est l'action de faire passer le bol alimentaire dans :",
-      "answers": [
-        { "text": "A. Le pharynx.", "correct": true },
-        { "text": "B. L'estomac.", "correct": false },
-        { "text": "C. La pyramide nasale.", "correct": false },
-        { "text": "D. L'œsophage.", "correct": true }
-      ]
-    },
-    {
-      "question": "Q6. Concernant la fréquence de la déglutition :",
-      "answers": [
-        { "text": "A. Elle survient 500 à 2000 fois/jour.", "correct": true },
-        { "text": "B. Elle dure environ une seconde chez le jeune adulte.", "correct": true },
-        { "text": "C. Elle augmente pendant les repas (jusqu'à 300 fois/h).", "correct": true },
-        { "text": "D. Elle est toujours rare (de 2 à 6/h).", "correct": false }
-      ]
-    },
-    {
-      "question": "Q7. Lors du sommeil, la déglutition est plus rare (de 2 à 6/h) et cela est lié à :",
-      "answers": [
-        { "text": "A. La diminution des sécrétions salivaires.", "correct": true },
-        { "text": "B. Des changements de position du corps pendant les transitions entre les différents stades de sommeil.", "correct": true },
-        { "text": "C. L'absence totale de mouvement lingual.", "correct": false },
-        { "text": "D. Une fréquence de 300 fois/h.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q8. La déglutition mature se fait en trois phases. Ces phases sont :",
-      "answers": [
-        { "text": "A. Buccale (ou préparatoire).", "correct": true },
-        { "text": "B. Pharyngée.", "correct": true },
-        { "text": "C. Laryngée.", "correct": false },
-        { "text": "D. Œsophagienne.", "correct": true }
-      ]
-    },
-    {
-      "question": "Q9. La phase buccale de la déglutition mature est caractérisée par :",
-      "answers": [
-        { "text": "A. La possibilité d'être arrêtée volontairement à n'importe quel moment.", "correct": true },
-        { "text": "B. L'arrêt de la respiration.", "correct": true },
-        { "text": "C. Une activité exclusivement semi-automatique.", "correct": false },
-        { "text": "D. Une propulsion linguale forte.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q10. Lors de la phase buccale, quels mouvements se déroulent pratiquement en même temps ?",
-      "answers": [
-        { "text": "A. La contraction invisible (isotonique) de l'orbiculaire des lèvres.", "correct": true },
-        { "text": "B. Le masséter se contracte et les dents entrent en contact en I. C. M.", "correct": true },
-        { "text": "C. L'obturation du larynx par abaissement de l'épiglotte.", "correct": true },
-        { "text": "D. L'abaissement du voile du palais.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q11. L'arrêt de la respiration pendant la déglutition mature se produit par :",
-      "answers": [
-        { "text": "A. L'élévation du voile du palais.", "correct": true },
-        { "text": "B. L'obturation du larynx par abaissement de l'épiglotte.", "correct": true },
-        { "text": "C. La contraction du masséter.", "correct": false },
-        { "text": "D. Le relâchement du mylo-hyoïdien.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q12. La pression exercée au niveau antérieur lors de la phase buccale est due à la langue qui :",
-      "answers": [
-        { "text": "A. Ne se déplace pas vers l'avant.", "correct": true },
-        { "text": "B. Présente simplement une onde de déformation.", "correct": true },
-        { "text": "C. Entraîne le bol vers le pharynx.", "correct": false },
-        { "text": "D. Prend appui sur les incisives inférieures.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q13. La maturation de la déglutition est fonction :",
-      "answers": [
-        { "text": "A. Des modifications de l'environnement buccal (apparition des dents).", "correct": true },
-        { "text": "B. De la maturation des circuits nerveux.", "correct": true },
-        { "text": "C. Des changements du mode de nutrition (liquide → semi-liquide → solide).", "correct": true },
-        { "text": "D. De l'amplitude verticale des cycles masticatoires.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q14. Les modifications de l'environnement buccal dues à l'apparition des dents entraînent :",
-      "answers": [
-        { "text": "A. Une bascule pharyngée de la langue.", "correct": true },
-        { "text": "B. Une modification des rapports des articulations temporo-mandibulaires.", "correct": true },
-        { "text": "C. Une diminution relative du volume lingual.", "correct": true },
-        { "text": "D. Une augmentation relative du volume lingual.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q15. La déglutition avec propulsion linguale devient minime et considérée comme dysfonctionnelle ou atypique :",
-      "answers": [
-        { "text": "A. Au-delà de 10 ans.", "correct": true },
-        { "text": "B. Lorsque l'enfant passe à une alimentation liquide.", "correct": false },
-        { "text": "C. Après cet âge là, elle est considérée comme pathologique.", "correct": true },
-        { "text": "D. Dès la mise en occlusion des dents de 6 ans.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q16. Concernant la déglutition chez le nouveau-né :",
-      "answers": [
-        { "text": "A. Elle est déclenchée par la stimulation au contact labial.", "correct": true },
-        { "text": "B. Elle est un acte réflexe à cet âge.", "correct": true },
-        { "text": "C. Elle est caractérisée par une forte contraction labiale.", "correct": true },
-        { "text": "D. La pointe de la langue est en appui palatin.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q17. Le nouveau-né présente naturellement :",
-      "answers": [
-        { "text": "A. Des arcades plates et sans dents.", "correct": true },
-        { "text": "B. Une véritable macroglossie naturelle.", "correct": true },
-        { "text": "C. Des lèvres jointes mais non contractées.", "correct": false },
-        { "text": "D. Des molaires en occlusion.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q18. La déglutition de type adulte se caractérise par :",
-      "answers": [
-        { "text": "A. Arcades serrées.", "correct": true },
-        { "text": "B. La langue contenue à l'intérieur des arcades.", "correct": true },
-        { "text": "C. Les lèvres jointes mais non contractées.", "correct": true },
-        { "text": "D. Un étalement de langue entre les arcades.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q19. La déglutition mature est le résultat de l'activité coordonnée des muscles faciaux incluant :",
-      "answers": [
-        { "text": "A. L'orbiculaire des lèvres.", "correct": true },
-        { "text": "B. Le buccinateur.", "correct": true },
-        { "text": "C. La houppe du menton.", "correct": true },
-        { "text": "D. Le muscle mylo-hyoïdien (contraction isotonique).", "correct": false }
-      ]
-    },
-    {
-      "question": "Q20. La mastication est la première étape de la digestion et est un acte complexe qui permet de rendre les substances alimentaires aptes à être dégluties après les avoir :",
-      "answers": [
-        { "text": "A. Coupées.", "correct": true },
-        { "text": "B. Écrasées.", "correct": true },
-        { "text": "C. Broyées.", "correct": true },
-        { "text": "D. Humidifiées uniquement.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q21. L'analyse des mouvements du cycle masticatoire montre des enchaînements d'abaissements et d'élévations de la mandibule, associés à des mouvements de :",
-      "answers": [
-        { "text": "A. Propulsion.", "correct": true },
-        { "text": "B. Rétropulsion.", "correct": true },
-        { "text": "C. Diduction.", "correct": true },
-        { "text": "D. Mouvement rotatoire pur.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q22. Le cycle masticatoire varie en fonction de :",
-      "answers": [
-        { "text": "A. La dureté de l'aliment.", "correct": true },
-        { "text": "B. L'âge.", "correct": true },
-        { "text": "C. La fréquence de la déglutition au repos.", "correct": false },
-        { "text": "D. Le côté non travaillant.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q23. La maturation de la mastication est caractérisée par :",
-      "answers": [
-        { "text": "A. Le fait que c'est une fonction apprise, contrairement à la succion et la déglutition.", "correct": true },
-        { "text": "B. Son apparition avec l'éruption des premières dents temporaires.", "correct": true },
-        { "text": "C. Son développement progressif avec le passage à l'alimentation solide.", "correct": true },
-        { "text": "D. Le fait qu'elle est un acte réflexe.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q24. Concernant les types de mastication, l'analyse des sources indique :",
-      "answers": [
-        { "text": "A. Mastication unilatérale alternée dans 80% des cas.", "correct": true },
-        { "text": "B. Mastication unilatérale dans 12% des cas.", "correct": true },
-        { "text": "C. Mastication bilatérale dans 8% des cas.", "correct": true },
-        { "text": "D. Mastication bilatérale dans 80% des cas.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q25. Le cycle masticatoire est plus long et d'amplitude plus grande lorsque :",
-      "answers": [
-        { "text": "A. L'aliment est mou.", "correct": false },
-        { "text": "B. L'aliment est Dur.", "correct": true },
-        { "text": "C. L'amplitude verticale des cycles masticatoires augmente au cours de la croissance.", "correct": true },
-        { "text": "D. La mandibule est guidée par les frottements interdentaires.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q26. La Phase d'ouverture (dans le plan frontal) est caractérisée par :",
-      "answers": [
-        { "text": "A. L'abaissement du dentale depuis la position d'ICM.", "correct": true },
-        { "text": "B. L'écartement du dentale de 5 à 6 mm par rapport à la ligne médiane.", "correct": true },
-        { "text": "C. Une durée relative de 36% du cycle masticatoire.", "correct": true },
-        { "text": "D. Le dentale rejoignant progressivement la ligne médiane.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q27. Lors de la Phase de fermeture de la mastication, on assiste à :",
-      "answers": [
-        { "text": "A. Le broiement du bol alimentaire entre les versants cuspidiens.", "correct": true },
-        { "text": "B. Le dentale rejoignant progressivement la ligne médiane.", "correct": true },
-        { "text": "C. La mise en place d'une onde péristaltique.", "correct": false },
-        { "text": "D. L'établissement des contacts dentaires qui dépend de la taille du bol alimentaire.", "correct": true }
-      ]
-    },
-    {
-      "question": "Q28. Si les aliments mastiqués sont mous, il est vrai que :",
-      "answers": [
-        { "text": "A. Les dents peuvent entrer en contact vers la fin du cycle.", "correct": true },
-        { "text": "B. La mandibule est guidée par les frottements interdentaires entre versants cuspidiens travaillants.", "correct": true },
-        { "text": "C. Les contacts interdentaires n'apparaissent jamais.", "correct": false },
-        { "text": "D. La phase de fermeture est ralentie par la résistance physique des aliments.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q29. Si la bouchée est de taille importante ou si les aliments sont durs, il est possible que :",
-      "answers": [
-        { "text": "A. Les contacts interdentaires n'apparaissent pas lors des premiers cycles.", "correct": true },
-        { "text": "B. Les aliments se trouvent coincés entre les versants cuspidiens.", "correct": true },
-        { "text": "C. La mandibule soit guidée par les frottements interdentaires.", "correct": false },
-        { "text": "D. Les dents entrent en contact vers la fin du cycle.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q30. Les trois phases principales du trajet du point inter incisif dans le plan frontal sont :",
-      "answers": [
-        { "text": "A. Phase d'ouverture.", "correct": true },
-        { "text": "B. Phase de fermeture.", "correct": true },
-        { "text": "C. Phase d'intercuspidation.", "correct": true },
-        { "text": "D. Phase préparatoire.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q31. La phonation est une fonction de relation qui participe à :",
-      "answers": [
-        { "text": "A. L'élaboration du langage oral.", "correct": true },
-        { "text": "B. La création d'un véhicule de la pensée.", "correct": true },
-        { "text": "C. La diminution des sécrétions salivaires.", "correct": false },
-        { "text": "D. L'établissement de l'occlusion.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q32. Le mécanisme de la phonation résulte de la superposition de deux conduites :",
-      "answers": [
-        { "text": "A. Les conduites phonatoires.", "correct": true },
-        { "text": "B. Les conduites articulatoires.", "correct": true },
-        { "text": "C. Les conduites masticatoires.", "correct": false },
-        { "text": "D. Les conduites labiales.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q33. Les conduites phonatoires sont des conduites innées qui :",
-      "answers": [
-        { "text": "A. Produisent la voix.", "correct": true },
-        { "text": "B. Utilisent les effecteurs pneumo-trachéo-laryngo-pharyngés.", "correct": true },
-        { "text": "C. Utilisent le système bucco-pharyngien.", "correct": false },
-        { "text": "D. Sont soumises à l'influence du milieu environnant.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q34. Les conduites articulatoires permettent :",
-      "answers": [
-        { "text": "A. La production des voyelles.", "correct": true },
-        { "text": "B. La production des consonnes.", "correct": true },
-        { "text": "C. L'utilisation des effecteurs bucco-labiaux (lèvres, langue, palais, voile du palais).", "correct": true },
-        { "text": "D. La vibration continue des cordes vocales.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q35. Les organes mis en jeu par la phonation (mis à part le larynx) sont d'abord affectés aux fonctions vitales de :",
-      "answers": [
-        { "text": "A. Respiration.", "correct": true },
-        { "text": "B. Nutrition.", "correct": true },
-        { "text": "C. Phonation.", "correct": false },
-        { "text": "D. Digestion.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q36. Le système laryngien et le système bucco-pharyngien ont des rôles spécifiques. Le système laryngien :",
-      "answers": [
-        { "text": "A. Travaille en continu tout le temps de l'expiration.", "correct": true },
-        { "text": "B. Forme les voyelles (son laryngé).", "correct": true },
-        { "text": "C. A une activité discontinue.", "correct": false },
-        { "text": "D. Produit les consonnes.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q37. Les phonèmes sont :",
-      "answers": [
-        { "text": "A. Les supports élémentaires du langage.", "correct": true },
-        { "text": "B. Constitués de voyelles.", "correct": true },
-        { "text": "C. Constitués de consonnes.", "correct": true },
-        { "text": "D. Les effecteurs bucco-labiaux.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q38. La morphologie d'un sujet adulte est le résultat :",
-      "answers": [
-        { "text": "A. De l'activité des différents muscles qui moulent le squelette.", "correct": true },
-        { "text": "B. Du jeu des muscles qui commande la forme.", "correct": true },
-        { "text": "C. De la seule installation de la denture définitive.", "correct": false },
-        { "text": "D. Du squelette qui moule les muscles.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q39. Dans la sphère oro-faciale, il est évident que :",
-      "answers": [
-        { "text": "A. La forme et la fonction sont étroitement liées.", "correct": true },
-        { "text": "B. Le jeu des muscles commande la forme.", "correct": true },
-        { "text": "C. La position des dents est déterminée par le jeu des muscles.", "correct": true },
-        { "text": "D. La déglutition est indépendante de la mastication.", "correct": false }
-      ]
-    },
-    {
-      "question": "Q40. Dans la sphère oro-faciale, le jeu des muscles détermine :",
-      "answers": [
-        { "text": "A. La position des dents.", "correct": true },
-        { "text": "B. Les rapports des mâchoires entre elles.", "correct": true },
-        { "text": "C. La forme.", "correct": true },
-        { "text": "D. Le mouvement de diduction.", "correct": false }
-      ]
-    }
-  ]
-
-
+'EMD 25':
+[
+  {
+    "question": "L'âge d'éruption des canines temporaires est :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "a. à 12 mois", "correct": false },
+      { "text": "b. entre 12 et 18 mois", "correct": false },
+      { "text": "c. entre 18 et 24 mois", "correct": true },
+      { "text": "d. entre 24 et 36 mois", "correct": false }
+    ]
+  },
+  {
+    "question": "Cette formule dentaire d'une jeune patient correspond à la phase : 16 55 14 53 12 11 21 22 63 24 65 26 46 85 44 83 42 41 31 32 73 34 75 36",
+    "difficulty": 1,
+    "answers": [
+      { "text": "a. constitution de la denture mixte", "correct": true },
+      { "text": "b. denture mixte stable", "correct": false },
+      { "text": "c. constitution de la denture adolescente", "correct": false },
+      { "text": "d. denture adolescente stable", "correct": false }
+    ]
+  },
+  {
+    "question": "À la mandibule, l'évolution du périmètre d'arcade :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. légère augmentation entre 5 et 18 ans", "correct": false },
+      { "text": "b. diminution entre 6 et 18 ans", "correct": true },
+      { "text": "c. relativement stable entre 6 et 18 ans", "correct": false },
+      { "text": "d. dépend de la dérive mésiale", "correct": true }
+    ]
+  },
+  {
+    "question": "Au niveau des arcades, les diastèmes Simien correspondent à l'espace situé :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. entre les incisives maxillaires", "correct": false },
+      { "text": "b. entre les incisives mandibulaires", "correct": false },
+      { "text": "c. en arrière les incisives latérales maxillaires", "correct": true },
+      { "text": "d. en arrière les canines mandibulaires", "correct": true }
+    ]
+  },
+  {
+    "question": "L'orientation des axes des incisives mandibulaires :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. droites dans le sens vestibulo-lingual", "correct": false },
+      { "text": "b. vers le côté lingual dans le sens vestibulo-lingual", "correct": true },
+      { "text": "c. droites ou légèrement mésio-versées dans le sens mésio-distal", "correct": true },
+      { "text": "d. droites ou légèrement disto-versées dans le sens mésio-distal", "correct": false }
+    ]
+  },
+  {
+    "question": "L'over jet :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. c'est la distance entre le bord libre de l'incisive supérieure et celui inférieur", "correct": false },
+      { "text": "b. c'est la distance entre la face vestibulaire de l'incisive inférieure et le bord libre de l'incisive supérieure", "correct": true },
+      { "text": "c. sa valeur moyenne est 2 mm en denture temporaire", "correct": true },
+      { "text": "d. c'est le recouvrement incisif dans le sens antéro-postérieur", "correct": true }
+    ]
+  },
+  {
+    "question": "Tous les modes de transmission sont possibles dans :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. l'agénésie dentaire", "correct": true },
+      { "text": "b. les dents surnuméraires", "correct": false },
+      { "text": "c. l'amélogenèse imparfaite", "correct": true },
+      { "text": "d. la rétrognathie mandibulaire", "correct": false }
+    ]
+  },
+  {
+    "question": "La DDM par macrodontie ou microdontie relative se transmet selon :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "a. le mode autosomique dominant", "correct": true },
+      { "text": "b. le mode autosomique récessif", "correct": false },
+      { "text": "c. le mode gonosomique", "correct": false },
+      { "text": "d. le mécanisme de l'hérédité croisée", "correct": false }
+    ]
+  },
+  {
+    "question": "Quel type de rotation mandibulaire est spécifiquement défini par une orientation verticale du condyle, impliquant des mécanismes complexes de mouvement articulaire ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. Rotation postérieure", "correct": true },
+      { "text": "b. Rotation latérale", "correct": false },
+      { "text": "c. Rotation moyenne", "correct": false },
+      { "text": "d. Rotation antérieure", "correct": false }
+    ]
+  },
+  {
+    "question": "Quel est l'impact morphologique de la résorption du bord antérieur de la branche montante sur la structure mandibulaire ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. Facilitation de l'émergence des molaires par création d'espace", "correct": true },
+      { "text": "b. Prolongement du corps mandibulaire en raison de modifications osseuses", "correct": true },
+      { "text": "c. Expansion latérale de la mandibule par remaniement osseux", "correct": false },
+      { "text": "d. Diminution des dimensions mandibulaires par résorption osseuse", "correct": false }
+    ]
+  },
+  {
+    "question": "Quel est le type de croissance qui se manifeste spécifiquement au niveau du col du condyle, en tenant compte des divers mécanismes biologiques impliqués ?",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. Croissance longitudinale, impliquant l'allongement des structures osseuses", "correct": true },
+      { "text": "b. Croissance cartilagineuse, caractérisée par la formation de cartilage", "correct": true },
+      { "text": "c. Croissance remodelante, se référant à la réorganisation des tissus osseux existants", "correct": false },
+      { "text": "d. Croissance suturale, liée à l'expansion des sutures crâniennes", "correct": false }
+    ]
+  },
+  {
+    "question": "La voûte crânienne (calvaria) :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. Elle est constituée uniquement par les os pariétaux.", "correct": false },
+      { "text": "b. Elle assure un rôle de protection du cerveau.", "correct": true },
+      { "text": "c. Elle comprend la partie verticale du frontal, les pariétaux, et la partie supérieure de l'occipital.", "correct": true },
+      { "text": "d. Elle est formée uniquement par des os d'origine endochondrale.", "correct": false }
+    ]
+  },
+  {
+    "question": "La suture intermaxillaire et interpalatine :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. Elles sont toutes deux complètement synostosées avant l'âge de 5 ans.", "correct": false },
+      { "text": "b. Elles ne sont pas totalement synostosées avant l'âge adulte permettant une expansion efficace avant environ 12 ans.", "correct": true },
+      { "text": "c. Les sutures constituent la suture médiane palatine.", "correct": true },
+      { "text": "d. Toutes les réponses justes", "correct": false }
+    ]
+  },
+  {
+    "question": "Parmi les sutures suivantes laquelle participe principalement à la croissance antéro-postérieure du maxillaire en agissant comme interface entre le maxillaire et le frontal :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. La suture maxillo-malaire", "correct": false },
+      { "text": "b. La suture maxillo-palatine", "correct": false },
+      { "text": "c. La suture fronto-maxillaire", "correct": true },
+      { "text": "d. La suture intermaxillaire", "correct": false }
+    ]
+  },
+  {
+    "question": "La croissance de la voûte du crâne :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. Son ossification est cartilagineuse est débute dès la naissance.", "correct": false },
+      { "text": "b. Son ossification est membraneuse et liée en partie au développement cérébral.", "correct": true },
+      { "text": "c. Son ossification est cartilagineuse puis membraneuse à 6 ans.", "correct": false },
+      { "text": "d. Sa croissance est assurée par l'élargissement des fontanelles.", "correct": false }
+    ]
+  },
+  {
+    "question": "La croissance totale en hauteur au niveau des lèvres est :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "a. 6,5 mm", "correct": false },
+      { "text": "b. 14 mm", "correct": false },
+      { "text": "c. 14,2 mm", "correct": true },
+      { "text": "d. 14,5 mm", "correct": false }
+    ]
+  },
+  {
+    "question": "La commissure et la ligne S de Ricketts :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "a. la ligne S passe par le milieu du menton", "correct": false },
+      { "text": "b. les deux lignes possèdent la même fiabilité en terme de référence", "correct": false },
+      { "text": "c. lorsqu'en absence d'anomalies, les lèvres dépassent la ligne E, elles doivent être tangentes à la ligne S", "correct": false },
+      { "text": "d. toutes les réponses sont fausses", "correct": true }
+    ]
+  },
+  {
+    "question": "La position des rotations au décubitus dorsal :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "a. ouvre l'angle de la base du crâne et l'angle pétreux", "correct": false },
+      { "text": "b. ferme l'angle de la base du crâne et l'angle pétreux", "correct": true },
+      { "text": "c. ferme l'angle de la base du crâne et ouvre l'angle pétreux", "correct": false },
+      { "text": "d. toutes les réponses sont fausses", "correct": false }
+    ]
+  },
+  {
+    "question": "Le perpendicular de Frank au pavillon est en position basse par rapport à l'échelle chez un enfant de 3,5 ans avec une occlusion incisive inversée :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "a. il y a rotation externe exagérée de l'écaille du temporal", "correct": false },
+      { "text": "b. rotation antérieure exagérée de l'écaille du temporal", "correct": true },
+      { "text": "c. frontalisation insuffisante du rocher", "correct": false },
+      { "text": "d. l'orifice du CAE est moins visible", "correct": false }
+    ]
+  },
+  {
+    "question": "Lorsque l'angle de la base du crâne est fermé on a :",
+    "difficulty": 2,
+    "answers": [
+      { "text": "a. une frontalisation de la base de la pyramide pétreuse", "correct": true },
+      { "text": "b. la frontalisation de la base de la pyramide pétreuse est insuffisante", "correct": false },
+      { "text": "c. le CAE est peu visible", "correct": true },
+      { "text": "d. on a un décollement de l'oreille du plan sous-jacent", "correct": false }
+    ]
+  }
+],
 };
 
 
