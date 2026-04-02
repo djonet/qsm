@@ -183,2071 +183,3220 @@
 
   // 🧠 أسئلة تجريبية
   const questionsData = {
-    'Nomenclature': [
-  // 1 à 5 — Niveau lecture superficielle ⭐
-  {
-    question: "La face orientée vers le milieu de la bouche est :",
-    difficulty: 1,
-    answers: [
-      { text: "A. La face mésiale", correct: true },
-      { text: "B. La face distale", correct: false },
-      { text: "C. Une face interne", correct: true },
-      { text: "D. Une face d’alignement selon le plan sagittal", correct: true }
-    ]
-  },
-  {
-    question: "La face la plus éloignée du milieu est appelée :",
-    difficulty: 1,
-    answers: [
-      { text: "A. Distale", correct: true },
-      { text: "B. Vestibulaire", correct: false },
-      { text: "C. Mésiale", correct: false },
-      { text: "D. Linguale", correct: false }
-    ]
-  },
-  {
-    question: "La face interne en regard de la langue ou du palais est :",
-    difficulty: 1,
-    answers: [
-      { text: "A. Linguale", correct: true },
-      { text: "B. Palatine", correct: true },
-      { text: "C. Interne", correct: true },
-      { text: "D. Vestibulaire", correct: false }
-    ]
-  },
-  {
-    question: "La face qui s’articule avec les dents antagonistes est appelée :",
-    difficulty: 1,
-    answers: [
-      { text: "A. Occlusale", correct: true },
-      { text: "B. Triturante", correct: true },
-      { text: "C. Bord libre (pour les incisifs)", correct: true },
-      { text: "D. Mésiale", correct: false }
-    ]
-  },
-  {
-    question: "Le plan sagittal médian sert à :",
-    difficulty: 1,
-    answers: [
-      { text: "A. Nommer les faces dentaires", correct: true },
-      { text: "B. Définir la symétrie des arcades", correct: true },
-      { text: "C. Subdiviser les arcades en hémi-arcades", correct: true },
-      { text: "D. Identifier le type de dent", correct: false }
-    ]
-  },
-
-  // 6 à 15 — Niveau bon élève ⭐⭐
-  {
-    question: "Les dents sont réparties selon :",
-    difficulty: 2,
-    answers: [
-      { text: "A. Deux dentures (temporaire et permanente)", correct: true },
-      { text: "B. Deux arcades (maxillaire et mandibulaire)", correct: true },
-      { text: "C. Un plan sagittal médian de symétrie", correct: true },
-      { text: "D. Une seule arcade centrale", correct: false }
-    ]
-  },
-  {
-    question: "Le plan sagittal médian subdivise :",
-    difficulty: 2,
-    answers: [
-      { text: "A. Les arcades en hémi-arcades droite et gauche", correct: true },
-      { text: "B. La mandibule en zones fonctionnelles", correct: false },
-      { text: "C. Les arcades maxillaire et mandibulaire en quadrants", correct: true },
-      { text: "D. Les arcades en surfaces occlusales", correct: false }
-    ]
-  },
-  {
-    question: "Dans la nomenclature anatomique, le nom d’une dent inclut :",
-    difficulty: 2,
-    answers: [
-      { text: "A. Sa classe", correct: true },
-      { text: "B. Son espèce", correct: true },
-      { text: "C. Son arcade", correct: true },
-      { text: "D. Sa latéralité", correct: true }
-    ]
-  },
-  {
-    question: "La classe dentaire peut être :",
-    difficulty: 2,
-    answers: [
-      { text: "A. Incisive", correct: true },
-      { text: "B. Canine", correct: true },
-      { text: "C. Prémolaire", correct: true },
-      { text: "D. Molaire", correct: true }
-    ]
-  },
-  {
-    question: "Les dentures mentionnées dans le cours sont :",
-    difficulty: 2,
-    answers: [
-      { text: "A. Permanente", correct: true },
-      { text: "B. Temporaire", correct: true },
-      { text: "C. Mixte", correct: false },
-      { text: "D. Continue", correct: false }
-    ]
-  },
-  {
-    question: "La nomenclature de Palmer permet :",
-    difficulty: 2,
-    answers: [
-      { text: "A. De numéroter les dents", correct: true },
-      { text: "B. De repérer topographiquement chaque dent", correct: true },
-      { text: "C. D’associer un symbole d’hémi-arcade", correct: true },
-      { text: "D. De distinguer les dents temporaires et permanentes", correct: true }
-    ]
-  },
-  {
-    question: "Dans le système de Palmer, les dents permanentes reçoivent :",
-    difficulty: 2,
-    answers: [
-      { text: "A. Des chiffres arabes", correct: true },
-      { text: "B. Des chiffres romains", correct: false },
-      { text: "C. Des lettres", correct: false },
-      { text: "D. Un symbole de quadrant", correct: true }
-    ]
-  },
-  {
-    question: "Les dents temporaires selon Palmer reçoivent :",
-    difficulty: 2,
-    answers: [
-      { text: "A. Des chiffres romains", correct: true },
-      { text: "B. Un symbole d’hémi-arcade", correct: true },
-      { text: "C. Des lettres", correct: false },
-      { text: "D. Des chiffres arabes", correct: false }
-    ]
-  },
-  {
-    question: "Dans la nomenclature de Palmer, les numéros 1 à 8 correspondent :",
-    difficulty: 2,
-    answers: [
-      { text: "A. Aux dents permanentes", correct: true },
-      { text: "B. De l’incisive centrale à la troisième molaire", correct: true },
-      { text: "C. À l’ordre sagittal médian → distal", correct: true },
-      { text: "D. À la position occlusale", correct: false }
-    ]
-  },
-  {
-    question: "Dans le schéma de Palmer, le repérage se fait grâce à :",
-    difficulty: 2,
-    answers: [
-      { text: "A. Un mi-cadre représentant une hémi-arcade", correct: true },
-      { text: "B. Un symbole propre à chaque quadrant", correct: true },
-      { text: "C. La combinaison du code et du cadre", correct: true },
-      { text: "D. Une ligne médiane tracée", correct: false }
-    ]
-  },
-
-  // 16 à 25 — Niveau très bon ⭐⭐⭐
-  {
-    question: "La combinaison du code de la dent et du symbole d’hémi-arcade permet :",
-    difficulty: 3,
-    answers: [
-      { text: "A. D’identifier la dent", correct: true },
-      { text: "B. De repérer la position sur l’arcade", correct: true },
-      { text: "C. De déterminer la classe dentaire", correct: false },
-      { text: "D. D’éviter la confusion droite/gauche", correct: true }
-    ]
-  },
-  {
-    question: "La nomenclature stomatologique dérive :",
-    difficulty: 3,
-    answers: [
-      { text: "A. De la nomenclature de Palmer", correct: true },
-      { text: "B. De la nomenclature anatomique", correct: false },
-      { text: "C. De la nomenclature universelle", correct: false },
-      { text: "D. De la nomenclature FDI", correct: false }
-    ]
-  },
-  {
-    question: "Dans la nomenclature stomatologique, on place :",
-    difficulty: 3,
-    answers: [
-      { text: "A. Une lettre au lieu du numéro", correct: true },
-      { text: "B. Une majuscule pour les dents maxillaires", correct: true },
-      { text: "C. Une minuscule pour les dents mandibulaires", correct: true },
-      { text: "D. Un chiffre arabe ou romain selon la denture", correct: true }
-    ]
-  },
-  {
-    question: "Exemple « d2 » signifie :",
-    difficulty: 3,
-    answers: [
-      { text: "A. Incisive latérale mandibulaire droite", correct: true },
-      { text: "B. Incisive centrale maxillaire gauche", correct: false },
-      { text: "C. Canine mandibulaire gauche", correct: false },
-      { text: "D. Première molaire maxillaire droite", correct: false }
-    ]
-  },
-  {
-    question: "Dans la nomenclature stomatologique :",
-    difficulty: 3,
-    answers: [
-      { text: "A. Les majuscules désignent le maxillaire", correct: true },
-      { text: "B. Les minuscules désignent la mandibule", correct: true },
-      { text: "C. Les chiffres arabes pour les permanentes", correct: true },
-      { text: "D. Les chiffres romains pour les temporaires", correct: true }
-    ]
-  },
-  {
-    question: "La nomenclature universelle utilise :",
-    difficulty: 3,
-    answers: [
-      { text: "A. Les chiffres arabes de 1 à 32", correct: true },
-      { text: "B. Un ordre de numérotation horaire", correct: false },
-      { text: "C. Un départ par la troisième molaire maxillaire droite", correct: true },
-      { text: "D. Une terminaison par la troisième molaire mandibulaire droite", correct: true }
-    ]
-  },
-  {
-    question: "Le système universel est employé :",
-    difficulty: 3,
-    answers: [
-      { text: "A. Aux États-Unis", correct: true },
-      { text: "B. Pour toutes les dents permanentes", correct: true },
-      { text: "C. Avec lettres pour les dents temporaires", correct: true },
-      { text: "D. Avec chiffres romains pour les dents temporaires", correct: false }
-    ]
-  },
-  {
-    question: "La nomenclature universelle numérote les dents dans :",
-    difficulty: 3,
-    answers: [
-      { text: "A. Le sens horaire", correct: true },
-      { text: "B. Un ordre continu", correct: true },
-      { text: "C. Deux séries séparées par arcade", correct: false },
-      { text: "D. Un plan sagittal médian", correct: false }
-    ]
-  },
-  {
-    question: "La troisième molaire maxillaire droite correspond au numéro :",
-    difficulty: 3,
-    answers: [
-      { text: "A. 1", correct: true },
-      { text: "B. 32", correct: false },
-      { text: "C. 16", correct: false },
-      { text: "D. 17", correct: false }
-    ]
-  },
-  {
-    question: "La troisième molaire mandibulaire droite porte le numéro :",
-    difficulty: 3,
-    answers: [
-      { text: "A. 32", correct: true },
-      { text: "B. 1", correct: false },
-      { text: "C. 8", correct: false },
-      { text: "D. 16", correct: false }
-    ]
-  },
-
-  // 26 à 35 — Niveau excellent ⭐⭐⭐⭐
-  {
-    question: "La nomenclature universelle comprend :",
-    difficulty: 4,
-    answers: [
-      { text: "A. 32 dents numérotées", correct: true },
-      { text: "B. Des chiffres arabes", correct: true },
-      { text: "C. Une progression continue de droite à gauche", correct: true },
-      { text: "D. Un système horaire", correct: false }
-    ]
-  },
-  {
-    question: "La nomenclature internationale FDI/OMS :",
-    difficulty: 4,
-    answers: [
-      { text: "A. Utilise des chiffres arabes pour les deux dentures", correct: true },
-      { text: "B. Emploie deux chiffres pour chaque dent", correct: true },
-      { text: "C. Désigne le quadrant et la position", correct: true },
-      { text: "D. Commence au niveau de l’hémi-arcade maxillaire droite", correct: true }
-    ]
-  },
-  {
-    question: "Dans la nomenclature FDI, le premier chiffre :",
-    difficulty: 4,
-    answers: [
-      { text: "A. Indique le quadrant", correct: true },
-      { text: "B. Indique la position sur la ligne médiane", correct: false },
-      { text: "C. Indique l’arcade", correct: true },
-      { text: "D. Change selon la denture", correct: true }
-    ]
-  },
-  {
-    question: "Le deuxième chiffre dans le code FDI :",
-    difficulty: 4,
-    answers: [
-      { text: "A. Indique la position de la dent", correct: true },
-      { text: "B. Représente le type de dent", correct: false },
-      { text: "C. Donne l’orientation distale", correct: false },
-      { text: "D. Définit la classe", correct: false }
-    ]
-  },
-  {
-    question: "Les quadrants FDI pour la denture temporaire sont :",
-    difficulty: 4,
-    answers: [
-      { text: "A. 5, 6, 7, 8", correct: true },
-      { text: "B. 1, 2, 3, 4", correct: false },
-      { text: "C. A, B, C, D", correct: false },
-      { text: "D. I, II, III, IV", correct: false }
-    ]
-  },
-  {
-    question: "Dans le système FDI, la rotation se fait :",
-    difficulty: 4,
-    answers: [
-      { text: "A. En sens horaire", correct: true },
-      { text: "B. En sens antihoraire", correct: false },
-      { text: "C. Du maxillaire droit au mandibulaire droit", correct: true },
-      { text: "D. De la gauche vers la droite", correct: false }
-    ]
-  },
-  {
-    question: "Le repérage FDI commence :",
-    difficulty: 4,
-    answers: [
-      { text: "A. Au quadrant supérieur droit", correct: true },
-      { text: "B. À la mandibule gauche", correct: false },
-      { text: "C. Au quadrant inférieur gauche", correct: false },
-      { text: "D. En rotation horaire", correct: true }
-    ]
-  },
-  {
-    question: "Les dents du quadrant supérieur droit sont notées :",
-    difficulty: 4,
-    answers: [
-      { text: "A. 1x", correct: true },
-      { text: "B. 2x", correct: false },
-      { text: "C. 3x", correct: false },
-      { text: "D. 4x", correct: false }
-    ]
-  },
-  {
-    question: "Le système FDI est :",
-    difficulty: 4,
-    answers: [
-      { text: "A. Officiel selon l’OMS", correct: true },
-      { text: "B. Utilisé actuellement", correct: true },
-      { text: "C. Basé sur deux chiffres", correct: true },
-      { text: "D. Remplacé par la nomenclature universelle", correct: false }
-    ]
-  },
-  {
-    question: "La séquence de numérotation FDI se fait :",
-    difficulty: 4,
-    answers: [
-      { text: "A. Du maxillaire droit vers le gauche", correct: true },
-      { text: "B. Puis vers la mandibule gauche", correct: true },
-      { text: "C. Puis vers la mandibule droite", correct: true },
-      { text: "D. En boucle fermée de rotation", correct: false }
-    ]
-  },
-
-  // 36 à 40 — Niveau très difficile ⭐⭐⭐⭐⭐
-  {
-    question: "Le passage de Palmer à la stomatologique consiste à :",
-    difficulty: 5,
-    answers: [
-      { text: "A. Remplacer le numéro par une lettre", correct: true },
-      { text: "B. Indiquer la latéralité dans la lettre", correct: true },
-      { text: "C. Employer majuscules et minuscules selon l’arcade", correct: true },
-      { text: "D. Modifier la signification des chiffres romains", correct: false }
-    ]
-  },
-  {
-    question: "Le symbole du mi-cadre dans Palmer permet :",
-    difficulty: 5,
-    answers: [
-      { text: "A. D’indiquer l’hémi-arcade", correct: true },
-      { text: "B. De repérer la latéralité", correct: true },
-      { text: "C. De visualiser le quadrant", correct: true },
-      { text: "D. De situer la dent sur la ligne sagittale", correct: false }
-    ]
-  },
-  {
-    question: "Le système FDI est plus universel que celui de Palmer parce qu’il :",
-    difficulty: 5,
-    answers: [
-      { text: "A. Utilise un code numérique unique", correct: true },
-      { text: "B. S’applique aux deux dentures", correct: true },
-      { text: "C. Évite les symboles graphiques", correct: true },
-      { text: "D. Indique clairement le quadrant et la position", correct: true }
-    ]
-  },
-  {
-    question: "Dans le FDI, les chiffres 1 et 5 désignent :",
-    difficulty: 5,
-    answers: [
-      { text: "A. Le quadrant supérieur droit (permanent et temporaire)", correct: true },
-      { text: "B. Le quadrant supérieur gauche (permanent et temporaire)", correct: false },
-      { text: "C. La même position pour deux dentures différentes", correct: true },
-      { text: "D. Un rapport maxillaire commun", correct: false }
-    ]
-  },
-  {
-    question: "Dans l’ensemble des nomenclatures, on retrouve :",
-    difficulty: 5,
-    answers: [
-      { text: "A. Une référence constante à la symétrie sagittale", correct: true },
-      { text: "B. La distinction entre arcade maxillaire et mandibulaire", correct: true },
-      { text: "C. L’usage des chiffres ou lettres selon la denture", correct: true },
-      { text: "D. La conservation du principe de quadrant", correct: true }
-    ]
-  }
-],'Terminologie': [
-  // 1 à 5 — Niveau bon élève ⭐
-  {
-    question: "La « division topographique » d’une dent, telle que décrite dans le cours, consiste à…",
-    difficulty: 1,
-    answers: [
-      { text: "A. Séparer chaque face en zones cervicale, moyenne et occlusale (ou incisive)", correct: true },
-      { text: "B. Diviser la racine en parties cervicale, moyenne et apicale selon un plan vertical", correct: true },
-      { text: "C. Regrouper les faces en deux hémichamps identiques", correct: false },
-      { text: "D. Compléter par des lignes verticales donnant 1/3 mésial, 1/3 médian, 1/3 distal et vestibulaire/lingual", correct: true }
-    ]
-  },
-  {
-    question: "Concernant l’alignement dentaire et le contact inter-dentaire, le cours précise que…",
-    difficulty: 1,
-    answers: [
-      { text: "A. Les dents alignées entrent d’abord en contact par un point", correct: true },
-      { text: "B. Le contact inter-dentaire reste ponctuel sans s’élargir", correct: false },
-      { text: "C. L’espace inter-dentaire se répartit en embrasures vestibulaires, linguales, cervicales et occlusales", correct: true },
-      { text: "D. Les embrasures n’existent que du côté vestibulaire", correct: false }
-    ]
-  },
-  {
-    question: "Chez les dents antérieures, la face linguale/palatine des incisives et canines est caractérisée par…",
-    difficulty: 1,
-    answers: [
-      { text: "A. Un cingulum saillant à la partie linguale", correct: true },
-      { text: "B. Des crêtes marginales allongées délimitant la face linguale", correct: true },
-      { text: "C. Une cuspide centrale occlusale systématique", correct: false },
-      { text: "D. L’absence de toute structure proéminente au collet", correct: false }
-    ]
-  },
-  {
-    question: "Pour les incisives et canines, le bord libre est…",
-    difficulty: 1,
-    answers: [
-      { text: "A. Rectiligne chez les incisives", correct: true },
-      { text: "B. Bord coupant (pointe canine) chez les canines", correct: true },
-      { text: "C. Remplacé par une surface occlusale cuspidée", correct: false },
-      { text: "D. Superposé à une crête transversale", correct: false }
-    ]
-  },
-  {
-    question: "À propos des cuspides des dents postérieures, le cours indique qu’elles…",
-    difficulty: 1,
-    answers: [
-      { text: "A. Sont convexes et présentes sur les faces occlusales", correct: true },
-      { text: "B. Permettent de distinguer les classes de dents et ressemblent à une pyramide gothique", correct: true },
-      { text: "C. Sont absentes sur les molaires maxillaires", correct: false },
-      { text: "D. S’accompagnent d’arêtes amélaires convergentes", correct: true }
-    ]
-  },
-
-  // 6 à 15 — Très bon élève ⭐⭐
-  {
-    question: "Les arêtes cuspidiennes externes/vestibulaires sont décrites comme…",
-    difficulty: 2,
-    answers: [
-      { text: "A. Les plus difficiles à localiser", correct: false },
-      { text: "B. Plus prononcées sur les deuxièmes prémolaires", correct: false },
-      { text: "C. Présentes sur les canines à direction incisale, visibles au centre des canines maxillaires", correct: true },
-      { text: "D. Absentes sur toutes les dents", correct: false }
-    ]
-  },
-  {
-    question: "Pour une cuspide donnée, les quatre arêtes distinguées sont…",
-    difficulty: 2,
-    answers: [
-      { text: "A. Vestibulaire (externe)", correct: true },
-      { text: "B. Mésiale", correct: true },
-      { text: "C. Distale", correct: true },
-      { text: "D. Occlusale (interne)", correct: true }
-    ]
-  },
-  {
-    question: "À propos des arêtes internes des cuspides postérieures…",
-    difficulty: 2,
-    answers: [
-      { text: "A. Chaque cuspide principale a une arête interne vers le centre occlusal", correct: true },
-      { text: "B. Toutes les cuspides maxillaires ont une seule arête interne identique", correct: false },
-      { text: "C. La cuspide mésio-palatine maxillaire a trois arêtes internes", correct: true },
-      { text: "D. L’arête interne existe seulement sur les cuspides linguales", correct: false }
-    ]
-  },
-  {
-    question: "Les crêtes cuspidiennes comprennent…",
-    difficulty: 2,
-    answers: [
-      { text: "A. Une crête médio-distale (arêtes M et D)", correct: true },
-      { text: "B. Une crête vestibulo-linguale pour cuspide vestibulaire", correct: true },
-      { text: "C. Une crête vestibulo-linguale pour cuspide linguale", correct: true },
-      { text: "D. Canine sans arête vestibulaire/linguale", correct: false }
-    ]
-  },
-  {
-    question: "Concernant les crêtes transversales et obliques…",
-    difficulty: 2,
-    answers: [
-      { text: "A. Crête transversale = arêtes internes des cuspides V et L", correct: true },
-      { text: "B. Crête oblique (pont d’émail) sur molaires maxillaires", correct: true },
-      { text: "C. Crête oblique diagonale : cuspides ML et DV", correct: true },
-      { text: "D. Crête transversale relie MV à DV mandibulaire", correct: false }
-    ]
-  },
-  {
-    question: "Les crêtes marginales sont…",
-    difficulty: 2,
-    answers: [
-      { text: "A. Élévations linéaires sur faces occlusales", correct: true },
-      { text: "B. Présentes sur faces linguales/palatines antérieures", correct: true },
-      { text: "C. Limitant latéralement les faces occlusales", correct: true },
-      { text: "D. Spécifiques des molaires uniquement", correct: false }
-    ]
-  },
-  {
-    question: "Les pans et versants d’une cuspide vestibulaire permettent de distinguer…",
-    difficulty: 2,
-    answers: [
-      { text: "A. Un versant externe et un versant interne", correct: true },
-      { text: "B. Un pan mésial et un pan distal", correct: true },
-      { text: "C. Une arête périphérique unique confondue avec l’interne", correct: false },
-      { text: "D. Une répartition topographique autour de la pointe", correct: true }
-    ]
-  },
-  {
-    question: "Concernant les tubercules…",
-    difficulty: 2,
-    answers: [
-      { text: "A. Carabelli sur cuspide mésio-palatine 1re molaire maxillaire", correct: true },
-      { text: "B. Bolk sur face vestibulaire 2e-3e molaire maxillaire", correct: true },
-      { text: "C. Cingulum compté parmi les tubercules", correct: true },
-      { text: "D. Tubercule central constant sur toutes les prémolaires mandibulaires", correct: false }
-    ]
-  },
-  {
-    question: "Les structures concaves « sillons » comprennent…",
-    difficulty: 2,
-    answers: [
-      { text: "A. Sillon principal central et périphérique", correct: true },
-      { text: "B. Sillons secondaires mésiaux et distaux", correct: true },
-      { text: "C. Sillons accessoires sur pans cuspidiens", correct: true },
-      { text: "D. Sillon marginal unique", correct: false }
-    ]
-  },
-  {
-    question: "À propos des fosses et fossettes…",
-    difficulty: 2,
-    answers: [
-      { text: "A. Fosse centrale = intersection des deux sillons", correct: true },
-      { text: "B. Fosse marginale = intersection sillon + crête marginale", correct: true },
-      { text: "C. Fossettes = dépressions sur faces V et L/P", correct: true },
-      { text: "D. Fossettes limitées aux molaires", correct: false }
-    ]
-  },
-
-  // 16 à 25 — Excellent ⭐⭐⭐
-  {
-    question: "Les divisions en tiers permettent…",
-    difficulty: 3,
-    answers: [
-      { text: "A. Identifier 1/3 mésial, médian, distal", correct: true },
-      { text: "B. Obtenir 1/3 vestibulaire, médian, lingual", correct: true },
-      { text: "C. Supprimer la distinction zones cervicales/moyennes", correct: false },
-      { text: "D. Appliquer la même grille à la racine", correct: true }
-    ]
-  },
-  {
-    question: "L’architecture « pyramide gothique » attribuée aux cuspides s’illustre par…",
-    difficulty: 3,
-    answers: [
-      { text: "A. Quatre arêtes convergentes au sommet", correct: true },
-      { text: "B. Crête transversale et oblique superposées", correct: false },
-      { text: "C. Versants périphériques et internes autour d’une pointe", correct: true },
-      { text: "D. Variabilité selon les classes de dents postérieures", correct: true }
-    ]
-  },
-  {
-    question: "Les arêtes externes sur les canines…",
-    difficulty: 3,
-    answers: [
-      { text: "A. Direction incisale, visibles au centre maxillaire", correct: true },
-      { text: "B. Remplacent les crêtes marginales", correct: false },
-      { text: "C. Coexistent avec la pointe canine", correct: true },
-      { text: "D. Direction vestibulo-linguale sur face palatine", correct: false }
-    ]
-  },
-  {
-    question: "La crête oblique des molaires maxillaires…",
-    difficulty: 3,
-    answers: [
-      { text: "A. Appelée pont d’émail", correct: true },
-      { text: "B. Traverse la face occlusale en diagonale", correct: true },
-      { text: "C. Formée par cuspides ML et DV", correct: true },
-      { text: "D. Présente aussi sur molaires mandibulaires", correct: false }
-    ]
-  },
-  {
-    question: "La crête transversale est décrite comme…",
-    difficulty: 3,
-    answers: [
-      { text: "A. Jonction des arêtes internes V et L", correct: true },
-      { text: "B. Traverse selon direction V/L", correct: true },
-      { text: "C. Entre cuspide L des PM et cuspide MV des molaires", correct: true },
-      { text: "D. Remplace les sillons secondaires", correct: false }
-    ]
-  },
-  {
-    question: "Les crêtes marginales assurent…",
-    difficulty: 3,
-    answers: [
-      { text: "A. Limitation latérale des faces occlusales", correct: true },
-      { text: "B. Barrage contre débordement des sillons", correct: true },
-      { text: "C. Disparition des embrasures cervicales", correct: false },
-      { text: "D. Continuité sans confusion avec crêtes cuspidiennes", correct: true }
-    ]
-  },
-  {
-    question: "La classification des sillons inclut…",
-    difficulty: 3,
-    answers: [
-      { text: "A. Principal central/périphérique", correct: true },
-      { text: "B. Secondaires avec branches divergentes", correct: true },
-      { text: "C. Accessoires sur pans cuspidiens", correct: true },
-      { text: "D. Radiculaires pour lobes radiculaires", correct: false }
-    ]
-  },
-  {
-    question: "Les fosses selon le texte…",
-    difficulty: 3,
-    answers: [
-      { text: "A. Fosse centrale = croisement sillons", correct: true },
-      { text: "B. Fosse marginale = sillon + crête marginale", correct: true },
-      { text: "C. Existent uniquement si crête oblique", correct: false },
-      { text: "D. Distinction entre fosse et fossettes", correct: true }
-    ]
-  },
-  {
-    question: "Les dents antérieures se caractérisent par…",
-    difficulty: 3,
-    answers: [
-      { text: "A. Incisives : bord libre rectiligne", correct: true },
-      { text: "B. Canines : bord coupant/pointe canine", correct: true },
-      { text: "C. Cingulum + crêtes marginales", correct: true },
-      { text: "D. Relief cuspidé comme molaires", correct: false }
-    ]
-  },
-  {
-    question: "Parmi les tubercules cités…",
-    difficulty: 3,
-    answers: [
-      { text: "A. Carabelli sur ML 1re molaire maxillaire", correct: true },
-      { text: "B. Bolk sur 2e et 3e molaires maxillaires", correct: true },
-      { text: "C. Cingulum parmi les tubercules", correct: true },
-      { text: "D. Tubercule oblique reliant ML à DV", correct: false }
-    ]
-  },
-
-  // 26 à 35 — Difficiles ⭐⭐⭐⭐
-  {
-    question: "Les embrasures se répartissent en…",
-    difficulty: 4,
-    answers: [
-      { text: "A. Vestibulaires et linguales/palatines", correct: true },
-      { text: "B. Cervicales et occlusales/incisives", correct: true },
-      { text: "C. Radiculaires apicales", correct: false },
-      { text: "D. Quatre familles schématisées", correct: true }
-    ]
-  },
-  {
-    question: "La surface de contact résulte…",
-    difficulty: 4,
-    answers: [
-      { text: "A. De l’usure du point de contact", correct: true },
-      { text: "B. D’un élargissement de la fosse marginale", correct: false },
-      { text: "C. D’un phénomène sur les dents alignées", correct: true },
-      { text: "D. D’un processus supprimant les embrasures", correct: false }
-    ]
-  },
-  {
-    question: "La topographie des faces dentaires montre…",
-    difficulty: 4,
-    answers: [
-      { text: "A. Dénominations distale, mésiale, vestibulaire, linguale, occlusale", correct: true },
-      { text: "B. Correspondance buccale/palatine", correct: false },
-      { text: "C. Usage des plans/tiers pour repères", correct: true },
-      { text: "D. Organisation des reliefs", correct: true }
-    ]
-  },
-  {
-    question: "Les pans d’une cuspide vestibulaire indiquent que…",
-    difficulty: 4,
-    answers: [
-      { text: "A. Pan mésial et distal se lisent de part et d’autre de l’arête", correct: true },
-      { text: "B. Versants interne et périphérique opposés", correct: true },
-      { text: "C. Arête périphérique distincte de l’interne", correct: true },
-      { text: "D. Inapplicables aux cuspides vestibulaires", correct: false }
-    ]
-  },
-  {
-    question: "Morphologie des prémolaires/molaires :",
-    difficulty: 4,
-    answers: [
-      { text: "A. Sillon central (M/D) et périphérique (V/L)", correct: true },
-      { text: "B. Sillons secondaires mésiaux/distaux", correct: true },
-      { text: "C. Accessoires sur pans cuspidiens", correct: true },
-      { text: "D. Aucune fosse occlusale", correct: false }
-    ]
-  },
-  {
-    question: "À propos des crêtes transversales/obliques, il est faux que…",
-    difficulty: 4,
-    answers: [
-      { text: "A. Crête oblique n’existe que sur molaires maxillaires", correct: false },
-      { text: "B. Crête transversale = réunion d’arêtes internes V/L", correct: false },
-      { text: "C. Crête oblique = pont d’émail diagonale", correct: false },
-      { text: "D. Crête transversale remplace les crêtes marginales", correct: true }
-    ]
-  },
-  {
-    question: "Le cingulum est…",
-    difficulty: 4,
-    answers: [
-      { text: "A. Tubercule de la face linguale des incisives/canines", correct: true },
-      { text: "B. Élément classé parmi les tubercules", correct: true },
-      { text: "C. Structure occupant la fosse centrale", correct: false },
-      { text: "D. Composante avec les crêtes marginales", correct: true }
-    ]
-  },
-  {
-    question: "Terminologie et topographie :",
-    difficulty: 4,
-    answers: [
-      { text: "A. Divisions zones/tiers = base des repères", correct: true },
-      { text: "B. Arêtes internes guident formation des crêtes", correct: true },
-      { text: "C. Embrasures sans rapport au contact", correct: false },
-      { text: "D. Crêtes marginales limitent sillons", correct: true }
-    ]
-  },
-  {
-    question: "Pour les molaires maxillaires :",
-    difficulty: 4,
-    answers: [
-      { text: "A. Crête oblique diagonale observée", correct: true },
-      { text: "B. Cuspide ML avec tubercule de Carabelli", correct: true },
-      { text: "C. Cuspide ML avec trois arêtes internes", correct: true },
-      { text: "D. Aucune arête interne", correct: false }
-    ]
-  },
-  {
-    question: "La terminologie des concavités distingue…",
-    difficulty: 4,
-    answers: [
-      { text: "A. Fosses centrale/marginale", correct: true },
-      { text: "B. Fossettes sur V et L/P", correct: true },
-      { text: "C. Sillons accessoires sur pans cuspidiens", correct: true },
-      { text: "D. Crêtes marginales comme fosses", correct: false }
-    ]
-  },
-
-  // 36 à 40 — Très difficiles ⭐⭐⭐⭐⭐
-  {
-    question: "Crêtes et arêtes : sélection correcte",
-    difficulty: 5,
-    answers: [
-      { text: "A. Crête transversale relie arêtes internes V et L", correct: true },
-      { text: "B. Crête oblique réunit ML et DV sur molaires maxillaires", correct: true },
-      { text: "C. Chaque cuspide postérieure a au moins une arête interne (ML en a trois)", correct: true },
-      { text: "D. Crêtes marginales disparaissent avec crête transversale", correct: false }
-    ]
-  },
-  {
-    question: "Schémas de pans/versants montrent que…",
-    difficulty: 5,
-    answers: [
-      { text: "A. Arête périphérique ≠ arête interne", correct: true },
-      { text: "B. Pans mésial/distal visibles autour de la pointe", correct: true },
-      { text: "C. Versants internes remplacés par sillons accessoires", correct: false },
-      { text: "D. Reliefs en pyramide à quatre côtés", correct: true }
-    ]
-  },
-  {
-    question: "Synthèse points de contact – embrasures – faces :",
-    difficulty: 5,
-    answers: [
-      { text: "A. Point de contact → usure → surface de contact", correct: true },
-      { text: "B. Embrasures vestibulaires, linguales, cervicales, occlusales", correct: true },
-      { text: "C. Espaces indépendants du contact", correct: false },
-      { text: "D. Répartition circulaire autour du contact", correct: true }
-    ]
-  },
-  {
-    question: "Dents antérieures :",
-    difficulty: 5,
-    answers: [
-      { text: "A. Incisives : bord libre rectiligne ; canines : pointe canine", correct: true },
-      { text: "B. Cingulum + crêtes marginales délimitent la face linguale", correct: true },
-      { text: "C. Cuspide occlusale médiane sur incisives", correct: false },
-      { text: "D. Pas de relief proéminent au collet lingual", correct: false }
-    ]
-  },
-  {
-    question: "Concavités occlusales :",
-    difficulty: 5,
-    answers: [
-      { text: "A. Fosse centrale = intersection sillons central/périphérique", correct: true },
-      { text: "B. Fosse marginale = intersection sillon principal + crête marginale", correct: true },
-      { text: "C. Sillons secondaires mésial/distal", correct: true },
-      { text: "D. Fossettes sur V et L/P", correct: true }
-]
-  }
-],'Généralités et notions de bases en Anatomie dentaire': [
-  // A. Bon élève ⭐
-  {
-    question: "Les rôles mis en avant pour la dent dans l’introduction recouvrent…",
-    difficulty: 1,
-    answers: [
-      { text: "A. la mastication avec préparation mécanique du bol", correct: true },
-      { text: "B. la phonation en participant à certains sons", correct: true },
-      { text: "C. l’esthétique du sourire et du tiers inférieur", correct: true },
-      { text: "D. la digestion gastrique directe dans l’estomac", correct: false }
-    ]
-  },
-  {
-    question: "L’étude morphologique des dents et de leur organisation dans les arcades permet…",
-    difficulty: 1,
-    answers: [
-      { text: "A. de comprendre la fonction et l’adaptation en bouche", correct: true },
-      { text: "B. d’anticiper les conséquences cliniques des anomalies dentaires", correct: true },
-      { text: "C. de remplacer totalement l’examen clinique et radiographique", correct: false },
-      { text: "D. d’établir des repères descriptifs communs", correct: true }
-    ]
-  },
-  {
-    question: "Parmi les tissus de l’organe dentaire, on distingue…",
-    difficulty: 1,
-    answers: [
-      { text: "A. l’émail et la dentine comme tissus durs/minéralisés", correct: true },
-      { text: "B. la pulpe comme tissu conjonctivo-vasculo-nerveux", correct: true },
-      { text: "C. le cément comme tissu de recouvrement radiculaire", correct: true },
-      { text: "D. le cartilage dentaire marginal comme tissu constitutif de couronne", correct: false }
-    ]
-  },
-  {
-    question: "L’anatomie d’une dent s’organise autour de…",
-    difficulty: 1,
-    answers: [
-      { text: "A. une couronne (partie visible cliniquement)", correct: true },
-      { text: "B. une racine (partie intra-alvéolaire)", correct: true },
-      { text: "C. un collet anatomique défini par la jonction émail-cément (JAC)", correct: true },
-      { text: "D. un « collet osseux » synonyme de JAC", correct: false }
-    ]
-  },
-  {
-    question: "À propos du collet clinique, on peut affirmer qu’il…",
-    difficulty: 1,
-    answers: [
-      { text: "A. délimite la couronne clinique selon le niveau gingival", correct: true },
-      { text: "B. varie au cours de la vie (récessions, éruptions passives)", correct: true },
-      { text: "C. coïncide toujours avec la JAC", correct: false },
-      { text: "D. sépare partie visible et partie enfouie", correct: true }
-    ]
-  },
-
-  // B. Très bon élève ⭐⭐
-  {
-    question: "Couronne anatomique vs couronne clinique selon l’âge :",
-    difficulty: 2,
-    answers: [
-      { text: "A. vers 10 ans, l’anatomique > la clinique", correct: true },
-      { text: "B. vers 25 ans, l’anatomique = la clinique", correct: true },
-      { text: "C. sujet âgé : anatomique < clinique", correct: true },
-      { text: "D. relation fixe et invariable", correct: false }
-    ]
-  },
-  {
-    question: "Les termes « denture » et « dentition » désignent respectivement…",
-    difficulty: 2,
-    answers: [
-      { text: "A. denture = ensemble des dents présentes (statique)", correct: true },
-      { text: "B. dentition = processus d’éruption (dynamique)", correct: true },
-      { text: "C. synonymes sans nuance", correct: false },
-      { text: "D. notions opposées statique/dynamique utilisées conjointement", correct: true }
-    ]
-  },
-  {
-    question: "Une dent monoradiculée et une dent pluriradiculée se distinguent par…",
-    difficulty: 2,
-    answers: [
-      { text: "A. le nombre de racines", correct: true },
-      { text: "B. la présence d’une furcation pour les pluriradiculées", correct: true },
-      { text: "C. apex unique dans tous les cas", correct: false },
-      { text: "D. absence de furcation pour les monoradiculées", correct: true }
-    ]
-  },
-  {
-    question: "Les quatre classes de dents permanentes comprennent…",
-    difficulty: 2,
-    answers: [
-      { text: "A. incisives", correct: true },
-      { text: "B. canines", correct: true },
-      { text: "C. prémolaires", correct: true },
-      { text: "D. molaires", correct: true }
-    ]
-  },
-  {
-    question: "Fonctions dominantes par classe :",
-    difficulty: 2,
-    answers: [
-      { text: "A. incisives → couper/découper", correct: true },
-      { text: "B. canines → déchirer, guider", correct: true },
-      { text: "C. prémolaires → triturer", correct: true },
-      { text: "D. molaires → broyer", correct: true }
-    ]
-  },
-  {
-    question: "Caractéristiques des incisives :",
-    difficulty: 2,
-    answers: [
-      { text: "A. quatre au total (centrales et latérales)", correct: true },
-      { text: "B. bord tranchant", correct: true },
-      { text: "C. racine bifide", correct: false },
-      { text: "D. impliquées dans esthétique et phonation", correct: true }
-    ]
-  },
-  {
-    question: "À propos des canines :",
-    difficulty: 2,
-    answers: [
-      { text: "A. deux par maxillaire", correct: true },
-      { text: "B. forme pointue, racine longue", correct: true },
-      { text: "C. guidage canin", correct: true },
-      { text: "D. aucune fonction occlusale", correct: false }
-    ]
-  },
-  {
-    question: "Les prémolaires :",
-    difficulty: 2,
-    answers: [
-      { text: "A. quatre au total", correct: true },
-      { text: "B. face occlusale triturante", correct: true },
-      { text: "C. fonction intermédiaire", correct: true },
-      { text: "D. remplacent incisives latérales", correct: false }
-    ]
-  },
-  {
-    question: "Les molaires permanentes sont…",
-    difficulty: 2,
-    answers: [
-      { text: "A. les dents les plus larges", correct: true },
-      { text: "B. à plusieurs cuspides", correct: true },
-      { text: "C. dédiées au broyage", correct: true },
-      { text: "D. monoradiculées", correct: false }
-    ]
-  },
-  {
-    question: "Schéma couronne/collet/racine et parodonte :",
-    difficulty: 2,
-    answers: [
-      { text: "A. émail, dentine, pulpe, cément", correct: true },
-      { text: "B. desmodonte, os alvéolaire, gencive", correct: true },
-      { text: "C. canal osseux intra-pulpaire", correct: false },
-      { text: "D. apex et canal radiculaire décrits", correct: true }
-    ]
-  },
-
-  // C. Excellent ⭐⭐⭐
-  {
-    question: "Denture déciduale (temporaire) :",
-    difficulty: 3,
-    answers: [
-      { text: "A. 6 mois → 6 ans", correct: true },
-      { text: "B. 10 dents/arcade (20 total)", correct: true },
-      { text: "C. incisives, canines, molaires", correct: true },
-      { text: "D. prémolaires temporaires", correct: false }
-    ]
-  },
-  {
-    question: "Denture permanente :",
-    difficulty: 3,
-    answers: [
-      { text: "A. 16 dents/arcade", correct: true },
-      { text: "B. incisives, canines, prémolaires, molaires", correct: true },
-      { text: "C. débute vers 6 ans", correct: true },
-      { text: "D. sans dents de sagesse", correct: false }
-    ]
-  },
-  {
-    question: "Denture mixte :",
-    difficulty: 3,
-    answers: [
-      { text: "A. commence à 6 ans", correct: true },
-      { text: "B. se termine vers 12 ans", correct: true },
-      { text: "C. cohabitation temporaire/permanente", correct: true },
-      { text: "D. exclut toute dent temporaire", correct: false }
-    ]
-  },
-  {
-    question: "Formule dentaire — principes :",
-    difficulty: 3,
-    answers: [
-      { text: "A. représentation par hémi-arcade", correct: true },
-      { text: "B. minuscules pour temporaires, majuscules pour permanentes", correct: true },
-      { text: "C. un seul système numérique obligatoire", correct: false },
-      { text: "D. schémas illustrant les trois états", correct: true }
-    ]
-  },
-  {
-    question: "Couronne clinique — assertions :",
-    difficulty: 3,
-    answers: [
-      { text: "A. partie visible dépendant de la gencive", correct: true },
-      { text: "B. peut être <, = ou >", correct: true },
-      { text: "C. délimitée par la gencive", correct: true },
-      { text: "D. confondue avec la JAC", correct: false }
-    ]
-  },
-  {
-    question: "Collet anatomique vs clinique :",
-    difficulty: 3,
-    answers: [
-      { text: "A. collet anatomique = JAC (fixe)", correct: true },
-      { text: "B. collet clinique : limite gingivale variable", correct: true },
-      { text: "C. JAC varie avec récessions", correct: false },
-      { text: "D. collet clinique sépare visible/enfoui", correct: true }
-    ]
-  },
-  {
-    question: "Éruption dents primaires :",
-    difficulty: 3,
-    answers: [
-      { text: "A. incisives centrales sup. : 7–12 mois", correct: true },
-      { text: "B. canines sup. : 16–22 mois", correct: true },
-      { text: "C. 1res molaires sup. : 13–19 mois", correct: true },
-      { text: "D. 2es molaires sup. : chute 10–12 ans", correct: false }
-    ]
-  },
-  {
-    question: "Éruption dents permanentes :",
-    difficulty: 3,
-    answers: [
-      { text: "A. incisives centrales sup. : 7–8 ans", correct: true },
-      { text: "B. canines sup. : 11–12 ans", correct: true },
-      { text: "C. 1res prémolaires sup. : 10–11 ans", correct: true },
-      { text: "D. 3es molaires : 17–21 ans", correct: true }
-    ]
-  },
-  {
-    question: "À propos de la furcation :",
-    difficulty: 3,
-    answers: [
-      { text: "A. divergence radiculaire des pluriradiculées", correct: true },
-      { text: "B. absente sur les monoradiculées", correct: true },
-      { text: "C. confondue avec le collet", correct: false },
-      { text: "D. visible sur schémas pluriradiculées", correct: true }
-    ]
-  },
-  {
-    question: "Repères d’ensemble :",
-    difficulty: 3,
-    answers: [
-      { text: "A. morphologie = langage commun (faces, bords, cuspides)", correct: true },
-      { text: "B. relie forme et fonction", correct: true },
-      { text: "C. rend l’examen clinique superflu", correct: false },
-      { text: "D. situe la dent dans le parodonte", correct: true }
-    ]
-  },
-
-  // D. Difficiles ⭐⭐⭐⭐
-  {
-    question: "Variations couronne anatomique/clinique (synthèse) :", difficulty: 4,
-    answers: [
-      { text: "A. 10 ans : anatomique > clinique", correct: true },
-      { text: "B. 25 ans : équivalence", correct: true },
-      { text: "C. sujet âgé : anatomique < clinique", correct: true },
-      { text: "D. relations figées", correct: false }
-    ]
-  },
-  {
-    question: "Concordance classes/fonctions :", difficulty: 4,
-    answers: [
-      { text: "A. incisives → couper", correct: true },
-      { text: "B. canines → déchirer/guider", correct: true },
-      { text: "C. prémolaires → triturer", correct: true },
-      { text: "D. molaires → broyer", correct: true }
-    ]
-  },
-  {
-    question: "Organisation tissulaire/parodontale :", difficulty: 4,
-    answers: [
-      { text: "A. émail/dentine/pulpe/cément", correct: true },
-      { text: "B. desmodonte/os/gencive", correct: true },
-      { text: "C. canal osseux intra-pulpaire", correct: false },
-      { text: "D. apex et canal radiculaire", correct: true }
-    ]
-  },
-  {
-    question: "Topographie générale :", difficulty: 4,
-    answers: [
-      { text: "A. distinction des faces (vestibulaire/linguale/mésiale/distale)", correct: true },
-      { text: "B. repérages utiles", correct: true },
-      { text: "C. suppression des repères", correct: false },
-      { text: "D. lien relief/fonction", correct: true }
-    ]
-  },
-  {
-    question: "Denture temporaire — composition :", difficulty: 4,
-    answers: [
-      { text: "A. incisives, canines, molaires", correct: true },
-      { text: "B. pas de prémolaires", correct: true },
-      { text: "C. 20 dents", correct: true },
-      { text: "D. 32 dents avant 6 ans", correct: false }
-    ]
-  },
-  {
-    question: "Denture permanente — rappels :", difficulty: 4,
-    answers: [
-      { text: "A. 32 dents", correct: true },
-      { text: "B. présence de prémolaires", correct: true },
-      { text: "C. 3es molaires possibles", correct: true },
-      { text: "D. 20 dents", correct: false }
-    ]
-  },
-  {
-    question: "Denture mixte — bornes :", difficulty: 4,
-    answers: [
-      { text: "A. débute à 6 ans", correct: true },
-      { text: "B. s’achève vers 12 ans", correct: true },
-      { text: "C. équivaut à absence de temporaire", correct: false },
-      { text: "D. cohabitation temporaire/permanente", correct: true }
-    ]
-  },
-  {
-    question: "Couronne clinique — conséquences :", difficulty: 4,
-    answers: [
-      { text: "A. varie avec récessions", correct: true },
-      { text: "B. peut > anatomique", correct: true },
-      { text: "C. reste identique chez l’enfant", correct: false },
-      { text: "D. conditionne visibilité", correct: true }
-    ]
-  },
-  {
-    question: "Formules dentaires :", difficulty: 4,
-    answers: [
-      { text: "A. hémi-arcade", correct: true },
-      { text: "B. casse distincte (minuscule/majuscule)", correct: true },
-      { text: "C. schéma enfant 8 ans", correct: true },
-      { text: "D. système unique imposé", correct: false }
-    ]
-  },
-  {
-    question: "Classes et nombres denture permanente :", difficulty: 4,
-    answers: [
-      { text: "A. 8 incisives", correct: true },
-      { text: "B. 4 canines", correct: true },
-      { text: "C. 8 prémolaires", correct: true },
-      { text: "D. 12 molaires", correct: true }
-    ]
-  },
-
-  // E. Très difficiles ⭐⭐⭐⭐⭐
-  {
-    question: "Recoupement 'statique vs dynamique' :", difficulty: 5,
-    answers: [
-      { text: "A. denture = état statique", correct: true },
-      { text: "B. dentition = processus dynamique", correct: true },
-      { text: "C. synonymes", correct: false },
-      { text: "D. opposition pédagogique", correct: true }
-    ]
-  },
-  {
-    question: "Lecture âge-dépendante (couronnes) :", difficulty: 5,
-    answers: [
-      { text: "A. enfant : gencive recouvre plus", correct: true },
-      { text: "B. adulte : équivalence fréquente", correct: true },
-      { text: "C. âgé : récession → couronne clinique ↑", correct: true },
-      { text: "D. JAC se déplace", correct: false }
-    ]
-  },
-  {
-    question: "Cohérence 'fonction ↔ morphologie' :", difficulty: 5,
-    answers: [
-      { text: "A. bords tranchants → section", correct: true },
-      { text: "B. pointe canine → guidage", correct: true },
-      { text: "C. cuspides prémolaires → trituration", correct: true },
-      { text: "D. tables molaires → broyage", correct: true }
-    ]
-  },
-  {
-    question: "Chronologie d’éruption — pièges :", difficulty: 5,
-    answers: [
-      { text: "A. primaires : canines 16–22 mois ; molaires 13–19 mois", correct: true },
-      { text: "B. primaires : 2es molaires chute 10–12 ans", correct: true },
-      { text: "C. permanentes : 7–8 ans à 17–21 ans", correct: true },
-      { text: "D. primaires : prémolaires avant 6 ans", correct: false }
-    ]
-  },
-  {
-    question: "Vision d’ensemble — articulation des notions :", difficulty: 5,
-    answers: [
-      { text: "A. terminologie structure la description", correct: true },
-      { text: "B. opposition denture/dentition éclaire les âges", correct: true },
-      { text: "C. distinction collet anat./clin. évite confusion", correct: true },
-      { text: "D. morphologie rend inutile l’étude du parodonte", correct: false }
-    ]
-  }
-], 
-  "Incisives : caractères morphologiques et différentiels": [
-    // 1–10 : difficulté 1
-    {
-      question:
-        "D’après le cours, les incisives sont au nombre de huit, groupées deux à deux en centrales et latérales, supérieures et inférieures, avec une fonction commune.",
-      difficulty: 1,
-      answers: [
-        { text: "Les supérieures et inférieures ont deux racines chacune par défaut", correct: false },
-        { text: "Elles sont quatre par maxillaire (deux centrales et deux latérales)", correct: true },
-        { text: "Elles servent prioritairement à broyer comme les molaires", correct: false },
-        { text: "Elles coupent les aliments et ne possèdent qu’une seule racine chacune", correct: true }
-      ]
-    },
-    {
-      question: "Série d’éruption et de classement :",
-      difficulty: 1,
-      answers: [
-        { text: "Les supérieures sont « ascendantes » alors que les inférieures sont « descendantes »", correct: false },
-        { text: "Les incisives inférieures sont en « série ascendante »", correct: true },
-        { text: "Les deux séries sont dites toutes deux « ascendantes »", correct: false },
-        { text: "Les incisives supérieures sont en « série descendante »", correct: true }
-      ]
-    },
-    {
-      question: "Incisive centrale maxillaire — données chronologiques (page dédiée) :",
-      difficulty: 1,
-      answers: [
-        { text: "Hauteur totale = 20,7 mm et éruption à 7 ans (valeurs de la mandibulaire centrale)", correct: false },
-        { text: "Hauteur totale ≈ 22,5 mm", correct: true },
-        { text: "Début de calcification en 3e année selon le texte", correct: false },
-        { text: "Début de calcification : 1re année ; éruption ≈ 7 ans et demi ; calcification complète ≈ 10 ans", correct: true }
-      ]
-    },
-    {
-      question: "Face vestibulaire de la 11/21 (centrale maxillaire) — dimensions indiquées :",
-      difficulty: 1,
-      answers: [
-        { text: "Diamètre mésio-distal ≈ 9 mm", correct: true },
-        { text: "Diamètre horizontal 6,4 mm et vertical 8,8 mm (valeurs de la latérale maxillaire)", correct: false },
-        { text: "Hauteur coronaire 8,8 mm (valeur mandibulaire)", correct: false },
-        { text: "Hauteur coronaire ≈ 10 mm", correct: true }
-      ]
-    },
-    {
-      question: "Incisive centrale mandibulaire — caractère général :",
-      difficulty: 1,
-      answers: [
-        { text: "Elle est aplatie dans le sens mésio-distal (et non vestibulo-lingual)", correct: true },
-        { text: "C’est la plus petite de toutes les dents, plus étroite et plus symétrique", correct: true },
-        { text: "Elle présente habituellement deux racines", correct: false },
-        { text: "Son aplatissement est vestibulo-lingual comme pour les supérieures", correct: false }
-      ]
-    },
-    {
-      question: "Orientation vestibulaire des incisives maxillaires (schéma d’orientation) :",
-      difficulty: 1,
-      answers: [
-        { text: "Les apex sont droits sans inclinaison ; aucune convergence n’est mentionnée", correct: false },
-        { text: "Les faces vestibulaires « convergent vers le sternum »", correct: true },
-        { text: "L’inclinaison se fait de 10–12° dans le plan mésio-distal", correct: false },
-        { text: "Les apex s’orientent du côté distal ; inclinaison de 3–4° dans le plan mésio-distal", correct: true }
-      ]
-    },
-    {
-      question: "Bord libre de la centrale maxillaire chez l’adulte :",
-      difficulty: 1,
-      answers: [
-        { text: "Aspect rectiligne dû à l’usure", correct: true },
-        { text: "S’oriente de bas en haut vers le vestibulaire selon le texte", correct: false },
-        { text: "Reste strictement horizontal, sans obliquité", correct: false },
-        { text: "Petite surface oblique de bas en haut vers le lingual et vers le distal", correct: true }
-      ]
-    },
-    {
-      question: "Face linguale/palatine de la centrale maxillaire — constitution :",
-      difficulty: 1,
-      answers: [
-        { text: "Deux fortes crêtes marginales (mésiale et distale) + un cingulum cervical", correct: true },
-        { text: "Complexité plus marquée que la face vestibulaire ; cingulum parfois divisé par un sillon vertical", correct: true },
-        { text: "Crêtes marginales uniquement au tiers incisal", correct: false },
-        { text: "Absence de cingulum et de crêtes marginales", correct: false }
-      ]
-    },
-    {
-      question: "Racine de la centrale maxillaire — forme et direction :",
-      difficulty: 1,
-      answers: [
-        { text: "Inclinaison légère vers le distal (plan M-D) et forte vers le palatin (plan V-L)", correct: true },
-        { text: "Section ovale à quatre faces (valeur de la latérale maxillaire)", correct: false },
-        { text: "Courte et trapue, apex légèrement arrondi ; section (au-dessus du collet) triangulaire aux angles arrondis", correct: true },
-        { text: "Inclinaison forte vers le vestibulaire selon le texte", correct: false }
-      ]
-    },
-    {
-      question: "Chambre pulpaire de la centrale maxillaire :",
-      difficulty: 1,
-      answers: [
-        { text: "Trois petites cornes pulpaires correspondant aux trois lobes de la « fleur de lys »", correct: true },
-        { text: "Aucune relation morphologique avec la couronne", correct: false },
-        { text: "Une seule corne, car la face vestibulaire n’est pas trilobée", correct: false },
-        { text: "Reproduit la forme coronale ; aplatie dans le sens vestibulo-lingual ; étranglement au collet", correct: true }
-      ]
-    },
-
-    // 11–20 : difficulté 2
-    {
-      question: "Canal radiculaire de la centrale maxillaire :",
-      difficulty: 2,
-      answers: [
-        { text: "Strictement conique dès l’entrée, sans segment cylindrique", correct: false },
-        { text: "S’élargit à l’apex", correct: false },
-        { text: "Fait suite directe à la chambre pulpaire", correct: true },
-        { text: "D’abord cylindrique puis s’effile graduellement ; rétrécissement brusque au sommet", correct: true }
-      ]
-    },
-    {
-      question: "Situation en bouche de la centrale maxillaire :",
-      difficulty: 2,
-      answers: [
-        { text: "Racine rigoureusement verticale dans les deux plans", correct: false },
-        { text: "Racine : ~4° de distalisation (M-D) et ~20° d’inclinaison palatine (V-L)", correct: true },
-        { text: "Face vestibulaire de couronne quasi verticale en V-L (bord cervical à l’aplomb du bord libre)", correct: true },
-        { text: "Collet franchement en retrait vestibulaire", correct: false }
-      ]
-    },
-    {
-      question: "Incisive latérale maxillaire — gabarit vestibulaire :",
-      difficulty: 2,
-      answers: [
-        { text: "Lobe distal moins détaché que sur la centrale", correct: false },
-        { text: "Diamètre M-D de 9 mm et H coronnaire 10 mm (valeurs de la centrale)", correct: false },
-        { text: "Bord libre plus oblique ; angle mésial plus aigu, angle distal plus arrondi", correct: true },
-        { text: "Plus élancée, diamètre vertical ≈ 8,8 mm et horizontal ≈ 6,4 mm", correct: true }
-      ]
-    },
-    {
-      question: "Racine de la latérale maxillaire :",
-      difficulty: 2,
-      answers: [
-        { text: "Jamais aplatie en M-D selon le texte", correct: false },
-        { text: "Section ovalaire, quatre faces, aplatie dans le sens mésio-distal", correct: true },
-        { text: "Section triangulaire équilatérale comme la centrale", correct: false },
-        { text: "Plus longue, plus mince et plus effilée que la centrale", correct: true }
-      ]
-    },
-    {
-      question: "Incisive centrale mandibulaire — face vestibulaire :",
-      difficulty: 2,
-      answers: [
-        { text: "Bords mésial et distal d’égale longueur ⇒ bord libre à peu près horizontal", correct: true },
-        { text: "Bord cervical rectiligne et anguleux (le texte indique demi-cercle)", correct: false },
-        { text: "Silhouette en trapèze à grande base supérieure", correct: true },
-        { text: "Diamètre M-D ≈ 5,4 mm ; diamètre vertical ≈ 8,8 mm", correct: true }
-      ]
-    },
-    {
-      question: "Centrale mandibulaire — modelé vestibulaire vs supérieures :",
-      difficulty: 2,
-      answers: [
-        { text: "Sillons très marqués jusqu’au collet (le texte dit qu’ils sont atténués)", correct: false },
-        { text: "Même bosse au 1/3 cervical ; deux sillons atténués", correct: true },
-        { text: "Trois lobes d’égale valeur (contrairement à la centrale maxillaire où le distal est le plus grand)", correct: true },
-        { text: "Lobes absents et face plane", correct: false }
-      ]
-    },
-    {
-      question: "Centrale mandibulaire — face linguale :",
-      difficulty: 2,
-      answers: [
-        { text: "Cingulum et crêtes marginales « se fondent sans aucune démarcation » ; modelé très doux", correct: true },
-        { text: "Reliefs fortement accusés comme sur maxillaire", correct: false },
-        { text: "Silhouette proche de la vestibulaire, plus étroite, même hauteur", correct: true },
-        { text: "Présence d’un cingulum proéminent divisé par un sillon vertical marqué", correct: false }
-      ]
-    },
-    {
-      question: "Centrale mandibulaire — faces proximales et bord libre :",
-      difficulty: 2,
-      answers: [
-        { text: "Deux faces proximales semblables, modelé simple quasi plat ; 8,8 mm (V) × 6 mm (H)", correct: true },
-        { text: "Bord libre oblique vers le vestibulaire", correct: false },
-        { text: "Faces proximales dissymétriques et bombées", correct: false },
-        { text: "Bord libre plus symétrique ; usure donnant une obliquité de bas en haut en V-L", correct: true }
-      ]
-    },
-    {
-      question: "Centrale mandibulaire — racine et endodonte :",
-      difficulty: 2,
-      answers: [
-        { text: "Une seule corne pulpaire", correct: false },
-        { text: "Canal strictement cylindrique et non aplati", correct: false },
-        { text: "Chambre pulpaire très petite à trois cornes ; canal aplati en M-D", correct: true },
-        { text: "Racine très aplatie en M-D ; au collet : 5,7 mm (V-L) × 3,5 mm (M-D)", correct: true }
-      ]
-    },
-    {
-      question: "Centrale mandibulaire — situation en bouche :",
-      difficulty: 2,
-      answers: [
-        { text: "Face vestibulaire verticale comme la centrale maxillaire", correct: false },
-        { text: "Racine inclinée très légèrement vers le distal (≈ 1°)", correct: true },
-        { text: "Racine inclinée franchement vers le mésial", correct: false },
-        { text: "Face vestibulaire de la couronne fortement inclinée vers le lingual", correct: true }
-      ]
-    },
-
-    // 21–30 : difficulté 3
-    {
-      question: "Latérale mandibulaire — différences avec la centrale :",
-      difficulty: 3,
-      answers: [
-        { text: "Inverse de la situation maxillaire (où la latérale n’est pas plus forte que la centrale)", correct: true },
-        { text: "Bord incisif nettement plus oblique que sur la centrale mandibulaire", correct: false },
-        { text: "Morphologie quasi identique, mais dent un peu plus forte", correct: true },
-        { text: "Bord libre en général horizontal avec angle distal légèrement arrondi", correct: true }
-      ]
-    },
-    {
-      question: "Latérale mandibulaire — situation en bouche :",
-      difficulty: 3,
-      answers: [
-        { text: "Racine fortement inclinée vers le vestibulaire", correct: false },
-        { text: "Face vestibulaire un peu plus inclinée vers le lingual que la centrale", correct: true },
-        { text: "Face vestibulaire moins inclinée lingualement que la centrale", correct: false },
-        { text: "Racine : verticale en V-L et légèrement inclinée vers le distal", correct: true }
-      ]
-    },
-    {
-      question: "Caractères différentiels — couronnes supérieures vs inférieures :",
-      difficulty: 3,
-      answers: [
-        { text: "Supérieures : aplatissement vestibulo-lingual (diamètre M-D > V-L)", correct: false },
-        { text: "Les inférieures ont V-L < M-D", correct: false },
-        { text: "Inférieures : aplatissement mésio-distal (diamètre V-L > M-D)", correct: true },
-        { text: "Supérieures et inférieures ont le même type d’aplatissement", correct: false }
-      ]
-    },
-    {
-      question: "Caractères différentiels — faces linguales :",
-      difficulty: 3,
-      answers: [
-        { text: "Les supérieures n’ont pas de crêtes marginales", correct: false },
-        { text: "Sur les supérieures, crêtes marginales et cingulum sont nettement délimités", correct: true },
-        { text: "Les linguales des incisives inférieures sont presque unies ; détails à peine décelables", correct: true },
-        { text: "Les inférieures montrent toujours un cingulum proéminent et découpé", correct: false }
-      ]
-    },
-    {
-      question: "Différentiel intra-maxillaire (maxillaire) — latérale vs centrale :",
-      difficulty: 3,
-      answers: [
-        { text: "Latérale plus élancée, un peu moins haute mais nettement plus étroite", correct: true },
-        { text: "Lobe distal au galbe plus accentué", correct: true },
-        { text: "La latérale présente une section radiculaire triangulaire comme la centrale", correct: false },
-        { text: "Obliquité plus marquée du bord incisif ; angle mésial plus aigu, distal plus ouvert/arrondi", correct: true }
-      ]
-    },
-    {
-      question: "Centrale maxillaire — silhouette vestibulaire :",
-      difficulty: 3,
-      answers: [
-        { text: "Angle mésial plus arrondi que distal d’après le texte", correct: false },
-        { text: "Bord cervical moins large que le bord libre et en demi-cercle", correct: true },
-        { text: "Bord mésial plus long et moins convexe que le distal ; angle distal plus arrondi", correct: true },
-        { text: "Bord libre « très légèrement oblique » de bas en haut dans le sens mésio-distal", correct: true }
-      ]
-    },
-    {
-      question: "Centrale maxillaire — modelé vestibulaire :",
-      difficulty: 3,
-      answers: [
-        { text: "Le lobe distal est décrit comme le plus grand", correct: true },
-        { text: "Deux sillons verticaux délimitant trois lobes (mésial moyen, central petit, distal le plus grand)", correct: true },
-        { text: "Sillons très marqués jusqu’au collet (le texte dit qu’ils s’atténuent à mi-hauteur)", correct: false },
-        { text: "Bosse au 1/3 cervical", correct: true }
-      ]
-    },
-    {
-      question: "Centrale maxillaire — face linguale :",
-      difficulty: 3,
-      answers: [
-        { text: "Les crêtes marginales sont minces près du bord libre puis s’élargissent vers le cingulum", correct: true },
-        { text: "Le cingulum est absent et remplacé par une fosse", correct: false },
-        { text: "Au 1/3 cervical, les crêtes se fondent avec le cingulum ; parfois cingulum divisé en deux renflements", correct: true },
-        { text: "Les crêtes marginales sont plus marquées au bord libre qu’au cingulum", correct: false }
-      ]
-    },
-    {
-      question: "Centrale maxillaire — situation en bouche (récapitulatif angulaire) :",
-      difficulty: 3,
-      answers: [
-        { text: "Racine : env. 20° vers palatin (V-L)", correct: true },
-        { text: "Aucun angle chiffré n’est donné", correct: false },
-        { text: "Racine : env. 4° vers distal (M-D)", correct: true },
-        { text: "Inclinaison palatine < 5°", correct: false }
-      ]
-    },
-    {
-      question: "Latérale maxillaire — faces :",
-      difficulty: 3,
-      answers: [
-        { text: "Face linguale : « tous les détails du modelé sont plus marqués » ; cingulum descend plus bas", correct: true },
-        { text: "Face mésiale : identique mais plus petite (8,8 mm × 6 mm)", correct: true },
-        { text: "Face distale : modelé plus convexe et nettement moins haute", correct: true },
-        { text: "Face vestibulaire : mêmes sillons/lobes que la centrale, lobe distal mieux détaché", correct: true }
-      ]
-    },
-    {
-      question: "Latérale maxillaire — situation sagittale en bouche :",
-      difficulty: 3,
-      answers: [
-        { text: "Collet très légèrement rentré du côté palatin", correct: true },
-        { text: "Aucune différence sagittale n’est mentionnée", correct: false },
-        { text: "Collet à l’aplomb exact du bord libre comme pour la centrale", correct: false },
-        { text: "Face vestibulaire moins verticale que la centrale", correct: true }
-      ]
-    },
-
-    // 31–35 : difficulté 4
-    {
-      question: "Centrale mandibulaire — chiffres et rapports :",
-      difficulty: 4,
-      answers: [
-        { text: "Racine au collet : 5,7 mm (V-L) × 3,5 mm (M-D)", correct: true },
-        { text: "Chambre pulpaire volumineuse à deux cornes", correct: false },
-        { text: "Faces proximales : 8,8 mm (V) × 6 mm (H)", correct: true },
-        { text: "Face vestibulaire : M-D ≈ 5,4 mm ; vertical ≈ 8,8 mm", correct: true }
-      ]
-    },
-    {
-      question: "Latérale mandibulaire — différentiels vs centrale mandibulaire :",
-      difficulty: 4,
-      answers: [
-        { text: "Bord incisif incliné inversement par l’usure sur la latérale (le texte mentionne cette remarque pour la centrale)", correct: false },
-        { text: "Face vestibulaire de couronne légèrement plus inclinée lingualement", correct: true },
-        { text: "Morphologie semblable mais un peu plus grande/forte", correct: true },
-        { text: "Racine verticale en V-L et un peu inclinée distalement", correct: true }
-      ]
-    },
-    {
-      question: "Différentiels « supra vs infra » — aplatissement et diamètres :",
-      difficulty: 4,
-      answers: [
-        { text: "Inférieures : V-L > M-D (aplatissement M-D)", correct: true },
-        { text: "Inférieures : M-D > V-L", correct: false },
-        { text: "Supérieures : M-D > V-L (aplatissement V-L)", correct: true },
-        { text: "Supérieures et inférieures ont V-L = M-D", correct: false }
-      ]
-    },
-    {
-      question: "Face linguale — contraste de reliefs :",
-      difficulty: 4,
-      answers: [
-        { text: "Mandibulaires : reliefs « se fondent », modelé très doux, « sans aucune démarcation »", correct: true },
-        { text: "Maxillaires : crêtes marginales/cingulum bien identifiables (schémas et texte)", correct: true },
-        { text: "Mandibulaires : cingulum scindé par sillon vertical marqué (non conforme)", correct: false },
-        { text: "Maxillaires : absence de cingulum", correct: false }
-      ]
-    },
-    {
-      question: "Centrale maxillaire — correspondance chambre/couronne (morphologie interne/externe) :",
-      difficulty: 4,
-      answers: [
-        { text: "Chambre pulpaire reproduit la forme coronale et s’aplatit en V-L comme la couronne", correct: true },
-        { text: "Canal d’abord cylindrique puis s’effile et se rétrécit brusquement au sommet", correct: true },
-        { text: "Présence de trois petites cornes en bas, analogues aux trois lobes de la « fleur de lys »", correct: true },
-        { text: "Canal radiculaire s’élargit vers l’apex selon le texte", correct: false }
-      ]
-    },
-
-    // 36–40 : difficulté 5
-    {
-      question: "Différentiel majeur « maxillaire vs mandibulaire » (synthèse) :",
-      difficulty: 5,
-      answers: [
-        { text: "Mandibulaires : faces linguales presque unies, détails à peine décelables", correct: true },
-        { text: "Supérieures et inférieures : mêmes orientations et mêmes reliefs linguales", correct: false },
-        { text: "Mandibulaires : aplatissement M-D avec V-L > M-D", correct: true },
-        { text: "Supérieures : faces vestibulaires convergentes vers le sternum, apex orientés distalement", correct: true }
-      ]
-    },
-    {
-      question: "Valeurs numériques fines — latérale maxillaire :",
-      difficulty: 5,
-      answers: [
-        { text: "Diamètre vertical vestibulaire ≈ 8,8 mm", correct: true },
-        { text: "Vertical 10 mm et horizontal 9 mm (valeurs de la centrale)", correct: false },
-        { text: "Diamètre horizontal vestibulaire ≈ 6,4 mm", correct: true },
-        { text: "Horizontal 5,4 mm (valeur mandibulaire centrale)", correct: false }
-      ]
-    },
-    {
-      question: "Orientation et angles — centrale maxillaire vs latérale maxillaire :",
-      difficulty: 5,
-      answers: [
-        { text: "La latérale présente un collet rentré vestibulaire", correct: false },
-        { text: "Les deux ont exactement la même verticalité en V-L", correct: false },
-        { text: "Latérale : collet légèrement rentré palatin, donc face vestibulaire moins verticale", correct: true },
-        { text: "Centrale : collet à l’aplomb de la ligne vestibulaire du bord libre (V-L quasi vertical)", correct: true }
-      ]
-    },
-    {
-      question: "Différentiel intra-mandibulaire (latérale vs centrale) — rappel final :",
-      difficulty: 5,
-      answers: [
-        { text: "Les deux : face vestibulaire de la latérale un peu plus inclinée lingualement", correct: true },
-        { text: "Les deux : racine strictement mésialisée en M-D", correct: false },
-        { text: "Latérale : un peu plus grande/forte ; bord incisif généralement horizontal avec angle distal légèrement arrondi", correct: true },
-        { text: "Centrale : remarque d’« inclinaison inverse » du bord incisif sous l’effet de l’usure", correct: true }
-      ]
-    }
-  ],
-
-  "Les canines maxillaires et mandibulaires": [
-    // 1–10 : difficulté 1
-    {
-      question: "Le nombre total de canines humaines est :",
-      difficulty: 1,
-      answers: [
-        { text: "Quatre, toutes mandibulaires", correct: false },
-        { text: "Deux, toutes maxillaires", correct: false },
-        { text: "Six, réparties également", correct: false },
-        { text: "Quatre, deux à l’arcade supérieure et deux à l’arcade inférieure", correct: true }
-      ]
-    },
-    {
-      question: "Les canines se placent immédiatement après :",
-      difficulty: 1,
-      answers: [
-        { text: "Les molaires", correct: false },
-        { text: "Les premières prémolaires", correct: false },
-        { text: "Les incisives centrales uniquement", correct: false },
-        { text: "Les incisives latérales des deux arcades", correct: true }
-      ]
-    },
-    {
-      question: "Les canines sont décrites comme :",
-      difficulty: 1,
-      answers: [
-        { text: "À racines fusionnées", correct: false },
-        { text: "Monoradiculées", correct: true },
-        { text: "Ancrées par deux canaux systématiques", correct: false },
-        { text: "Biradiculées", correct: false }
-      ]
-    },
-    {
-      question: "La fonction principale attribuée à la forme pointue de la couronne canine est de :",
-      difficulty: 1,
-      answers: [
-        { text: "Briser les corps très résistants", correct: true },
-        { text: "Écraser comme une molaire", correct: false },
-        { text: "Stabiliser la mandibule", correct: false },
-        { text: "Déchiqueter grâce à plusieurs cuspides", correct: false }
-      ]
-    },
-    {
-      question: "La canine maxillaire est remarquable parce que :",
-      difficulty: 1,
-      answers: [
-        { text: "Sa hauteur coronaire est la plus faible", correct: false },
-        { text: "C’est la plus longue de toutes les dents (≈ 26,5 mm)", correct: true },
-        { text: "Elle n’a pas de bosse canine au maxillaire", correct: false },
-        { text: "Elle possède toujours deux racines", correct: false }
-      ]
-    },
-    {
-      question: "Pour la canine maxillaire, le début de calcification et la période d’éruption sont indiqués comme :",
-      difficulty: 1,
-      answers: [
-        { text: "≈ 2 ans 1/2 ; éruption 6–7 ans", correct: false },
-        { text: "≈ 2 ans 1/2 ; éruption 11–12 ans", correct: true },
-        { text: "≈ 1 an ; éruption 13–14 ans", correct: false },
-        { text: "≈ 5 ans ; éruption 8–9 ans", correct: false }
-      ]
-    },
-    {
-      question: "La calcification complète de la canine maxillaire survient :",
-      difficulty: 1,
-      answers: [
-        { text: "Vers 13 ans", correct: true },
-        { text: "Après 16 ans systématiquement", correct: false },
-        { text: "Avant 8 ans", correct: false },
-        { text: "À 10 ans", correct: false }
-      ]
-    },
-    {
-      question: "La racine de la canine maxillaire présente cliniquement :",
-      difficulty: 1,
-      answers: [
-        { text: "Une saillie palpable sur le maxillaire appelée « bosse canine »", correct: true },
-        { text: "Une fosse canine au niveau de la mandibule", correct: false },
-        { text: "Deux apex radiculaires", correct: false },
-        { text: "Une surface concave vestibulaire constante", correct: false }
-      ]
-    },
-    {
-      question: "La face vestibulaire de la couronne de la canine maxillaire a une silhouette :",
-      difficulty: 1,
-      answers: [
-        { text: "Quadrangulaire avec angles aigus coronaires", correct: false },
-        { text: "En forme de trapèze inversé", correct: false },
-        { text: "Comparée à un fer de lance, bord cervical en demi-cercle", correct: true },
-        { text: "Strictement symétrique mésio-distalement", correct: false }
-      ]
-    },
-    {
-      question: "Au bord libre vestibulaire de la canine maxillaire :",
-      difficulty: 1,
-      answers: [
-        { text: "V étroit à branches égales → pointe centrée", correct: false },
-        { text: "Pointe déportée distalement par une branche mésiale plus longue", correct: false },
-        { text: "Bord ovale sans V", correct: false },
-        { text: "V très ouvert à branches inégales, distale plus longue → pointe déportée mésialement", correct: true }
-      ]
-    },
-
-    // 11–20 : difficulté 2
-    {
-      question: "Le modelé vestibulaire de la canine maxillaire est :",
-      difficulty: 2,
-      answers: [
-        { text: "Concave verticalement", correct: false },
-        { text: "Strictement rectiligne", correct: false },
-        { text: "Plat, avec saillie maximale au 1/3 incisal", correct: false },
-        { text: "Convexe verticalement et horizontalement avec saillie maximale au 1/3 cervical", correct: true }
-      ]
-    },
-    {
-      question: "À propos des lobes de la face vestibulaire de la canine maxillaire :",
-      difficulty: 2,
-      answers: [
-        { text: "Lobe central absent", correct: false },
-        { text: "Deux lobes seulement", correct: false },
-        { text: "Trois lobes plus marqués que sur les incisives, sillons plus nets et divergents", correct: true },
-        { text: "Sillons parallèles comme sur les incisives", correct: false }
-      ]
-    },
-    {
-      question: "Le lobe central de la canine maxillaire :",
-      difficulty: 2,
-      answers: [
-        { text: "Est séparé par des sillons parallèles", correct: false },
-        { text: "Ne participe pas à la cuspide", correct: false },
-        { text: "Est le moins développé des trois", correct: false },
-        { text: "Se termine en pointe et confère le caractère unicuspidé", correct: true }
-      ]
-    },
-    {
-      question: "La face palatine de la canine maxillaire :",
-      difficulty: 2,
-      answers: [
-        { text: "Présente un bord libre circulaire sans V", correct: false },
-        { text: "Est plus large que la vestibulaire", correct: false },
-        { text: "Est dépourvue de cingulum", correct: false },
-        { text: "Est aussi haute que la vestibulaire mais plus étroite, avec cingulum plus saillant", correct: true }
-      ]
-    },
-    {
-      question: "Chez la canine maxillaire jeune puis âgée, la cuspide :",
-      difficulty: 2,
-      answers: [
-        { text: "Toujours acérée sans usure", correct: false },
-        { text: "Disparaît complètement avant 13 ans", correct: false },
-        { text: "Se transforme en deux cuspides", correct: false },
-        { text: "Arrondie chez les jeunes ; usure formant une petite surface plane chez les plus âgées", correct: true }
-      ]
-    },
-    {
-      question: "La racine de la canine maxillaire est décrite comme :",
-      difficulty: 2,
-      answers: [
-        { text: "Courte et compressée vestibulo-lingualement", correct: false },
-        { text: "Longue et forte (≈ 17 mm), section ovalaire", correct: true },
-        { text: "Courte et triangulaire", correct: false },
-        { text: "Double, à section circulaire", correct: false }
-      ]
-    },
-    {
-      question: "La chambre pulpaire de la canine maxillaire :",
-      difficulty: 2,
-      answers: [
-        { text: "Identique aux incisives, canal court et étroit", correct: false },
-        { text: "Sans cornes pulpaires", correct: false },
-        { text: "Plus vaste que sur les incisives, grande corne centrale et deux plus petites ; canal large et droit", correct: true },
-        { text: "Toujours courbe en S", correct: false }
-      ]
-    },
-    {
-      question: "Situation en bouche de la canine maxillaire (V-L) :",
-      difficulty: 2,
-      answers: [
-        { text: "Face vestibulaire quasi verticale ; racine inclinée vers le palatin d’environ 20°", correct: true },
-        { text: "Axe parfaitement vertical sans inclinaison", correct: false },
-        { text: "Face vestibulaire franchement oblique lingualement", correct: false },
-        { text: "Racine inclinée vers le vestibulaire d’environ 20°", correct: false }
-      ]
-    },
-    {
-      question: "Situation en bouche (M-D) de la canine maxillaire :",
-      difficulty: 2,
-      answers: [
-        { text: "Couronne inclinée distalement mais racine mésiale", correct: false },
-        { text: "Parfaitement verticale", correct: false },
-        { text: "Inclinaison mésiale de 10°", correct: false },
-        { text: "Dent légèrement inclinée distalement ; racine plus marquée (≈ 4° avec la verticale)", correct: true }
-      ]
-    },
-    {
-      question: "Pour la canine mandibulaire, les données chrono-morphométriques de base sont :",
-      difficulty: 2,
-      answers: [
-        { text: "Hauteur 20 mm ; éruption 6–7 ans", correct: false },
-        { text: "Hauteur 26,5 mm ; calcification 1 an ; éruption 8–9 ans", correct: false },
-        { text: "Hauteur 30 mm ; calcification 15 ans", correct: false },
-        { text: "Hauteur totale ≈ 25,6 mm ; calcification dès 2 ans 1/2 ; éruption 11–12 ans ; calcification complète 13–14 ans", correct: true }
-      ]
-    },
-
-    // 21–30 : difficulté 3
-    {
-      question: "Conformation générale de la canine mandibulaire par rapport à la maxillaire :",
-      difficulty: 3,
-      answers: [
-        { text: "Identique sur tous les plans", correct: false },
-        { text: "Couronne plus courte et racine plus longue", correct: false },
-        { text: "Plus aplatie mésio-distalement, couronne plus haute, racine moins longue", correct: true },
-        { text: "Plus globuleuse et racine plus longue", correct: false }
-      ]
-    },
-    {
-      question: "Face vestibulaire de la canine mandibulaire :",
-      difficulty: 3,
-      answers: [
-        { text: "Symétrique avec branche mésiale plus longue", correct: false },
-        { text: "Plus élancée et moins globuleuse, haute (≈ 10,3 mm), moins large (≈ 6,9 mm), pointe déportée mésialement", correct: true },
-        { text: "Pointe déportée distalement", correct: false },
-        { text: "Plus basse et plus large, pointe centrée", correct: false }
-      ]
-    },
-    {
-      question: "Face linguale de la canine mandibulaire :",
-      difficulty: 3,
-      answers: [
-        { text: "Éléments présents mais très atténués, presque fondus", correct: true },
-        { text: "Éléments absents", correct: false },
-        { text: "Cingulum très saillant comme au maxillaire", correct: false },
-        { text: "Crêtes marginales exubérantes", correct: false }
-      ]
-    },
-    {
-      question: "Faces mésiale et distale de la canine mandibulaire :",
-      difficulty: 3,
-      answers: [
-        { text: "Creusées par de larges sillons concaves", correct: false },
-        { text: "Plus convexes que sur la maxillaire", correct: false },
-        { text: "Plus plates que celles de la maxillaire", correct: true },
-        { text: "Identiques à la maxillaire", correct: false }
-      ]
-    },
-    {
-      question: "Racine et chambre pulpaire de la canine mandibulaire :",
-      difficulty: 3,
-      answers: [
-        { text: "Racine plus courte (≈ 15,3 mm) et un peu plus plate M-D ; chambre moins vaste, canal aplati M-D", correct: true },
-        { text: "Chambre plus vaste que la maxillaire", correct: false },
-        { text: "Canal toujours courbe vestibulo-lingual", correct: false },
-        { text: "Racine plus longue (≈ 18 mm) ; canal circulaire", correct: false }
-      ]
-    },
-    {
-      question: "Situation en bouche (V-L) de la canine mandibulaire :",
-      difficulty: 3,
-      answers: [
-        { text: "Inclinaison linguale de 10°", correct: false },
-        { text: "Inclinaison vestibulaire de 20°", correct: false },
-        { text: "Axe strictement vertical", correct: false },
-        { text: "Axe radiculaire très légèrement incliné de bas en haut vers le lingual (≈ 3°)", correct: true }
-      ]
-    },
-    {
-      question: "Situation en bouche (M-D) de la canine mandibulaire :",
-      difficulty: 3,
-      answers: [
-        { text: "Axe parfaitement vertical pour racine et couronne", correct: false },
-        { text: "Couronne et racine fortement mésialisées", correct: false },
-        { text: "Couronne inclinée distalement et racine mésiale", correct: false },
-        { text: "Couronne verticale ; racine légèrement inclinée distalement (≈ 2°)", correct: true }
-      ]
-    },
-    {
-      question: "Différentiel majeur du bord tranchant entre les deux canines :",
-      difficulty: 3,
-      answers: [
-        { text: "Mandibulaire : portion mésiale très courte, distale plus longue et plus oblique → pointe plus près du mésial", correct: true },
-        { text: "Mandibulaire : deux branches strictement égales", correct: false },
-        { text: "Maxillaire : portion distale plus courte → pointe plus près du distal", correct: false },
-        { text: "Maxillaire : pointe centrée par symétrie parfaite", correct: false }
-      ]
-    },
-    {
-      question: "Concernant le diamètre horizontal :",
-      difficulty: 3,
-      answers: [
-        { text: "Identique pour les deux", correct: false },
-        { text: "Plus large au mandibule", correct: false },
-        { text: "Plus étroit pour la canine mandibulaire que pour la maxillaire", correct: true },
-        { text: "Indéterminé", correct: false }
-      ]
-    },
-    {
-      question: "Faces proximales (différentiels) :",
-      difficulty: 3,
-      answers: [
-        { text: "Plus larges et plus basses qu’au maxillaire", correct: false },
-        { text: "Modelé plus accentué au mandibule", correct: false },
-        { text: "Identiques en hauteur et largeur", correct: false },
-        { text: "Légèrement plus étroites et plus hautes au mandibule, modelé moins accentué", correct: true }
-      ]
-    },
-    {
-      question: "Différence de hauteur entre faces mésiale et distale (mandibulaire vs maxillaire) :",
-      difficulty: 3,
-      answers: [
-        { text: "Plus nette sur la maxillaire", correct: false },
-        { text: "Inexistante", correct: false },
-        { text: "Identique", correct: false },
-        { text: "Plus nette sur la canine mandibulaire", correct: true }
-      ]
-    },
-
-    // 31–35 : difficulté 4
-    {
-      question: "Au maxillaire, les sillons des trois lobes vestibulaires :",
-      difficulty: 4,
-      answers: [
-        { text: "Absents", correct: false },
-        { text: "Convergents vers le collet", correct: false },
-        { text: "Strictement parallèles comme sur les incisives", correct: false },
-        { text: "Plus nets que sur les incisives, divergents et très légèrement courbes", correct: true }
-      ]
-    },
-    {
-      question: "Cingulum (comparatif) :",
-      difficulty: 4,
-      answers: [
-        { text: "Plus saillant sur la mandibulaire que sur la maxillaire", correct: false },
-        { text: "Identique en saillie sur les deux", correct: false },
-        { text: "Plus saillant et plus bas sur la canine maxillaire ; à peine marqué et confondu aux crêtes marginales sur la mandibulaire", correct: true },
-        { text: "Toujours absent sur la mandibulaire et la maxillaire", correct: false }
-      ]
-    },
-    {
-      question: "Orientation générale de la dent maxillaire (M-D) :",
-      difficulty: 4,
-      answers: [
-        { text: "Inclinaison mésiale de 10°", correct: false },
-        { text: "Inclinaison distale uniquement de la couronne, racine mésiale", correct: false },
-        { text: "Légère inclinaison distale globale, racine plus marquée (≈ 4°)", correct: true },
-        { text: "Verticale stricte", correct: false }
-      ]
-    },
-    {
-      question: "Chronologie : calcification complète mandibulaire vs maxillaire :",
-      difficulty: 4,
-      answers: [
-        { text: "Mandibulaire 10 ans ; maxillaire 14 ans", correct: false },
-        { text: "Mandibulaire vers 13–14 ans ; maxillaire vers 13 ans", correct: true },
-        { text: "Les deux à 8 ans", correct: false },
-        { text: "Maxillaire plus tardive que mandibulaire (15–16 ans)", correct: false }
-      ]
-    },
-    {
-      question: "Choix de l’énoncé qui combine correctement morphologie et topographie maxillaires :",
-      difficulty: 4,
-      answers: [
-        { text: "Face vestibulaire quasi verticale ; racine inclinée palatin ≈ 20° ; silhouette « fer de lance » avec V très ouvert", correct: true },
-        { text: "Racine double ; V symétrique", correct: false },
-        { text: "Face vestibulaire oblique lingual ; racine inclinée vestibulaire 20° ; V fermé", correct: false },
-        { text: "Face vestibulaire concave ; silhouette trapézoïdale", correct: false }
-      ]
-    },
-
-    // 36–40 : difficulté 5
-    {
-      question: "Évolution de la cuspide et lecture clinique :",
-      difficulty: 5,
-      answers: [
-        { text: "Pointe demeure toujours acérée quel que soit l’âge", correct: false },
-        { text: "La surface plane apparaît uniquement mandibulaire", correct: false },
-        { text: "L’usure supprime tout V au bord libre", correct: false },
-        { text: "Usure physiologique transformant la pointe en petite surface plane sur dents âgées", correct: true }
-      ]
-    },
-    {
-      question: "Combinaison correcte des valeurs dimensionnelles (approximatives) :",
-      difficulty: 5,
-      answers: [
-        { text: "Maxillaire : hauteur totale ≈ 26,5 mm ; racine ≈ 17 mm — Mandibulaire : hauteur totale ≈ 25,6 mm ; racine ≈ 15,3 mm", correct: true },
-        { text: "Maxillaire : racine 10 mm ; mandibulaire : racine 20 mm", correct: false },
-        { text: "Maxillaire : 25,6 mm ; mandibulaire : 26,5 mm ; racines inversées", correct: false },
-        { text: "Valeurs identiques pour les deux", correct: false }
-      ]
-    },
-    {
-      question: "Orientation fine mandibulaire (comparaison V-L et M-D) :",
-      difficulty: 5,
-      answers: [
-        { text: "Axe lingual : inclinaison distale (≈ 4°) ; V-L vertical", correct: false },
-        { text: "Axe vestibulaire : inclinaison vestibulaire (≈ 20°) ; M-D vertical", correct: false },
-        { text: "Axe radiculaire : verticale stricte ; M-D fortement mésiale", correct: false },
-        { text: "Axe radiculaire : légère inclinaison linguale (≈ 3°) ; en M-D racine légèrement distale (≈ 2°)", correct: true }
-      ]
-    },
-    {
-      question: "Énoncé intégratif « différentiels » correct :",
-      difficulty: 5,
-      answers: [
-        { text: "Les deux identiques en silhouette et reliefs", correct: false },
-        { text: "Mandibulaire à lobe central absent ; maxillaire bicuspidée", correct: false },
-        { text: "Mandibulaire plus élancée et aplatie M-D, éléments linguaux atténués ; maxillaire plus globuleuse avec cingulum saillant et bosse canine", correct: true },
-        { text: "Mandibulaire plus globuleuse avec cingulum marqué ; maxillaire aplatie sans bosse", correct: false }
-      ]
-    }
-  ],
-  
-
-    'Système nerveux': [
+   "1": [
+  {
+    "question": "Généralités sur les prémolaires Concernant les caractéristiques générales des prémolaires :",
+    "difficulty": 2,
+    "answers": [
       {
-        question: 'ما هو الجزء من الدماغ المسؤول عن التوازن؟',
-        difficulty: 1,
-        answers: [
-          { text: 'المخيخ', correct: true },
-          { text: 'النخاع المستطيل', correct: false },
-          { text: 'المهاد', correct: false },
-          { text: 'القشرة المخية', correct: false }
-        ]
+        "text": "Le bord tranchant est conservé tel quel sur la face occlusale.",
+        "correct": false
       },
       {
-        question: 'ما هو العصب المسؤول عن الرؤية؟',
-        difficulty: 2,
-        answers: [
-          { text: 'العصب السمعي', correct: false },
-          { text: 'العصب البصري', correct: true },
-          { text: 'العصب الوجهي', correct: false },
-          { text: 'العصب الحائر', correct: false }
-        ]
+        "text": "Leur couronne présente une forme cuboïde avec une face triturante complexe.",
+        "correct": true
+      },
+      {
+        "text": "Elles se situent immédiatement après les incisives latérales.",
+        "correct": false
+      },
+      {
+        "text": "Elles sont au nombre de huit au total, soit deux par hémi-arcade.",
+        "correct": true
       }
-      // ➕ أضف المزيد من الأسئلة هنا
     ]
+  },
+  {
+    "question": "Séries d'éruption et de volume À propos de l'évolution des prémolaires en bouche :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Toutes les prémolaires, sans exception, suivent une série descendante de volume.",
+        "correct": false
+      },
+      {
+        "text": "Les prémolaires inférieures se présentent en série ascendante (la 1ère est moins forte que la 2ème).",
+        "correct": true
+      },
+      {
+        "text": "La première prémolaire inférieure est systématiquement plus volumineuse que la supérieure.",
+        "correct": false
+      },
+      {
+        "text": "Les prémolaires supérieures se présentent en série descendante (la 1ère est plus forte que la 2ème).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Chronologie de la 1ère prémolaire maxillaire Quels sont les repères chronologiques exacts pour la première prémolaire maxillaire ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La calcification complète est achevée dès l'âge de 8 ans.",
+        "correct": false
+      },
+      {
+        "text": "Le début de la calcification se situe vers 3 à 4 ans environ.",
+        "correct": true
+      },
+      {
+        "text": "L'éruption est plus précoce que celle des canines supérieures.",
+        "correct": false
+      },
+      {
+        "text": "L'éruption survient entre 9 et 12 ans environ.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Morphologie radiculaire de la 1ère prémolaire maxillaire Cette dent possède des particularités radiculaires uniques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "C'est la seule prémolaire qui possède souvent deux racines.",
+        "correct": true
+      },
+      {
+        "text": "Elle possède systématiquement une racine unique et conique.",
+        "correct": false
+      },
+      {
+        "text": "La racine palatine est toujours plus longue que la racine vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Elle est constituée d'une racine vestibulaire (13 mm) et d'une racine linguale (12,5 mm).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Face vestibulaire de la 1ère prémolaire maxillaire Concernant la face vestibulaire de cette dent :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est divisée en trois lobes : mésial, central et distal.",
+        "correct": true
+      },
+      {
+        "text": "Elle ressemble à celle de la canine supérieure, mais avec un \"V\" du bord libre plus ouvert.",
+        "correct": true
+      },
+      {
+        "text": "Elle est parfaitement lisse et ne présente aucun relief.",
+        "correct": false
+      },
+      {
+        "text": "Sa hauteur est de 12 mm avec un diamètre mésio-distal de 10 mm.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Face palatine de la 1ère prémolaire maxillaire Quelles sont les caractéristiques de la face palatine ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est plus large que la face vestibulaire pour assurer la stabilité.",
+        "correct": false
+      },
+      {
+        "text": "Elle est plus petite que la face vestibulaire en hauteur et en diamètre.",
+        "correct": true
+      },
+      {
+        "text": "Elle présente des crêtes marginales très saillantes sur sa surface.",
+        "correct": false
+      },
+      {
+        "text": "Elle est absolument lisse, ne présente aucun sillon et n'est pas divisée en lobes.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Face mésiale de la 1ère prémolaire maxillaire À propos de la face mésiale :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa silhouette est plus large que haute (Hauteur 8 mm, diamètre V-P 9 mm).",
+        "correct": true
+      },
+      {
+        "text": "Le bord vestibulaire présente une convexité située au tiers occlusal.",
+        "correct": false
+      },
+      {
+        "text": "Elle est moins large que la face distale de la même dent.",
+        "correct": false
+      },
+      {
+        "text": "Son bord cervical est légèrement concave.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Face occlusale de la 1ère prémolaire maxillaire L'anatomie de la face triturante révèle que :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle s'inscrit globalement dans un pentagone à bords inégaux.",
+        "correct": true
+      },
+      {
+        "text": "Elle est formée de deux cuspides très saillantes, la vestibulaire étant la plus forte.",
+        "correct": true
+      },
+      {
+        "text": "Elle s'inscrit dans un triangle à base linguale.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide linguale est systématiquement plus large que la vestibulaire.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Sillon et relief occlusal (1ère prémolaire maxillaire) Le modelé de la face occlusale précise que :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le sillon est rectiligne et se termine par deux fossettes.",
+        "correct": true
+      },
+      {
+        "text": "Le versant mésial est plus grand que le versant distal.",
+        "correct": false
+      },
+      {
+        "text": "Les deux cuspides sont séparées par un sillon profond placé près du bord lingual.",
+        "correct": true
+      },
+      {
+        "text": "Les crêtes marginales sont absentes sur cette dent.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Cavité pulpaire de la 1ère prémolaire maxillaire Concernant le système endodontique :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La chambre pulpaire se continue par deux canaux radiculaires.",
+        "correct": true
+      },
+      {
+        "text": "La corne linguale est plus haute que la corne vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Elle ne possède qu'un seul canal central unique.",
+        "correct": false
+      },
+      {
+        "text": "La chambre présente deux cornes bulbaires, la vestibulaire étant la plus développée.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Situation en bouche de la 1ère prémolaire maxillaire Dans son orientation alvéolaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La face vestibulaire est fortement inclinée vers le palais.",
+        "correct": false
+      },
+      {
+        "text": "La racine fait un angle de 15 degrés avec la verticale.",
+        "correct": false
+      },
+      {
+        "text": "Les racines sont inclinées du côté palatin.",
+        "correct": true
+      },
+      {
+        "text": "La pointe de la cuspide vestibulaire arrive au même niveau que la cuspide linguale.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Morphologie de la 1ère prémolaire mandibulaire Comparée aux autres dents :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est beaucoup plus courte que la prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Sa forme générale se rapproche de celle de la canine inférieure.",
+        "correct": true
+      },
+      {
+        "text": "Elle est plus longue que les prémolaires supérieures (Hauteur totale 23 mm).",
+        "correct": true
+      },
+      {
+        "text": "Son caractère bicuspidé est extrêmement marqué et symétrique.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Face linguale de la 1ère prémolaire mandibulaire La face linguale de cette dent est particulière car :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle possède un diamètre mésio-distal plus grand que la face vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Elle est concave dans tous les sens pour loger la langue.",
+        "correct": false
+      },
+      {
+        "text": "Cette brièveté est due à la petitesse de la cuspide linguale.",
+        "correct": true
+      },
+      {
+        "text": "Elle est beaucoup plus petite que la face vestibulaire (environ la moitié de sa hauteur).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Faces proximales de la 1ère prémolaire mandibulaire Contrairement aux prémolaires supérieures :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le diamètre vestibulo-lingual au collet est de 12 mm.",
+        "correct": false
+      },
+      {
+        "text": "Elles sont décrites comme étant plus larges que hautes.",
+        "correct": true
+      },
+      {
+        "text": "Elles présentent une forme parfaitement carrée.",
+        "correct": false
+      },
+      {
+        "text": "Leur diamètre vertical (8 mm) l'emporte sur le diamètre horizontal (7,5 mm).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Face occlusale de la 1ère prémolaire mandibulaire À propos de l'asymétrie cuspidienne :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Cette différence de volume entraîne une obliquité très marquée de la face occlusale.",
+        "correct": true
+      },
+      {
+        "text": "Les deux cuspides sont de volume et de hauteur identiques.",
+        "correct": false
+      },
+      {
+        "text": "La face occlusale est parfaitement horizontale.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide vestibulaire a le double de largeur et de hauteur de la cuspide linguale.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sillon intercuspidien de la 1ère prémolaire mandibulaire Le sillon de cette dent se caractérise par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'absence totale de crêtes marginales mésiale et distale.",
+        "correct": false
+      },
+      {
+        "text": "Un petit sillon à direction mésio-distale placé près du bord lingual.",
+        "correct": true
+      },
+      {
+        "text": "Ce sillon est à peine marqué et se termine par deux fossettes.",
+        "correct": true
+      },
+      {
+        "text": "Un sillon en forme de \"Y\" très profond et central.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Racine de la 1ère prémolaire mandibulaire L'étude de la racine montre que :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle présente les mêmes caractères que la racine de la canine inférieure.",
+        "correct": true
+      },
+      {
+        "text": "Sa hauteur est de 21 mm.",
+        "correct": false
+      },
+      {
+        "text": "Elle est aplatie dans le sens mésio-distal.",
+        "correct": true
+      },
+      {
+        "text": "Elle est bifide dans 90% des cas.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Système pulpaire de la 1ère prémolaire mandibulaire La cavité pulpaire se distingue par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une corne vestibulaire très grande et une corne linguale petite.",
+        "correct": true
+      },
+      {
+        "text": "Une chambre pulpaire sphérique sans cornes marquées.",
+        "correct": false
+      },
+      {
+        "text": "Deux canaux divergents bien distincts.",
+        "correct": false
+      },
+      {
+        "text": "Un canal radiculaire fin et aplati dans le sens mésio-distal.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Situation en bouche de la 1ère prémolaire mandibulaire Quelle est l'orientation de cette dent sur l'arcade ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La dent présente une direction parfaitement horizontale.",
+        "correct": false
+      },
+      {
+        "text": "La face vestibulaire est inclinée vers le côté vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "La racine est dirigée obliquement de bas en haut dans le sens lingual.",
+        "correct": true
+      },
+      {
+        "text": "La face occlusale est oblique de haut en bas dans le sens lingual.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Comparaison Maxillaire vs Mandibulaire En comparant les deux premières prémolaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La prémolaire maxillaire est plus haute que la mandibulaire.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide linguale est beaucoup plus réduite sur la mandibulaire que sur la maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Seule la prémolaire mandibulaire possède une face triturante.",
+        "correct": false
+      },
+      {
+        "text": "La maxillaire a souvent deux racines, tandis que la mandibulaire est généralement monoradiculée.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+
+"Qestions de cours": [
+  {
+    "question": "Chronologie de développement (Commune aux deux arcades) Concernant la chronologie de la seconde prémolaire (supérieure ou inférieure) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La dent commence sa calcification à la naissance.",
+        "correct": false
+      },
+      {
+        "text": "L'éruption en bouche a lieu vers l'âge de 11 ans.",
+        "correct": true
+      },
+      {
+        "text": "La calcification complète est terminée dès l'éruption à 11 ans.",
+        "correct": false
+      },
+      {
+        "text": "Le début de la calcification se situe aux alentours de 4 ans.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Dimensions de la seconde prémolaire supérieure À propos des mesures moyennes de la seconde prémolaire supérieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La hauteur de sa couronne est identique à celle de la canine (10 mm).",
+        "correct": false
+      },
+      {
+        "text": "La longueur de sa racine est de 13,5 mm.",
+        "correct": true
+      },
+      {
+        "text": "Son diamètre vestibulo-palatin au collet est de 10,5 mm.",
+        "correct": false
+      },
+      {
+        "text": "Sa hauteur totale est de 21 mm.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Morphologie coronaire de la 2ème PM supérieure Sur la face occlusale de la seconde prémolaire supérieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La cuspide vestibulaire est beaucoup plus large et saillante que la palatine.",
+        "correct": false
+      },
+      {
+        "text": "Les deux cuspides (vestibulaire et palatine) ont la même valeur fonctionnelle.",
+        "correct": true
+      },
+      {
+        "text": "Le relief est marqué par trois sillons inter-cuspidiens majeurs.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide palatine descend légèrement plus bas que la cuspide vestibulaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Caractéristiques radiculaires de la 2ème PM supérieure La racine de la seconde prémolaire supérieure présente les particularités suivantes :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est presque toujours unique et très rarement bifide.",
+        "correct": true
+      },
+      {
+        "text": "Elle présente un diamètre mésio-distal au collet de 7,5 mm.",
+        "correct": false
+      },
+      {
+        "text": "Elle est inclinée de 30 degrés vers le côté vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Elle est fortement aplatie dans le sens mésio-distal.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Anatomie pulpaire de la 2ème PM supérieure Concernant la cavité endodontique de la seconde prémolaire supérieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle se termine presque toujours par un seul canal très aplati.",
+        "correct": true
+      },
+      {
+        "text": "La chambre pulpaire présente deux cornes correspondant aux deux cuspides.",
+        "correct": true
+      },
+      {
+        "text": "Le canal est de forme circulaire parfaite en coupe transversale.",
+        "correct": false
+      },
+      {
+        "text": "Elle possède systématiquement deux canaux radiculaires distincts.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Situation en bouche de la 2ème PM supérieure Dans son alignement sur l'arcade, la seconde prémolaire supérieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Est inclinée mésialement de 45 degrés par rapport à la verticale.",
+        "correct": false
+      },
+      {
+        "text": "Présente une face vestibulaire coronaire verticale.",
+        "correct": true
+      },
+      {
+        "text": "A une direction totalement opposée à celle de la première prémolaire.",
+        "correct": false
+      },
+      {
+        "text": "Possède une racine inclinée d'environ 17 degrés vers le côté lingual.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Comparaison entre les deux prémolaires supérieures En comparant la seconde prémolaire supérieure à la première :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La seconde est légèrement moins forte et moins large (6,5 mm contre 7 mm).",
+        "correct": true
+      },
+      {
+        "text": "La racine de la seconde est beaucoup plus souvent divisée que celle de la première.",
+        "correct": false
+      },
+      {
+        "text": "La seconde prémolaire est nettement plus haute que la première.",
+        "correct": false
+      },
+      {
+        "text": "La face palatine de la seconde est presque de même hauteur que sa face vestibulaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Généralités sur la seconde prémolaire inférieure La seconde prémolaire inférieure se distingue par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa hauteur totale qui est de 23,5 mm (la plus forte des prémolaires).",
+        "correct": true
+      },
+      {
+        "text": "Sa couronne de forme cubique se rapprochant de celle des molaires.",
+        "correct": true
+      },
+      {
+        "text": "Le fait qu'elle présente toujours uniquement deux cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Sa taille qui est la plus réduite de toutes les dents jugales.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Face vestibulaire de la 2ème PM inférieure La face vestibulaire de la seconde prémolaire inférieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Présente un bord libre bien moins en pointe que sur les autres prémolaires.",
+        "correct": true
+      },
+      {
+        "text": "Est plus étroite que celle de la première prémolaire.",
+        "correct": false
+      },
+      {
+        "text": "Est plus vaste que celle de la première prémolaire inférieure.",
+        "correct": true
+      },
+      {
+        "text": "Mesure 10,5 mm de hauteur coronaire.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Face linguale de la 2ème PM inférieure Concernant la face linguale de la seconde prémolaire inférieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Son bord libre peut présenter une ou deux pointes (cuspides).",
+        "correct": true
+      },
+      {
+        "text": "Elle ne possède jamais de sillon de séparation.",
+        "correct": false
+      },
+      {
+        "text": "Elle est systématiquement plus large que la face vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Sa hauteur est de 6,4 mm, soit un peu moins que la face vestibulaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Configuration à trois cuspides de la 2ème PM inférieure Dans le cas d'une seconde prémolaire inférieure tricuspidée :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La cuspide disto-linguale est la plus forte des trois cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Les trois cuspides sont de dimensions strictement identiques.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide mésio-linguale est plus grande que la disto-linguale.",
+        "correct": true
+      },
+      {
+        "text": "La cuspide linguale est divisée en deux par un sillon en forme d'Y.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Face occlusale de la 2ème PM inférieure (Généralités) L'anatomie occlusale de la seconde prémolaire inférieure montre que :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les fossettes mésiale et distale sont situées au centre géométrique de la face.",
+        "correct": false
+      },
+      {
+        "text": "Son obliquité est beaucoup moins prononcée que celle de la 1ère PM inférieure.",
+        "correct": true
+      },
+      {
+        "text": "Elle est oblique de haut en bas dans le sens vestibulo-lingual.",
+        "correct": true
+      },
+      {
+        "text": "Le sillon mésio-distal est toujours parfaitement rectiligne.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Configuration à deux cuspides de la 2ème PM inférieure Lorsque la seconde prémolaire inférieure ne possède que deux cuspides :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les fossettes sont plus proches du bord lingual que du bord vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Le sillon sépare deux cuspides de volume parfaitement égal.",
+        "correct": false
+      },
+      {
+        "text": "Le sillon mésio-distal est courbe avec une concavité vestibulaire.",
+        "correct": true
+      },
+      {
+        "text": "La cuspide vestibulaire est la plus forte et la plus saillante.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Racine de la seconde prémolaire inférieure La racine de la seconde prémolaire inférieure se caractérise par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une absence totale d'aplatissement mésio-distal.",
+        "correct": false
+      },
+      {
+        "text": "Une conformation similaire à la 1ère PM inférieure mais un peu plus forte.",
+        "correct": true
+      },
+      {
+        "text": "Un diamètre mésio-distal au collet de 10 mm.",
+        "correct": false
+      },
+      {
+        "text": "Une hauteur moyenne de 15,5 mm.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Anatomie pulpaire de la 2ème PM inférieure Le système canalaire de la seconde prémolaire inférieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Présente un canal radiculaire aplati dans le sens mésio-distal.",
+        "correct": true
+      },
+      {
+        "text": "Est caractérisé par une chambre pulpaire dépourvue de cornes.",
+        "correct": false
+      },
+      {
+        "text": "Présente un canal systématiquement divisé en trois branches distinctes au collet.",
+        "correct": false
+      },
+      {
+        "text": "Possède deux ou trois cornes pulpaires selon le nombre de cuspides.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Faces proximales de la 2ème PM inférieure Les faces proximales de la seconde prémolaire inférieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Présentent une convexité palatine très marquée.",
+        "correct": false
+      },
+      {
+        "text": "Sont un peu plus larges (8,3 mm) que hautes (8,1 mm).",
+        "correct": true
+      },
+      {
+        "text": "Participent à la forme cubique globale de la couronne.",
+        "correct": true
+      },
+      {
+        "text": "Sont deux fois plus hautes que larges.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Hiérarchie des cuspides (Type tricuspidé) Sur une seconde prémolaire inférieure à trois cuspides, l'ordre décroissant de taille est :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La moyenne est la mésio-linguale et la plus petite la disto-linguale.",
+        "correct": true
+      },
+      {
+        "text": "Toutes les cuspides sont de même volume pour assurer le broyage.",
+        "correct": false
+      },
+      {
+        "text": "La plus forte est la vestibulaire.",
+        "correct": true
+      },
+      {
+        "text": "La plus forte est la disto-linguale, suivie de la vestibulaire.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Situation en bouche de la 2ème PM inférieure Concernant la position de la seconde prémolaire inférieure sur l'arcade :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle garde la même inclinaison générale que la première prémolaire inférieure.",
+        "correct": true
+      },
+      {
+        "text": "Sa racine est inclinée distalement à 45 degrés.",
+        "correct": false
+      },
+      {
+        "text": "Elle est inclinée vers le vestibule de manière très prononcée.",
+        "correct": false
+      },
+      {
+        "text": "Sa face occlusale est beaucoup moins oblique que celle de la 1ère PM inférieure.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Morphologie comparée (Maxillaire vs Mandibulaire) En comparant les secondes prémolaires des deux arcades :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La mandibulaire a une racine systématiquement plus courte que la supérieure.",
+        "correct": false
+      },
+      {
+        "text": "La supérieure est la seule à pouvoir présenter trois cuspides.",
+        "correct": false
+      },
+      {
+        "text": "La supérieure a une couronne plus aplatie transversalement (8,5 mm de diamètre VP).",
+        "correct": true
+      },
+      {
+        "text": "La mandibulaire est globalement plus haute (23,5 mm contre 21 mm).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Résumé des caractères morphologiques Pour la seconde prémolaire inférieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La face vestibulaire est moins large que celle de la 1ère PM inférieure.",
+        "correct": false
+      },
+      {
+        "text": "Le sillon lingual se fond tout de suite dans la face linguale après être venu de l'occlusal.",
+        "correct": true
+      },
+      {
+        "text": "La calcification complète s'achève à l'âge de 8 ans.",
+        "correct": false
+      },
+      {
+        "text": "Le bord libre de la face linguale est divisé en deux pointes si elle a trois cuspides.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+
+
+
+
+"3": [
+  {
+    "question": "Concernant l'évolution du volume des prémolaires dans l'arcade.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les prémolaires mandibulaires sont en série descendante.",
+        "correct": false
+      },
+      {
+        "text": "Les prémolaires inférieures suivent une série ascendante de la première à la deuxième.",
+        "correct": true
+      },
+      {
+        "text": "Les prémolaires maxillaires augmentent de volume vers l'arrière.",
+        "correct": false
+      },
+      {
+        "text": "Les prémolaires supérieures suivent une série descendante de la première à la deuxième.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos de l'obliquité de la face vestibulaire.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La face vestibulaire maxillaire présente une inclinaison linguale très prononcée.",
+        "correct": false
+      },
+      {
+        "text": "La face vestibulaire des prémolaires inférieures est plus oblique que leur face linguale.",
+        "correct": true
+      },
+      {
+        "text": "La face vestibulaire mandibulaire est strictement verticale.",
+        "correct": false
+      },
+      {
+        "text": "La face vestibulaire des prémolaires supérieures est moins oblique que leur face linguale.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Caractéristiques du sillon inter-cuspidien.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le sillon supérieur présente une convexité linguale marquée.",
+        "correct": false
+      },
+      {
+        "text": "Le sillon inter-cuspidien est rectiligne pour les prémolaires maxillaires.,",
+        "correct": true
+      },
+      {
+        "text": "Le sillon inférieur est parfaitement rectiligne.",
+        "correct": false
+      },
+      {
+        "text": "Le sillon inter-cuspidien est courbe pour les prémolaires mandibulaires.,",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Morphologie spécifique du sillon des prémolaires inférieures.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le sillon présente une courbe caractéristique.,",
+        "correct": true
+      },
+      {
+        "text": "Sa convexité est orientée vers le côté vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Il sépare deux cuspides de volume identique chez la première prémolaire.",
+        "correct": false
+      },
+      {
+        "text": "Sa convexité est orientée vers le côté lingual.,",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Comparaison volumétrique des prémolaires supérieures.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La deuxième prémolaire supérieure est légèrement plus petite que la première.",
+        "correct": true
+      },
+      {
+        "text": "La première prémolaire supérieure est légèrement plus volumineuse que la seconde.",
+        "correct": true
+      },
+      {
+        "text": "Les deux prémolaires supérieures sont de volume identique.",
+        "correct": false
+      },
+      {
+        "text": "La première prémolaire supérieure est nettement moins volumineuse que la seconde.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Analyse des cuspides de la première prémolaire supérieure.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les deux cuspides arrivent exactement au même niveau occlusal.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide linguale possède un diamètre vestibulo-lingual plus petit que la vestibulaire.",
+        "correct": true
+      },
+      {
+        "text": "La cuspide linguale est la plus saillante.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide vestibulaire est la plus saillante des deux.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Caractéristiques morphologiques de la seconde prémolaire supérieure.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle possède deux cuspides d'égale valeur en saillie.",
+        "correct": true
+      },
+      {
+        "text": "La cuspide vestibulaire est prédominante par rapport à la linguale.",
+        "correct": false
+      },
+      {
+        "text": "Elle présente une cuspide linguale atrophiée.",
+        "correct": false
+      },
+      {
+        "text": "Ses deux cuspides ont un diamètre vestibulo-lingual identique.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Volume relatif des prémolaires mandibulaires.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La première prémolaire inférieure est nettement moins volumineuse que la seconde.",
+        "correct": true
+      },
+      {
+        "text": "La deuxième prémolaire inférieure présente un volume plus important que la première.",
+        "correct": true
+      },
+      {
+        "text": "Elles suivent une série descendante identique aux prémolaires supérieures.",
+        "correct": false
+      },
+      {
+        "text": "La première prémolaire inférieure est plus grosse que la seconde.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Architecture de la deuxième prémolaire inférieure.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est plus volumineuse que la première prémolaire inférieure.",
+        "correct": true
+      },
+      {
+        "text": "Elle possède une forme triangulaire à sommet lingual.",
+        "correct": false
+      },
+      {
+        "text": "Elle se présente sous une forme cubique.",
+        "correct": true
+      },
+      {
+        "text": "Elle est nettement moins développée que la première prémolaire.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Particularités de la cuspide linguale de la 1ère prémolaire inférieure.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Son atrophie donne à la face occlusale une obliquité très marquée.",
+        "correct": true
+      },
+      {
+        "text": "Elle est plus développée que la portion linguale de la deuxième prémolaire.",
+        "correct": false
+      },
+      {
+        "text": "Elle arrive presque à la hauteur de la cuspide vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Elle est très petite par rapport à la cuspide vestibulaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "L'obliquité de la face occlusale chez les prémolaires inférieures.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est inexistante pour la première prémolaire.",
+        "correct": false
+      },
+      {
+        "text": "Elle est plus marquée chez la seconde que chez la première.",
+        "correct": false
+      },
+      {
+        "text": "Elle est beaucoup moins prononcée pour la seconde prémolaire.",
+        "correct": true
+      },
+      {
+        "text": "Elle est très marquée de haut en bas et dans le sens lingual pour la première.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La portion linguale de la deuxième prémolaire inférieure.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est toujours constituée d'une seule cuspide massive.",
+        "correct": false
+      },
+      {
+        "text": "Elle arrive presque à la hauteur de la cuspide vestibulaire.",
+        "correct": true
+      },
+      {
+        "text": "Elle est plus développée que celle de la première prémolaire inférieure.",
+        "correct": true
+      },
+      {
+        "text": "Elle est très réduite, entraînant une forte obliquité occlusale.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Variations de la portion linguale de la 2ème prémolaire inférieure.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est moins haute que la cuspide linguale de la première prémolaire.",
+        "correct": false
+      },
+      {
+        "text": "Cette portion est toujours unitaire et pointue.",
+        "correct": false
+      },
+      {
+        "text": "Cette portion est souvent divisée en deux petites cuspides.",
+        "correct": true
+      },
+      {
+        "text": "La portion linguale est plus volumineuse que celle de la première prémolaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Orientation de la face linguale des prémolaires inférieures.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle présente une forte convexité vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Elle peut être très légèrement oblique dans le même sens que la face vestibulaire.",
+        "correct": true
+      },
+      {
+        "text": "Elle est plus oblique que la face vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Elle est verticale dans sa disposition générale.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Différences fondamentales entre prémolaires supérieures et inférieures.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les supérieures sont en série descendante et les inférieures en série ascendante.",
+        "correct": true
+      },
+      {
+        "text": "Les supérieures ont une face vestibulaire plus oblique que la linguale.",
+        "correct": false
+      },
+      {
+        "text": "Les inférieures possèdent des cuspides toujours de même hauteur.",
+        "correct": false
+      },
+      {
+        "text": "Le sillon inter-cuspidien est rectiligne en haut et courbe en bas.,",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Symétrie cuspidienne chez les prémolaires supérieures.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La 1ère prémolaire supérieure est la seule à posséder une symétrie cuspidienne.",
+        "correct": false
+      },
+      {
+        "text": "La 2ème prémolaire supérieure présente une égalité de valeur entre ses cuspides.",
+        "correct": true
+      },
+      {
+        "text": "La 1ère prémolaire supérieure présente une inégalité de saillie cuspidienne.",
+        "correct": true
+      },
+      {
+        "text": "Les deux prémolaires supérieures ont des cuspides de hauteur identique.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos de la première prémolaire inférieure.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Son volume est réduit par rapport à sa voisine distale.",
+        "correct": true
+      },
+      {
+        "text": "Sa cuspide linguale est presque aussi haute que la vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Sa face occlusale descend fortement vers le côté lingual.",
+        "correct": true
+      },
+      {
+        "text": "Sa forme est typiquement cubique.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Comparaison des faces vestibulaires (Maxillaire vs Mandibulaire).",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La face vestibulaire maxillaire est moins oblique que la linguale.",
+        "correct": true
+      },
+      {
+        "text": "Les deux faces vestibulaires ont la même inclinaison.",
+        "correct": false
+      },
+      {
+        "text": "La face vestibulaire mandibulaire est moins oblique que la linguale.",
+        "correct": false
+      },
+      {
+        "text": "La face vestibulaire mandibulaire est plus oblique que la linguale.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Hauteur cuspidienne relative.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Chez la 2ème PM supérieure, la vestibulaire est beaucoup plus haute que la linguale.",
+        "correct": false
+      },
+      {
+        "text": "Chez la 1ère PM inférieure, la linguale égale la vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Chez la 2ème PM inférieure, la linguale égale presque la vestibulaire.",
+        "correct": true
+      },
+      {
+        "text": "Chez la 1ère PM supérieure, la cuspide vestibulaire est la plus saillante.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Morphologie occlusale globale.",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La face occlusale de la 1ère PM inférieure est horizontale.",
+        "correct": false
+      },
+      {
+        "text": "La 1ère prémolaire supérieure a un diamètre lingual plus petit que le vestibulaire.",
+        "correct": true
+      },
+      {
+        "text": "Le sillon inter-cuspidien inférieur est rectiligne.",
+        "correct": false
+      },
+      {
+        "text": "La 2ème prémolaire inférieure a une portion linguale très développée.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+
+
+"4": [
+  {
+    "question": "Généralités sur les molaires Concernant les caractéristiques générales des molaires, quelles sont les propositions exactes ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Leur couronne est de forme pyramidale et présente toujours deux cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Leur volume suit une série descendante, décroissant de la première à la troisième molaire.",
+        "correct": true
+      },
+      {
+        "text": "Elles présentent un rendement masticatoire identique à celui des prémolaires.",
+        "correct": false
+      },
+      {
+        "text": "Elles sont au nombre de 12 au total, réparties en trois groupes par hémi-arcade.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Rapports d'occlusion À propos de l'occlusion des molaires, quelles affirmations sont vraies ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'étroitesse de l'incisive centrale supérieure explique le décalage mésial des molaires.",
+        "correct": false
+      },
+      {
+        "text": "Dans le sens mésio-distal, chaque molaire inférieure est en avance d'une demi-cuspide sur la supérieure.",
+        "correct": true
+      },
+      {
+        "text": "Les deux faces distales des dents de sagesse arrivent à des niveaux décalés de 5mm.",
+        "correct": false
+      },
+      {
+        "text": "Dans le sens vestibulo-lingual, les molaires supérieures débordent les inférieures du côté vestibulaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Dimensions de la première molaire supérieure (16/26) Quelles sont les caractéristiques dimensionnelles de la couronne de la 1ère molaire supérieure ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa hauteur coronaire (7,5mm) excède largement celle de la deuxième prémolaire.",
+        "correct": false
+      },
+      {
+        "text": "Son diamètre vestibulo-lingual (12mm) est supérieur à son diamètre mésio-distal (10mm).",
+        "correct": true
+      },
+      {
+        "text": "Elle présente la morphologie la plus simple de toutes les dents de l'arcade.",
+        "correct": false
+      },
+      {
+        "text": "La couronne est globalement plus large que haute.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Face palatine de la première molaire supérieure Concernant la face palatine de la 1ère molaire supérieure, quelles propositions sont exactes ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est légèrement plus large près de son bord libre que la face vestibulaire.",
+        "correct": true
+      },
+      {
+        "text": "Le sillon lingual se termine systématiquement dans une fossette profonde.",
+        "correct": false
+      },
+      {
+        "text": "Le lobe distal est beaucoup plus large et descend plus bas que le lobe mésial.",
+        "correct": false
+      },
+      {
+        "text": "Le tubercule de Carabelli est une saillie située sur le lobe mésio-palatin.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Morphologie occlusale de la première molaire supérieure Quels éléments retrouve-t-on sur la face occlusale de la 1ère molaire supérieure ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le pont d'émail relie les cuspides palato-mésiale et vestibulo-distale.",
+        "correct": true
+      },
+      {
+        "text": "La cuspide mésio-palatine est la plus volumineuse des quatre cuspides.",
+        "correct": true
+      },
+      {
+        "text": "Elle s'inscrit dans un trapèze à grande base mésiale.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide disto-linguale est la deuxième plus grande cuspide de la dent.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Système radiculaire de la première molaire supérieure À propos des racines de la 1ère molaire supérieure, que peut-on affirmer ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La racine vestibulo-distale est plus volumineuse que la racine vestibulo-mésiale.",
+        "correct": false
+      },
+      {
+        "text": "Elles sont au nombre de trois : deux vestibulaires et une palatine.",
+        "correct": true
+      },
+      {
+        "text": "Les racines se détachent du corps de la dent immédiatement au niveau du collet.",
+        "correct": false
+      },
+      {
+        "text": "La racine palatine est la plus robuste des trois racines.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Différenciation 1ère et 2ème molaires supérieures Quels caractères différencient la 2ème molaire supérieure de la 1ère ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La 2ème molaire supérieure ne présente jamais de tubercule de Carabelli.",
+        "correct": true
+      },
+      {
+        "text": "Les racines de la 2ème molaire sont beaucoup plus divergentes que celles de la 1ère.",
+        "correct": false
+      },
+      {
+        "text": "La hauteur totale de la 2ème molaire est supérieure à celle de la 1ère.",
+        "correct": false
+      },
+      {
+        "text": "La diminution de volume de la 2ème molaire affecte surtout la cuspide disto-palatine.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La troisième molaire supérieure (18/28) Concernant la dent de sagesse supérieure, quelles sont les propositions correctes ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle varie de forme à l'infini et est souvent atteinte de nanisme.",
+        "correct": true
+      },
+      {
+        "text": "Lorsqu'elle est bien constituée, elle ne présente généralement que trois cuspides.",
+        "correct": true
+      },
+      {
+        "text": "Ses racines sont toujours bien séparées et au nombre constant de trois.",
+        "correct": false
+      },
+      {
+        "text": "C'est la cuspide vestibulo-mésiale qui disparaît le plus souvent sur cette dent.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Dimensions de la première molaire inférieure (36/46) Quelles sont les particularités dimensionnelles de la 1ère molaire inférieure ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Son diamètre mésio-distal (11,2mm) est plus grand que son diamètre vestibulo-lingual (10,3mm).",
+        "correct": true
+      },
+      {
+        "text": "Elle est nettement plus haute que large.",
+        "correct": false
+      },
+      {
+        "text": "Contrairement aux supérieures, elle est aplatie dans le sens vestibulo-lingual.",
+        "correct": true
+      },
+      {
+        "text": "Elle présente systématiquement quatre cuspides sur sa face occlusale.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Face vestibulaire de la première molaire inférieure À propos de la face vestibulaire de la 1ère molaire inférieure, que peut-on dire ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le sillon mésial est profond et se termine par une fossette vestibulaire au centre de la face.",
+        "correct": true
+      },
+      {
+        "text": "La face s'inscrit dans un trapèze à grande base inférieure.",
+        "correct": false
+      },
+      {
+        "text": "Le sillon distal est plus long et plus profond que le sillon mésial.",
+        "correct": false
+      },
+      {
+        "text": "Le bord libre présente trois lobes de taille décroissante du mésial vers le distal.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Hiérarchie des cuspides de la première molaire inférieure Selon l'ordre de taille décroissant des cuspides de la 1ère molaire inférieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La cuspide vestibulo-mésiale est plus petite que la vestibulo-centrale.",
+        "correct": false
+      },
+      {
+        "text": "Les cuspides linguales sont plus petites que toutes les cuspides vestibulaires.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide vestibulo-distale est la plus petite.",
+        "correct": true
+      },
+      {
+        "text": "La cuspide mésio-linguale est la plus grande.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sillons et fossettes de la première molaire inférieure Quels éléments composent la face occlusale de la 1ère molaire inférieure ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle ne possède qu'une seule crête marginale située du côté mésial.",
+        "correct": false
+      },
+      {
+        "text": "On y trouve deux fossettes principales (mésiale et distale) et trois fossettes accessoires.",
+        "correct": true
+      },
+      {
+        "text": "Elle présente 4 sillons intercuspidiens : 1 mésio-distal, 2 vestibulaires et 1 lingual.",
+        "correct": true
+      },
+      {
+        "text": "Le sillon mésio-distal s'étend librement sur les faces proximales sans être arrêté.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Morphologie de la deuxième molaire inférieure (37/47) Quels caractères morphologiques sont propres à la 2ème molaire inférieure ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est globalement plus volumineuse que la première molaire inférieure.",
+        "correct": false
+      },
+      {
+        "text": "Elle possède trois sillons vestibulaires bien marqués.",
+        "correct": false
+      },
+      {
+        "text": "Ses sillons intercuspidiens forment une croix régulière sur la face occlusale.",
+        "correct": true
+      },
+      {
+        "text": "Sa couronne ne présente que quatre cuspides, ce qui la différencie de la 1ère.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Cuspides de la deuxième molaire inférieure Concernant les cuspides de la 2ème molaire inférieure, quelles affirmations sont vraies ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle présente une cinquième cuspide inconstante sur le bord distal.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide disto-linguale est la plus petite.",
+        "correct": true
+      },
+      {
+        "text": "La cuspide vestibulo-distale est plus volumineuse que la mésio-linguale.",
+        "correct": false
+      },
+      {
+        "text": "La cuspide vestibulo-mésiale est la plus grande des quatre.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La troisième molaire inférieure (38/48) À propos de la dent de sagesse inférieure, que retenir ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le type courant présente cinq cuspides.",
+        "correct": true
+      },
+      {
+        "text": "Elle est fréquemment frappée de nanisme, tout comme la supérieure.",
+        "correct": false
+      },
+      {
+        "text": "Sa cinquième cuspide se place toujours sur le bord vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Elle est moins inconstante de forme que la dent de sagesse supérieure.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Situation en bouche des molaires supérieures Concernant l'orientation des molaires supérieures en bouche :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La 3ème molaire est inclinée de bas en haut dans le sens distal.",
+        "correct": false
+      },
+      {
+        "text": "La face occlusale de la 1ère molaire est légèrement oblique de haut en bas vers le palatin.",
+        "correct": true
+      },
+      {
+        "text": "La face occlusale de la 3ème molaire est encore plus oblique que sur les deux autres molaires.",
+        "correct": true
+      },
+      {
+        "text": "La couronne de la 1ère molaire est fortement inclinée vers le distal.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Anatomie de la face mésiale des molaires Quelles sont les caractéristiques de la face mésiale de la 1ère molaire inférieure ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Son bord vestibulaire est très incliné vers le lingual dans ses deux tiers supérieurs.",
+        "correct": true
+      },
+      {
+        "text": "Elle est beaucoup plus étroite que la face distale.",
+        "correct": false
+      },
+      {
+        "text": "Elle est plus large que haute.",
+        "correct": true
+      },
+      {
+        "text": "Son bord lingual est parfaitement horizontal.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Sillons de la deuxième molaire inférieure Concernant les sillons de la 2ème molaire inférieure :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le sillon mésio-distal sépare les cuspides vestibulaires des cuspides linguales.",
+        "correct": true
+      },
+      {
+        "text": "Le sillon intercuspidien ne traverse jamais le centre de la face occlusale.",
+        "correct": false
+      },
+      {
+        "text": "Il existe deux sillons vestibulaires séparant trois lobes distincts.",
+        "correct": false
+      },
+      {
+        "text": "Le sillon vestibulo-lingual commence dans une fossette sur la face vestibulaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Structure coronaire (Cuboïde) À propos de la forme générale des molaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les molaires mandibulaires sont plus étroites dans le sens mésio-distal que vestibulo-lingual.",
+        "correct": false
+      },
+      {
+        "text": "La première molaire supérieure est plus haute que large.",
+        "correct": false
+      },
+      {
+        "text": "Elles possèdent au moins trois et au plus cinq cuspides.",
+        "correct": true
+      },
+      {
+        "text": "Leur couronne est de conformation générale cuboïde.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Développement et chronologie Quelles données chronologiques sont exactes selon le cours ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La dent de sagesse fait son éruption systématiquement à 12 ans.",
+        "correct": false
+      },
+      {
+        "text": "La calcification complète de la deuxième molaire se termine vers 13 ans et demi.",
+        "correct": true
+      },
+      {
+        "text": "Le début de calcification de la première molaire a lieu à la naissance.",
+        "correct": false
+      },
+      {
+        "text": "L'éruption de la première molaire (supérieure ou inférieure) se fait vers 6 ans.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+"5": [
+  {
+    "question": "Concernant les généralités et la formule dentaire temporaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les dents temporaires sont également appelées « dents de sagesse ».",
+        "correct": false
+      },
+      {
+        "text": "Il n'existe aucune prémolaire dans la dentition temporaire.",
+        "correct": true
+      },
+      {
+        "text": "Le nombre total de dents temporaires est de 24 (12 par arcade).",
+        "correct": false
+      },
+      {
+        "text": "La formule dentaire par hémi-arcade est : I 2/2, C 1/1, M 2/2.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les caractéristiques différentielles majeures des dents temporaires par rapport aux permanentes ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'émail des dents temporaires est plus transparent et plus épais.",
+        "correct": false
+      },
+      {
+        "text": "Leur teinte est d'un blanc laiteux caractéristique.",
+        "correct": true
+      },
+      {
+        "text": "Leur forme est totalement différente de celle des dents permanentes.",
+        "correct": false
+      },
+      {
+        "text": "Elles sont globalement plus petites que les dents permanentes d'environ 1/3.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos des stades d'évolution de la dent temporaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La rhizalyse commence dès l'éruption de la dent en bouche (Stade 1).",
+        "correct": false
+      },
+      {
+        "text": "Le stade 1 correspond à la phase de développement et d'édification de la couronne et de la racine.",
+        "correct": true
+      },
+      {
+        "text": "Le stade 3 commence dès la naissance de l'enfant.",
+        "correct": false
+      },
+      {
+        "text": "Le stade 2 est une phase de stabilité allant de l'achèvement apical jusqu'au début de la rhizalyse.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles fonctions essentielles sont assurées par les dents temporaires ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le maintien de l'espace nécessaire pour l'éruption des dents permanentes.",
+        "correct": true
+      },
+      {
+        "text": "Elles ne servent qu'à l'esthétique et n'ont aucun rôle dans la phonation.",
+        "correct": false
+      },
+      {
+        "text": "Elles empêchent la résorption alvéolaire physiologique avant 6 ans.",
+        "correct": false
+      },
+      {
+        "text": "La stimulation de la croissance des massifs maxillaires.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant la morphologie externe (émail et couronne) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le rapport diamètre mésio-distal / hauteur coronaire est plus important que chez les permanentes, donnant un aspect trapu.",
+        "correct": true
+      },
+      {
+        "text": "L'émail est plus opaque et plus fin que celui des dents permanentes.",
+        "correct": true
+      },
+      {
+        "text": "Les faces proximales sont convergentes de la région cervicale vers la face occlusale.",
+        "correct": false
+      },
+      {
+        "text": "La couronne représente les deux tiers de la hauteur totale de la dent.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Au sujet des caractéristiques cervicales et radiculaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les sillons et dépressions sur les molaires temporaires sont très profonds et marqués.",
+        "correct": false
+      },
+      {
+        "text": "Les incisives et canines présentent un bourrelet d'émail cervical marqué.",
+        "correct": true
+      },
+      {
+        "text": "Les racines des molaires sont fusionnées pour protéger le germe de la prémolaire.",
+        "correct": false
+      },
+      {
+        "text": "Les racines sont proportionnellement plus longues, plus fines et se terminent par un apex pointu.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les particularités de l'anatomie interne des dents temporaires ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les cavités pulpaires sont proportionnellement plus volumineuses dans toutes leurs dimensions.",
+        "correct": true
+      },
+      {
+        "text": "L'épaisseur de la dentine axiale est beaucoup plus importante que chez les permanentes.",
+        "correct": false
+      },
+      {
+        "text": "Le plafond et le plancher pulpaires sont de forme concave.",
+        "correct": false
+      },
+      {
+        "text": "Les cornes pulpaires sont proéminentes, surtout les cornes mésiales des molaires.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant l'éruption des incisives temporaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles font leur éruption généralement entre l'âge de 6 mois et 8 mois.",
+        "correct": true
+      },
+      {
+        "text": "L'éruption débute classiquement par les incisives mandibulaires.",
+        "correct": true
+      },
+      {
+        "text": "Le bord libre des incisives temporaires est fortement festonné comme celui des permanentes.",
+        "correct": false
+      },
+      {
+        "text": "Elles se différencient à partir de la deuxième lame dentaire.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Spécificités de l'incisive centrale maxillaire temporaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa face vestibulaire présente un aspect trapu et une forte convexité cervicale.",
+        "correct": true
+      },
+      {
+        "text": "L'angle incisif distal est plus aigu et marqué que l'angle mésial.",
+        "correct": false
+      },
+      {
+        "text": "C'est la seule incisive dont le diamètre mésio-distal est supérieur à la hauteur coronaire.",
+        "correct": true
+      },
+      {
+        "text": "Elle possède systématiquement trois canaux radiculaires.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Caractéristiques de la face palatine et de la racine de l'incisive centrale maxillaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La racine unique présente un apex qui est à la fois mésialé et vestibulé.",
+        "correct": true
+      },
+      {
+        "text": "La chambre pulpaire est située au niveau de l'apex et présente quatre cornes.",
+        "correct": false
+      },
+      {
+        "text": "La face palatine est beaucoup plus large que la face vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Le cingulum est fortement convexe et déporté du côté distal.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Différences entre l'incisive latérale et l'incisive centrale maxillaires temporaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La racine de l'incisive latérale est plus courte que celle de la centrale.",
+        "correct": false
+      },
+      {
+        "text": "Le bord libre de la latérale est parfaitement horizontal et jamais incliné.",
+        "correct": false
+      },
+      {
+        "text": "Chez la latérale, le diamètre mésio-distal est moins important que la hauteur de la couronne.",
+        "correct": true
+      },
+      {
+        "text": "La latérale a des dimensions plus réduites que la centrale.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos des incisives mandibulaires temporaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les angles incisifs de l'incisive centrale sont très arrondis dès l'éruption.",
+        "correct": false
+      },
+      {
+        "text": "L'incisive latérale mandibulaire a une forme plus arrondie distalement et un cingulum décalé en distal.",
+        "correct": true
+      },
+      {
+        "text": "L'incisive centrale est symétrique avec un bord incisif rectiligne.",
+        "correct": true
+      },
+      {
+        "text": "Elles présentent deux canaux radiculaires dans 100% des cas.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Morphologie de la couronne de la canine maxillaire temporaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le point de contact mésial est situé au tiers cervical.",
+        "correct": false
+      },
+      {
+        "text": "Le diamètre mésio-distal est largement supérieur à la hauteur coronaire.",
+        "correct": false
+      },
+      {
+        "text": "Le sommet cuspidien est plus aigu que celui de la canine maxillaire permanente.",
+        "correct": true
+      },
+      {
+        "text": "Les faces proximales divergent fortement depuis le collet, donnant une forme en « fer de lance ».",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Anatomie interne et palatine des canines temporaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les crêtes marginales de la canine mandibulaire sont plus marquées que sur la maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "La chambre pulpaire possède une corne pulpaire aiguë se projetant loin vers le sommet cuspidien.",
+        "correct": true
+      },
+      {
+        "text": "La canine mandibulaire a un diamètre vestibulo-lingual plus grand que la canine maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Le cingulum est très proéminent et peut occuper la moitié de la hauteur coronaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Caractéristiques générales des molaires temporaires supérieures :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles possèdent trois racines : une palatine et deux vestibulaires.",
+        "correct": true
+      },
+      {
+        "text": "Les racines sont courtes, épaisses et convergent vers l'axe central.",
+        "correct": false
+      },
+      {
+        "text": "Elles ne ressemblent absolument pas aux molaires permanentes.",
+        "correct": false
+      },
+      {
+        "text": "Elles s'inscrivent dans un parallélogramme en vue occlusale.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Spécificités de la première molaire maxillaire temporaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La bosse cervicale est située au-dessus de la cuspide vestibulo-distale.",
+        "correct": false
+      },
+      {
+        "text": "Elle présente 3 cuspides : 2 vestibulaires et 1 linguale (la plus volumineuse).",
+        "correct": true
+      },
+      {
+        "text": "Elle montre une forte asymétrie mésio-distale, la face mésiale étant plus haute que la distale.",
+        "correct": true
+      },
+      {
+        "text": "Sa morphologie est identique à celle de la première molaire permanente.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant la deuxième molaire maxillaire temporaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle présente des bosses cervicales vestibulaires et linguales très saillantes.",
+        "correct": true
+      },
+      {
+        "text": "Elle ne possède qu'une seule racine fusionnée.",
+        "correct": false
+      },
+      {
+        "text": "Sa morphologie est pratiquement identique à celle de la première molaire permanente supérieure.",
+        "correct": true
+      },
+      {
+        "text": "Elle est nettement plus volumineuse que la molaire permanente de 6 ans.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos de la première molaire mandibulaire temporaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa couronne est très particulière et différente de toutes les autres dents (aspect de prémolaire adulte).",
+        "correct": true
+      },
+      {
+        "text": "Elle ne possède aucun tubercule ni crête marginale saillante.",
+        "correct": false
+      },
+      {
+        "text": "Ses bords proximaux sont fortement divergents vers l'occlusal.",
+        "correct": false
+      },
+      {
+        "text": "Sur la face occlusale, la cuspide vestibulo-mésiale est la plus forte des quatre cuspides.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Morphologie de la deuxième molaire mandibulaire temporaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les racines sont fusionnées sur toute leur hauteur pour laisser place aux prémolaires.",
+        "correct": false
+      },
+      {
+        "text": "Sa bosse cervicale vestibulaire est moins accentuée que sur la dent permanente.",
+        "correct": false
+      },
+      {
+        "text": "Elle possède deux racines (mésiale et distale) fortement aplaties et divergentes.",
+        "correct": true
+      },
+      {
+        "text": "Elle reproduit globalement les caractères de la première molaire permanente (6 ans) inférieure.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Pourquoi les racines des molaires temporaires sont-elles fortement divergentes ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Pour compenser la finesse de l'émail coronaire.",
+        "correct": false
+      },
+      {
+        "text": "Parce que les racines se détachent du corps de la dent juste au-dessus du collet.",
+        "correct": true
+      },
+      {
+        "text": "Pour faciliter le processus de rhizalyse qui commence dès 3 ans.",
+        "correct": false
+      },
+      {
+        "text": "Pour permettre aux germes des prémolaires permanentes d'évoluer entre elles.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+"6": [
+  {
+    "question": "Concernant la définition générale des anomalies dentaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "C'est un trouble qui survient obligatoirement après l'éruption dentaire.",
+        "correct": false
+      },
+      {
+        "text": "L'anomalie résulte d'une déviation du développement embryonnaire normal.",
+        "correct": true
+      },
+      {
+        "text": "Elle ne concerne jamais les dents temporaires, uniquement les permanentes.",
+        "correct": false
+      },
+      {
+        "text": "Elle correspond à toute altération de l'aspect externe, de la structure interne ou de la topographie.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les anomalies liées à la crête neurale et aux odontoblastes incluent :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'hypoplasie de l'émail uniquement liée à des facteurs environnementaux.",
+        "correct": false
+      },
+      {
+        "text": "L'hyperdontie par excès de prolifération des futurs odontoblastes.",
+        "correct": true
+      },
+      {
+        "text": "La dyschromie dentaire par excès de minéralisation.",
+        "correct": false
+      },
+      {
+        "text": "L'hypodontie ou l'anodontie par insuffisance du nombre d'odontoblastes.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos des anomalies de nombre par défaut :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'anodontie est une anomalie extrêmement fréquente en pratique quotidienne.",
+        "correct": false
+      },
+      {
+        "text": "L'oligodontie se définit par l'absence de plus de 4 dents permanentes.",
+        "correct": true
+      },
+      {
+        "text": "L'agénésie de l'incisive latérale est considérée comme une oligodontie isolée.",
+        "correct": false
+      },
+      {
+        "text": "L'hypodontie concerne le manque de 1 à 4 dents, souvent de manière symétrique.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant l'hyperdontie (dents surnuméraires) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Dans 85% des cas, ces dents se situent au niveau du maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Elles ont systématiquement une morphologie coronaire normale.",
+        "correct": false
+      },
+      {
+        "text": "Elles ne gênent jamais l'éruption des dents adjacentes.",
+        "correct": false
+      },
+      {
+        "text": "Le \"mesiodens\" se situe près de la suture médiane et peut provoquer un diastème.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La gémination dentaire se caractérise par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une cavité pulpaire unique au sein d'une dent plus volumineuse.",
+        "correct": true
+      },
+      {
+        "text": "Le dédoublement d'un seul germe dentaire dont les parties restent accolées.",
+        "correct": true
+      },
+      {
+        "text": "Une fréquence très élevée dans la population générale.",
+        "correct": false
+      },
+      {
+        "text": "L'union de deux germes dentaires distincts par leurs racines.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "La fusion dentaire se distingue par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une origine liée exclusivement à une prolifération du cément radiculaire.",
+        "correct": false
+      },
+      {
+        "text": "L'accolement de deux germes dentaires adjacents avec des cavités pulpaires distinctes.",
+        "correct": true
+      },
+      {
+        "text": "Une chambre pulpaire unique et agrandie sans séparation interne.",
+        "correct": false
+      },
+      {
+        "text": "Une classification en 4 catégories selon Aguilo, allant de la couronne bifide aux racines fusionnées.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les anomalies de volume (Macrodontie et Microdontie) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La macrodontie se manifeste cliniquement par des malpositions dentaires.",
+        "correct": true
+      },
+      {
+        "text": "La microdontie est définie par des valeurs supérieures à la limite normale admise.",
+        "correct": false
+      },
+      {
+        "text": "Ces anomalies ne touchent jamais la racine seule.",
+        "correct": false
+      },
+      {
+        "text": "La microdontie se manifeste cliniquement par l'apparition de diastèmes interdentaires.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant les variations radiculaires spécifiques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La rhizomégalie correspond à un gigantisme limité à la partie radiculaire.",
+        "correct": true
+      },
+      {
+        "text": "La rhizomicrie est un nanisme radiculaire fréquent sur les prémolaires et 3èmes molaires.",
+        "correct": true
+      },
+      {
+        "text": "L'hypercémentose réduit systématiquement le volume de la racine.",
+        "correct": false
+      },
+      {
+        "text": "La rhizomicrie n'existe que sur les incisives centrales supérieures.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Le taurodontisme présente les caractéristiques suivantes :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Un plancher pulpaire repoussé apicalement sans étranglement au collet.",
+        "correct": true
+      },
+      {
+        "text": "Une réduction de la taille globale de l'organe dentaire.",
+        "correct": false
+      },
+      {
+        "text": "Une augmentation significative du volume de la chambre pulpaire.",
+        "correct": true
+      },
+      {
+        "text": "Une invagination de l'organe de l'émail à l'intérieur de la papille.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos du \"Dens in dente\" (odontome intradentaire) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La dent la plus fréquemment touchée est l'incisive latérale supérieure permanente.",
+        "correct": true
+      },
+      {
+        "text": "Il s'agit d'une fusion entre une dent normale et une dent surnuméraire.",
+        "correct": false
+      },
+      {
+        "text": "C'est une anomalie qui touche exclusivement les molaires inférieures.",
+        "correct": false
+      },
+      {
+        "text": "Il résulte d'une invagination de l'organe de l'émail à l'intérieur de la dent.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les anomalies morphologiques des incisives incluent :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'incisive en \"tournevis\" qui est un signe de carence en vitamine D.",
+        "correct": false
+      },
+      {
+        "text": "La dent de Hutchinson qui présente des axes coronaires divergents.",
+        "correct": false
+      },
+      {
+        "text": "L'incisive \"en pelle\" caractérisée par l'hypertrophie des crêtes marginales et une fosse linguale concave.",
+        "correct": true
+      },
+      {
+        "text": "L'hypertrophie du cingulum touchant particulièrement l'incisive latérale supérieure.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La dent de Hutchinson se définit par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une hypertrophie massive du tubercule de Carabelli.",
+        "correct": false
+      },
+      {
+        "text": "Son statut de signe morphologique pathognomonique de la syphilis congénitale.",
+        "correct": true
+      },
+      {
+        "text": "Un bord libre plus étroit que le bord cervical avec une encoche médiane.",
+        "correct": true
+      },
+      {
+        "text": "Une forme conoïde dite \"en grain de riz\".",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant les canines et prémolaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La prémolaire caniniforme possède une cuspide linguale très développée.",
+        "correct": false
+      },
+      {
+        "text": "La canine ne présente jamais de variations morphologiques coronaires.",
+        "correct": false
+      },
+      {
+        "text": "La première prémolaire molariforme présente une acuité cuspidienne réduite.",
+        "correct": true
+      },
+      {
+        "text": "La \"prémolarisation\" de la canine est due à une hypertrophie majeure du cingulum.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le tubercule de Carabelli :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Est une anomalie radiculaire empêchant l'éruption.",
+        "correct": false
+      },
+      {
+        "text": "Est présent chez environ 50% de la population.",
+        "correct": true
+      },
+      {
+        "text": "Se localise sur la face vestibulaire des deuxièmes molaires.",
+        "correct": false
+      },
+      {
+        "text": "Se situe sur la face mésio-linguale des premières molaires supérieures.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le tubercule de Bolk se distingue par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa fréquence élevée au niveau des deuxièmes molaires permanentes supérieures.",
+        "correct": true
+      },
+      {
+        "text": "Son absence totale en denture temporaire.",
+        "correct": false
+      },
+      {
+        "text": "Le fait qu'il ne se trouve jamais à l'arcade inférieure.",
+        "correct": false
+      },
+      {
+        "text": "Sa localisation sur la face vestibulaire des cuspides mésio-vestibulaires des molaires supérieures.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les perles d'émail sont des structures :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Qui disparaissent systématiquement lors de l'éruption.",
+        "correct": false
+      },
+      {
+        "text": "Nodulaires et sphériques situées sur la face occlusale ou dans l'embrasure inter-radiculaire.",
+        "correct": true
+      },
+      {
+        "text": "Composées d'émail pouvant se retrouver même sur la surface radiculaire.",
+        "correct": true
+      },
+      {
+        "text": "Formées exclusivement de cément et de dentine.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Les variations du nombre de racines incluent :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La présence fréquente de deux racines (mésiale et distale ou V et L) sur les prémolaires inférieures.",
+        "correct": true
+      },
+      {
+        "text": "L'absence totale de racines surnuméraires sur les dents de sagesse.",
+        "correct": false
+      },
+      {
+        "text": "La possibilité de deux racines (vestibulaire et linguale) pour le groupe incisivo-canin inférieur.",
+        "correct": true
+      },
+      {
+        "text": "La fusion systématique des trois racines des molaires supérieures chez tous les patients.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos de la forme des racines :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La racine peut présenter un axe coudé, fréquent sur les dents de sagesse.",
+        "correct": true
+      },
+      {
+        "text": "L'hypercémentose est une résorption de la racine par infection.",
+        "correct": false
+      },
+      {
+        "text": "Le gigantisme radiculaire est systématiquement lié à une fusion dentaire.",
+        "correct": false
+      },
+      {
+        "text": "La racine \"en baïonnette\" est typique des prémolaires et molaires supérieures.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La concrescence dentaire se définit comme :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une union osseuse très dense entre deux dents voisines.",
+        "correct": false
+      },
+      {
+        "text": "Une fusion des germes dentaires survenant avant la formation des racines.",
+        "correct": false
+      },
+      {
+        "text": "Une anomalie survenant souvent entre les 2ème et 3ème molaires supérieures.",
+        "correct": true
+      },
+      {
+        "text": "L'union secondaire des racines par une prolifération anormale du cément.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant les étiologies et complications des anomalies radiculaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La coalescence est strictement identique à la concrescence dans sa structure.",
+        "correct": false
+      },
+      {
+        "text": "L'extraction des dents atteintes de concrescence est souvent rendue difficile par l'union cémentaire.",
+        "correct": true
+      },
+      {
+        "text": "Les anomalies de forme radiculaire n'ont aucun impact sur le traitement prothétique.",
+        "correct": false
+      },
+      {
+        "text": "La concrescence peut avoir une étiologie mécanique (manque de place) ou infectieuse.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+"EMD 24": [
+  {
+    "question": "Quelle est la prémolaire qui présente 2 racines dans la majorité des cas :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Première prémolaire maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Deuxième prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Première prémolaire mandibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à deux cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à trois cuspides.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quelle est la prémolaire avec la couronne la plus haute :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Première prémolaire maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Deuxième prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Première prémolaire mandibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à deux cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à trois cuspides.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quelle est la prémolaire qui présente 2 cuspides de la même hauteur :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Première prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Première prémolaire mandibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à deux cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à trois cuspides.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quelle est (sont) la (les) prémolaire(s) qui présente(nt) une crête marginale D plus cervicale :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Première prémolaire maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Deuxième prémolaire maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Première prémolaire mandibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à deux cuspides.",
+        "correct": true
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à trois cuspides.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Prémolaire la plus inclinée linguale :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Première prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Première prémolaire mandibulaire.",
+        "correct": true
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à deux cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à trois cuspides.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Prémolaires centrées sur le tronc radiculaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Première prémolaire maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Deuxième prémolaire maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Première prémolaire mandibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à deux cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à trois cuspides.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Face mésiale divisée en V et L :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Première prémolaire maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Deuxième prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Première prémolaire mandibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à deux cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à trois cuspides.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Contour occlusal carré :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Première prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Première prémolaire mandibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à deux cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à trois cuspides.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Contour vestibulaire en V :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Première prémolaire maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Deuxième prémolaire maxillaire.",
+        "correct": true
+      },
+      {
+        "text": "Première prémolaire mandibulaire.",
+        "correct": true
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à deux cuspides.",
+        "correct": true
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à trois cuspides.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sans crête transversale :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Première prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire maxillaire.",
+        "correct": false
+      },
+      {
+        "text": "Première prémolaire mandibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à deux cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Deuxième prémolaire mandibulaire à trois cuspides.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les cuspides primaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sont des cuspides guides.",
+        "correct": false
+      },
+      {
+        "text": "Cuspides palatines maxillaires.",
+        "correct": true
+      },
+      {
+        "text": "Cuspides vestibulaires mandibulaires.",
+        "correct": true
+      },
+      {
+        "text": "Palatines maxillaires + linguales mandibulaires.",
+        "correct": false
+      },
+      {
+        "text": "Protection joue/langue.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Les cuspides guides :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Cuspides primaires.",
+        "correct": false
+      },
+      {
+        "text": "Vestibulaires maxillaires.",
+        "correct": true
+      },
+      {
+        "text": "Linguales mandibulaires.",
+        "correct": true
+      },
+      {
+        "text": "Toutes justes.",
+        "correct": false
+      },
+      {
+        "text": "Toutes fausses.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Les surfaces de guidage :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Versants mandibulaires.",
+        "correct": false
+      },
+      {
+        "text": "Versants maxillaires.",
+        "correct": false
+      },
+      {
+        "text": "Interférences.",
+        "correct": true
+      },
+      {
+        "text": "Toutes justes.",
+        "correct": false
+      },
+      {
+        "text": "Toutes fausses.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Surfaces de guidage en latéralité :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Distopalatin + canine.",
+        "correct": false
+      },
+      {
+        "text": "Mésiopalatin + latérale.",
+        "correct": false
+      },
+      {
+        "text": "Pan mésial + sommet cuspides vestibulaires.",
+        "correct": true
+      },
+      {
+        "text": "Non travaillant vestibulaire.",
+        "correct": false
+      },
+      {
+        "text": "Toutes justes.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Le point de contact :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Stable.",
+        "correct": false
+      },
+      {
+        "text": "Évolue avec l’âge.",
+        "correct": true
+      },
+      {
+        "text": "Attrition interproximale.",
+        "correct": true
+      },
+      {
+        "text": "Toutes justes.",
+        "correct": false
+      },
+      {
+        "text": "Toutes fausses.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Courbes de Slavicek :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Courbe active.",
+        "correct": true
+      },
+      {
+        "text": "Esthétique.",
+        "correct": true
+      },
+      {
+        "text": "Fonctionnelle passive.",
+        "correct": true
+      },
+      {
+        "text": "Toutes justes.",
+        "correct": true
+      },
+      {
+        "text": "Toutes fausses.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Classe I d’Angle :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Mésialisation molaire.",
+        "correct": true
+      },
+      {
+        "text": "Canine correcte.",
+        "correct": false
+      },
+      {
+        "text": "Relation incisive.",
+        "correct": true
+      },
+      {
+        "text": "Toutes justes.",
+        "correct": false
+      },
+      {
+        "text": "Toutes fausses.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Classe II d’Angle :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Distocclusion.",
+        "correct": false
+      },
+      {
+        "text": "Relation canine.",
+        "correct": false
+      },
+      {
+        "text": "Relation prémolaires.",
+        "correct": true
+      },
+      {
+        "text": "Toutes justes.",
+        "correct": false
+      },
+      {
+        "text": "Toutes fausses.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Classe III d’Angle :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Distocclusion.",
+        "correct": true
+      },
+      {
+        "text": "Overjet peut être négatif.",
+        "correct": true
+      },
+      {
+        "text": "Toujours négatif.",
+        "correct": false
+      },
+      {
+        "text": "Toutes justes.",
+        "correct": false
+      },
+      {
+        "text": "Toutes fausses.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Verrous de l’occlusion :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Cuspide-fossette.",
+        "correct": false
+      },
+      {
+        "text": "Intercuspidie fosses.",
+        "correct": true
+      },
+      {
+        "text": "Cuspide-embrasure.",
+        "correct": false
+      },
+      {
+        "text": "Toutes justes.",
+        "correct": false
+      },
+      {
+        "text": "Toutes fausses. إذا تحب 💡 نقدر بعدها نعمل لك: ✔ مقارنة بين إجاباتك والتصحيح (باش تعرف أخطائك) ✔ أو ملخص يحفظك كامل الموضوع في أقل وقت 🔥",
+        "correct": false
+      }
+    ]
+  }
+],
+
+
+
+
+
   };
   const questions = questionsData[lesson] || [];
   const container = document.getElementById("questionsContainer");

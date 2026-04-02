@@ -183,59 +183,2545 @@
 
   // 🧠 أسئلة تجريبية
   const questionsData = {
-    'Os frontal et éthmoïde': [
+   "EMD 24": [
+  {
+    "question": "la dentine réparatrice :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "est sécrétée en réponse à une agression de faible intensité", "correct": false },
+      { "text": "est sécrétée par des odontoblastes de 2eme génération", "correct": true },
+      { "text": "est une dentine réactionnelle", "correct": false },
+      { "text": "est sécrétée en réponse à une agression de forte intensité", "correct": true }
+    ]
+  },
+  {
+    "question": "la dentine réactionnelle :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "c’est une dentine intratubulaire", "correct": true },
+      { "text": "c’est une dentine cicatricielle", "correct": true },
+      { "text": "est produite par les odontoblastes", "correct": true },
+      { "text": "stoppe l’évolution de processus carieux", "correct": false }
+    ]
+  },
+  {
+    "question": "l’handidam :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "présente un cadre à digue métallique", "correct": false },
+      { "text": "a une forme asymétrique", "correct": true },
+      { "text": "a une forme circulaire", "correct": false },
+      { "text": "formé de 2 arceaux en plastique", "correct": false }
+    ]
+  },
+  {
+    "question": "la flore buccale :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "3/4 de la flore cariogène est composée de streptocoques sanguinis", "correct": false },
+      { "text": "3/4 de la flore cariogène est composée de lactobacillus", "correct": false },
+      { "text": "actinomyces viscosus est responsable des caries amélaires", "correct": false },
+      { "text": "les streptocoques sanguinis adhèrent aux tissus dures", "correct": true }
+    ]
+  },
+  {
+    "question": "la pulpe est composée de :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "fibres de collagène", "correct": true },
+      { "text": "cellules de défense", "correct": true },
+      { "text": "lymphocytes", "correct": true },
+      { "text": "macrophages", "correct": true }
+    ]
+  },
+  {
+    "question": "la sénescence pulpaire :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "c’est le vieillissement pulpaire", "correct": true },
+      { "text": "c’est une inflammation pulpaire aigue", "correct": false },
+      { "text": "c’est un phénomène physiologique", "correct": true },
+      { "text": "c’est l’œdème pulpaire", "correct": false }
+    ]
+  },
+  {
+    "question": "la phase proliférative de l’inflammation pulpaire :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "est une réponse immédiate", "correct": false },
+      { "text": "est une phase aigue", "correct": false },
+      { "text": "est une réponse retardée", "correct": true },
+      { "text": "se caractérise par la formation de nouvelles fibroblastes", "correct": true }
+    ]
+  },
+  {
+    "question": "le flux salivaire :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "est accéléré pendant le sommeil", "correct": false },
+      { "text": "est faible pendant le sommeil", "correct": true },
+      { "text": "est diminué par la mastication de chewing-gum", "correct": false },
+      { "text": "permet un nettoyage mécanique des surfaces dentaires", "correct": true }
+    ]
+  },
+  {
+    "question": "l’aptidam :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "présente une feuille à digue fine", "correct": false },
+      { "text": "est utilisé pour toutes les dents", "correct": false },
+      { "text": "formé de 2 arceaux en plastique", "correct": false },
+      { "text": "à usage unique", "correct": true }
+    ]
+  },
+  {
+    "question": "les micro-organismes responsables de la carie des fissures sont :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "les streptocoques mutans associés aux lactobacillus", "correct": false },
+      { "text": "les streptocoques sanguinis associés aux lactobacillus casei", "correct": true },
+      { "text": "les streptocoques sanguinis associés aux actinomyces", "correct": false },
+      { "text": "les streptocoques sanguinis associés aux actinomyces viscosus", "correct": false }
+    ]
+  },
+  {
+    "question": "La carie évolutive siège :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "au niveau des faces occlusales", "correct": true },
+      { "text": "au niveau des faces proximales", "correct": true },
+      { "text": "au niveau de sillons anfractueux", "correct": false },
+      { "text": "au niveau des faces vestibulaire", "correct": true }
+    ]
+  },
+  {
+    "question": "La carie arrêtée siège :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "au niveau des faces occlusales", "correct": true },
+      { "text": "au niveau des faces vestibulaire", "correct": false },
+      { "text": "au niveau des faces proximales", "correct": false },
+      { "text": "au niveau des sillons anfractueux", "correct": true }
+    ]
+  },
+  {
+    "question": "La carie évolutive :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "Propage en surface", "correct": false },
+      { "text": "Entraine une grande destruction des couronnes", "correct": true },
+      { "text": "Propage en profondeur", "correct": true },
+      { "text": "Evolue vers la dentinite", "correct": true }
+    ]
+  },
+  {
+    "question": "La carie arrêtée :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "contient beaucoup de dentine réactionnelle", "correct": true },
+      { "text": "contient beaucoup de dentine ramollie", "correct": false },
+      { "text": "contient peu de dentine ramollie", "correct": true },
+      { "text": "contient peu de dentine réactionnelle", "correct": false }
+    ]
+  },
+  {
+    "question": "La carie de l’émail :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "Peut commencer sur la face occlusale des dents ; carie des sillons", "correct": true },
+      { "text": "Peut commencer sur la face vestibulaire et palatine ou linguale", "correct": true },
+      { "text": "est appelée carie de surface lisse quand elle touche les faces vestibulaires ; linguales et proximales", "correct": true },
+      { "text": "est marquée par une perte de substance cliniquement décelable", "correct": false }
+    ]
+  },
+  {
+    "question": "la carie de l’émail :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "est une lésion symptomatique", "correct": false },
+      { "text": "est une lésion asymptomatique", "correct": true },
+      { "text": "est une lésion qui peut être inaperçue et son dépistage nécessite un examen clinique minutieux", "correct": true },
+      { "text": "en absence de traitement évolue toujours vers la carie arrêtée", "correct": false }
+    ]
+  },
+  {
+    "question": "La carie de l’émail :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "Marquée par une grande quantité de dentine ramollie et réactionnelle", "correct": false },
+      { "text": "Contient peu de dentine ramollie et beaucoup de dentine réactionnelle", "correct": false },
+      { "text": "est marquée par des modifications de coloration sans perte de substance cliniquement décelables", "correct": true },
+      { "text": "Son traitement est non invasif", "correct": true }
+    ]
+  },
+  {
+    "question": "La carie de l’émail :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "Nécessite un traitement invasif", "correct": false },
+      { "text": "Elle ne répond pas au test de pression (test de proximité pulpaire)", "correct": true },
+      { "text": "marqué par une cavité profonde", "correct": false },
+      { "text": "peut être prévenue par un scellement des puits et fissures", "correct": true }
+    ]
+  },
+  {
+    "question": "la carie de la dentine :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "Est toujours secondaire à la carie de l’émail", "correct": true },
+      { "text": "Est une lésion macroscopiquement faite de Cinq zone", "correct": true },
+      { "text": "Est classé selon la symptomatologie en lésion rapide ; lente et arrêtée", "correct": false },
+      { "text": "Est classé selon le mode de progression en lésion superficielle ; profonde et avancée", "correct": false }
+    ]
+  },
+  {
+    "question": "la dentinite superficielle :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "Est une cavité de moins de 2mm", "correct": true },
+      { "text": "Caractérisé par une douleur localisée de courte durée", "correct": true },
+      { "text": "Est stimulé par le froid et le chaud", "correct": false },
+      { "text": "Ne répond pas au test de pression", "correct": true }
+     ]
+  }
+],
+"EMD 21": [
+  {
+    "question": "La sénescence pulpaire :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "est un phénomène physiologique.", "correct": true },
+      { "text": "se caractérise par une augmentation de la lumière canalaire.", "correct": false },
+      { "text": "c’est le vieillissement de tissu pulpaire.", "correct": true },
+      { "text": "c’est une inflammation pulpaire retardée.", "correct": false }
+    ]
+  },
+  {
+    "question": "En cas d'inflammation pulpaire, la réponse proliférative :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "est formée par un tissu exsudatif.", "correct": false },
+      { "text": "est formée par un tissu de granulation.", "correct": true },
+      { "text": "est caractérisée par un œdème inflammatoire.", "correct": false },
+      { "text": "est une réaction de défense pulpaire.", "correct": true }
+    ]
+  },
+  {
+    "question": "La dentine réparatrice :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "est sécrétée en réponse à une agression de faible intensité.", "correct": false },
+      { "text": "est sécrétée par des odontoblastes de 2ème génération.", "correct": true },
+      { "text": "est une dentine réactionnelle.", "correct": false },
+      { "text": "est une dentine sclérotique.", "correct": false }
+    ]
+  },
+  {
+    "question": "La dentine réactionnelle :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "c'est une dentine intratubulaire.", "correct": true },
+      { "text": "c'est une dentine cicatricielle.", "correct": true },
+      { "text": "est produite par les odontoblastes.", "correct": true },
+      { "text": "stoppe l'évolution du processus carieux.", "correct": false }
+    ]
+  },
+  {
+    "question": "La pulpe :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "est un tissu mésenchymateux.", "correct": true },
+      { "text": "est confinée dans une cavité extensible.", "correct": false },
+      { "text": "présente un rôle de défense.", "correct": true },
+      { "text": "constitue la majeure partie de l'organe dentaire.", "correct": false }
+    ]
+  },
+  {
+    "question": "La carie :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "maladie infectieuse.", "correct": true },
+      { "text": "irréversible aux stades initiaux.", "correct": false },
+      { "text": "accélérée dans un milieu acide.", "correct": true },
+      { "text": "est fréquente au niveau radiculaire chez les jeunes patients.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le flux salivaire :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "accéléré pendant le sommeil.", "correct": false },
+      { "text": "faible pendant le sommeil.", "correct": true },
+      { "text": "diminué par mastication de chewing-gum.", "correct": false },
+      { "text": "permet le nettoyage mécanique des surfaces dentaires.", "correct": true }
+    ]
+  },
+  {
+    "question": "Après une prise alimentaire sucrée :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "le pH diminue sous seuil critique après 20 mn.", "correct": false },
+      { "text": "le pH diminue en 5 mn.", "correct": true },
+      { "text": "le pH diminue en 5 minutes et persiste jusqu'à 20 mn.", "correct": true },
+      { "text": "le pH salivaire reste neutre.", "correct": false }
+    ]
+  },
+  {
+    "question": "Les produits laitiers :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "favorisent la diminution du pH salivaire.", "correct": false },
+      { "text": "stimulent le flux salivaire.", "correct": true },
+      { "text": "favorisent la déminéralisation.", "correct": false },
+      { "text": "provoquent l'initiation du processus carieux.", "correct": false }
+    ]
+  },
+  {
+    "question": "L'indice de Banting :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "indice épidémiologique des caries coronaires.", "correct": false },
+      { "text": "indice épidémiologique des caries radiculaires.", "correct": true },
+      { "text": "indice épidémiologique des caries circulaires.", "correct": false },
+      { "text": "indice épidémiologique des caries occlusales.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le nouveau concept versus l'ancien :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "les deux concepts considèrent la classification selon la topographie.", "correct": false },
+      { "text": "les deux concepts exigent l'extension prophylactique.", "correct": false },
+      { "text": "les deux concepts considèrent la carie comme une maladie infectieuse.", "correct": true },
+      { "text": "les deux concepts exigent l'élimination de la dentine infectée et affectée.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le concept Sista est basé sur :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "une classification qui ne prend pas en considération le stade d'évolution de la lésion carieuse.", "correct": false },
+      { "text": "un diagnostic anticipé de la lésion carieuse.", "correct": true },
+      { "text": "le traitement chirurgical le plus invasif des lésions carieuses.", "correct": false },
+      { "text": "la reminéralisation des lésions irréversibles.", "correct": false }
+    ]
+  },
+  {
+    "question": "Site 1 de la classification Sista :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "touche les mêmes sites que la classe I de Black.", "correct": true },
+      { "text": "touche les mêmes sites que la classe I de Black sauf le groupe prémo-molaire.", "correct": false },
+      { "text": "touche les mêmes sites que la classe I de Black sauf le groupe incisivo-canine.", "correct": false },
+      { "text": "touche les mêmes sites que la classe I de Black plus carie vestibulaire au niveau du tiers médian.", "correct": false }
+    ]
+  },
+  {
+    "question": "Stade 0 Sista :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "lésion superficielle diagnostiquée par pénétration de la sonde.", "correct": false },
+      { "text": "lésion superficielle nécessitant un comblement par matériau adhésif.", "correct": false },
+      { "text": "lésion superficielle nécessitant uniquement un traitement préventif invasif.", "correct": false },
+      { "text": "lésion superficielle nécessitant un traitement préventif non invasif.", "correct": true }
+    ]
+  },
+  {
+    "question": "Le site 2 stade 3 de Sista :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "lésion proximale 1/3 moyen sans fragilisation.", "correct": false },
+      { "text": "lésion proximale 1/3 moyen avec fragilisation.", "correct": false },
+      { "text": "lésion proximale 1/3 interne sans fragilisation.", "correct": false },
+      { "text": "lésion proximale 1/3 interne avec fragilisation.", "correct": true }
+    ]
+  },
+  {
+    "question": "Le concept Sista présente des stades d'évolution de la carie :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "4 stades.", "correct": false },
+      { "text": "5 stades.", "correct": false },
+      { "text": "stade 2 → 1/3 dentinaire interne.", "correct": false },
+      { "text": "stade 3 → 1/3 dentinaire interne.", "correct": true }
+    ]
+  },
+  {
+    "question": "Site 3 stade 3 de Sista :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "occlusale 1/3 moyen sans fragilisation.", "correct": false },
+      { "text": "occlusale 1/3 interne avec fragilisation.", "correct": false },
+      { "text": "cervicale 1/3 interne avec fragilisation.", "correct": true },
+      { "text": "parapulpaire avec fragilisation.", "correct": false }
+    ]
+  },
+  {
+    "question": "Le site 2 stade 2 de Sista :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "traitement invasif.", "correct": false },
+      { "text": "proximo-triturante préventif.", "correct": false },
+      { "text": "traitement non invasif.", "correct": true },
+      { "text": "reminéralisation.", "correct": false }
+    ]
+  },
+  {
+    "question": "Selon le concept actuel :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "élimine dentine affectée et infectée.", "correct": false },
+      { "text": "élimine infectée et conserve affectée.", "correct": false },
+      { "text": "mécanique + chimique.", "correct": false },
+      { "text": "chimique seul.", "correct": true }
+    ]
+  },
+  {
+    "question": "Le scellement des puits et fissures :",
+    "difficulty": 1,
+    "answers": [
+      { "text": "prévention selon risque carieux.", "correct": true },
+      { "text": "fermeture des anfractuosités.", "correct": true },
+      { "text": "indiqué chez les jeunes.", "correct": true },
+      { "text": "indiqué au stade 4 Sista.", "correct": false }
+    ]
+  }
+],
+"1": [
+  {
+    "question": "Le changement de paradigme dans le traitement de la carie dentaire aujourd'hui se caractérise par :",
+    "difficulty": 2,
+    "answers": [
       {
-        question: 'ما هو العظم الذي يشكل الجزء الأمامي من الجمجمة؟',
-        difficulty: 1,
-        answers: [
-          { text: 'العظم الجبهي', correct: true },
-          { text: 'العظم القذالي', correct: false },
-          { text: 'العظم الصدغي', correct: false },
-          { text: 'العظم الوتدي', correct: false }
-        ]
+        "text": "L'utilisation exclusive de l'amalgame pour assurer la rétention mécanique.",
+        "correct": false
       },
       {
-        question: 'كم عدد الفقرات العنقية في الإنسان؟',
-        difficulty: 2,
-        answers: [
-          { text: '6', correct: false },
-          { text: '7', correct: true },
-          { text: '8', correct: false },
-          { text: '5', correct: false }
-        ]
+        "text": "La préservation maximale des tissus dentaires grâce à l'évolution des matériaux adhésifs.",
+        "correct": true
       },
       {
-        question: 'ما وظيفة العظم الغربالي؟',
-        difficulty: 3,
-        answers: [
-          { text: 'يساعد في تشكيل جدار الأنف والحجاج', correct: true },
-          { text: 'يشكل الفك العلوي', correct: false },
-          { text: 'يدعم قاعدة الجمجمة فقط', correct: false },
-          { text: 'يشكل سقف الفم', correct: false }
-        ]
+        "text": "L'élimination systématique de tout tissu déminéralisé, même s'il est sain.",
+        "correct": false
       },
       {
-        question: 'العظم الجبهي يحتوي على:',
-        difficulty: 2,
-        answers: [
-          { text: 'الجيب الجبهي', correct: true },
-          { text: 'الجيب الوتدي', correct: false },
-          { text: 'الجيب الغربالي', correct: false },
-          { text: 'الجيب الفكي', correct: false }
-        ]
-      },
-      {
-        question: 'أي مما يلي ليس جزءًا من العظم الجبهي؟',
-        difficulty: 2,
-        answers: [
-          { text: 'القرين الأنفي العلوي', correct: true },
-          { text: 'السطح الحجاجي', correct: false },
-          { text: 'الحديبة الجبهية', correct: false },
-          { text: 'الثقبة فوق الحجاج', correct: false }
-        ]
+        "text": "Le passage d'une approche purement chirurgicale vers une approche médicale préventive.",
+        "correct": true
       }
     ]
-  };
+  },
+  {
+    "question": "Selon les définitions du cours, la dentisterie adhésive repose sur :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La séparation physique nette entre deux surfaces sans aucune interaction.",
+        "correct": false
+      },
+      {
+        "text": "L'utilisation d'une résine qui adhère directement aux surfaces dentaires.",
+        "correct": true
+      },
+      {
+        "text": "L'utilisation de cavités à formes de dépouille pour la rétention.",
+        "correct": false
+      },
+      {
+        "text": "La création d'une liaison par collage entre la restauration et les parois dentaires résiduelles.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Dans le modèle chirurgical peu invasif, la gestion de la dentine est la suivante :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Toute la dentine colorée doit être impérativement supprimée.",
+        "correct": false
+      },
+      {
+        "text": "Seule la dentine infectée est éliminée.",
+        "correct": true
+      },
+      {
+        "text": "L'épaisseur de la dentine résiduelle n'a aucune importance pour la pulpe.",
+        "correct": false
+      },
+      {
+        "text": "La dentine affectée (déminéralisée) est conservée car elle est reminéralisable.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant le mordançage de l'émail à l'acide orthophosphorique :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La concentration idéale se situe entre 30 et 40% en poids.",
+        "correct": true
+      },
+      {
+        "text": "L'effet recherché est une macro-cavitation de plus de 100 μm de profondeur.",
+        "correct": false
+      },
+      {
+        "text": "Après rinçage et séchage, l'émail doit apparaître brillant et translucide.",
+        "correct": false
+      },
+      {
+        "text": "Le temps d'application recommandé est de 15 à 30 secondes.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La formation de la \"couche hybride\" lors de l'adhésion dentinaire implique :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La pénétration et la stabilisation du réseau collagénique par la résine adhésive.",
+        "correct": true
+      },
+      {
+        "text": "La diffusion du primaire dans le réseau de collagène exposé par l'acide.",
+        "correct": true
+      },
+      {
+        "text": "L'obturation des tubuli uniquement en surface sans pénétration profonde.",
+        "correct": false
+      },
+      {
+        "text": "La dissolution totale des fibres de collagène par l'acide phosphorique.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Dans la classification de Mount et Hume (1997), les sites sont définis ainsi :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le Site 3 concerne exclusivement les bords incisifs.",
+        "correct": false
+      },
+      {
+        "text": "Le Site 1 concerne les puits, sillons et fossettes des dents postérieures et antérieures.",
+        "correct": true
+      },
+      {
+        "text": "La taille d'une lésion est déterminée uniquement par sa profondeur et non par son extension.",
+        "correct": false
+      },
+      {
+        "text": "Le Site 2 concerne les zones de contact interproximal de toutes les dents.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant les tailles de lésion selon Mount et Hume :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La taille 1 correspond à une lésion atteignant la dentine où la reminéralisation seule ne suffit plus.",
+        "correct": true
+      },
+      {
+        "text": "La taille 3 signifie que la dentine est intacte mais l'émail est fracturé.",
+        "correct": false
+      },
+      {
+        "text": "La taille 4 indique une lésion superficielle limitée à l'émail.",
+        "correct": false
+      },
+      {
+        "text": "La taille 2 correspond à une lésion modérée où l'émail reste soutenu par de la dentine saine.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le concept SISTA se distingue par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'utilisation de critères histologiques et radiographiques pour le diagnostic.",
+        "correct": true
+      },
+      {
+        "text": "Son rôle de guide thérapeutique pour le traitement des lésions quel que soit leur stade.",
+        "correct": true
+      },
+      {
+        "text": "Le maintien strict des principes de préparation cavitaire de Black.",
+        "correct": false
+      },
+      {
+        "text": "L'exclusion des lésions pouvant être traitées de manière non invasive.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Les sites définis dans le concept SISTA sont :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Site 3 : Parties cervicales et radiculaires de la dent.",
+        "correct": true
+      },
+      {
+        "text": "Site 2 : Uniquement les faces vestibulaires des dents antérieures.",
+        "correct": false
+      },
+      {
+        "text": "Site 1 : Puits et sillons (occlusaux, palatins et vestibulaires).",
+        "correct": true
+      },
+      {
+        "text": "Site 4 : Lésions impliquant uniquement la pulpe.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Le Stade 0 de la classification SISTA correspond à :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une lésion réversible par des mesures de reminéralisation.",
+        "correct": true
+      },
+      {
+        "text": "Une destruction partielle des cuspides.",
+        "correct": false
+      },
+      {
+        "text": "Une atteinte du tiers moyen de la dentine nécessitant une restauration.",
+        "correct": false
+      },
+      {
+        "text": "Une atteinte amélaire sans cavitation apparente.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Différence entre le Stade 1 et le Stade 2 de SISTA :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le Stade 1 nécessite systématiquement une restauration indirecte.",
+        "correct": false
+      },
+      {
+        "text": "Le Stade 2 implique une destruction totale de la crête marginale.",
+        "correct": false
+      },
+      {
+        "text": "Le Stade 2 correspond à une atteinte du 1/3 moyen de la dentine sans affaiblissement cuspidien.",
+        "correct": true
+      },
+      {
+        "text": "Le Stade 1 correspond à une atteinte du 1/3 externe de la dentine.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les stades avancés SISTA (3 et 4) se caractérisent par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une atteinte limitée à la jonction amélo-dentinaire sans cavitation.",
+        "correct": false
+      },
+      {
+        "text": "La nécessité de restaurations renforçant les structures résiduelles (onlays, couronnes).",
+        "correct": true
+      },
+      {
+        "text": "Une fragilisation ou une destruction des cuspides.",
+        "correct": true
+      },
+      {
+        "text": "Un traitement exclusivement basé sur le scellement des sillons.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Pour une lésion SISTA 1.1 (Site 1, Stade 1), la préparation cavitaire doit :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Être systématiquement étendue à tous les sillons sains par extension préventive.",
+        "correct": false
+      },
+      {
+        "text": "Comporter un biseau large sur tout le contour occlusal.",
+        "correct": false
+      },
+      {
+        "text": "Utiliser des microfraises ou des inserts diamantés pour une élimination sélective.",
+        "correct": true
+      },
+      {
+        "text": "Être limitée aux défauts dentinaires sans relier les cavités entre elles.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La dentine affectée est maintenue lors de la préparation car :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est totalement déstructurée et ne peut pas se reminéraliser.",
+        "correct": false
+      },
+      {
+        "text": "Elle reste compatible avec les techniques d'adhésion des composites.",
+        "correct": true
+      },
+      {
+        "text": "Elle contient une concentration bactérienne plus élevée que la dentine infectée.",
+        "correct": false
+      },
+      {
+        "text": "Elle augmente l'épaisseur de dentine résiduelle protégeant la pulpe.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Dans le traitement d'une lésion SISTA 2.1 (Site 2, Stade 1), on privilégie :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'accès direct si la dent voisine est absente ou s'il existe un diastème.",
+        "correct": true
+      },
+      {
+        "text": "L'ouverture systématique de la crête marginale pour une meilleure visibilité.",
+        "correct": false
+      },
+      {
+        "text": "L'utilisation de l'amalgame sans protection dentinaire.",
+        "correct": false
+      },
+      {
+        "text": "La préservation de la crête marginale, pilier de la résistance mécanique.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La \"cavité tunnel\" (Site 2) présente les caractéristiques suivantes :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est réalisée uniquement à l'aide de fraises de gros diamètre.",
+        "correct": false
+      },
+      {
+        "text": "L'accès se fait par la face occlusale en préservant la crête marginale.",
+        "correct": true
+      },
+      {
+        "text": "Elle est indiquée pour traiter une carie proximale SISTA 2.1.",
+        "correct": true
+      },
+      {
+        "text": "Elle nécessite l'élimination totale de l'émail proximal pour être efficace.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Une \"cavité slot\" (ou cannelure) pour le Site 2 peut être :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Verticale, avec un accès par la face occlusale.",
+        "correct": true
+      },
+      {
+        "text": "Uniquement radiculaire, sans lien avec la couronne.",
+        "correct": false
+      },
+      {
+        "text": "Horizontale, avec un accès vestibulaire ou lingual.",
+        "correct": true
+      },
+      {
+        "text": "Diagonale, traversant la dent de part en part.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Pour la restauration d'une lésion SISTA 1.2 :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "On utilise un composite microhybride par technique de stratification.",
+        "correct": true
+      },
+      {
+        "text": "Le matériau de choix est exclusivement le ciment verre ionomère traditionnel.",
+        "correct": false
+      },
+      {
+        "text": "On doit réaliser un biseau de 2 mm sur les surfaces occlusales fonctionnelles.",
+        "correct": false
+      },
+      {
+        "text": "L'ouverture des sillons est limitée aux zones atteintes sans liaison systématique.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les outils modernes de la dentisterie à minima incluent :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Uniquement les instruments manuels (excavateurs) sans instrumentation rotative.",
+        "correct": false
+      },
+      {
+        "text": "Les fraises boules de grande taille pour une éviction rapide.",
+        "correct": false
+      },
+      {
+        "text": "Les microfraises et l'air-abrasion (cinétique).",
+        "correct": true
+      },
+      {
+        "text": "Les inserts ultrasonores et la sono-abrasion.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "L'objectif ultime de la MID (Minimal Intervention Dentistry) est :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "De remplacer toutes les restaurations existantes par des matériaux adhésifs.",
+        "correct": false
+      },
+      {
+        "text": "De privilégier les actions préventives et les actes de moins en moins invasifs.",
+        "correct": true
+      },
+      {
+        "text": "D'éliminer le besoin de radiographies lors du diagnostic carieux.",
+        "correct": false
+      },
+      {
+        "text": "D'assurer une survie dentaire le plus longtemps possible.",
+        "correct": true
+      }
+    ]
+  }
+],
+"2": [
+  {
+    "question": "Selon l'approche minimalement invasive, quels sont les objectifs prioritaires lors d'un traitement ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ignorer l'esthétique au profit de la seule solidité mécanique.",
+        "correct": false
+      },
+      {
+        "text": "Réparer la dent tout en restaurant sa fonction et sa longévité.",
+        "correct": true
+      },
+      {
+        "text": "Privilégier systématiquement les méthodes les plus agressives.",
+        "correct": false
+      },
+      {
+        "text": "Préserver au maximum les tissus dentaires sains.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels sont les éléments clés du concept mécanique concernant la préservation tissulaire ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Utiliser uniquement des couronnes périphériques traditionnelles.",
+        "correct": false
+      },
+      {
+        "text": "Minimiser la préparation de la dentine lors du traitement.",
+        "correct": true
+      },
+      {
+        "text": "Éliminer tout le tissu dentaire pour assurer la rétention.",
+        "correct": false
+      },
+      {
+        "text": "Minimiser la préparation de l'émail lors du traitement.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Dans le cadre de la biomécanique dentaire, que doit comprendre le praticien ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'utilisation exclusive de matériaux plus durs que l'émail.",
+        "correct": false
+      },
+      {
+        "text": "Comment les forces s'exercent sur la dent.",
+        "correct": true
+      },
+      {
+        "text": "La suppression totale des forces de mastication.",
+        "correct": false
+      },
+      {
+        "text": "Comment restaurer les propriétés mécaniques pour un fonctionnement optimal.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Pourquoi les techniques adhésives modernes sont-elles privilégiées dans le concept mécanique ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles permettent d'obtenir une meilleure adaptation de la restauration.",
+        "correct": true
+      },
+      {
+        "text": "Elles affaiblissent la liaison entre la dent et le matériau.",
+        "correct": false
+      },
+      {
+        "text": "Elles nécessitent des tailles de cavités beaucoup plus larges.",
+        "correct": false
+      },
+      {
+        "text": "Elles permettent d'éviter les préparations invasives comme les couronnes périphériques.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels sont les deux piliers majeurs de la biomimétique en dentisterie ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Reproduire les caractéristiques esthétiques de la dent naturelle.",
+        "correct": true
+      },
+      {
+        "text": "Reproduire les caractéristiques fonctionnelles de la dent naturelle.",
+        "correct": true
+      },
+      {
+        "text": "Ignorer la structure anatomique originale de la dent.",
+        "correct": false
+      },
+      {
+        "text": "Remplacer systématiquement le substrat naturel par du métal.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Sur quels principes biologiques repose l'économie tissulaire ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La préparation extensive pour la stabilité.",
+        "correct": false
+      },
+      {
+        "text": "La bio-intégration des matériaux.",
+        "correct": true
+      },
+      {
+        "text": "L'utilisation de matériaux irritants pour la pulpe.",
+        "correct": false
+      },
+      {
+        "text": "La prévention des récidives de pathologies.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels matériaux permettent aujourd'hui une correspondance biomimétique avec le substrat anatomique ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les matériaux composites modernes.",
+        "correct": true
+      },
+      {
+        "text": "Les amalgames d'argent à forte rétraction.",
+        "correct": false
+      },
+      {
+        "text": "Les ciments provisoires à base d'eugénol uniquement.",
+        "correct": false
+      },
+      {
+        "text": "Les matériaux céramiques avancés.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Que signifie respecter l'intégrité tissulaire selon les concepts biologiques ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Respecter la vitalité de la dent.",
+        "correct": true
+      },
+      {
+        "text": "Préserver au maximum les tissus vivants et leur environnement.",
+        "correct": true
+      },
+      {
+        "text": "Pratiquer des extractions préventives sur les dents adjacentes.",
+        "correct": false
+      },
+      {
+        "text": "Augmenter le retrait de polymérisation pour créer des espaces.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Qu'est-ce que la bioactivité d'un matériau de restauration ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La capacité à former des liaisons directes avec les tissus vivants.",
+        "correct": true
+      },
+      {
+        "text": "L'incapacité totale à interagir avec l'organisme.",
+        "correct": false
+      },
+      {
+        "text": "La capacité à favoriser la cicatrisation osseuse.",
+        "correct": true
+      },
+      {
+        "text": "La production de substances toxiques pour les tissus biologiques.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "En combinant les concepts biologiques et mécaniques, quel est l'objectif ultime ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Garantir un traitement respectueux de l'organisme et plus durable.",
+        "correct": true
+      },
+      {
+        "text": "Favoriser l'esthétique au détriment de la fonction.",
+        "correct": false
+      },
+      {
+        "text": "Isoler totalement la restauration du reste de la bouche.",
+        "correct": false
+      },
+      {
+        "text": "Créer une unité fonctionnelle entre la dent et la restauration.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels facteurs guident la planification d'un traitement moderne selon les sources ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'utilisation de techniques purement mécaniques sans biologie.",
+        "correct": false
+      },
+      {
+        "text": "La destruction délibérée des tissus pour le gain de temps.",
+        "correct": false
+      },
+      {
+        "text": "La recherche de la longévité de la restauration.",
+        "correct": true
+      },
+      {
+        "text": "Le choix des méthodes les moins agressives.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les principes biologiques citent la \"Fonction et esthétique\" ; que cela implique-t-il ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le sacrifice de la fonction pour obtenir une couleur blanche uniforme.",
+        "correct": false
+      },
+      {
+        "text": "Une restauration capable de supporter les charges masticatoires.",
+        "correct": true
+      },
+      {
+        "text": "Une restauration qui s'intègre visuellement à la dentition naturelle.",
+        "correct": true
+      },
+      {
+        "text": "L'utilisation de matériaux opaques et non fonctionnels.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quel rôle joue la sophistication des techniques adhésives dans la biomimétique ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle nécessite l'élimination de l'émail sain.",
+        "correct": false
+      },
+      {
+        "text": "Elle rend les restaurations moins stables dans le temps.",
+        "correct": false
+      },
+      {
+        "text": "Elle facilite l'utilisation des composites et céramiques.",
+        "correct": true
+      },
+      {
+        "text": "Elle permet une liaison forte avec le substrat anatomique.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La durabilité d'une restauration (Concept mécanique) dépend de :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'absence totale de liaison adhésive.",
+        "correct": false
+      },
+      {
+        "text": "La résistance aux forces de mastication.",
+        "correct": true
+      },
+      {
+        "text": "La fragilité intentionnelle du matériau de substitution.",
+        "correct": false
+      },
+      {
+        "text": "La solidité des matériaux utilisés.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Pourquoi la préservation des tissus est-elle considérée comme un concept mécanique ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Parce qu'elle permet une meilleure distribution des forces.",
+        "correct": true
+      },
+      {
+        "text": "Parce qu'elle n'a aucun impact sur la biologie de la dent.",
+        "correct": false
+      },
+      {
+        "text": "Parce qu'elle vise uniquement à économiser le matériel de fraisage.",
+        "correct": false
+      },
+      {
+        "text": "Parce qu'elle maintient l'intégrité structurelle de la dent.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels sont les bénéfices de l'intégration biologique des matériaux ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une inflammation gingivale chronique souhaitée.",
+        "correct": false
+      },
+      {
+        "text": "Une harmonie avec l'environnement parodontal.",
+        "correct": true
+      },
+      {
+        "text": "Une absence de réactions de rejet par l'organisme.",
+        "correct": true
+      },
+      {
+        "text": "Une accélération de la carie sous la restauration.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Dans la liste des principes biologiques, quels éléments sont mentionnés ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La biocompatibilité.",
+        "correct": true
+      },
+      {
+        "text": "L'élargissement systématique des cavités.",
+        "correct": false
+      },
+      {
+        "text": "Le principe d'adhésion.",
+        "correct": true
+      },
+      {
+        "text": "La macro-rétention par tenons métalliques uniquement.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quel lien existe-t-il entre biomimétisme et matériaux ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le biomimétisme utilise des matériaux de substitution esthétique.",
+        "correct": true
+      },
+      {
+        "text": "Il se limite uniquement à la couleur de la dent.",
+        "correct": false
+      },
+      {
+        "text": "Il rejette l'utilisation des composites.",
+        "correct": false
+      },
+      {
+        "text": "Il nécessite des matériaux capables de mimer les propriétés mécaniques naturelles.",
+        "correct": true
+      }
+    ]
+  }
+],
+"3": [
+  {
+    "question": "Selon les définitions classiques et de l'OMS, la carie dentaire est :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une pathologie d'origine uniquement génétique et héréditaire.",
+        "correct": false
+      },
+      {
+        "text": "Un processus pathologique localisé d'origine externe apparaissant après l'éruption.",
+        "correct": true
+      },
+      {
+        "text": "Une maladie auto-immune affectant exclusivement la pulpe dentaire.",
+        "correct": false
+      },
+      {
+        "text": "Une pathologie infectieuse causée par des bactéries adhérentes entraînant une déminéralisation acide.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant la terminologie des lésions carieuses :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La carie jumelle ne siège jamais sur les faces proximales.",
+        "correct": false
+      },
+      {
+        "text": "La carie secondaire (ou récidive) est une lésion adjacente à une restauration.",
+        "correct": true
+      },
+      {
+        "text": "Une \"brown spot\" indique systématiquement une carie en pleine activité.",
+        "correct": false
+      },
+      {
+        "text": "La carie primaire commence sur un site indemne de restauration.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Dans le schéma d'étiologie de Keyes, modifié par Newbrun, les facteurs indispensables sont :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La température corporelle et l'apport en vitamine C.",
+        "correct": false
+      },
+      {
+        "text": "Le biofilm (bactéries cariogènes) et les tissus dentaires (hôte).",
+        "correct": true
+      },
+      {
+        "text": "Le type de brosse à dents et l'utilisation de fil dentaire.",
+        "correct": false
+      },
+      {
+        "text": "Les glucides fermentescibles et le facteur temps.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos du rôle des bactéries dans l'initiation et la progression de la carie :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les *Streptocoques mutans* sont les principaux responsables de l'initiation par leur fixation aux surfaces lisses.",
+        "correct": true
+      },
+      {
+        "text": "Les *Actinomyces* sont des bactéries aérobies strictes responsables des caries de l'émail.",
+        "correct": false
+      },
+      {
+        "text": "Les polysaccharides ne jouent aucun rôle dans l'adhérence bactérienne.",
+        "correct": false
+      },
+      {
+        "text": "Les *Lactobacillus* interviennent surtout dans la progression de la lésion carieuse.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "L'alimentation joue un rôle crucial dans la genèse de la carie car :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les lipides et certaines vitamines ont un rôle cariostatique.",
+        "correct": true
+      },
+      {
+        "text": "Le saccharose est le sucre le plus incriminé dans la fermentation acide.",
+        "correct": true
+      },
+      {
+        "text": "Le temps d'exposition aux sucres n'a aucune influence sur la déminéralisation.",
+        "correct": false
+      },
+      {
+        "text": "Les protéines sont transformées en acides par la plaque dentaire.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "En analysant la Courbe de Stephan, on observe que :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le pH critique de déminéralisation est situé à 7,0.",
+        "correct": false
+      },
+      {
+        "text": "Le pH de la plaque chute brutalement à 5 en seulement 2 à 3 minutes après un rinçage glucosé.",
+        "correct": true
+      },
+      {
+        "text": "La zone de pH critique n'est atteinte que chez les sujets indemnes de carie.",
+        "correct": false
+      },
+      {
+        "text": "Il faut attendre environ 40 minutes pour que le pH remonte à sa valeur initiale.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les propriétés protectrices de la salive incluent :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Un pouvoir tampon lié à la concentration en bicarbonates et phosphates.",
+        "correct": true
+      },
+      {
+        "text": "La production de maltase salivaire qui protège directement l'émail.",
+        "correct": false
+      },
+      {
+        "text": "L'abaissement systématique du pH buccal en dessous de 5,5.",
+        "correct": false
+      },
+      {
+        "text": "Un débit salivaire permettant la dilution et l'élimination des sucres.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La protection minérale de l'émail par la salive est assurée par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Des concentrations ioniques élevées en Calcium et Phosphate inorganique.",
+        "correct": true
+      },
+      {
+        "text": "La présence de Fluor qui stabilise la phase minérale contre la déminéralisation.",
+        "correct": true
+      },
+      {
+        "text": "L'absence totale d'ions dans le fluide salivaire.",
+        "correct": false
+      },
+      {
+        "text": "La présence de fer et de magnésium comme agents reminéralisants principaux.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Les facteurs généraux pouvant influencer la prévalence carieuse sont :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le déséquilibre de la flore par la prise d'antibiotiques ou d'AINS de longue durée.",
+        "correct": true
+      },
+      {
+        "text": "Uniquement le groupe sanguin de l'individu.",
+        "correct": false
+      },
+      {
+        "text": "La profession (ex: exposition professionnelle aux sucres) et l'âge.",
+        "correct": true
+      },
+      {
+        "text": "Exclusivement la situation géographique sans lien avec le comportement.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "En épidémiologie, quelle est la distinction correcte entre prévalence et incidence ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'incidence mesure les nouveaux cas détectés au cours de l'année précédente.",
+        "correct": true
+      },
+      {
+        "text": "La prévalence indique uniquement la vitesse d'évolution d'une lésion.",
+        "correct": false
+      },
+      {
+        "text": "L'incidence mesure la sévérité de la destruction tissulaire.",
+        "correct": false
+      },
+      {
+        "text": "La prévalence mesure la présence de la maladie dans une population à un moment donné.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les indices épidémiologiques en cariologie doivent être :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Subjectifs pour s'adapter à chaque praticien.",
+        "correct": false
+      },
+      {
+        "text": "Utilisés uniquement pour les soins curatifs individuels.",
+        "correct": false
+      },
+      {
+        "text": "Comparables internationalement pour suivre l'évolution dans le temps.",
+        "correct": true
+      },
+      {
+        "text": "Reproductibles et standardisés.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant l'indice CAOD (Dents permanentes) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les dents absentes pour des raisons orthodontiques sont incluses dans le score \"A\".",
+        "correct": false
+      },
+      {
+        "text": "Le score maximum pour un adulte possédant 28 dents est de 28.",
+        "correct": true
+      },
+      {
+        "text": "Il comptabilise les dents Cariées, Absentes (pour cause de carie) et Obturées.",
+        "correct": true
+      },
+      {
+        "text": "L'unité de mesure est toujours la face dentaire (CAOF).",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "L'indice \"cod\" spécifique aux dents temporaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Inclut systématiquement les dents extraites pour traumatisme.",
+        "correct": false
+      },
+      {
+        "text": "Est identique à l'indice CAOD utilisé chez l'adulte.",
+        "correct": false
+      },
+      {
+        "text": "Est principalement utile et fiable jusqu'à l'âge de 5-6 ans.",
+        "correct": true
+      },
+      {
+        "text": "Ne comptabilise pas les dents absentes car l'origine de la perte (exfoliation ou carie) est incertaine.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Selon la classification clinique simplifiée (C1 à C4) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "C4 correspond à une dent saine sans aucune lésion.",
+        "correct": false
+      },
+      {
+        "text": "C2 correspond à une zone blanchâtre (déminéralisation de l'émail).",
+        "correct": true
+      },
+      {
+        "text": "C3 correspond à une absence totale de la dent sur l'arcade.",
+        "correct": false
+      },
+      {
+        "text": "C1 correspond à un simple liseré noir.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "L'indice de Banting est utilisé pour :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Identifier des critères tels que la pénétration de la sonde ou la lésion à la jonction émail-cément.",
+        "correct": true
+      },
+      {
+        "text": "Mesurer le niveau d'hygiène buccale globale.",
+        "correct": false
+      },
+      {
+        "text": "Évaluer uniquement les caries occlusales chez l'enfant.",
+        "correct": false
+      },
+      {
+        "text": "Le diagnostic spécifique des caries radiculaires.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La carie radiculaire se caractérise par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une résistance naturelle due à la dureté du cément.",
+        "correct": false
+      },
+      {
+        "text": "Une implication majeure des bactéries de type *Actinomyces*.",
+        "correct": true
+      },
+      {
+        "text": "Une localisation favorisée par la récession gingivale.",
+        "correct": true
+      },
+      {
+        "text": "Une apparition systématique avant l'éruption de la dent.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Une carie initiale (stade précoce) peut se manifester par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une tache brune (\"brown spot\") lorsqu'elle est arrêtée et reminéralisée.",
+        "correct": true
+      },
+      {
+        "text": "Une destruction totale de la couronne dentaire.",
+        "correct": false
+      },
+      {
+        "text": "Une tache blanche (\"white spot\") lorsqu'elle est encore active.",
+        "correct": true
+      },
+      {
+        "text": "Une cavité profonde atteignant immédiatement la pulpe.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quels éléments anatomiques favorisent l'installation de la carie ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les sillons profonds et les anfractuosités occlusales.",
+        "correct": true
+      },
+      {
+        "text": "Une salive extrêmement fluide et abondante.",
+        "correct": false
+      },
+      {
+        "text": "Les surfaces lisses parfaitement brossées.",
+        "correct": false
+      },
+      {
+        "text": "Les points de contact défectueux qui favorisent les caries proximales.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "L'indice CAO moyen d'une population se calcule par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le comptage uniquement des dents obturées dans un échantillon de 10 personnes.",
+        "correct": false
+      },
+      {
+        "text": "La multiplication du nombre de dents saines par l'âge des sujets.",
+        "correct": false
+      },
+      {
+        "text": "C'est une valeur permettant d'étudier le niveau d'atteinte d'une population donnée.",
+        "correct": true
+      },
+      {
+        "text": "La somme des valeurs individuelles (C+A+O) divisée par le nombre de sujets examinés.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Un individu est considéré comme ayant des dents saines lorsque :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il présente au moins 5 obturations fonctionnelles.",
+        "correct": false
+      },
+      {
+        "text": "La somme de l'indice \"cod\" (pour les dents temporaires) est nulle.",
+        "correct": true
+      },
+      {
+        "text": "Son pH salivaire reste constamment à 4,0 après les repas.",
+        "correct": false
+      },
+      {
+        "text": "La somme de l'indice CAOD est nulle.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+"4": [
+  {
+    "question": "Concernant l'évolution des concepts de traitement de la lésion carieuse :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La préservation tissulaire maximale préconise l'ouverture large de l'émail pour un meilleur accès.",
+        "correct": false
+      },
+      {
+        "text": "L'odontologie conservatrice moderne repose sur le concept de \"Minimal Intervention Dentistry\".",
+        "correct": true
+      },
+      {
+        "text": "Le traitement actuel privilégie l'élimination systématique de toute dentine déminéralisée.",
+        "correct": false
+      },
+      {
+        "text": "On est passé du concept d'extension préventive de G.V. Black à celui de la préservation tissulaire maximale.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les caractéristiques de la dentine infectée ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle possède un potentiel de reminéralisation élevé après l'application de biomatériaux.",
+        "correct": false
+      },
+      {
+        "text": "Elle est incapable de se reminéraliser et doit impérativement être éliminée.",
+        "correct": true
+      },
+      {
+        "text": "C'est une couche profonde où la trame collagène est conservée.",
+        "correct": false
+      },
+      {
+        "text": "C'est une couche superficielle riche en bactéries et irréversiblement dénaturée.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos de la dentine affectée :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle constitue la couche la plus superficielle de la lésion carieuse.",
+        "correct": false
+      },
+      {
+        "text": "Elle est déminéralisée mais sa trame collagène est conservée.",
+        "correct": true
+      },
+      {
+        "text": "Elle est cliniquement identifiée comme étant une substance boueuse et ramollie.",
+        "correct": false
+      },
+      {
+        "text": "Elle est pauvre en bactéries et doit être conservée pour favoriser la reminéralisation.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "L'instrumentation rotative conventionnelle se caractérise par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'utilisation d'une fraise boule en carbure de tungstène sur contre-angle à vitesse lente pour l'excavation.",
+        "correct": true
+      },
+      {
+        "text": "Une sélectivité biologique parfaite entre la dentine infectée et affectée.",
+        "correct": false
+      },
+      {
+        "text": "L'absence totale de vibrations et de bruits lors de l'utilisation.",
+        "correct": false
+      },
+      {
+        "text": "Un excellent retour tactile et une grande rapidité d'exécution.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels sont les inconvénients majeurs de la méthode rotative classique ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle génère de la douleur, des vibrations et du bruit souvent mal perçus par le patient.",
+        "correct": true
+      },
+      {
+        "text": "Elle présente un risque élevé de sureviction par manque de discernement tactile précis.",
+        "correct": true
+      },
+      {
+        "text": "Elle est strictement contre-indiquée pour les cavités volumineuses.",
+        "correct": false
+      },
+      {
+        "text": "Son coût d'investissement initial est extrêmement élevé pour le praticien.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "La méthode chimiomécanique (type Carisolv) fonctionne par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'abrasion de l'émail sain pour accéder à la lésion.",
+        "correct": false
+      },
+      {
+        "text": "La dissolution chimique sélective du collagène dénaturé.",
+        "correct": true
+      },
+      {
+        "text": "La polymérisation des bactéries au sein de la dentine affectée.",
+        "correct": false
+      },
+      {
+        "text": "L'utilisation d'instruments manuels spécifiques pour l'éviction de la dentine infectée après action du gel.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels sont les avantages de la méthode chimiomécanique ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une conservation maximale des tissus sains et une absence de douleur/vibrations.",
+        "correct": true
+      },
+      {
+        "text": "C'est la technique la plus rapide disponible pour les cavités de gros volume.",
+        "correct": false
+      },
+      {
+        "text": "Elle permet de couper l'émail sans avoir recours à l'instrumentation rotative.",
+        "correct": false
+      },
+      {
+        "text": "Elle est particulièrement indiquée en pédodontie et chez les patients anxieux.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant l'ablation par Laser Er:YAG :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa longueur d'onde de 2 940 nm correspond au pic d'absorption de l'eau et de l'hydroxyapatite.",
+        "correct": true
+      },
+      {
+        "text": "Il possède un effet bactéricide et le traitement est souvent indolore.",
+        "correct": true
+      },
+      {
+        "text": "Il est principalement utilisé pour le retrait rapide des anciens amalgames.",
+        "correct": false
+      },
+      {
+        "text": "Il offre au praticien une sensation tactile supérieure à celle du contre-angle.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les limites ou contre-indications du Laser Er:YAG ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'absence totale de sensation tactile pour le praticien durant l'éviction.",
+        "correct": true
+      },
+      {
+        "text": "Son utilisation ne nécessite aucune protection oculaire spécifique.",
+        "correct": false
+      },
+      {
+        "text": "Le retrait des amalgames est contre-indiqué à cause des vapeurs de mercure.",
+        "correct": true
+      },
+      {
+        "text": "Son coût est le plus faible de toutes les techniques actuelles d'éviction.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "L'abrasion par air (dentisterie cinétique) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Crée une surface micro-rétentive idéale pour les procédures de collage.",
+        "correct": true
+      },
+      {
+        "text": "Ne nécessite pas la pose de la digue lors de son utilisation.",
+        "correct": false
+      },
+      {
+        "text": "Est particulièrement recommandée pour les patients asthmatiques.",
+        "correct": false
+      },
+      {
+        "text": "Projette des particules d'alumine sous pression pour éliminer les tissus.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels sont les risques associés à l'utilisation de l'abrasio-air ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'usure rapide des inserts diamantés.",
+        "correct": false
+      },
+      {
+        "text": "La surchauffe pulpaire due à l'absence de spray d'eau.",
+        "correct": false
+      },
+      {
+        "text": "La projection de poussières importantes dans l'environnement de travail.",
+        "correct": true
+      },
+      {
+        "text": "Un risque de provoquer un emphysème.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La sono-abrasion (ultrasons) est privilégiée pour :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'éviction totale de la dentine sclérotique très dure.",
+        "correct": false
+      },
+      {
+        "text": "La protection des dents adjacentes lors des préparations proximales.",
+        "correct": true
+      },
+      {
+        "text": "La réalisation de cavités de classe II étroites avec une grande précision.",
+        "correct": true
+      },
+      {
+        "text": "Le traitement rapide des lésions carieuses très volumineuses.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Les fraises en polymère (auto-limitantes) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sont des instruments stérilisables et réutilisables à volonté.",
+        "correct": false
+      },
+      {
+        "text": "Peuvent être utilisées efficacement pour ouvrir l'émail dentaire.",
+        "correct": false
+      },
+      {
+        "text": "Offrent une sécurité maximale contre les effractions pulpaires accidentelles.",
+        "correct": true
+      },
+      {
+        "text": "Sont conçues pour s'user prématurément dès qu'elles rencontrent la dentine saine (plus dure).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quand est-il indiqué d'utiliser les fraises en polymère ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Lorsque l'accès à la lésion est extrêmement difficile pour des instruments manuels.",
+        "correct": false
+      },
+      {
+        "text": "En complément d'un contre-angle tournant à environ 8 000 tr/min.",
+        "correct": true
+      },
+      {
+        "text": "Pour l'élimination de la dentine sclérotique.",
+        "correct": false
+      },
+      {
+        "text": "Pour la finition des fonds de cavités profondes.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels sont les critères cliniques pour valider l'arrêt de l'éviction carieuse ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La vision : la dentine est propre, sans aspect boueux ou ramolli.",
+        "correct": true
+      },
+      {
+        "text": "L'absence totale de coloration brune en fond de cavité.",
+        "correct": false
+      },
+      {
+        "text": "La mesure systématique de la profondeur résiduelle avec une sonde graduée.",
+        "correct": false
+      },
+      {
+        "text": "Le tact : la dentine devient ferme et s'élimine en poudre (dentine criante).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La technologie de fluorescence dans l'éviction carieuse :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Est utilisée exclusivement pour blanchir la dentine affectée.",
+        "correct": false
+      },
+      {
+        "text": "Permet de confirmer l'absence de bactéries de manière objective.",
+        "correct": true
+      },
+      {
+        "text": "Est un critère technologique moderne pour valider l'arrêt de l'excavation.",
+        "correct": true
+      },
+      {
+        "text": "Remplace totalement le besoin de retour tactile du praticien.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant la dentine infectée vs affectée, quelle est la conduite à tenir ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La dentine affectée doit être conservée car elle est capable de se reminéraliser.",
+        "correct": true
+      },
+      {
+        "text": "La dentine affectée doit être éliminée car elle fragilise la restauration future.",
+        "correct": false
+      },
+      {
+        "text": "La dentine infectée doit être éliminée car elle est dénaturée et riche en bactéries.",
+        "correct": true
+      },
+      {
+        "text": "Les deux couches doivent être éliminées pour garantir l'adhésion.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quels procédés sont considérés comme \"conservateurs\" pour préserver la vitalité pulpaire ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La méthode chimiomécanique et l'utilisation de fraises en polymère.",
+        "correct": true
+      },
+      {
+        "text": "L'utilisation de la turbine à haute vitesse sans irrigation.",
+        "correct": false
+      },
+      {
+        "text": "L'extension préventive systématique selon les principes de Black.",
+        "correct": false
+      },
+      {
+        "text": "L'utilisation du laser Er:YAG.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sur quoi repose la mise en œuvre de la méthode chimiomécanique ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le paramétrage précis de la fréquence et de la puissance du faisceau.",
+        "correct": false
+      },
+      {
+        "text": "L'utilisation obligatoire d'une anesthésie locale profonde.",
+        "correct": false
+      },
+      {
+        "text": "La répétition de la séquence jusqu'à ce que le gel ne soit plus trouble.",
+        "correct": true
+      },
+      {
+        "text": "L'application d'un gel pendant 30 secondes pour ramollir la dentine cariée.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les limites des techniques ultrasonores et polymères ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles augmentent considérablement le risque d'exposition pulpaire.",
+        "correct": false
+      },
+      {
+        "text": "Elles sont inefficaces sur l'émail (nécessitent un accès préalable).",
+        "correct": true
+      },
+      {
+        "text": "Elles ne nécessitent aucun instrument complémentaire pour l'ensemble du soin.",
+        "correct": false
+      },
+      {
+        "text": "Elles sont peu efficaces pour traiter rapidement de gros volumes carieux.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+"5": [
+  {
+    "question": "À propos des différents types de diagnostics médicaux :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le diagnostic étiologique se limite uniquement à l'observation visuelle des lésions.",
+        "correct": false
+      },
+      {
+        "text": "Le diagnostic positif est construit à partir de l'histoire du cas et des données de l'examen clinique.",
+        "correct": true
+      },
+      {
+        "text": "Le diagnostic différentiel consiste à confirmer la maladie dès le premier symptôme.",
+        "correct": false
+      },
+      {
+        "text": "Le diagnostic étiologique permet d'identifier la ou les causes de la maladie pour un traitement adéquat.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant l'examen clinique complet et d'urgence :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'examen complet débute obligatoirement par les tests de mobilité dentaire.",
+        "correct": false
+      },
+      {
+        "text": "L'examen d'urgence est un bilan bref visant principalement à soulager la plainte immédiate du patient.",
+        "correct": true
+      },
+      {
+        "text": "L'examen de contrôle ne recherche que les signes de nécrose pulpaire ancienne.",
+        "correct": false
+      },
+      {
+        "text": "L'examen complet doit être systématique dans le cadre d'une approche préventive globale.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le protocole du test de sensibilité au froid exige que :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La neige carbonique soit appliquée directement sur la gencive marginale.",
+        "correct": false
+      },
+      {
+        "text": "Le test soit réalisé sur des dents préalablement séchées pour éviter les biais.",
+        "correct": true
+      },
+      {
+        "text": "La boulette de coton soit retirée uniquement après 30 secondes, même si le patient réagit.",
+        "correct": false
+      },
+      {
+        "text": "On commence l'application sur une dent supposée saine pour servir de témoin de comparaison.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Lors de la réalisation d'un test électrique (pulpomètre) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les dents doivent être nettoyées car le tartre peut conduire le courant vers le parodonte.",
+        "correct": true
+      },
+      {
+        "text": "Le courant doit être appliqué à son intensité maximale dès le début du test.",
+        "correct": false
+      },
+      {
+        "text": "Ce test permet de stimuler efficacement les fibres nerveuses non myélinisées.",
+        "correct": false
+      },
+      {
+        "text": "Un agent électrolytique, comme de la pâte dentifrice, est nécessaire sur l'électrode.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant le test de morsure et de palpation :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La palpation apicale permet de détecter des tuméfactions résultant d'une pathologie pulpaire.",
+        "correct": true
+      },
+      {
+        "text": "Le test de morsure est un outil essentiel pour le diagnostic des fêlures dentaires.",
+        "correct": true
+      },
+      {
+        "text": "La palpation doit être réalisée avec une sonde métallique pour plus de précision.",
+        "correct": false
+      },
+      {
+        "text": "Le \"tooth slooth\" est un instrument utilisé pour tester la mobilité axiale des dents.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "La classification de la mobilité dentaire selon l'ARPA :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le grade 1 signifie qu'une mobilité importante est visible à l'œil nu.",
+        "correct": false
+      },
+      {
+        "text": "Le grade 2 correspond à une mobilité transversale visible à l'œil nu mais inférieure à 1 mm.",
+        "correct": true
+      },
+      {
+        "text": "Le grade 3 correspond à l'absence totale de mobilité physiologique.",
+        "correct": false
+      },
+      {
+        "text": "Le grade 4 est défini comme une mobilité de type axial.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos des colorants et révélateurs de caries :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Leur principe repose sur la variation de la fluorescence du colorant selon la perte minérale.",
+        "correct": true
+      },
+      {
+        "text": "Ils sont conçus pour colorer spécifiquement les bactéries du front de progression.",
+        "correct": false
+      },
+      {
+        "text": "Le colorant doit être appliqué sur une cavité humide pour faciliter sa pénétration.",
+        "correct": false
+      },
+      {
+        "text": "Ils colorent sélectivement le collagène de la matrice organique déminéralisée.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le protocole d'application du révélateur de carie :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le produit est laissé en place pendant une durée de 5 à 10 secondes selon la marque.",
+        "correct": true
+      },
+      {
+        "text": "Plusieurs applications successives sont souvent nécessaires pour une éviction complète.",
+        "correct": true
+      },
+      {
+        "text": "Une seule application suffit pour identifier la dentine infectée de manière définitive.",
+        "correct": false
+      },
+      {
+        "text": "La cavité ne doit jamais être rincée après l'application du colorant.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Le principe du laser à fluorescence (type DIAGNOdent) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La détection est basée sur le changement des propriétés physiques induit par la carie.",
+        "correct": true
+      },
+      {
+        "text": "Le laser émet une lumière bleue pour quantifier la perte de calcium uniquement.",
+        "correct": false
+      },
+      {
+        "text": "Il émet une lumière rouge spécifique d'une longueur d'onde de 655 nm.",
+        "correct": true
+      },
+      {
+        "text": "La fluorescence diminue systématiquement lorsque la lésion carieuse progresse.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant le système QLF (Quantitative Light-induced Fluorescence) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une baisse de la fluorescence est observée car les minéraux sont remplacés par de l'eau.",
+        "correct": true
+      },
+      {
+        "text": "L'image capturée est convertie en une carte thermique de couleur rouge uniquement.",
+        "correct": false
+      },
+      {
+        "text": "Le système QLF ne nécessite aucun ordinateur ni logiciel pour l'analyse des images.",
+        "correct": false
+      },
+      {
+        "text": "Il utilise une lumière laser proche de 400 nm pour quantifier la déminéralisation.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le dispositif Soprolife et ses modes de fonctionnement :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le mode I utilise une lumière infrarouge pour traverser les restaurations métalliques.",
+        "correct": false
+      },
+      {
+        "text": "Soprolife est basé sur le principe de la réflexion acoustique des tissus mous.",
+        "correct": false
+      },
+      {
+        "text": "Le mode \"dent infectée\" montre un signal rouge ou une zone d'obscurité.",
+        "correct": true
+      },
+      {
+        "text": "Le mode \"dent saine\" se manifeste par un signal de fluorescence vert homogène.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le calibrage et l'utilisation du DIAGNOdent :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La sonde doit être maintenue à 5 mm de distance de la surface dentaire sans contact.",
+        "correct": false
+      },
+      {
+        "text": "Une valeur de référence (étalon) est prise sur une surface dentaire saine du patient.",
+        "correct": true
+      },
+      {
+        "text": "L'appareil doit être calibré sur une plaque de céramique standard avant chaque usage.",
+        "correct": true
+      },
+      {
+        "text": "La présence de salive ou de tartre n'influence pas la valeur de fluorescence enregistrée.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Les indications et limites du DIAGNOdent :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "C'est l'outil de choix pour détecter les caries sous les couronnes prothétiques en métal.",
+        "correct": false
+      },
+      {
+        "text": "Une valeur située entre 0 et 5 indique la nécessité immédiate d'une préparation de cavité.",
+        "correct": false
+      },
+      {
+        "text": "Il présente une efficacité réduite au niveau des marges des restaurations existantes.",
+        "correct": true
+      },
+      {
+        "text": "Il est très utile pour le monitoring des caries et la détection des sillons infiltrés.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La technique de transillumination par fibre optique (FOTI) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle utilise une lumière ultraviolette pour détruire les bactéries carieuses.",
+        "correct": false
+      },
+      {
+        "text": "Elle est particulièrement avantageuse car elle n'expose pas le patient aux radiations.",
+        "correct": true
+      },
+      {
+        "text": "Le FOTI est la méthode la plus fiable pour détecter les caries strictement amélaires.",
+        "correct": false
+      },
+      {
+        "text": "Elle exploite la diffraction de la lumière qui apparaît comme une ombre dans la dent.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les caractéristiques et limites du système FOTI :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les résines composites peuvent modifier la transmission et la dispersion lumineuse.",
+        "correct": true
+      },
+      {
+        "text": "L'examen par transillumination est totalement indépendant de l'acuité visuelle du praticien.",
+        "correct": false
+      },
+      {
+        "text": "Elle ne peut être utilisée que sur les faces vestibulaires des dents antérieures.",
+        "correct": false
+      },
+      {
+        "text": "Cette méthode permet d'obtenir des images instantanées et est simple à utiliser.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le système DIFOTI (Digital Fiber Optic Trans-illumination) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il utilise exclusivement des ultrasons pour localiser les lésions carieuses.",
+        "correct": false
+      },
+      {
+        "text": "Il utilise une caméra CCD pour capturer et numériser les images de la dent.",
+        "correct": true
+      },
+      {
+        "text": "Il permet un archivage des données pour assurer un suivi des lésions dans le temps.",
+        "correct": true
+      },
+      {
+        "text": "Le DIFOTI a été créé pour augmenter la variabilité de diagnostic entre les examinateurs.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "L'utilisation de l'air abrasion à visée diagnostique :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'apparition d'une minuscule cavitation confirme la présence d'une déminéralisation.",
+        "correct": true
+      },
+      {
+        "text": "Si le sillon reste intact après le passage de la poudre, c'est qu'il est infecté.",
+        "correct": false
+      },
+      {
+        "text": "Elle consiste à projeter un jet d'oxyde d'alumine sur un sillon coloré suspect.",
+        "correct": true
+      },
+      {
+        "text": "Cette technique est purement visuelle et n'utilise aucune énergie cinétique.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "En conclusion sur les nouveaux outils de diagnostic :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les méthodes conventionnelles (visuel, sonde) ne suffisent pas toujours pour les stades précoces.",
+        "correct": true
+      },
+      {
+        "text": "Le diagnostic de la carie ne nécessite plus l'intégration de données subjectives.",
+        "correct": false
+      },
+      {
+        "text": "La radiographie reste l'unique moyen de diagnostic pour tous les stades de la carie.",
+        "correct": false
+      },
+      {
+        "text": "Les nouvelles technologies visent à détecter les lésions carieuses dès leur phase débutante.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+};
 
   const questions = questionsData[lesson] || [];
   const container = document.getElementById("questionsContainer");

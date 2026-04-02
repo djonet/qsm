@@ -181,800 +181,4811 @@
 
   // 🧠 أسئلة تجريبية
   const questionsData = {
-   
-  "Les matériaux à empreinte": [
-    // 1–8 : difficulté 1
-    {
-      question: "L’empreinte en dentisterie est définie comme un moulage en négatif d’une partie ou de la totalité des arcades et tissus environnants, destiné à obtenir un modèle positif fidèle.",
-      difficulty: 1,
-      answers: [
-        { text: "Elle ne concerne pas les tissus environnants", correct: false },
-        { text: "Elle permet d’obtenir la réplique des structures enregistrées", correct: true },
-        { text: "Elle est un moulage positif pris directement en bouche", correct: false },
-        { text: "Oui, c’est la définition clinique donnée dans le cours", correct: true }
-      ]
-    },
-    {
-      question: "Selon l’introduction, la CFAO progresse mais l’empreinte « chimico-manuelle » reste d’actualité et s’est améliorée pour la précision dimensionnelle.",
-      difficulty: 1,
-      answers: [
-        { text: "La CFAO exclut tout intérêt pour les matériaux d’empreinte", correct: false },
-        { text: "Les propriétés mécaniques/surfaciques des matériaux se sont améliorées", correct: true },
-        { text: "L’empreinte traditionnelle est présentée comme obsolète", correct: false },
-        { text: "Le texte souligne que la CFAO a fait des efforts mais n’a pas remplacé l’empreinte traditionnelle", correct: true }
-      ]
-    },
-    {
-      question: "Pour O’Brien, deux grandes classes de matériaux à empreinte se distinguent après leur réaction : élastiques et inélastiques (rigides).",
-      difficulty: 1,
-      answers: [
-        { text: "Le cours ne mentionne qu’une seule classe", correct: false },
-        { text: "Les élastiques et les inélastiques/rigides", correct: true },
-        { text: "Les rigides sont dits « hydrocolloïdes » dans le texte", correct: false },
-        { text: "La distinction est basée sur le comportement après la prise", correct: true }
-      ]
-    },
-    {
-      question: "Les hydrocolloïdes sont classés en irréversibles (alginate) et réversibles (agar-agar).",
-      difficulty: 1,
-      answers: [
-        { text: "Oui, c’est l’opposition citée", correct: true },
-        { text: "Les deux sont explicitement décrits comme réversibles", correct: false },
-        { text: "L’agar-agar est donné comme irréversible", correct: false },
-        { text: "L’alginate est l’irréversible et l’agar-agar le réversible", correct: true }
-      ]
-    },
-    {
-      question: "Parmi les élastomères cités figurent les polysulfures, silicones et polyéthers.",
-      difficulty: 1,
-      answers: [
-        { text: "Elles appartiennent à la classe « élastiques »", correct: true },
-        { text: "Ces trois familles sont listées dans le document", correct: true },
-        { text: "Elles sont décrites comme hydrocolloïdes", correct: false },
-        { text: "Elles sont classées parmi les matériaux rigides", correct: false }
-      ]
-    },
-    {
-      question: "Les matériaux inélastiques/rigides regroupent notamment les cires/compositions thermoplastiques, les pâtes oxyde de zinc-eugénol et le plâtre.",
-      difficulty: 1,
-      answers: [
-        { text: "Ils sont rangés parmi les élastomères", correct: false },
-        { text: "Ces trois sous-groupes sont explicitement cités", correct: true },
-        { text: "Ils sont présentés comme hydrophiles par définition", correct: false },
-        { text: "Ils relèvent des matériaux inélastiques", correct: true }
-      ]
-    },
-    {
-      question: "Parmi les souhaits généraux des matériaux élastiques : odeur/goût agréables et innocuité (non toxiques, non irritants).",
-      difficulty: 1,
-      answers: [
-        { text: "Ces qualités sensorielles et biologiques sont mentionnées", correct: true },
-        { text: "Le cours exige un goût neutre mais accepte la toxicité", correct: false },
-        { text: "Une légère irritabilité est recommandée", correct: false },
-        { text: "L’innocuité est citée comme exigence", correct: true }
-      ]
-    },
-    {
-      question: "Le temps de travail souhaité pour un matériau élastique est d’au moins 3 minutes.",
-      difficulty: 1,
-      answers: [
-        { text: "Cette valeur minimale est donnée", correct: true },
-        { text: "Elle fait partie des propriétés générales attendues", correct: true },
-        { text: "Il n’y a aucune indication de durée dans le texte", correct: false },
-        { text: "Le temps requis est strictement inférieur à 1 minute", correct: false }
-      ]
-    },
 
-    // 9–16 : difficulté 2
-    {
-      question: "La réaction de prise recherchée est dite « athermique ». ",
-      difficulty: 2,
-      answers: [
-        { text: "Elle figure parmi les propriétés générales", correct: true },
-        { text: "La prise doit obligatoirement être thermique", correct: false },
-        { text: "L’athermicité est mentionnée comme souhaitable", correct: true },
-        { text: "Le document n’emploie pas ce terme", correct: false }
-      ]
-    },
-    {
-      question: "Une stabilité dimensionnelle d’au moins 24 heures (conditions d’hygrométrie/thermie normales) est souhaitée pour les matériaux élastiques.",
-      difficulty: 2,
-      answers: [
-        { text: "Les conditions environnementales « cabinet/labo » sont précisées", correct: true },
-        { text: "La stabilité n’est pas considérée", correct: false },
-        { text: "Le texte recommande une stabilité de 24 jours", correct: false },
-        { text: "Cette durée minimale est explicitement donnée", correct: true }
-      ]
-    },
-    {
-      question: "Le matériau doit être compatible avec le matériau de réplique et ne pas dégager de gaz de réaction.",
-      difficulty: 2,
-      answers: [
-        { text: "Le dégagement gazeux est recherché pour l’adhésion", correct: false },
-        { text: "L’incompatibilité avec les répliques est tolérée", correct: false },
-        { text: "« Sans dégagement gazeux » est cité", correct: true },
-        { text: "Compatibilité avec le matériau de réplique exigée", correct: true }
-      ]
-    },
-    {
-      question: "Le conditionnement ergonomique et un prix en accord avec le résultat souhaité font partie des critères.",
-      difficulty: 2,
-      answers: [
-        { text: "L’ergonomie n’est jamais évoquée", correct: false },
-        { text: "Ils complètent les exigences techniques", correct: true },
-        { text: "Oui, ces points pratiques/économiques sont listés", correct: true },
-        { text: "Le texte rejette toute considération de coût", correct: false }
-      ]
-    },
-    {
-      question: "La précision rassemble la capacité à reproduire formes (volumique/dimensionnelle) et microsurfaces (fidélité des détails).",
-      difficulty: 2,
-      answers: [
-        { text: "Les microsurfaces ne sont pas évoquées", correct: false },
-        { text: "La précision ne concerne que le volume", correct: false },
-        { text: "La « fidélité » nomme la reproduction fine des détails", correct: true },
-        { text: "Ces deux volets sont distingués", correct: true }
-      ]
-    },
-    {
-      question: "La mouillabilité exprime l’aptitude d’un fluide à s’étaler à la surface d’un solide et conditionne l’enregistrement des surfaces.",
-      difficulty: 2,
-      answers: [
-        { text: "Elle n’a aucune conséquence clinique", correct: false },
-        { text: "Une faible mouillabilité réduit l’aptitude à l’étalement", correct: true },
-        { text: "La mouillabilité est indépendante de l’étalement", correct: false },
-        { text: "La définition et l’impact clinique sont donnés", correct: true }
-      ]
-    },
-    {
-      question: "D’une manière générale, mouillabilité dépend de viscosité, thixotropie et hydrophilie.",
-      difficulty: 2,
-      answers: [
-        { text: "Ils conditionnent l’aptitude à l’étalement", correct: true },
-        { text: "Seule l’hydrophilie est mentionnée", correct: false },
-        { text: "La thixotropie n’apparaît pas", correct: false },
-        { text: "Ces trois facteurs sont cités", correct: true }
-      ]
-    },
-    {
-      question: "L’hydrophilie est liée à l’angle de contact eau/matériau : < 90° ⇒ hydrophile.",
-      difficulty: 2,
-      answers: [
-        { text: "Un angle > 90° signe l’hydrophilie", correct: false },
-        { text: "Cette relation est explicitement formulée", correct: true },
-        { text: "Le seuil de 90° est donné", correct: true },
-        { text: "L’angle de contact n’est pas utilisé", correct: false }
-      ]
-    },
 
-    // 17–24 : difficulté 3
-    {
-      question: "La viscosité est la résistance à l’écoulement, liée aux interactions intermoléculaires et au taux de charges.",
-      difficulty: 3,
-      answers: [
-        { text: "Le taux de charges influence la viscosité", correct: true },
-        { text: "Le texte ne parle pas de charges", correct: false },
-        { text: "Définition et déterminants sont cités", correct: true },
-        { text: "Elle ne dépend pas des interactions moléculaires", correct: false }
-      ]
-    },
-    {
-      question: "La viscosité n’agit pas directement sur le mouillage, mais influence la cinétique d’écoulement et le degré de compression tissulaire à l’empreinte.",
-      difficulty: 3,
-      answers: [
-        { text: "Cette nuance est écrite dans le cours", correct: true },
-        { text: "Elle n’a aucun effet sur la procédure clinique", correct: false },
-        { text: "Elle détermine directement l’hydrophilie", correct: false },
-        { text: "Elle conditionne aussi malaxage, injectabilité et aptitude à l’écoulement", correct: true }
-      ]
-    },
-    {
-      question: "La reproduction des détails est optimisée par mouillabilité, faible viscosité et compatibilité avec le matériau de réplique.",
-      difficulty: 3,
-      answers: [
-        { text: "La compatibilité n’est pas pertinente", correct: false },
-        { text: "Elle ne dépend pas de la viscosité", correct: false },
-        { text: "Elle se mesure en microns dans le texte", correct: true },
-        { text: "Ces trois facteurs sont listés", correct: true }
-      ]
-    },
-    {
-      question: "La stabilité dimensionnelle est affectée par dilatation thermique, contraction de prise et élimination de sous-produits volatils.",
-      difficulty: 3,
-      answers: [
-        { text: "Le temps de stockage est sans effet", correct: false },
-        { text: "Le stockage/l’environnement influencent la stabilité", correct: true },
-        { text: "La stabilité n’est qu’un paramètre « immédiat »", correct: false },
-        { text: "Ces facteurs sont cités", correct: true }
-      ]
-    },
-    {
-      question: "Les propriétés élastiques dépendent du taux de réticulation, de la quantité de charges et de plastifiants.",
-      difficulty: 3,
-      answers: [
-        { text: "Elles dépendent uniquement de la température buccale", correct: false },
-        { text: "Les plastifiants ne sont jamais mentionnés", correct: false },
-        { text: "Ces dépendances sont listées", correct: true },
-        { text: "Elles conditionnent la résistance aux contraintes", correct: true }
-      ]
-    },
-    {
-      question: "Un retrait prématuré avant fin de prise est une cause fréquente de déformation.",
-      difficulty: 3,
-      answers: [
-        { text: "Le retrait précoce améliore la précision", correct: false },
-        { text: "Le texte l’indique explicitement", correct: true },
-        { text: "Le mélange homogène n’est pas nécessaire", correct: false },
-        { text: "Le respect d’un temps de prise suffisant est requis", correct: true }
-      ]
-    },
-    {
-      question: "Il n’existe pas de protocole standard de désinfection en raison de la diversité des matériaux et désinfectants.",
-      difficulty: 3,
-      answers: [
-        { text: "Cette absence de standard est écrite", correct: true },
-        { text: "Un protocole unique est imposé", correct: false },
-        { text: "L’immersion est recommandée pour une bonne désinfection", correct: true },
-        { text: "La pulvérisation est dite systématiquement supérieure", correct: false }
-      ]
-    },
-    {
-      question: "L’immersion est recommandée pour tous les matériaux sauf les hydrocolloïdes, avec un temps suffisant mais < 1 h.",
-      difficulty: 3,
-      answers: [
-        { text: "Le temps d’immersion n’a pas d’impact dimensionnel", correct: false },
-        { text: "Une longue immersion modifie les dimensions", correct: true },
-        { text: "Cette restriction et la limite de temps sont données", correct: true },
-        { text: "Les hydrocolloïdes supportent des immersions prolongées", correct: false }
-      ]
-    },
+"1oc": [
+  {
+    "question": "Concernant l'historique et la définition de l'amalgame :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La formule actuelle de l'alliage (Ag 68%, Sn 26%) a été fixée dès 1855 par Lonse.",
+        "correct": false
+      },
+      {
+        "text": "Le français Taveau est reconnu pour avoir introduit la \"pâte d'argent\" mélangée au mercure dès 1826.",
+        "correct": true
+      },
+      {
+        "text": "Les frères Croscour étaient des dentistes renommés ayant perfectionné la technique de Taveau.",
+        "correct": false
+      },
+      {
+        "text": "L'amalgamation est un processus de création d'alliage où l'un des constituants (le mercure) est liquide à température ordinaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sur les étapes de fabrication de la poudre d'alliage :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Lors du refroidissement du lingot, la cristallisation se fait de l'intérieur vers l'extérieur.",
+        "correct": false
+      },
+      {
+        "text": "Le recuit est un chauffage à 100°C qui permet de stabiliser l'alliage et d'éliminer les impuretés.",
+        "correct": true
+      },
+      {
+        "text": "Les alliages sphériques sont obtenus par usinage mécanique du lingot refroidi.",
+        "correct": false
+      },
+      {
+        "text": "L'homogénéisation du lingot s'effectue dans un four entre 400°C et 425°C pendant plusieurs heures.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos de la classification des alliages selon leur morphologie et composition :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'alliage de Type 1 est caractérisé par une teneur en cuivre supérieure à 10%.",
+        "correct": false
+      },
+      {
+        "text": "Les alliages de Classe II sont des particules sphériques obtenues par pulvérisation du métal fondu en atmosphère inerte.",
+        "correct": true
+      },
+      {
+        "text": "Les alliages mixtes (Classe III) excluent par définition l'utilisation de copeaux taillés mécaniquement.",
+        "correct": false
+      },
+      {
+        "text": "Le Type 3 selon l'AFNOR correspond à un alliage à haute teneur en cuivre à composition unique.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quel est le rôle de l'Argent (Ag) dans l'alliage pour amalgame ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il augmente la résistance mécanique de l'obturation finale.",
+        "correct": true
+      },
+      {
+        "text": "Il diminue la réactivité de l'alliage avec le mercure.",
+        "correct": false
+      },
+      {
+        "text": "Il est le principal responsable de l'augmentation du fluage (creep).",
+        "correct": false
+      },
+      {
+        "text": "Il favorise l'expansion de prise du matériau.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant l'influence de l'Étain (Sn) sur les propriétés de l'amalgame :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une augmentation de sa teneur entraîne une augmentation de la contraction et de la corrosion.",
+        "correct": true
+      },
+      {
+        "text": "Il facilite l'amalgamation car il possède une plus grande affinité pour le mercure que l'argent.",
+        "correct": true
+      },
+      {
+        "text": "Sa présence permet de réduire considérablement le temps de prise.",
+        "correct": false
+      },
+      {
+        "text": "L'étain augmente significativement la dureté et la résistance du matériau.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos du rôle du Zinc (Zn) et du Cuivre (Cu) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La contamination par l'humidité d'un alliage riche en zinc provoque une contraction retardée.",
+        "correct": false
+      },
+      {
+        "text": "Le zinc agit comme un agent anti-oxydant lors de la fabrication du lingot.",
+        "correct": true
+      },
+      {
+        "text": "Le cuivre est ajouté principalement pour diminuer l'expansion finale de prise.",
+        "correct": false
+      },
+      {
+        "text": "Le cuivre augmente la dureté de l'amalgame et diminue son fluage.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant le phénomène de prise des amalgames conventionnels :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La phase gamma ($\\gamma$) correspond à l'alliage initial Argent-Étain ($Ag_3Sn$).",
+        "correct": true
+      },
+      {
+        "text": "La phase gamma 2 se forme avant la phase gamma 1 et possède une structure cubique.",
+        "correct": false
+      },
+      {
+        "text": "Le centre des grains d'alliage est totalement dissous par le mercure lors de la trituration.",
+        "correct": false
+      },
+      {
+        "text": "La phase gamma 1 ($\\gamma_1$) est la phase noble ($Ag_2Hg_3$) qui se cristallise en premier lieu.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les caractéristiques de la phase gamma 2 ($\\gamma_2$) ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle possède le potentiel électrochimique le plus bas, ce qui la rend vulnérable à la corrosion.",
+        "correct": true
+      },
+      {
+        "text": "C'est une phase peu dure, responsable du manque de résistance et du fluage élevé.",
+        "correct": true
+      },
+      {
+        "text": "Elle renforce la stabilité dimensionnelle de l'amalgame à long terme.",
+        "correct": false
+      },
+      {
+        "text": "Sa formule chimique est $Ag_2Hg_3$ et elle possède un réseau hexagonal.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Sur les amalgames à \"phase dispersée\" ou \"non-gamma 2\" :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La réaction de prise forme du $Cu_6Sn_5$, empêchant ainsi la formation de la phase $\\gamma_2$.",
+        "correct": true
+      },
+      {
+        "text": "La phase dispersée est constituée uniquement de particules d'étain pur.",
+        "correct": false
+      },
+      {
+        "text": "Ils utilisent un alliage eutectique Argent-Cuivre de morphologie sphérique.",
+        "correct": true
+      },
+      {
+        "text": "Ces amalgames ont une teneur totale en cuivre ne dépassant jamais 5%.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant la stabilité dimensionnelle de l'amalgame :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Plus le grain de la poudre est fin, plus la diffusion du mercure est rapide et moins l'expansion est importante.",
+        "correct": true
+      },
+      {
+        "text": "Le zinc augmente l'expansion finale même en l'absence de toute contamination hydrique.",
+        "correct": false
+      },
+      {
+        "text": "Un excès de mercure lors du mélange tend à provoquer une contraction de prise.",
+        "correct": false
+      },
+      {
+        "text": "L'expansion de prise est due à la formation des nouveaux composés $\\gamma_1$ et $\\gamma_2$.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos des propriétés mécaniques (Résistance) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La résistance à la compression augmente proportionnellement avec l'élévation de la température buccale.",
+        "correct": false
+      },
+      {
+        "text": "La résistance maximale est atteinte dès la fin de la condensation.",
+        "correct": false
+      },
+      {
+        "text": "La résistance à la traction est très inférieure à la résistance à la compression (environ 50 kg/cm2).",
+        "correct": true
+      },
+      {
+        "text": "Un amalgame acceptable doit présenter une résistance à la compression d'au moins 32 kg/cm2.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sur le fluage (Flow et Creep) de l'amalgame :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le \"creep\" doit être le plus élevé possible pour assurer la pérennité marginale.",
+        "correct": false
+      },
+      {
+        "text": "Le \"creep\" est le fluage dynamique résultant des contraintes occlusales répétées.",
+        "correct": true
+      },
+      {
+        "text": "Le \"flow\" est le fluage initial statique mesuré durant les premières 21 heures.",
+        "correct": true
+      },
+      {
+        "text": "Pour une meilleure adaptation, un amalgame doit posséder un \"flow\" très bas.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Selon la théorie GBS (Grain Boundary Sliding) d'Okabe :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le creep diminue lorsque la granulométrie de la poudre est très fine.",
+        "correct": false
+      },
+      {
+        "text": "Le glissement intercristallin est plus important si les grains de phase $\\gamma_2$ sont volumineux.",
+        "correct": false
+      },
+      {
+        "text": "Les déformations plastiques sont principalement concentrées à la périphérie de chaque grain.",
+        "correct": true
+      },
+      {
+        "text": "Le mécanisme de déformation (creep) implique le glissement des cristaux de phase $\\gamma_1$ entre eux.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant les propriétés chimiques (Corrosion et Ternissure) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La corrosion de la phase $\\gamma_2$ améliore les propriétés mécaniques marginales.",
+        "correct": false
+      },
+      {
+        "text": "La corrosion est une détérioration profonde du matériau par réaction avec l'environnement.",
+        "correct": true
+      },
+      {
+        "text": "La corrosion chimique est totalement indépendante de la corrosion électrolytique.",
+        "correct": false
+      },
+      {
+        "text": "La ternissure est un simple changement de couleur superficiel lié à des dépôts.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos des propriétés biologiques et de la toxicité :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'amalgame peut provoquer des lésions bénignes comme le tatouage des muqueuses.",
+        "correct": true
+      },
+      {
+        "text": "La toxicité pour la pulpe est uniquement due aux composants chimiques intrinsèques du matériau.",
+        "correct": false
+      },
+      {
+        "text": "Le mercure utilisé dans les amalgames est hautement soluble dans les fluides salivaires.",
+        "correct": false
+      },
+      {
+        "text": "Les risques principaux sont liés aux manipulations pouvant entraîner l'inhalation de vapeurs de mercure.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sur les propriétés thermiques et électriques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La réaction de prise de l'amalgame est fortement exothermique, risquant de brûler la pulpe.",
+        "correct": false
+      },
+      {
+        "text": "L'amalgame est un excellent conducteur thermique à cause de ses électrons libres.",
+        "correct": true
+      },
+      {
+        "text": "La pose d'un isolant thermique est nécessaire pour protéger la pulpe des variations de température.",
+        "correct": true
+      },
+      {
+        "text": "Le coefficient de dilatation thermique de l'amalgame est très proche de celui de la dent.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant la technique de manipulation (Dosage et Condensation) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La condensation manuelle a pour but de faire remonter l'excès de mercure à la surface.",
+        "correct": true
+      },
+      {
+        "text": "Une condensation efficace doit être arrêtée dès que la surface de l'amalgame devient mate.",
+        "correct": false
+      },
+      {
+        "text": "Le dosage recommandé par l'ADA est de 50% de poudre et 50% de mercure en masse.",
+        "correct": true
+      },
+      {
+        "text": "La condensation ultrasonique est la technique de choix car elle réduit la vaporisation du mercure.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos de la finition (Sculpture et Polissage) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La présculpture s'effectue avec des spatules aiguisées dès que le durcissement est suffisant (2 à 10 min).",
+        "correct": true
+      },
+      {
+        "text": "Le polissage est réalisé immédiatement après la sculpture à l'aide de cupules en caoutchouc.",
+        "correct": false
+      },
+      {
+        "text": "Le brunissage sert à augmenter la rugosité de surface pour favoriser l'adhérence bactérienne.",
+        "correct": false
+      },
+      {
+        "text": "Le polissage final doit être différé de 48 heures pour permettre la stabilisation de la réaction.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sur les indications et contre-indications cliniques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il est recommandé de l'utiliser même sans fond protecteur dans les cavités très profondes.",
+        "correct": false
+      },
+      {
+        "text": "L'amalgame est le matériau idéal pour les restaurations esthétiques du secteur antérieur.",
+        "correct": false
+      },
+      {
+        "text": "Le bimétallisme et les parois dentaires minces sont des contre-indications majeures.",
+        "correct": true
+      },
+      {
+        "text": "L'amalgame est indiqué pour les cavités de Classe I, II et V des dents postérieures.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant les objectifs de la finition finale :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Permettre une expansion tardive contrôlée pour sceller les parois.",
+        "correct": false
+      },
+      {
+        "text": "Augmenter la résistance à la corrosion et améliorer l'adaptation marginale.",
+        "correct": true
+      },
+      {
+        "text": "Remplacer l'étape de condensation pour assurer l'homogénéité du matériau.",
+        "correct": false
+      },
+      {
+        "text": "Améliorer l'état de surface pour limiter la rétention de la plaque bactérienne.",
+        "correct": true
+      }
+    ]
+  }
+],
 
-    // 25–35 : difficulté 4
-    {
-      question: "Les matériaux d’origine naturelle (plâtre, hydrocolloïdes) ne présentent pas de toxicité ; la biocompatibilité des synthétiques est liée à leur instabilité chimique.",
-      difficulty: 4,
-      answers: [
-        { text: "Oui, c’est le passage sur toxicité/biocompatibilité", correct: true },
-        { text: "Le plâtre est décrit comme toxique", correct: false },
-        { text: "Les synthétiques sont dits toujours stables chimiquement", correct: false },
-        { text: "L’énoncé oppose naturel/synthétique comme dans le texte", correct: true }
-      ]
-    },
-    {
-      question: "L’empreinte préside à l’élaboration de la construction prothétique et le choix du matériau est une étape fondamentale.",
-      difficulty: 4,
-      answers: [
-        { text: "Le modèle n’a pas à être fidèle", correct: false },
-        { text: "La sélection du matériau n’est pas considérée essentielle", correct: false },
-        { text: "La fidélité du modèle de travail reflète la capacité d’enregistrement", correct: true },
-        { text: "Ces idées sont formulées dans l’introduction", correct: true }
-      ]
-    },
-    {
-      question: "L’amélioration des propriétés mécaniques et surfaciques sert la précision dimensionnelle et la définition des états de surface.",
-      difficulty: 4,
-      answers: [
-        { text: "Elle n’a aucun rapport avec la précision", correct: false },
-        { text: "Elle concerne les matériaux d’empreinte actuels", correct: true },
-        { text: "Elle est attribuée uniquement aux hydrocolloïdes", correct: false },
-        { text: "Cette double finalité est mentionnée", correct: true }
-      ]
-    },
-    {
-      question: "La « précision » au sens du cours inclut précision volumique/dimensionnelle et « fidélité » des microsurfaces.",
-      difficulty: 4,
-      answers: [
-        { text: "Cette articulation est soulignée", correct: true },
-        { text: "La précision ne vise que les contours macroscopiques", correct: false },
-        { text: "La fidélité est la reproduction des détails", correct: true },
-        { text: "Les microsurfaces ne sont pas prises en compte", correct: false }
-      ]
-    },
-    {
-      question: "La mouillabilité insuffisante réduit l’étalement et l’enregistrement des surfaces bucco-dentaires.",
-      difficulty: 4,
-      answers: [
-        { text: "Conséquence clinique directe sur l’empreinte", correct: true },
-        { text: "Aucune incidence n’est rapportée", correct: false },
-        { text: "Relation causale clairement indiquée", correct: true },
-        { text: "Elle améliore paradoxalement l’enregistrement", correct: false }
-      ]
-    },
-    {
-      question: "La stabilité dimensionnelle est un paramètre « à plus long terme », distinct de la précision immédiate.",
-      difficulty: 4,
-      answers: [
-        { text: "La stabilité mesure la conformité à la situation originelle", correct: true },
-        { text: "Elle n’a pas de lien avec l’environnement de stockage", correct: false },
-        { text: "Elle est qualifiée d’« immédiate » dans le texte", correct: false },
-        { text: "Cette distinction temporelle est donnée", correct: true }
-      ]
-    },
-    {
-      question: "Les propriétés mécaniques peuvent conduire à des déformations lors du retrait de la bouche ou de la coulée si insuffisantes.",
-      difficulty: 4,
-      answers: [
-        { text: "D’où l’importance d’un mélange homogène et du temps de prise", correct: true },
-        { text: "Le retrait prématuré est encouragé", correct: false },
-        { text: "Les déformations ne surviennent qu’en laboratoire", correct: false },
-        { text: "Ces sources de contraintes sont citées", correct: true }
-      ]
-    },
-    {
-      question: "L’angle de contact < 90° est le critère d’hydrophilie et favorise l’étalement.",
-      difficulty: 4,
-      answers: [
-        { text: "Un angle inférieur réduit la mouillabilité", correct: false },
-        { text: "Le texte ne mentionne pas l’angle de contact", correct: false },
-        { text: "L’hydrophilie soutient la mouillabilité", correct: true },
-        { text: "Le seuil et son interprétation sont donnés", correct: true }
-      ]
-    },
-    {
-      question: "La reproduction des détails en microns dépend aussi de la compatibilité avec le matériau de réplique.",
-      difficulty: 4,
-      answers: [
-        { text: "Le texte ne parle pas de microns", correct: false },
-        { text: "La mesure en microns est indiquée", correct: true },
-        { text: "La compatibilité est explicitement incluse", correct: true },
-        { text: "Elle est indépendante de tout matériau de réplique", correct: false }
-      ]
-    },
-    {
-      question: "L’environnement/temps de stockage peuvent altérer les propriétés des empreintes.",
-      difficulty: 4,
-      answers: [
-        { text: "D’où l’importance des conditions de conservation", correct: true },
-        { text: "La stabilité augmente toujours avec le temps", correct: false },
-        { text: "Ce risque est mentionné", correct: true },
-        { text: "Le stockage n’a pas d’effet selon le document", correct: false }
-      ]
-    },
-    {
-      question: "L’immersion est préférée à la pulvérisation pour la désinfection, mais doit rester contrôlée (temps < 1 h).",
-      difficulty: 4,
-      answers: [
-        { text: "Limitation temporelle précisée", correct: true },
-        { text: "Supériorité de l’immersion indiquée", correct: true },
-        { text: "La pulvérisation est dite équivalente en toutes circonstances", correct: false },
-        { text: "Aucune précaution de temps n’est donnée", correct: false }
-      ]
-    },
 
-    // 36–40 : difficulté 5 (Très difficiles)
-    {
-      question: "La cinétique d’écoulement, déterminée par la viscosité, conditionne des facteurs opératoires (malaxage, injection, aptitude à l’écoulement).",
-      difficulty: 5,
-      answers: [
-        { text: "Ces trois implications opératoires sont listées", correct: true },
-        { text: "Elles ne sont pas mentionnées", correct: false },
-        { text: "Elles sont reliées à la viscosité dans le texte", correct: true },
-        { text: "Elles dépendent uniquement de l’hydrophilie", correct: false }
-      ]
-    },
-    {
-      question: "La précision dimensionnelle immédiate peut être respectée alors que la stabilité dimensionnelle se dégrade avec un stockage inapproprié.",
-      difficulty: 5,
-      answers: [
-        { text: "Le texte insiste sur le rôle du temps et de l’environnement", correct: true },
-        { text: "Les deux paramètres sont confondus sans distinction", correct: false },
-        { text: "Le stockage améliore toujours la stabilité", correct: false },
-        { text: "Cette opposition « immédiat/long terme » est posée", correct: true }
-      ]
-    },
-    {
-      question: "Les propriétés élastiques dépendent conjointement réticulation/charges/plastifiants, modulant la résistance aux contraintes de coulée.",
-      difficulty: 5,
-      answers: [
-        { text: "Les trois paramètres sont nommés", correct: true },
-        { text: "Seule la réticulation est évoquée", correct: false },
-        { text: "La coulée fait partie des contraintes citées", correct: true },
-        { text: "Les plastifiants sont exclus du raisonnement", correct: false }
-      ]
-    },
-    {
-      question: "Le document assimile « fidélité » à la capacité de reproduction des microsurfaces, distincte de la précision volumique.",
-      difficulty: 5,
-      answers: [
-        { text: "Le texte ne définit pas ce terme", correct: false },
-        { text: "« Fidélité » est utilisée pour la dilatation thermique", correct: false },
-        { text: "Il appartient à la définition opérationnelle de la précision", correct: true },
-        { text: "Oui, ce vocabulaire est explicitement utilisé", correct: true }
-      ]
-    },
-    {
-      question: "La conclusion insiste : le succès dépend du choix du matériau/technique et d’un examen clinique rigoureux ; l’optimisation actuelle vient surtout de l’amélioration des matériaux.",
-      difficulty: 5,
-      answers: [
-        { text: "L’examen clinique est jugé secondaire", correct: false },
-        { text: "La technique seule suffit, indépendamment du matériau", correct: false },
-        { text: "Ces deux messages sont énoncés", correct: true },
-        { text: "La primauté de l’amélioration des propriétés est soulignée", correct: true }
-      ]
-    }
-  ], 
-  
-  "Biomatériaux & Dispositifs médicaux": [
-    // 2–11 : difficulté 1
-    {
-      question: "Un dispositif médical, par définition, sert notamment :",
-      difficulty: 1,
-      answers: [
-        { text: "Un « médicament » est considéré comme un dispositif médical", correct: false },
-        { text: "À l’étude, au remplacement ou à la modification de l’anatomie ou d’un processus physiologique", correct: true },
-        { text: "À l’administration d’un médicament dont l’action est chimique principale", correct: false },
-        { text: "Au diagnostic, à la prévention ou au traitement, sans action principale pharmacologique", correct: true }
-      ]
-    },
-    {
-      question: "Un biomatériau est :",
-      difficulty: 1,
-      answers: [
-        { text: "Dépourvu de toute interaction avec l’hôte", correct: false },
-        { text: "Différent d’une greffe qui n’est pas un biomatériau", correct: true },
-        { text: "Une greffe tissulaire vivante par nature", correct: false },
-        { text: "Un matériau non vivant utilisé dans un dispositif médical et appelé à interagir avec les systèmes biologiques", correct: true }
-      ]
-    },
-    {
-      question: "Les biomatériaux dentaires sont classés :",
-      difficulty: 1,
-      answers: [
-        { text: "En III systématiquement, en contact avec le cœur", correct: false },
-        { text: "En IIa et doivent subir obligatoirement génotoxicité, cytotoxicité, sensibilisation, implantation", correct: true },
-        { text: "Sans lien avec la nature et la durée du contact", correct: false },
-        { text: "Comme non invasifs de classe I sans test obligatoire", correct: false }
-      ]
-    },
-    {
-      question: "Concernant l’or en tant que matériau :",
-      difficulty: 1,
-      answers: [
-        { text: "Il peut être biocompatible pour une restauration coronaire", correct: true },
-        { text: "Il induit toujours une ostéointégration supérieure au titane", correct: false },
-        { text: "Son statut ne dépend jamais du but clinique", correct: false },
-        { text: "Il n’est pas biocompatible comme implant orthopédique faute d’ostéointégration", correct: true }
-      ]
-    },
-    {
-      question: "La norme qui régit l’évaluation de la biocompatibilité est indiquée comme :",
-      difficulty: 1,
-      answers: [
-        { text: "Une norme applicable à tous les dispositifs médicaux, quel que soit le domaine", correct: true },
-        { text: "ISO 10-993, remplaçant d’anciennes normes", correct: true },
-        { text: "Une recommandation non standardisée", correct: false },
-        { text: "Une directive réservée aux médicaments", correct: false }
-      ]
-    },
-    {
-      question: "Chronologie générale des tests :",
-      difficulty: 1,
-      answers: [
-        { text: "Des secondaires systématiquement effectués avant tout primaire", correct: false },
-        { text: "Des tests primaires (in vitro/in vivo) puis, en cas de succès, des tests secondaires", correct: true },
-        { text: "Les produits échouant aux primaires sont toujours engagés en secondaires", correct: false },
-        { text: "Une bonne corrélation visée pour réduire le nombre d’animaux sacrifiés", correct: true }
-      ]
-    },
-    {
-      question: "Parmi les tests primaires cités :",
-      difficulty: 1,
-      answers: [
-        { text: "Génotoxicité in vitro et cytotoxicité in vitro (obligatoires en odontologie)", correct: true },
-        { text: "Sensibilisation uniquement en in vivo secondaire", correct: false },
-        { text: "Implantation directement classée comme primaire", correct: false },
-        { text: "Toxicité systémique (in vivo) et hémolyse (in vitro)", correct: true }
-      ]
-    },
-    {
-      question: "Parmi les tests secondaires listés :",
-      difficulty: 1,
-      answers: [
-        { text: "Irritations muqueuse et cutanée (in vivo), sensibilisation et implantation (obligatoires en odontologie)", correct: true },
-        { text: "Essais d’utilisation chez l’animal et essais cliniques chez l’homme", correct: true },
-        { text: "Reproduction toujours classée secondaire", correct: true },
-        { text: "Génotoxicité et cytotoxicité initiales", correct: false }
-      ]
-    },
-    {
-      question: "Avantages des tests in vitro :",
-      difficulty: 1,
-      answers: [
-        { text: "Permettent d’évaluer séparément les effets de chaque composant", correct: true },
-        { text: "Strictement superposables à la clinique sans excès de sensibilité", correct: false },
-        { text: "Plus rapides, moins onéreux et reproductibles", correct: true },
-        { text: "Toujours supérieurs aux in vivo pour détecter les métabolites", correct: false }
-      ]
-    },
-    {
-      question: "Inconvénients des tests in vitro :",
-      difficulty: 1,
-      answers: [
-        { text: "Incapacité à reproduire fidèlement le contexte clinique global", correct: true },
-        { text: "Nécessitent deux espèces de mammifères", correct: false },
-        { text: "Évaluation nécessairement histologique chez l’animal", correct: false },
-        { text: "Peu de rapport avec la clinique et trop sensibles", correct: true }
-      ]
-    },
 
-    // 12–20 : difficulté 2
-    {
-      question: "Avantages des tests in vivo :",
-      difficulty: 2,
-      answers: [
-        { text: "Toujours moins pertinents que les in vitro pour la toxicité", correct: false },
-        { text: "Interdisent l’étude d’effets éloignés de l’organe cible", correct: false },
-        { text: "Interprétation parfois plus facile grâce au lien clinique", correct: true },
-        { text: "Plus proches de la clinique, évaluation d’organes à distance et des métabolites", correct: true }
-      ]
-    },
-    {
-      question: "Inconvénients des tests in vivo :",
-      difficulty: 2,
-      answers: [
-        { text: "Assurent toujours la détection de tout effet délétère", correct: false },
-        { text: "Effets néfastes non recherchés pouvant passer inaperçus et difficultés de simulation de pathologies", correct: true },
-        { text: "Résultats chez l’animal pouvant ne pas refléter l’espèce humaine", correct: true },
-        { text: "Timing d’essai parfois inadapté compliquant l’interprétation", correct: true }
-      ]
-    },
-    {
-      question: "Test d’Ames (génotoxicité) :",
-      difficulty: 2,
-      answers: [
-        { text: "Dépend d’une supplémentation obligatoire en histidine pour pousser en milieu sans histidine", correct: false },
-        { text: "Mesure une ostéointégration osseuse directe", correct: false },
-        { text: "Le nombre de colonies révertantes (his+) est proportionnel à l’effet génotoxique", correct: true },
-        { text: "Utilise des mutants de Salmonella Typhimurium (his–) très sensibles aux mutations géniques", correct: true }
-      ]
-    },
-    {
-      question: "Test de cytotoxicité :",
-      difficulty: 2,
-      answers: [
-        { text: "N’exige aucun choix méthodologique", correct: false },
-        { text: "Questions clés : choix des cellules, du critère de viabilité, et du mode de mise en présence", correct: true },
-        { text: "Ne concerne que des cellules sanguines humaines", correct: false },
-        { text: "Matériau en contact avec des cellules cibles, évaluation de leur viabilité", correct: true }
-      ]
-    },
-    {
-      question: "Cellules cibles en cytotoxicité :",
-      difficulty: 2,
-      answers: [
-        { text: "Les primaires se dédifférencient après quelques multiplications (durée de vie limitée)", correct: true },
-        { text: "Les lignées établies sont toujours identiques aux cellules cliniques", correct: false },
-        { text: "Les primaires ne peuvent jamais provenir de pulpe, gencive ou desmodonte", correct: false },
-        { text: "Lignées établies (ex. L929) et cultures primaires proches de la cellule cible", correct: true }
-      ]
-    },
-    {
-      question: "Critères d’évaluation de la cytotoxicité :",
-      difficulty: 2,
-      answers: [
-        { text: "La toxicité basale ne s’applique pas à toutes les cellules", correct: false },
-        { text: "Toxicité basale (viabilité/fonction mitochondriale)", correct: true },
-        { text: "Toxicité spécifique (fonction propre de la cellule)", correct: true },
-        { text: "Un seul critère universel suffit toujours", correct: false }
-      ]
-    },
-    {
-      question: "Tests de mise en relation cellule–matériau :",
-      difficulty: 2,
-      answers: [
-        { text: "Surimposition de gélose (diffusion de produits cytotoxiques)", correct: true },
-        { text: "Remplacement par un test d’ostéointégration systématique", correct: false },
-        { text: "Contact direct (adhérence et distance par rapport au matériau)", correct: true },
-        { text: "Interposition de dentine naturelle selon recommandations du fabricant", correct: true }
-      ]
-    },
-    {
-      question: "Dans le contact direct, si le matériau est non toxique :",
-      difficulty: 2,
-      answers: [
-        { text: "Les cellules viennent au contact du matériau", correct: true },
-        { text: "La distance mesurée n’a aucun intérêt", correct: false },
-        { text: "Elles ne peuvent jamais adhérer au fond de boîte", correct: false },
-        { text: "Elles restent éloignées si le matériau libère des produits cytotoxiques", correct: true }
-      ]
-    },
-    {
-      question: "Surimposition de gélose (agarose) :",
-      difficulty: 2,
-      answers: [
-        { text: "Il s’agit d’un test clinique chez l’homme", correct: false },
-        { text: "Le milieu de culture n’est jamais remplacé", correct: false },
-        { text: "Les produits cytotoxiques diffusent à travers l’agarose vers les cellules", correct: true },
-        { text: "Le matériau est posé sur la gélose durcie après gélification au-dessus des cellules", correct: true }
-      ]
-    },
 
-    // 21–28 : difficulté 3
-    {
-      question: "Interposition de dentine naturelle :",
-      difficulty: 3,
-      answers: [
-        { text: "Elle supprime toute interaction entre matériau et cellules", correct: false },
-        { text: "Le matériau est appliqué sur la dentine selon les recommandations du fabricant", correct: true },
-        { text: "Elle n’est pas mentionnée parmi les méthodes", correct: false },
-        { text: "Une tranche de dentine est placée entre cellules et matériau", correct: true }
-      ]
-    },
-    {
-      question: "Essai de sensibilisation de référence :",
-      difficulty: 3,
-      answers: [
-        { text: "Toujours réalisé in vitro sur L929", correct: false },
-        { text: "Nécessite systématiquement une biopsie cutanée", correct: false },
-        { text: "GPMT (cobayes), double contact à 15 jours d’intervalle", correct: true },
-        { text: "Lecture cutanée à 24, 48 et 72 h, sans sacrifice ni histologie", correct: true }
-      ]
-    },
-    {
-      question: "Essai d’implantation (intraosseux) :",
-      difficulty: 3,
-      answers: [
-        { text: "Toujours sans préparation histologique", correct: false },
-        { text: "Implantation mandibule/fémur de lapin, sacrifice à 1 mois (court) ou 3 mois (long)", correct: true },
-        { text: "Ne permet pas de classer la réaction", correct: false },
-        { text: "Analyse histologique selon critères ISO 10-993 : inflammation, interposition fibreuse, nécrose, etc.", correct: true }
-      ]
-    },
-    {
-      question: "Essais d’utilisation (biofonctionnalité) :",
-      difficulty: 3,
-      answers: [
-        { text: "Chez l’animal en conditions réelles, non obligatoires et à la charge du fabricant", correct: true },
-        { text: "Toujours bon marché et faciles à justifier", correct: false },
-        { text: "Ex. obturations de classe V ou traitements canalaires complets chez le singe/chien", correct: true },
-        { text: "Systématiquement exigés avant essai clinique", correct: false }
-      ]
-    },
-    {
-      question: "Essais cliniques :",
-      difficulty: 3,
-      answers: [
-        { text: "Dispensent de toute évaluation préalable", correct: false },
-        { text: "Impliquent un « promoteur », un « investigateur » et un « moniteur » indépendant", correct: true },
-        { text: "Réalisés chez l’homme après avis du comité d’éthique", correct: true },
-        { text: "Toujours réalisés avant tout test primaire", correct: false }
-      ]
-    },
-    {
-      question: "Concernant la corrélation primaires–secondaires :",
-      difficulty: 3,
-      answers: [
-        { text: "Elle est souhaitable éthiquement pour limiter l’usage d’animaux", correct: true },
-        { text: "Tous les matériaux passent en secondaires d’emblée", correct: false },
-        { text: "Les primaires sont inutiles si la clinique est prévue", correct: false },
-        { text: "Seuls les produits réussissant les primaires passent en secondaires", correct: true }
-      ]
-    },
-    {
-      question: "À propos des classes de dispositifs :",
-      difficulty: 3,
-      answers: [
-        { text: "III : toujours sans contact avec cœur/système circulatoire/nerveux", correct: false },
-        { text: "IIa : invasifs à long terme toujours extra-oropharyngés", correct: false },
-        { text: "IIb : invasifs à long terme (hors sphère oro-pharyngée)", correct: true },
-        { text: "I : non invasifs ou invasifs à usage temporaire", correct: true }
-      ]
-    },
-    {
-      question: "Pour les matériaux dentaires (IIa), les tests obligatoires incluent :",
-      difficulty: 3,
-      answers: [
-        { text: "Hémolyse obligatoire uniquement", correct: false },
-        { text: "Sensibilisation et implantation (in vivo)", correct: true },
-        { text: "Cancérogénicité systématique obligatoire", correct: false },
-        { text: "Génotoxicité et cytotoxicité (in vitro)", correct: true }
-      ]
-    },
 
-    // 29–35 : difficulté 4
-    {
-      question: "Tests in vivo — portée :",
-      difficulty: 4,
-      answers: [
-        { text: "Évaluation d’organes éloignés de l’organe cible", correct: true },
-        { text: "Jamais de lien avec la clinique", correct: false },
-        { text: "Appréciation de la toxicité des métabolites produits", correct: true },
-        { text: "Impossibilité d’étudier des effets systémiques", correct: false }
-      ]
-    },
-    {
-      question: "Tests in vivo — limites :",
-      difficulty: 4,
-      answers: [
-        { text: "Difficulté à simuler une pathologie préexistante (carie, lésion parodontale)", correct: true },
-        { text: "Toujours transposables immédiatement à l’humain", correct: false },
-        { text: "Effet délétère pouvant se manifester hors période d’observation (« timing »)", correct: true },
-        { text: "Ne requièrent pas deux espèces animales de laboratoire", correct: false }
-      ]
-    },
-    {
-      question: "Définition d’un dispositif médical — action principale :",
-      difficulty: 4,
-      answers: [
-        { text: "Peut être assistée par ces moyens sans en constituer l’action principale", correct: true },
-        { text: "Est identique à celle d’un médicament", correct: false },
-        { text: "Doit être chimiquement active de façon principale", correct: false },
-        { text: "Non obtenue par des moyens pharmacologiques/chimiques/immunologiques/métaboliques", correct: true }
-      ]
-    },
-    {
-      question: "Dans le test d’Ames, la croissance sur milieu sans histidine :",
-      difficulty: 4,
-      answers: [
-        { text: "Est proportionnelle au potentiel génotoxique de la substance testée", correct: true },
-        { text: "N’a aucun lien avec les mutations géniques", correct: false },
-        { text: "Dépend d’un apport continu d’histidine dans le milieu sans histidine", correct: false },
-        { text: "Indique l’apparition de révertants (his+) après mutation", correct: true }
-      ]
-    },
-    {
-      question: "Implantation — critères ISO (extraits) :",
-      difficulty: 4,
-      answers: [
-        { text: "Évaluation sans histologie", correct: false },
-        { text: "Site uniquement cutané", correct: false },
-        { text: "Classement des réactions : absente, légère, modérée, sévère", correct: true },
-        { text: "Inflammation, interposition fibreuse, nécrose osseuse, débris, granulome", correct: true }
-      ]
-    },
 
-    // 36–40 : difficulté 5
-    {
-      question: "Choix des cellules cibles — implications :",
-      difficulty: 5,
-      answers: [
-        { text: "Les primaires ne posent jamais de contraintes de culture", correct: false },
-        { text: "Cultures primaires proches de la cible mais à durée de vie limitée par dédifférenciation", correct: true },
-        { text: "Lignées L929 « pratiques » mais éloignées des cellules cliniques", correct: true },
-        { text: "Les lignées établies garantissent toujours une parfaite représentativité clinique", correct: false }
-      ]
-    },
-    {
-      question: "Toxicité basale vs spécifique — finalité :",
-      difficulty: 5,
-      answers: [
-        { text: "Spécifique : savoir si la cellule remplit sa fonction propre (sur cultures primaires)", correct: true },
-        { text: "Spécifique applicable indistinctement à toutes lignées", correct: false },
-        { text: "Basale : savoir si la cellule est vivante et si ses fonctions (ex. mitochondriales) sont intactes", correct: true },
-        { text: "Basale limitée aux seules cellules L929", correct: false }
-      ]
-    },
-    {
-      question: "Essais d’utilisation — exemples et statut :",
-      difficulty: 5,
-      answers: [
-        { text: "Non obligatoires, coûteux et difficiles à justifier (à l’initiative du fabricant)", correct: true },
-        { text: "Obturations de cavités de classe V ou traitements endodontiques complets chez le singe/chien", correct: true },
-        { text: "Toujours requis avant l’implantation", correct: false },
-        { text: "Peuvent être remplacés par une simple lecture cutanée", correct: false }
-      ]
-    },
-    {
-      question: "Essais cliniques — organisation :",
-      difficulty: 5,
-      answers: [
-        { text: "Avis préalable du comité départemental d’éthique", correct: true },
-        { text: "Sans contrôle externe des résultats", correct: false },
-        { text: "Rôles séparés : promoteur, investigateur, moniteur indépendant", correct: true },
-        { text: "Réalisés avant tout essai primaire et secondaire par principe", correct: false }
-      ]
-    },
-    {
-      question: "Conclusion — principe directeur :",
-      difficulty: 5,
-      answers: [
-        { text: "Le choix des tests est à adapter au type de biomatériau et à son usage clinique futur", correct: true },
-        { text: "Un test unique suffit s’il est positif", correct: false },
-        { text: "L’interprétation n’est pas nécessaire si la norme est appliquée", correct: false },
-        { text: "L’évaluation repose sur un ensemble de tests à réaliser puis interpréter par des spécialistes", correct: true }
-      ]
-    }
-  ]
+
+'2oc': [
+  {
+    "question": "Selon le consensus de Chester (1991), un biomatériau est défini par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Son incapacité totale à interagir avec l'environnement biologique buccal.",
+        "correct": false
+      },
+      {
+        "text": "Sa fonction d'évaluer, traiter, modifier les formes ou remplacer un tissu ou organe.",
+        "correct": true
+      },
+      {
+        "text": "Sa composition exclusivement synthétique et minérale.",
+        "correct": false
+      },
+      {
+        "text": "Sa destination à être mis en contact avec des tissus vivants ou des fluides biologiques.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant la biocompatibilité d'un matériau dentaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle garantit que le matériau ne subira aucune usure mécanique au cours du temps.",
+        "correct": false
+      },
+      {
+        "text": "Un matériau peut être biocompatible dans une situation précise et non dans une autre.",
+        "correct": true
+      },
+      {
+        "text": "Elle est une propriété intrinsèque et immuable, indépendante de l'usage.",
+        "correct": false
+      },
+      {
+        "text": "Elle décrit le phénomène de tolérance biologique du matériau par l'organisme.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La conductivité thermique en odontologie :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il est recommandé de choisir le matériau le plus conducteur possible pour la pulpe.",
+        "correct": false
+      },
+      {
+        "text": "Une valeur élevée peut provoquer une hypersensibilité dentinaire au chaud et au froid.",
+        "correct": true
+      },
+      {
+        "text": "La conductivité ne dépend pas du flux d'énergie calorifique traversant le matériau.",
+        "correct": false
+      },
+      {
+        "text": "L'amalgame est un exemple de matériau possédant une conductivité thermique élevée.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le Coefficient Linéaire de Dilatation Thermique (C.L.D.T.) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il représente le changement de volume du matériau en fonction de la température.",
+        "correct": true
+      },
+      {
+        "text": "Un C.L.D.T. élevé est recherché pour favoriser l'adhésion chimique.",
+        "correct": false
+      },
+      {
+        "text": "Il se calcule uniquement en fonction de la masse volumique du matériau.",
+        "correct": false
+      },
+      {
+        "text": "Sa valeur doit être la plus proche possible de celle des tissus dentaires (émail/dentine).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les propriétés électriques idéales d'un matériau de restauration incluent :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une absence totale de conductivité électrique pour éviter les courants galvaniques.",
+        "correct": true
+      },
+      {
+        "text": "Une excellente résistivité électrique pour isoler la dent.",
+        "correct": true
+      },
+      {
+        "text": "Une faible résistivité afin de permettre l'évacuation des charges statiques.",
+        "correct": false
+      },
+      {
+        "text": "Une conductivité élevée pour favoriser la transmission des stimuli nerveux.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "La plasticité et la rhéologie des matériaux :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La viscosité définit la tendance naturelle d'un matériau à couler facilement.",
+        "correct": false
+      },
+      {
+        "text": "La plasticité permet au matériau de se déformer sous une force pour mieux se mouler.",
+        "correct": true
+      },
+      {
+        "text": "La fluidité est la capacité d'un matériau à résister à l'écoulement sous contrainte.",
+        "correct": false
+      },
+      {
+        "text": "Une bonne plasticité permet de diminuer la formation d'hiatus au niveau des parois.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "L'adhérence et les phénomènes de surface :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'adhérence est la force qui attache deux substances mises en contact intime.",
+        "correct": true
+      },
+      {
+        "text": "La tension de surface est une force d'attraction plus faible au centre du matériau.",
+        "correct": false
+      },
+      {
+        "text": "Un angle de contact élevé (proche de 180°) favorise un excellent mouillage.",
+        "correct": false
+      },
+      {
+        "text": "L'angle de contact est l'angle formé par l'adhésif et le substrat à leur interface.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La dureté d'un biomatériau :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle se définit comme la résistance du matériau à la pénétration.",
+        "correct": true
+      },
+      {
+        "text": "Les essais consistent à enfoncer un objet géométrique plus dur dans le matériau.",
+        "correct": true
+      },
+      {
+        "text": "Un matériau plus tendre que les tissus environnants est idéal pour la mastication.",
+        "correct": false
+      },
+      {
+        "text": "La dureté de la dentine (93) est supérieure à celle de l'émail (300).",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "La résistance mécanique (Traction, Compression, Cisaillement) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le matériau d'obturation doit résister aux forces de mastication exercées.",
+        "correct": true
+      },
+      {
+        "text": "Le composite hybride possède une résistance à la compression plus faible que le silicate.",
+        "correct": false
+      },
+      {
+        "text": "C'est l'effort maximal nécessaire pour briser la structure du matériau.",
+        "correct": true
+      },
+      {
+        "text": "La résistance à la traction du verre ionomère est supérieure à celle de l'amalgame.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Le module d'élasticité de Young :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Plus sa valeur est élevée, plus la déformation est faible pour une contrainte donnée.",
+        "correct": true
+      },
+      {
+        "text": "Le module d'élasticité de l'émail (8-16) est identique à celui de l'amalgame.",
+        "correct": false
+      },
+      {
+        "text": "Un module d'élasticité élevé indique que le matériau est extrêmement flexible.",
+        "correct": false
+      },
+      {
+        "text": "Il exprime le rapport entre la contrainte appliquée et la déformation obtenue.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les phénomènes de fluage (Creep et Flow) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le fluage statique ou \"flow\" est une déformation totalement réversible.",
+        "correct": false
+      },
+      {
+        "text": "Le fluage n'affecte que les matériaux polymères à basse température.",
+        "correct": false
+      },
+      {
+        "text": "Le terme \"Creep\" désigne spécifiquement le fluage dynamique sous charges cycliques.",
+        "correct": true
+      },
+      {
+        "text": "Le fluage est une déformation plastique irréversible qui se produit avec le temps.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les propriétés optiques des restaurations :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'opacité signifie que la lumière est totalement absorbée sans aucune réflexion.",
+        "correct": false
+      },
+      {
+        "text": "L'opacité est le rapport entre l'intensité incidente et l'intensité transmise.",
+        "correct": true
+      },
+      {
+        "text": "La translucidité correspond à la quantité de lumière transmise et dispersée.",
+        "correct": true
+      },
+      {
+        "text": "Une translucidité élevée augmente l'intensité de la couleur perçue.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "La fluorescence et l'esthétique dentaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le poli du matériau n'a aucune importance pour le maintien de l'esthétique.",
+        "correct": false
+      },
+      {
+        "text": "L'amalgame est le matériau de choix pour les restaurations esthétiques antérieures.",
+        "correct": false
+      },
+      {
+        "text": "La fluorescence est l'éclat que produit un objet lorsqu'il est éclairé.",
+        "correct": true
+      },
+      {
+        "text": "Les dents naturelles sont fluorescentes, ce qui leur donne un éclat particulier.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La solubilité et ses conséquences cliniques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La solubilité est une propriété biologique et non biochimique.",
+        "correct": false
+      },
+      {
+        "text": "La dissolution du matériau entraîne un hiatus favorisant l'infiltration bactérienne.",
+        "correct": true
+      },
+      {
+        "text": "Un matériau très soluble est préférable pour assurer l'étanchéité marginale.",
+        "correct": false
+      },
+      {
+        "text": "La solubilité se mesure par immersion dans l'eau distillée pendant 7 jours.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La corrosion des biomatériaux métalliques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La corrosion électro-chimique survient typiquement en milieu humide.",
+        "correct": true
+      },
+      {
+        "text": "La corrosion est une réaction bénéfique qui renforce la structure du matériau.",
+        "correct": false
+      },
+      {
+        "text": "Tout métal en contact avec l'air refuse systématiquement de s'oxyder.",
+        "correct": false
+      },
+      {
+        "text": "La corrosion chimique (oxydation) se produit en présence d'oxygène.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les exigences biologiques fondamentales :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une élévation thermique importante lors de la prise est recommandée.",
+        "correct": false
+      },
+      {
+        "text": "Le matériau ne doit pas être toxique pour la pulpe ou l'organisme en général.",
+        "correct": true
+      },
+      {
+        "text": "Il doit être parfaitement biocompatible avec l'environnement buccal.",
+        "correct": true
+      },
+      {
+        "text": "Le matériau doit être déshydratant pour protéger les tissus dentinaires.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Comparaison entre Composite et Amalgame (données du tableau) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'amalgame possède une dureté de 95, très proche de celle de la dentine (93).",
+        "correct": true
+      },
+      {
+        "text": "Le coefficient de dilatation thermique de l'amalgame est supérieur à celui du composite.",
+        "correct": false
+      },
+      {
+        "text": "La résistance à la compression du composite hybride peut atteindre 385 MPa.",
+        "correct": true
+      },
+      {
+        "text": "Le composite conventionnel est plus résistant que l'amalgame en secteur postérieur.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Comparaison entre l'Émail et la Dentine (données du tableau) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'émail a une dureté (300) bien plus élevée que celle de la dentine (93).",
+        "correct": true
+      },
+      {
+        "text": "La résistance à la compression de la dentine est de 10,5 MPa.",
+        "correct": false
+      },
+      {
+        "text": "Le coefficient de dilatation de l'émail (11,4) est inférieur à celui de la dentine.",
+        "correct": false
+      },
+      {
+        "text": "Le module d'élasticité de la dentine est de 18,5, supérieur à celui de l'émail (8-16).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Objectifs de l'adaptation du matériau à la dent :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La formation d'un hiatus est nécessaire pour permettre la respiration tissulaire.",
+        "correct": false
+      },
+      {
+        "text": "Il doit posséder un coefficient de dilatation très différent de celui de la dent.",
+        "correct": false
+      },
+      {
+        "text": "Le matériau doit adhérer ou coller le mieux possible aux tissus minéralisés.",
+        "correct": true
+      },
+      {
+        "text": "Assurer l'herméticité et l'étanchéité de la restauration pour éviter les récidives.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Caractéristiques d'utilisation clinique d'un matériau idéal :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il doit être soluble dans les fluides tissulaires pour libérer des ions.",
+        "correct": false
+      },
+      {
+        "text": "Il doit être rigide, résistant et capable de conserver un poli durable.",
+        "correct": true
+      },
+      {
+        "text": "Le matériau doit être un excellent conducteur du courant électrique buccal.",
+        "correct": false
+      },
+      {
+        "text": "Le matériau doit être d'un emploi facile et pouvoir être facilement désinséré.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+"3oc": [
+  {
+    "question": "À propos de la composition de la poudre du ciment Oxyde de Zinc Eugène (ZOE) classique :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le stéarate de zinc agit comme le principal agent antiseptique (Faux : c'est l'eugénol/ZnO).",
+        "correct": false
+      },
+      {
+        "text": "L'acétate de zinc est incorporé pour jouer le rôle d'accélérateur de prise.",
+        "correct": true
+      },
+      {
+        "text": "La colophane est ajoutée uniquement pour augmenter la dureté finale (Faux : elle rend le produit plus lisse et homogène).",
+        "correct": false
+      },
+      {
+        "text": "L'oxyde de zinc représente le constituant principal (environ 70g).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant les propriétés biologiques de l'eugénol liquide :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il est extrait uniquement de l'huile de coton (Faux : essence de girofle).",
+        "correct": false
+      },
+      {
+        "text": "Il présente un caractère caustique et peut provoquer des brûlures s'il est libre.",
+        "correct": true
+      },
+      {
+        "text": "Il est totalement hydrophile et se dissout rapidement dans l'eau (Faux : il est insoluble dans l'eau).",
+        "correct": false
+      },
+      {
+        "text": "Il possède des vertus analgésiques et sédatives reconnues.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels facteurs influencent l'augmentation du temps de prise du ZOE ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'utilisation de grains de poudre extrêmement fins (Faux : le temps augmente quand la grosseur des grains augmente).",
+        "correct": false
+      },
+      {
+        "text": "Une diminution de la température ambiante lors du mélange.",
+        "correct": true
+      },
+      {
+        "text": "L'ajout d'une humidité importante dans le mélange (Faux : l'humidité modifie la prise mais l'acétate/chaleur l'accélère).",
+        "correct": false
+      },
+      {
+        "text": "Une augmentation de la proportion de liquide par rapport à la poudre.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Au sujet des propriétés mécaniques et physiques de l'eugénate :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa résistance à la compression est variable selon le ratio poudre/liquide (1,3 à 20 Mpa).",
+        "correct": true
+      },
+      {
+        "text": "Sa dureté est nettement supérieure à celle des ciments définitifs (Faux : elle est nettement inférieure).",
+        "correct": false
+      },
+      {
+        "text": "Sa rétractation de prise est nulle en milieu humide (Faux : elle peut être de 0,9).",
+        "correct": false
+      },
+      {
+        "text": "Il possède une faible conductivité thermique et électrique, en faisant un bon isolant.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les caractéristiques de l'hydroxyde de calcium Ca(OH)2 ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il possède des propriétés hémostatiques grâce à la présence d'ions calcium.",
+        "correct": true
+      },
+      {
+        "text": "Son pH est très alcalin, voisin de 12,5.",
+        "correct": true
+      },
+      {
+        "text": "Il est principalement utilisé comme matériau de restauration permanente (Faux : produit de coiffage/fond protecteur).",
+        "correct": false
+      },
+      {
+        "text": "Sa forte solubilité permet une diffusion profonde dans les tissus (Faux : sa faible solubilité s'oppose à la diffusion toxique).",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant le ciment aux orthophosphates de zinc :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il est particulièrement esthétique grâce à sa grande translucidité (Faux : il est opaque et inesthétique).",
+        "correct": false
+      },
+      {
+        "text": "Sa réaction de prise lors du mélange poudre-liquide est fortement exothermique.",
+        "correct": true
+      },
+      {
+        "text": "Il ne présente aucune porosité face aux fluides buccaux (Faux : il est poreux et soluble).",
+        "correct": false
+      },
+      {
+        "text": "Son pH est très acide au début de la prise (environ 1,6) avant de se neutraliser.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos du MTA (Mineral Trioxide Aggregate) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il est composé principalement de silicate tricalcique et d'oxyde de bismuth.",
+        "correct": true
+      },
+      {
+        "text": "Son temps de prise est très rapide, environ 5 à 10 minutes (Faux : 3 à 4 heures).",
+        "correct": false
+      },
+      {
+        "text": "Il est considéré comme un matériau hautement résorbable (Faux : il est non résorbable).",
+        "correct": false
+      },
+      {
+        "text": "Sa nature hydrophile permet une prise sans contraction en milieu humide.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles affirmations sont exactes concernant la Biodentine ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "C'est un substitut dentinaire bioactif à base de silicate de calcium.",
+        "correct": true
+      },
+      {
+        "text": "Sa résistance à la compression (environ 300 Mpa) est proche de celle de la dentine humaine.",
+        "correct": true
+      },
+      {
+        "text": "Elle se présente sous forme de deux pâtes à mélanger manuellement (Faux : capsule et liquide pour vibreur).",
+        "correct": false
+      },
+      {
+        "text": "Elle ne peut être utilisée que comme fond de cavité provisoire de 24h (Faux : restauration semi-définitive possible).",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Sur le mécanisme d'action biologique du MTA et de la Biodentine :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le relargage d'ions calcium et hydroxyl favorise la réparation tissulaire.",
+        "correct": true
+      },
+      {
+        "text": "La formation d'hydroxyapatite à l'interface est un phénomène purement passif (Faux : interaction avec les phosphates des fluides).",
+        "correct": false
+      },
+      {
+        "text": "Ils induisent la formation d'un pont dentinaire et la différenciation des cellules pulpaires.",
+        "correct": true
+      },
+      {
+        "text": "Ces matériaux inhibent totalement l'activité des ostéoblastes (Faux : les ostéoblastes peuvent y adhérer et croître).",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant les vernis protecteurs en dentisterie :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ils sont constitués d'une résine dissoute dans un solvant organique comme le chloroforme.",
+        "correct": true
+      },
+      {
+        "text": "On les applique en une seule couche épaisse pour une protection maximale (Faux : couches minces, deux applications espacées).",
+        "correct": false
+      },
+      {
+        "text": "Ils possèdent un effet antibactérien puissant et durable (Faux : non prouvé).",
+        "correct": false
+      },
+      {
+        "text": "Ils servent à sceller les canalicules dentinaires contre les irritations chimiques.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le ciment de type E.B.A se distingue par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une solubilité nulle dans l'eau distillée (Faux : 0,04 en 7 jours, ce qui est faible mais pas nul).",
+        "correct": false
+      },
+      {
+        "text": "L'absence totale d'eugénol dans sa formulation (Faux : contient 37,5ml d'eugénol).",
+        "correct": false
+      },
+      {
+        "text": "La présence de quartz fondu dans la poudre pour renforcer les qualités mécaniques.",
+        "correct": true
+      },
+      {
+        "text": "L'ajout d'acide orthoéthoxybenzoïque dans le liquide pour augmenter la résistance.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les indications cliniques majeures de la Biodentine ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le blanchiment interne des dents dévitalisées (Faux : non mentionné).",
+        "correct": false
+      },
+      {
+        "text": "L'apexification et l'obturation de l'extrémité radiculaire (rétrograde).",
+        "correct": true
+      },
+      {
+        "text": "Le coiffage pulpaire direct et le traitement des perforations radiculaires.",
+        "correct": true
+      },
+      {
+        "text": "Le scellement définitif des bridges de longue portée (Faux : non mentionné comme indication de scellement prothétique).",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos du ciment IRM :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il n'existe qu'en une seule couleur universelle (Faux : ivoire, bleu et rouge).",
+        "correct": false
+      },
+      {
+        "text": "Sa spatulation doit être lente et durer au moins 3 minutes (Faux : moins d'une minute).",
+        "correct": false
+      },
+      {
+        "text": "Il offre une excellente adaptation marginale et une durabilité accrue.",
+        "correct": true
+      },
+      {
+        "text": "Il s'agit d'un ciment oxyde de zinc eugénol renforcé par un polymère (PMMA).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les contre-indications ou inconvénients du ZOE ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Son pH très acide provoque des douleurs lors de l'application (Faux : pH neutre 7 à 7,2).",
+        "correct": false
+      },
+      {
+        "text": "Il présente une faible résistance à l'abrasion et à la traction.",
+        "correct": true
+      },
+      {
+        "text": "Il est totalement inodore, ce qui rend son identification difficile (Faux : odeur forte de girofle).",
+        "correct": false
+      },
+      {
+        "text": "Il ne doit pas être utilisé sous les composites car il inhibe leur polymérisation.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le matériau Cavit se caractérise par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'absence totale d'eugénol dans sa composition.",
+        "correct": true
+      },
+      {
+        "text": "Une manipulation complexe nécessitant une source de chaleur externe (Faux : prêt à l'emploi).",
+        "correct": false
+      },
+      {
+        "text": "Une solubilité nulle rendant le retrait impossible (Faux : matériau d'obturation provisoire).",
+        "correct": false
+      },
+      {
+        "text": "Une prise initiée par la réaction de l'eau (salive) avec le sulfate de calcium.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant la préparation et la manipulation du ciment orthophosphate :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La température ambiante n'a aucune influence sur le temps de prise (Faux : elle l'influence).",
+        "correct": false
+      },
+      {
+        "text": "Le mélange doit se faire par incorporation progressive de portions de poudre dans le liquide.",
+        "correct": true
+      },
+      {
+        "text": "La consistance doit être crémeuse pour une obturation et relativement liquide pour un scellement.",
+        "correct": true
+      },
+      {
+        "text": "On utilise obligatoirement une plaque de verre rugueuse (Faux : plaque de verre lisse).",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos des propriétés du ciment Kalsogène :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa composition inclut des particules de résine naturelle ou synthétique (10 à 40%).",
+        "correct": true
+      },
+      {
+        "text": "Son action biologique est principalement irritante pour la pulpe (Faux : sédatif).",
+        "correct": false
+      },
+      {
+        "text": "Il possède une résistance à la compression (35-55 MPa) supérieure au ZOE classique.",
+        "correct": true
+      },
+      {
+        "text": "Sa solubilité est bien plus faible que celle de l'oxyde de zinc eugénol simple (Faux : plus importante).",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "L'action antimicrobienne du MTA est liée à :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Son pH élevé (environ 12,5 après 3 heures).",
+        "correct": true
+      },
+      {
+        "text": "Son action spécifique et létale sur toutes les bactéries anaérobies strictes (Faux : n'est pas efficace sur les strictes).",
+        "correct": false
+      },
+      {
+        "text": "Sa libération massive de fluorures actifs (Faux : non mentionné pour le MTA).",
+        "correct": false
+      },
+      {
+        "text": "Son efficacité sur certaines bactéries anaérobies facultatives et les champignons.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles propriétés physiques définissent le mieux l'oxyde de zinc pur ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa couleur naturelle est jaune vif à température ambiante (Faux : blanc).",
+        "correct": false
+      },
+      {
+        "text": "Il possède une masse moléculaire de 150,5 (Faux : 81,38).",
+        "correct": false
+      },
+      {
+        "text": "Il est insoluble dans l'eau mais peut se transformer en carbonate de zinc à l'air.",
+        "correct": true
+      },
+      {
+        "text": "C'est un oxyde amphotère réagissant avec les acides et les bases.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant l'adhérence des ciments dentaires :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La Biodentine n'a aucune étanchéité au niveau de la dentine (Faux : étanchéité excellente).",
+        "correct": false
+      },
+      {
+        "text": "Le ciment orthophosphate de zinc présente une bonne adhérence générale.",
+        "correct": true
+      },
+      {
+        "text": "Les vernis augmentent l'adhérence des composites par liaison chimique (Faux : ils inhibent parfois ou servent de barrière).",
+        "correct": false
+      },
+      {
+        "text": "L'adhérence du ZOE est jugée supérieure à celle des ciments définitifs et des amalgames.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+
+
+"4": [
+  {
+    "question": "Concernant la classification ASTM du titane et de ses alliages :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les grades 1 à 4 contiennent des atomes de substitution volontairement ajoutés.",
+        "correct": false
+      },
+      {
+        "text": "Les grades allant de 5 à 38 correspondent aux alliages de titane.",
+        "correct": true
+      },
+      {
+        "text": "Le grade 5 est un titane pur à haute teneur en oxygène.",
+        "correct": false
+      },
+      {
+        "text": "Les grades 1 à 4 sont considérés comme du titane commercialement pur (Cp).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos de la composition chimique du titane de grade 5 (TA6V4) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il ne contient aucune trace de fer ou d'oxygène.",
+        "correct": false
+      },
+      {
+        "text": "Il contient 6% d'aluminium et 4% de vanadium.",
+        "correct": true
+      },
+      {
+        "text": "Sa concentration en impuretés d'insertion peut atteindre 5% du poids total.",
+        "correct": false
+      },
+      {
+        "text": "Il est composé d'environ 90% de titane pur.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sur la structure allotropique du titane en dessous de 882,5°C :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Cette phase est qualifiée de plastique et sensible aux traitements thermiques.",
+        "correct": false
+      },
+      {
+        "text": "Le titane se présente sous sa forme $\\alpha$.",
+        "correct": true
+      },
+      {
+        "text": "Le titane adopte une structure cubique centrée.",
+        "correct": false
+      },
+      {
+        "text": "Sa structure est de type hexagonale stable.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant la phase $\\beta$ du titane (au-dessus de 882,5°C) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle possède une structure cristalline cubique centrée.",
+        "correct": true
+      },
+      {
+        "text": "Elle est moins sensible aux traitements thermiques que la phase $\\alpha$.",
+        "correct": false
+      },
+      {
+        "text": "Elle représente la structure la plus résistante mécaniquement à température ambiante.",
+        "correct": false
+      },
+      {
+        "text": "Elle est considérée comme une phase plastique.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les caractéristiques de la couche de passivation du titane ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle confère au titane une excellente résistance à la corrosion en milieu biologique.",
+        "correct": true
+      },
+      {
+        "text": "Elle est composée d'oxydes tels que le $TiO_2$, le $Ti_2O_3$ et le $TiO$.",
+        "correct": true
+      },
+      {
+        "text": "Elle rend le titane moins biocompatible que les alliages Co-Cr ou Ni-Cr.",
+        "correct": false
+      },
+      {
+        "text": "Sa formation est proportionnelle à l'augmentation du courant de corrosion.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Lors de la coulée de précision du titane :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'azote est l'élément le plus recherché pour augmenter la ductilité.",
+        "correct": false
+      },
+      {
+        "text": "Il est impératif de travailler sous vide ou sous atmosphère raréfiée.",
+        "correct": true
+      },
+      {
+        "text": "Une atmosphère ambiante est préférable pour favoriser l'oxydation de surface.",
+        "correct": false
+      },
+      {
+        "text": "L'objectif est d'éviter l'incorporation d'éléments d'insertion comme l'hydrogène.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos de l'usinage par CFAO (Conception et Fabrication Assistées par Ordinateur) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le fraisage doit être effectué à une vitesse très lente.",
+        "correct": true
+      },
+      {
+        "text": "L'usinage est facilité par les propriétés mécaniques élevées des grades 4 et 5.",
+        "correct": false
+      },
+      {
+        "text": "Cette méthode est principalement utilisée pour le titane de grade 1 uniquement.",
+        "correct": false
+      },
+      {
+        "text": "Un système de refroidissement efficace est indispensable durant l'opération.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant les impuretés dans le titane commercialement pur (Cp) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Plus le grade (de 1 à 4) augmente, plus la concentration d'impuretés est élevée.",
+        "correct": true
+      },
+      {
+        "text": "L'oxygène, l'azote et le fer font partie des impuretés d'insertion courantes.",
+        "correct": true
+      },
+      {
+        "text": "Le titane Cp est exempt de toute trace de carbone ou d'hydrogène.",
+        "correct": false
+      },
+      {
+        "text": "Le grade 1 possède la teneur en oxygène la plus élevée de la série Cp.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les propriétés thermiques et physiques notables du titane ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa masse spécifique est de $4,5~g/cm^{3}$ (matériau léger).",
+        "correct": true
+      },
+      {
+        "text": "Il possède une conductivité thermique extrêmement élevée par rapport aux autres métaux.",
+        "correct": false
+      },
+      {
+        "text": "Sa température de fusion est d'environ $1670^{\\circ}C$.",
+        "correct": true
+      },
+      {
+        "text": "Son coefficient de dilatation thermique est identique à celui de l'émail dentaire.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Le \"transus $\\beta$\" se définit comme :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une zone située généralement entre $882^{\\circ}C$ et $890^{\\circ}C$.",
+        "correct": true
+      },
+      {
+        "text": "La température maximale d'utilisation des prothèses en titane.",
+        "correct": false
+      },
+      {
+        "text": "Le moment où le titane passe de l'état liquide à l'état solide.",
+        "correct": false
+      },
+      {
+        "text": "La température de transition entre les phases $\\alpha$ et $\\beta$.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "En comparant les grades 1 et 4 de titane pur :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le grade 1 est mécaniquement plus résistant que le grade 4.",
+        "correct": false
+      },
+      {
+        "text": "Le grade 4 contient des ajouts de vanadium pour augmenter sa dureté.",
+        "correct": false
+      },
+      {
+        "text": "Le grade 4 possède une haute teneur en oxygène.",
+        "correct": true
+      },
+      {
+        "text": "Le grade 1 a une faible teneur en oxygène.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant l'électro-érosion du titane :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle s'effectue par ajout de matière couche par couche.",
+        "correct": false
+      },
+      {
+        "text": "Le métal en fusion est immédiatement éliminé par une couche diélectrique.",
+        "correct": true
+      },
+      {
+        "text": "Cette méthode utilise des décharges électriques pour provoquer la fonte locale du métal.",
+        "correct": true
+      },
+      {
+        "text": "C'est la méthode la plus couramment utilisée aujourd'hui en prothèse dentaire.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "La résistance à la corrosion du titane est liée à :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'intensité élevée du courant de corrosion qu'il génère.",
+        "correct": false
+      },
+      {
+        "text": "L'absence totale d'atomes d'oxygène dans sa structure interne.",
+        "correct": false
+      },
+      {
+        "text": "La stabilité chimique de cette couche en milieu buccal.",
+        "correct": true
+      },
+      {
+        "text": "La formation spontanée d'une couche protectrice d'oxydes.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sur la différence entre les phases $\\alpha$ et $\\beta$ :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La phase $\\beta$ est stable uniquement en dessous de $882,5^{\\circ}C$.",
+        "correct": false
+      },
+      {
+        "text": "La phase $\\beta$ pure est dite \"plastique\".",
+        "correct": true
+      },
+      {
+        "text": "La phase $\\alpha$ est cubique centrée.",
+        "correct": false
+      },
+      {
+        "text": "La phase $\\alpha$ pure est dite \"résistante\".",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "L'incorporation d'hydrogène dans l'alliage de titane provoque :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Une diminution notable de la résistance à la traction.",
+        "correct": true
+      },
+      {
+        "text": "Une augmentation de la ductilité et de la malléabilité.",
+        "correct": false
+      },
+      {
+        "text": "Une meilleure résistance à la corrosion biologique.",
+        "correct": false
+      },
+      {
+        "text": "Une fragilité importante de l'alliage.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La classification des alliages de titane (grades 5 et supérieurs) se base sur :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Leur capacité à devenir totalement liquides à $882^{\\circ}C$.",
+        "correct": false
+      },
+      {
+        "text": "Leurs compositions chimiques spécifiques.",
+        "correct": true
+      },
+      {
+        "text": "Leurs propriétés physiques et mécaniques.",
+        "correct": true
+      },
+      {
+        "text": "Uniquement leur teneur en hydrogène.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les valeurs correctes pour les propriétés du titane ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Conductivité thermique : $0,04~cal/cm^{2}/S/^{\\circ}C/cm$.",
+        "correct": true
+      },
+      {
+        "text": "Température de fusion : $882,5^{\\circ}C$.",
+        "correct": false
+      },
+      {
+        "text": "Coefficient de dilatation thermique linéaire : $9,0 \\times 10^{-6}/^{\\circ}C$.",
+        "correct": true
+      },
+      {
+        "text": "Masse spécifique : $10,5~g/cm^{3}$.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos de la biocompatibilité du titane :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle est étroitement liée à son excellente résistance à la corrosion.",
+        "correct": true
+      },
+      {
+        "text": "Elle diminue lorsque la teneur en aluminium du grade 5 augmente.",
+        "correct": false
+      },
+      {
+        "text": "Elle est identique à celle du Ni-Cr qui ne provoque aucune inflammation.",
+        "correct": false
+      },
+      {
+        "text": "Elle est assurée par la couche de passivation.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le titane de grade 4 (Ti-Cp) se distingue du grade 5 (TA6V4) car :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le grade 5 ne contient aucune impureté d'insertion comme l'oxygène.",
+        "correct": false
+      },
+      {
+        "text": "Le grade 4 est plus difficile à usiner par CFAO que le grade 5.",
+        "correct": false
+      },
+      {
+        "text": "Le grade 5 contient du vanadium et de l'aluminium comme atomes de substitution.",
+        "correct": true
+      },
+      {
+        "text": "Le grade 4 est un titane commercialement pur sans éléments d'alliage intentionnels.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Pourquoi le titane est-il un matériau de choix en prothèse moderne ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Parce qu'il est très facile à couler à l'air libre sans précautions particulières.",
+        "correct": false
+      },
+      {
+        "text": "Pour sa haute résistance à la corrosion et sa biocompatibilité.",
+        "correct": true
+      },
+      {
+        "text": "Parce qu'il possède le point de fusion le plus bas de tous les métaux dentaires.",
+        "correct": false
+      },
+      {
+        "text": "Pour sa légèreté alliée à de bonnes propriétés mécaniques.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+"5": [
+  {
+    "question": "Concernant les propriétés fondamentales de l'Or pur :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il est très résistant aux attaques par le mercure.",
+        "correct": false
+      },
+      {
+        "text": "Il possède une excellente résistance à la corrosion et une grande ductilité.",
+        "correct": true
+      },
+      {
+        "text": "Son point de fusion est relativement bas, aux alentours de 500°C.",
+        "correct": false
+      },
+      {
+        "text": "C'est le métal le plus ductile, capable de s'écraser en feuilles de 1 micron.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos de la notion de caratage dans les alliages d'or :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le caratage n'a aucune influence sur la possibilité de modeler l'or.",
+        "correct": false
+      },
+      {
+        "text": "Un alliage de 18 carats correspond à une teneur de 75% d'or.",
+        "correct": true
+      },
+      {
+        "text": "L'or à 24 carats est considéré comme pur à 100% sans aucun affinage.",
+        "correct": false
+      },
+      {
+        "text": "Un \"carat\" représente exactement 1/24 de la teneur en or pur.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels sont les composants principaux d'un alliage dit \"précieux\" ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ils sont principalement composés de Fer et de Zinc à plus de 50%.",
+        "correct": false
+      },
+      {
+        "text": "L'Or et les métaux de la lignée du Platine (Palladium, Iridium, etc.).",
+        "correct": true
+      },
+      {
+        "text": "Le Nickel et le Chrome sont les éléments de base de ces alliages.",
+        "correct": false
+      },
+      {
+        "text": "Ce sont essentiellement des alliages ternaires Au-Ag-Cu ou plus complexes.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quel est le rôle de l'Argent (Ag) et du Cuivre (Cu) dans les alliages précieux ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'argent tempère la couleur rouge du cuivre et augmente la ductilité.",
+        "correct": true
+      },
+      {
+        "text": "L'argent est utilisé pour élever considérablement le point de fusion.",
+        "correct": false
+      },
+      {
+        "text": "Le cuivre est ajouté principalement pour ses propriétés désoxydantes.",
+        "correct": false
+      },
+      {
+        "text": "Le cuivre augmente la résistance mécanique et la dureté de l'alliage.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant l'usage du Palladium (Pd) et du Platine (Pt) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le Platine augmente la dureté et élève l'intervalle de fusion.",
+        "correct": true
+      },
+      {
+        "text": "Le Palladium a la particularité de blanchir l'alliage d'or.",
+        "correct": true
+      },
+      {
+        "text": "Le Platine est ajouté pour augmenter la malléabilité et ramollir l'alliage.",
+        "correct": false
+      },
+      {
+        "text": "Le Palladium diminue la résistance à la corrosion en milieu buccal.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos de l'élément Zinc (Zn) dans la composition :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il ralentit le processus de durcissement de l'alliage précieux.",
+        "correct": false
+      },
+      {
+        "text": "Il est utilisé en faible quantité comme agent désoxydant.",
+        "correct": true
+      },
+      {
+        "text": "Il est l'élément principal responsable de la ductilité de l'or.",
+        "correct": false
+      },
+      {
+        "text": "Il contribue à abaisser le point de fusion en fluidisant l'alliage.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Selon la spécification n°5 de l'ADA, pour les alliages de Type I et Type II :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les alliages de Type I ont une dureté Vickers (VHN) comprise entre 50 et 90.",
+        "correct": true
+      },
+      {
+        "text": "Le Type I est recommandé pour les bridges de grande portée.",
+        "correct": false
+      },
+      {
+        "text": "Le Type II possède une dureté supérieure à 150 VHN.",
+        "correct": false
+      },
+      {
+        "text": "Le Type II est moyennement dur (90 < VHN < 120) et indiqué pour les inlays/onlays.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant les alliages de Type III et Type IV (ADA) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le Type III est employé pour les couronnes unitaires et bridges de petite portée.",
+        "correct": true
+      },
+      {
+        "text": "Le Type IV est extra-dur (VHN > 150) et réservé aux châssis métalliques et grands bridges.",
+        "correct": true
+      },
+      {
+        "text": "Le Type IV est indiqué exclusivement pour les inlays simples.",
+        "correct": false
+      },
+      {
+        "text": "Le Type III est plus dur que le Type IV.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Sur les propriétés biologiques des alliages d'or :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'homogénéisation de l'alliage aide à éviter le goût métallique en bouche.",
+        "correct": true
+      },
+      {
+        "text": "Le picotement de la langue est dû à une réaction allergique systémique systématique.",
+        "correct": false
+      },
+      {
+        "text": "Ils sont très bien tolérés si la teneur globale en métaux nobles est supérieure à 70%.",
+        "correct": true
+      },
+      {
+        "text": "La corrosion électrochimique n'existe pas avec les alliages précieux.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos des intervalles de fusion des alliages précieux :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Pour les alliages destinés à la céramo-métallique, l'intervalle dépasse 1000°C.",
+        "correct": true
+      },
+      {
+        "text": "Tous les types (I à IV) fondent exactement à la même température de 800°C.",
+        "correct": false
+      },
+      {
+        "text": "Le Type IV a le point de fusion le plus élevé, commençant à 1100°C.",
+        "correct": false
+      },
+      {
+        "text": "La température minimale de début de fusion est de 930°C pour le Type I.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Définition et usage des alliages semi-précieux :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ils sont uniquement composés de Nickel et de Chrome.",
+        "correct": false
+      },
+      {
+        "text": "Ils ne contiennent jamais d'argent ni de palladium.",
+        "correct": false
+      },
+      {
+        "text": "Ils servent d'infrastructures aux réalisations céramiques unitaires ou plurales.",
+        "correct": true
+      },
+      {
+        "text": "Ils contiennent au minimum 50% en poids d'or et de métaux de la mine du platine.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Composition des alliages Nickel-Chrome (Ni-Cr) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La teneur en Fer doit être supérieure à 50% pour assurer la rigidité.",
+        "correct": false
+      },
+      {
+        "text": "On y ajoute des éléments comme le molybdène, l'aluminium et le silicium.",
+        "correct": true
+      },
+      {
+        "text": "Le Nickel est présent à hauteur de 60-80% et le Chrome à 10-25%.",
+        "correct": true
+      },
+      {
+        "text": "Le Cobalt est l'élément majoritaire dans un alliage Ni-Cr.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Propriétés physiques des alliages Ni-Cr comparées à l'Or :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Leur intervalle de fusion est plus bas que celui des alliages d'or.",
+        "correct": false
+      },
+      {
+        "text": "Leur conductibilité thermique est deux fois supérieure à celle des métaux précieux.",
+        "correct": false
+      },
+      {
+        "text": "Ils sont nettement plus durs que les alliages d'or conventionnels.",
+        "correct": true
+      },
+      {
+        "text": "Leur masse volumique (8 g/cm3) est deux fois plus faible que celle de l'or.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Résistance à la corrosion et élasticité des alliages Ni-Cr :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ces alliages sont considérés comme hautement toxiques pour le patient.",
+        "correct": false
+      },
+      {
+        "text": "Le module d'élasticité est plus de deux fois supérieur à celui des alliages d'or.",
+        "correct": true
+      },
+      {
+        "text": "L'ajout de manganèse diminue fortement la résistance à la corrosion.",
+        "correct": false
+      },
+      {
+        "text": "La passivité est assurée par le chrome si sa teneur est d'au moins 13%.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Indications cliniques des alliages Ni-Cr :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ils conviennent pour la prothèse conjointe coulée et les fils de crochet.",
+        "correct": true
+      },
+      {
+        "text": "Ils sont exclusivement réservés aux inlays de petite taille (Type I).",
+        "correct": false
+      },
+      {
+        "text": "On les utilise principalement pour les bases de prothèses totales amovibles.",
+        "correct": false
+      },
+      {
+        "text": "Ils sont utilisés pour les infrastructures céramo-métalliques grâce à leur grande rigidité.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Composition chimique des alliages Chrome-Cobalt (Co-Cr) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ce sont des alliages qui ne contiennent jamais de chrome.",
+        "correct": false
+      },
+      {
+        "text": "Le Cobalt représente environ 62,5% et le Chrome 30%.",
+        "correct": true
+      },
+      {
+        "text": "Le molybdène peut remplacer le tungstène pour améliorer la ductilité.",
+        "correct": true
+      },
+      {
+        "text": "Le Carbone est présent à un taux élevé de 10% pour la malléabilité.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Propriétés mécaniques exceptionnelles du Co-Cr :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Leur haut module d'élasticité permet d'éviter les déformations des crochets fins.",
+        "correct": true
+      },
+      {
+        "text": "Ils sont moins résistants à la rupture que les alliages d'or de Type I.",
+        "correct": false
+      },
+      {
+        "text": "Ils possèdent la limite élastique la plus élevée de tous les alliages dentaires.",
+        "correct": true
+      },
+      {
+        "text": "Leur dureté Vickers est inférieure à celle de la dentine humaine.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos de la fusion et de la dureté du Co-Cr :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'intervalle de fusion est très élevé, se situant entre 1250°C et 1400°C.",
+        "correct": true
+      },
+      {
+        "text": "Plus la teneur en cobalt est faible, plus le point de fusion augmente.",
+        "correct": false
+      },
+      {
+        "text": "La fusion doit se faire en présence d'oxygène et de carbone pour être stable.",
+        "correct": false
+      },
+      {
+        "text": "Leur dureté (280-365 VHM) dépasse celle de l'émail dentaire (320).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Indications et corrosion des alliages Co-Cr :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Leur utilisation est proscrite en prothèse adjointe.",
+        "correct": false
+      },
+      {
+        "text": "Ils sont le premier choix pour les bridges de très petite portée en or.",
+        "correct": false
+      },
+      {
+        "text": "Ils présentent une très bonne résistance à la corrosion électrochimique.",
+        "correct": true
+      },
+      {
+        "text": "Ils sont principalement indiqués pour la confection des châssis métalliques.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Conclusion sur le choix des alliages en prothèse :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les matériaux organiques ont totalement remplacé les métaux précieux aujourd'hui.",
+        "correct": false
+      },
+      {
+        "text": "Leurs propriétés mécaniques et leur mise en œuvre simple les rendent incontournables.",
+        "correct": true
+      },
+      {
+        "text": "Les alliages non-précieux sont moins employés que les alliages précieux en pratique.",
+        "correct": false
+      },
+      {
+        "text": "Les alliages restent des matériaux de référence grâce à leur polyvalence clinique.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+
+
+
+"6": [
+  {
+    "question": "Concernant la définition générale d'une céramique dentaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa consolidation est obtenue par un traitement mécanique à froid uniquement.",
+        "correct": false
+      },
+      {
+        "text": "Elle possède généralement une structure biphasée composée de verre amorphe et de minéraux cristallisés.",
+        "correct": true
+      },
+      {
+        "text": "Elle est constituée de polymères organiques à plus de 50%.",
+        "correct": false
+      },
+      {
+        "text": "C'est un matériau inorganique et non métallique.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos de la porcelaine et du verre :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La porcelaine est dépourvue de phase cristalline.",
+        "correct": false
+      },
+      {
+        "text": "Le verre possède une structure vitreuse désordonnée car composée d'atomes de dimensions très différentes.",
+        "correct": true
+      },
+      {
+        "text": "Le verre est un composé organique fabriqué exclusivement à base de carbone.",
+        "correct": false
+      },
+      {
+        "text": "La porcelaine contient de l'argile sous forme de kaolin.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le processus de frittage dans les céramiques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Consiste à faire fondre totalement le matériau jusqu'à l'état liquide.",
+        "correct": false
+      },
+      {
+        "text": "Est un traitement thermique visant une évolution vers un état de compacité maximale.",
+        "correct": true
+      },
+      {
+        "text": "Est une étape de mise en forme qui se fait exclusivement par soustraction de matière.",
+        "correct": false
+      },
+      {
+        "text": "Permet la densification et la consolidation de l'agglomérat de poudre.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La phase cristalline au sein de la matrice vitreuse :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Permet d'améliorer la dureté et la résistance par rapport aux verres simples.",
+        "correct": true
+      },
+      {
+        "text": "Augmente la translucidité et l'aspect esthétique de la restauration.",
+        "correct": false
+      },
+      {
+        "text": "Est une phase désordonnée occupant la majorité du volume des céramiques polycristallines.",
+        "correct": false
+      },
+      {
+        "text": "Agit en bloquant la propagation des fissures au sein de la matrice.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant la coloration et l'opacité des céramiques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'opacité est due à la présence d'oxydes de zirconium, d'étain ou de titane.",
+        "correct": true
+      },
+      {
+        "text": "Les teintes sont obtenues par l'addition de poudres d'oxydes métalliques.",
+        "correct": true
+      },
+      {
+        "text": "Les poudres de porcelaine sont commercialisées en une seule formule universelle pour l'émail et la dentine.",
+        "correct": false
+      },
+      {
+        "text": "L'oxyde de silicium est le principal agent opacifiant utilisé.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Selon la classification traditionnelle par température de frittage :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La très basse fusion permet uniquement la réalisation d'inlays en or.",
+        "correct": false
+      },
+      {
+        "text": "La haute fusion se situe entre 1289 et 1390°C pour les dents de prothèse amovible.",
+        "correct": true
+      },
+      {
+        "text": "La moyenne fusion est réservée exclusivement au titane pur depuis 1992.",
+        "correct": false
+      },
+      {
+        "text": "La basse fusion (870 à 1065°C) est utilisée pour l'émaillage des couronnes céramo-métalliques.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Caractéristiques des céramiques feldspathiques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles constituent les céramiques traditionnelles destinées à l'émaillage des coiffes CCM.",
+        "correct": true
+      },
+      {
+        "text": "Leur phase cristalline est exclusivement composée d'alumine pure à 98%.",
+        "correct": false
+      },
+      {
+        "text": "Elles sont mises en forme uniquement par le procédé de pressée sous vide.",
+        "correct": false
+      },
+      {
+        "text": "Le feldspath et les feldspathoïdes composent leur matrice vitreuse.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos des céramiques alumineuses (système In-Ceram®) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'In-Ceram Zirconia est plus résistante car composée d'alumine et de zircone.",
+        "correct": true
+      },
+      {
+        "text": "L'In-Ceram Spinelle est plus translucide mais moins résistante.",
+        "correct": true
+      },
+      {
+        "text": "L'In-Ceram Alumina standard possède une résistance supérieure à la zircone.",
+        "correct": false
+      },
+      {
+        "text": "Le Procera contient moins de 40% d'alumine dans sa structure.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Les vitro-céramiques se caractérisent par :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Un traitement thermique de cristallisation volontaire, contrôlée et partielle.",
+        "correct": true
+      },
+      {
+        "text": "Une absence totale de phase vitreuse après traitement thermique.",
+        "correct": false
+      },
+      {
+        "text": "Une mise en forme initiale à l'état de verre.",
+        "correct": true
+      },
+      {
+        "text": "Une utilisation exclusive pour les infrastructures de bridges de longue portée.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "La zircone (ZrO2) en tant que céramique dentaire :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Constitue une alternative aux alliages métalliques pour les restaurations prothétiques.",
+        "correct": true
+      },
+      {
+        "text": "Possède une translucidité supérieure aux céramiques feldspathiques grâce à sa structure.",
+        "correct": false
+      },
+      {
+        "text": "Est le matériau le plus fragile et le moins résistant à la fatigue.",
+        "correct": false
+      },
+      {
+        "text": "Est totalement cristalline et mise en œuvre par CFAO.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le procédé des céramiques cuites (stratification) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le glaçage est la première étape du processus de cuisson.",
+        "correct": false
+      },
+      {
+        "text": "La translucidité apparaît dès la première cuisson de dégourdi.",
+        "correct": false
+      },
+      {
+        "text": "Au cours de la cuisson, le feldspath se transforme en leucite et en silice.",
+        "correct": true
+      },
+      {
+        "text": "Utilise un mélange poudre + eau distillée pour obtenir une pâte façonnable.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les céramiques pressées et injectées :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ne nécessitent jamais de sablage ou de maquillage après refroidissement.",
+        "correct": false
+      },
+      {
+        "text": "Nécessitent le façonnage d'une pièce en cire calcinable sur une tige de coulée.",
+        "correct": true
+      },
+      {
+        "text": "Utilisent des lingotins de vitrocéramiques renforcées à la leucite ou au disilicate de lithium.",
+        "correct": true
+      },
+      {
+        "text": "S'effectuent par stratification manuelle de poudres successives.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Le système des céramiques infiltrées (In-Ceram®) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Donne une couleur finale au matériau avant même l'étape d'infiltration.",
+        "correct": false
+      },
+      {
+        "text": "Est un procédé en une seule étape de cuisson rapide.",
+        "correct": false
+      },
+      {
+        "text": "Utilise un verre à température élevée pour combler les porosités de la structure.",
+        "correct": true
+      },
+      {
+        "text": "Comporte l'élaboration d'une structure pré-frittée poreuse appelée barbotine.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les céramiques usinées par CFAO :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ne permettent pas l'utilisation de matériaux polycristallins comme la zircone.",
+        "correct": false
+      },
+      {
+        "text": "Sont les seules à mettre en œuvre les infrastructures par soustraction de matériau.",
+        "correct": true
+      },
+      {
+        "text": "Sont façonnées par addition de couches de porcelaine sur un modèle réfractaire.",
+        "correct": false
+      },
+      {
+        "text": "Sont préparées industriellement sous forme de blocs standardisés.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant la bio-inertie et la biocompatibilité :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles ne provoquent aucune allergie et sont plus stables que les métaux face à la corrosion.",
+        "correct": true
+      },
+      {
+        "text": "Elles subissent une dégradation importante par corrosion en milieu buccal.",
+        "correct": false
+      },
+      {
+        "text": "Leur stabilité chimique est inférieure à celle des résines synthétiques.",
+        "correct": false
+      },
+      {
+        "text": "Les céramiques sont bio-inertes chimiquement, électriquement et thermiquement.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Propriétés mécaniques des céramiques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Leur module de Young est systématiquement inférieur à celui de la dentine.",
+        "correct": false
+      },
+      {
+        "text": "Elles présentent une très bonne résistance à la compression.",
+        "correct": true
+      },
+      {
+        "text": "Elles ont une faible résistance à la traction et à la flexion.",
+        "correct": true
+      },
+      {
+        "text": "Elles possèdent une grande capacité de déformation plastique avant rupture.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Fragilité et fracture des céramiques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles ne peuvent pas s'adapter à une déformation de plus de quelques micromètres.",
+        "correct": true
+      },
+      {
+        "text": "La déformation sous contrainte est de type plastique et non linéaire.",
+        "correct": false
+      },
+      {
+        "text": "La fracture se propage à partir d'une fissure initiale.",
+        "correct": true
+      },
+      {
+        "text": "Leur ténacité est équivalente à celle de l'acier (indice 100).",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Dureté et abrasion :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La dureté Vickers des céramiques (380 à 460) est supérieure à celle de l'émail (320-340).",
+        "correct": true
+      },
+      {
+        "text": "L'émail est le matériau le plus dur du corps humain, dépassant largement la zircone.",
+        "correct": false
+      },
+      {
+        "text": "La dentine (70 VHN) est plus dure que la céramique conventionnelle.",
+        "correct": false
+      },
+      {
+        "text": "Elles possèdent un coefficient d'abrasion qu'il faut prendre en compte cliniquement.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Propriétés thermiques et chimiques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les céramiques In-Ceram présentent la plus grande stabilité chimique du marché.",
+        "correct": false
+      },
+      {
+        "text": "La température de frittage est la même pour tous les types de céramiques (1000°C).",
+        "correct": false
+      },
+      {
+        "text": "La solubilité chimique des vitrocéramiques est généralement inférieure à 20 μg/cm2.",
+        "correct": true
+      },
+      {
+        "text": "Les céramiques sont d'excellents isolants thermiques.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Propriétés optiques et esthétiques :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les matériaux offrant les meilleures propriétés mécaniques sont les plus aptes à diffuser la lumière.",
+        "correct": false
+      },
+      {
+        "text": "Les céramiques polycristallines (alumine/zircone) sont opaques ou semi-opaques par manque de phase vitreuse.",
+        "correct": true
+      },
+      {
+        "text": "Le mimétisme des céramiques est dû à l'absorption totale des faisceaux lumineux.",
+        "correct": false
+      },
+      {
+        "text": "Plus la matrice vitreuse est importante, plus la céramique est translucide.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+
+
+"7": [
+  {
+    "question": "À propos des définitions fondamentales de l'assemblage :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le ciment de scellement est principalement composé de monomères d'esters méthacryliques.",
+        "correct": false
+      },
+      {
+        "text": "Le ciment de scellement est un matériau dont le durcissement résulte d'une réaction acide-base.",
+        "correct": true
+      },
+      {
+        "text": "Le scellement assure une liaison chimique intrinsèque et forte avec les tissus dentaires,.",
+        "correct": false
+      },
+      {
+        "text": "Le scellement se définit comme un assemblage par calage dû uniquement à une agrégation mécanique du ciment.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les qualités requises pour un ciment de scellement idéal ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il doit être acide vis-à-vis du matériau de restauration pour favoriser l'adhésion.",
+        "correct": false
+      },
+      {
+        "text": "Il doit permettre l'obtention d'une pellicule (film) de ciment la plus fine possible.",
+        "correct": true
+      },
+      {
+        "text": "Il doit posséder une forte conductibilité thermique pour protéger la pulpe.",
+        "correct": false
+      },
+      {
+        "text": "Il doit présenter la plus faible solubilité possible dans les fluides buccaux et résister aux contraintes.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant le ciment au phosphate de zinc :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il possède une résistance à la traction supérieure à sa résistance à la compression.",
+        "correct": false
+      },
+      {
+        "text": "Ses indications incluent le scellement de couronnes, de ponts et de bagues orthodontiques.",
+        "correct": true
+      },
+      {
+        "text": "Il possède des propriétés anti-cariogéniques intrinsèques.",
+        "correct": false
+      },
+      {
+        "text": "C'est un bon isolant thermique sous les obturations métalliques grâce à sa faible conductibilité.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels sont les inconvénients majeurs du ciment au phosphate de zinc ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il est fragile et devient soluble au contact des acides organiques et de la salive.",
+        "correct": true
+      },
+      {
+        "text": "Sa manipulation est extrêmement complexe et nécessite un matériel très spécifique.",
+        "correct": false
+      },
+      {
+        "text": "Il est impossible de contrôler l'épaisseur du film par le rapport Poudre/Liquide.",
+        "correct": false
+      },
+      {
+        "text": "Il ne présente aucune adhésion à la structure dentaire, ce qui favorise l'infiltration.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos des ciments silico-phosphates de zinc :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Leur acidité initiale élevée impose impérativement une protection pulpaire sur dent vivante,.",
+        "correct": true
+      },
+      {
+        "text": "Leur résistance à la compression et leur résistance à l'abrasion sont supérieures aux autres ciments inorganiques,.",
+        "correct": true
+      },
+      {
+        "text": "Leur temps de prise en bouche est extrêmement long, dépassant généralement les 15 minutes.",
+        "correct": false
+      },
+      {
+        "text": "Ils sont moins solubles dans la bouche que les ciments de scellement organiques,.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant l'Oxyde de Zinc-Eugénol (ZEO) classique :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il est recommandé comme base définitive sous les restaurations en céramique mordançable,.",
+        "correct": false
+      },
+      {
+        "text": "Il est utilisé pour le scellement provisoire car il possède un effet doux et sédatif pour la pulpe.",
+        "correct": true
+      },
+      {
+        "text": "Sa résistance à la traction est équivalente à celle des ciments au phosphate de zinc,.",
+        "correct": false
+      },
+      {
+        "text": "Il présente une faible résistance à la compression et se désagrège dans la salive.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les caractéristiques du ciment au phosphate de zinc à l'EBA ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa résistance globale et l'épaisseur de son film sont comparables à celles du ciment au phosphate de zinc.",
+        "correct": true
+      },
+      {
+        "text": "Il est totalement insensible à la dégradation hydrolytique dans la salive.",
+        "correct": false
+      },
+      {
+        "text": "Son malaxage est instantané et ne nécessite pas de rapport poudre/liquide élevé.",
+        "correct": false
+      },
+      {
+        "text": "Il offre un temps de travail long et s'avère peu irritant pour la pulpe dentaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos du ciment au polycarboxylate :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il présente l'avantage d'adhérer chimiquement à l'émail dentaire.",
+        "correct": true
+      },
+      {
+        "text": "Ses propriétés biologiques et sa réaction pulpaire sont minimes, similaires au ZEO.",
+        "correct": true
+      },
+      {
+        "text": "Il est principalement indiqué pour le scellement des facettes esthétiques en céramique,.",
+        "correct": false
+      },
+      {
+        "text": "Sa résistance à la compression est nettement supérieure à celle des silico-phosphates,.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant le Ciment au Verre Ionomère (CVI) de scellement :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Sa manipulation technique est délicate et nécessite un dosage précis pour optimiser ses propriétés.",
+        "correct": true
+      },
+      {
+        "text": "Il possède un temps de travail très long facilitant les scellements multiples.",
+        "correct": false
+      },
+      {
+        "text": "Il offre une meilleure adhésion dentaire que les ciments minéraux classiques.",
+        "correct": true
+      },
+      {
+        "text": "Il est totalement insoluble, même en cas de mauvaise manipulation.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les particularités des ciments de scellement organiques (résines) ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Leurs principaux inconvénients sont un effet nuisible sur la pulpe et une élimination difficile des excès.",
+        "correct": true
+      },
+      {
+        "text": "Ils sont extrêmement solubles dans les fluides buccaux.",
+        "correct": false
+      },
+      {
+        "text": "Ils permettent un temps de travail très étendu facilitant le nettoyage après la prise.",
+        "correct": false
+      },
+      {
+        "text": "Ils possèdent une résistance et une ténacité relativement élevées par rapport aux ciments minéraux.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Comment se définit le collage et les colles organiques ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le collage repose exclusivement sur un calage mécanique par frottement,.",
+        "correct": false
+      },
+      {
+        "text": "Les colles sont des matériaux purement minéraux sans matrice organique.",
+        "correct": false
+      },
+      {
+        "text": "Les colles sont des polymères organiques à base d'esters méthacryliques possédant une grande ténacité après polymérisation.",
+        "correct": true
+      },
+      {
+        "text": "Le collage est un assemblage par adhésion entre l'intrados prothétique et le tissu dentaire via une substance intermédiaire.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les qualités essentielles d'un système adhésif ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il doit être hautement soluble pour faciliter le retrait de la prothèse en cas de besoin.",
+        "correct": false
+      },
+      {
+        "text": "Il doit garantir une longévité clinique tout en ayant une mise en œuvre simple et fiable.",
+        "correct": true
+      },
+      {
+        "text": "Il doit assurer une adhésion étanche et être biocompatible avec les tissus.",
+        "correct": true
+      },
+      {
+        "text": "Il doit être le plus épais possible pour compenser les défauts d'ajustage,.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos de l'agent de mordançage (Etching) dans les systèmes adhésifs :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il est principalement utilisé pour créer une liaison chimique avec le métal noble,.",
+        "correct": false
+      },
+      {
+        "text": "Il s'agit d'une solution tensioactive qui favorise directement l'infiltration de la résine.",
+        "correct": false
+      },
+      {
+        "text": "Son rôle est de supprimer ou de modifier la \"smear layer\" (couche de boue dentinaire).",
+        "correct": true
+      },
+      {
+        "text": "Il est composé d'acides (souvent phosphorique) servant à déminéraliser l'émail et la dentine.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quel est le rôle des primers et de la résine adhésive (bonding) ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le bonding est une poudre minérale que l'on mélange à un liquide acide,.",
+        "correct": false
+      },
+      {
+        "text": "La résine adhésive (bonding) constitue l'adhésif proprement dit qui assure l'union finale.",
+        "correct": true
+      },
+      {
+        "text": "Le primer sert exclusivement à mordaner la céramique vitreuse,.",
+        "correct": false
+      },
+      {
+        "text": "Le primer est un agent de couplage tensioactif qui favorise l'infiltration des tissus déminéralisés.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant les colles sans potentiel adhésif (SPA) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles permettent un choix de teinte et présentent une faible épaisseur de film.",
+        "correct": true
+      },
+      {
+        "text": "Elles possèdent des monomères fonctionnels qui les rendent intrinsèquement adhésives à la dentine.",
+        "correct": false
+      },
+      {
+        "text": "Leur manipulation est radicalement différente de celle d'un composite de restauration.",
+        "correct": false
+      },
+      {
+        "text": "Elles nécessitent obligatoirement un traitement de surface préalable et l'emploi d'agents de couplage.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les caractéristiques des colles avec potentiel adhésif (APA) ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles ne permettent aucun choix de teinte pour le praticien.",
+        "correct": false
+      },
+      {
+        "text": "Elles possèdent des monomères fonctionnels réactifs et une résine intrinsèquement adhésive.",
+        "correct": true
+      },
+      {
+        "text": "Elles assurent une adhésion à la fois chimique et micromécanique avec une bonne élasticité.",
+        "correct": true
+      },
+      {
+        "text": "Elles sont très solubles en bouche, ce qui limite leur utilisation aux dents temporaires.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos des colles auto-adhésives (AA) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles offrent de bonnes propriétés élastiques et une faible épaisseur de film.",
+        "correct": true
+      },
+      {
+        "text": "Elles nécessitent impérativement l'application d'un acide fort sur la dentine avant pose.",
+        "correct": false
+      },
+      {
+        "text": "Ce sont des colles di-méthacrylates chargées qui ne nécessitent aucun traitement de surface préalable.",
+        "correct": true
+      },
+      {
+        "text": "Elles offrent une translucidité supérieure et un choix de couleur plus vaste que les colles APA.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Comment s'effectue le collage de la céramique mordançable ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "On applique d'abord de l'acide fluorhydrique pour créer un relief micro-mécanique.",
+        "correct": true
+      },
+      {
+        "text": "Le silane est inutile si la céramique est riche en silice.",
+        "correct": false
+      },
+      {
+        "text": "Le mordançage s'effectue uniquement avec de l'acide phosphorique à 37%,.",
+        "correct": false
+      },
+      {
+        "text": "On utilise ensuite un silane comme agent de couplage pour lier la phase vitreuse à la résine.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quel système de polymérisation choisir pour le collage ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'adhésif photo-polymérisant est recommandé pour toutes les couronnes métalliques.",
+        "correct": false
+      },
+      {
+        "text": "La photo-polymérisation seule est suffisante quelle que soit l'épaisseur de la pièce prothétique.",
+        "correct": false
+      },
+      {
+        "text": "Pour une pièce en résine de plus de 3 mm d'épaisseur, un adhésif auto-polymérisant (chémo) est requis.",
+        "correct": true
+      },
+      {
+        "text": "Pour les céramiques opaques ou renforcées, il faut privilégier un système chémo-polymérisable.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les spécificités du collage sur métal (alliages nobles) ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le métal noble peut être mordançé directement avec de l'acide fluorhydrique,.",
+        "correct": false
+      },
+      {
+        "text": "La silice déposée est ensuite couplée à la résine par l'application d'un silane.",
+        "correct": true
+      },
+      {
+        "text": "Le collage du métal ne nécessite aucun agent de couplage spécifique, une colle AA suffit toujours,.",
+        "correct": false
+      },
+      {
+        "text": "Il est nécessaire de déposer de la silice à la surface du métal.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+"8": [
+  {
+    "question": "Quelle est l'origine chimique des résines utilisées en prothèse dentaire ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles proviennent uniquement de la condensation de l'acide chlorhydrique.",
+        "correct": false
+      },
+      {
+        "text": "Elles s'obtiennent par polymérisation de dérivés de l'acide acrylique ou méthacrylique.",
+        "correct": true
+      },
+      {
+        "text": "Ce sont exclusivement des polymères naturels extraits de résines végétales.",
+        "correct": false
+      },
+      {
+        "text": "Ce sont des méthacrylates de méthyle avec une double liaison d'acryle.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "De quoi est composée la poudre (polymère) des résines acryliques ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "D'un inhibiteur comme l'hydroquinone pour empêcher la polymérisation.",
+        "correct": false
+      },
+      {
+        "text": "D'un initiateur appelé peroxyde de benzoyle (0,5 à 2% en poids).",
+        "correct": true
+      },
+      {
+        "text": "De monomère de méthacrylate de méthyle pur.",
+        "correct": false
+      },
+      {
+        "text": "De particules sphériques de polyméthacrylate de méthyle (PMMA).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels sont les composants essentiels du liquide (monomère) ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Des pigments colorés pour l'esthétique de la gencive.",
+        "correct": false
+      },
+      {
+        "text": "Le monomère de méthacrylate de méthyle.",
+        "correct": true
+      },
+      {
+        "text": "Des particules de pré-polymère pour épaissir le mélange.",
+        "correct": false
+      },
+      {
+        "text": "Un inhibiteur, l'hydroquinone, dosé à 0,006%.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels rôles jouent les additifs secondaires dans la composition ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le phtalate de butyle agit comme un agent plastifiant dans la poudre.",
+        "correct": true
+      },
+      {
+        "text": "L'hydroquinone accélère la réaction une fois le mélange effectué.",
+        "correct": false
+      },
+      {
+        "text": "Le peroxyde de benzoyle stabilise le monomère pendant le stockage.",
+        "correct": false
+      },
+      {
+        "text": "Le diméthacrylate d'éthylène ou de glycol sert d'agent de réticulation dans le liquide.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les caractéristiques des résines autopolymérisables (chémopolymérisables) ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elles contiennent un activateur de type amine aromatique ternaire.",
+        "correct": true
+      },
+      {
+        "text": "Elles durcissent à froid sans apport de chaleur externe.",
+        "correct": true
+      },
+      {
+        "text": "Elles sont composées uniquement de liquide sans aucune poudre.",
+        "correct": false
+      },
+      {
+        "text": "Elles ne nécessitent pas d'initiateur dans leur composition.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Comment se déroule la phase d'initiation de la polymérisation ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les radicaux libres se transforment immédiatement en molécules stables.",
+        "correct": false
+      },
+      {
+        "text": "Le peroxyde de benzoyle se dissout dans le monomère dès le mélange.",
+        "correct": true
+      },
+      {
+        "text": "Le monomère s'évapore pour laisser place au polymère solide.",
+        "correct": false
+      },
+      {
+        "text": "La chaleur ou l'activateur divise l'initiateur en deux radicaux libres.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Que se passe-t-il durant la phase de croissance (propagation) ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les radicaux acryliques réagissent successivement avec des unités de monomères.",
+        "correct": true
+      },
+      {
+        "text": "La masse molaire de la chaîne diminue au fur et à mesure de l'ajout d'unités.",
+        "correct": false
+      },
+      {
+        "text": "L'initiateur est consommé pour stopper la réaction de manière précoce.",
+        "correct": false
+      },
+      {
+        "text": "Le processus peut se répéter plus de 500 fois pour former des macromolécules.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les premières étapes de la formation de la pâte (mélange poudre/liquide) ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le stade sableux ou granuleux où le monomère mouille les sphères de polymère.",
+        "correct": true
+      },
+      {
+        "text": "Le stade mousseux ou filamenteux où les couches externes des sphères se dissolvent.",
+        "correct": true
+      },
+      {
+        "text": "Le stade rigide où la résine a déjà atteint sa dureté finale.",
+        "correct": false
+      },
+      {
+        "text": "Le stade élastique où la résine est prête à être manipulée sans coller.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les caractéristiques du troisième stade (pâteux) ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "C'est à ce stade que l'acrylique est vendu lorsqu'il est prêt à l'emploi.",
+        "correct": true
+      },
+      {
+        "text": "C'est le stade idéal pour le polissage final de la prothèse.",
+        "correct": false
+      },
+      {
+        "text": "Les particules sphériques se joignent pour former des chaînes de polymères.",
+        "correct": true
+      },
+      {
+        "text": "La pâte développe des propriétés élastiques irréversibles à ce moment précis.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Pourquoi utilise-t-on un vernis isolant sur le modèle en plâtre avant le bourrage ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Pour empêcher l'adhésion du plâtre à la résine finale.",
+        "correct": true
+      },
+      {
+        "text": "Pour augmenter la porosité de surface de la base de prothèse.",
+        "correct": false
+      },
+      {
+        "text": "Pour accélérer la réaction exothermique de la résine.",
+        "correct": false
+      },
+      {
+        "text": "Pour éviter la diffusion du monomère vers le plâtre.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quel est l'intérêt de placer un léger excès de pâte lors du bourrage du moufle ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Cela facilite l'ouverture du moufle après le refroidissement.",
+        "correct": false
+      },
+      {
+        "text": "Cela réduit la température d'ébullition du monomère.",
+        "correct": false
+      },
+      {
+        "text": "Cela forme un joint de résine empêchant le passage de l'eau de cuisson.",
+        "correct": true
+      },
+      {
+        "text": "Cela permet de compenser la contraction de polymérisation.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quels facteurs garantissent un bon cycle de cuisson ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'utilisation d'une pression atmosphérique basse pour favoriser les bulles.",
+        "correct": false
+      },
+      {
+        "text": "Le maintien de la température de la pâte en dessous de 103°C.",
+        "correct": true
+      },
+      {
+        "text": "Une cuisson lente pour contrôler la décomposition de l'initiateur.",
+        "correct": true
+      },
+      {
+        "text": "Une montée en température extrêmement rapide au-dessus de 120°C dès le début.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Pourquoi la température de 103°C est-elle critique pour le méthacrylate de méthyle ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "C'est le point où le peroxyde de benzoyle cesse de fonctionner.",
+        "correct": false
+      },
+      {
+        "text": "C'est la température où la résine devient totalement liquide et inutilisable.",
+        "correct": false
+      },
+      {
+        "text": "Dépasser cette température provoque la formation de porosités dans la résine.",
+        "correct": true
+      },
+      {
+        "text": "C'est la température d'ébullition du monomère.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Comment réduire la quantité de monomère résiduel en fin de cycle ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "En plongeant immédiatement le moufle chaud dans de l'eau glacée.",
+        "correct": false
+      },
+      {
+        "text": "En montant la température à 100°C pendant le stade terminal du cycle.",
+        "correct": true
+      },
+      {
+        "text": "En ajoutant davantage d'hydroquinone en fin de réaction.",
+        "correct": false
+      },
+      {
+        "text": "En effectuant une polymérisation complète.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les recommandations concernant le refroidissement de la résine ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La lenteur permet d'éviter les contraintes dues au brusque écart thermique.",
+        "correct": true
+      },
+      {
+        "text": "Il faut refroidir par choc thermique pour augmenter la dureté.",
+        "correct": false
+      },
+      {
+        "text": "Le refroidissement n'a aucune influence sur la précision dimensionnelle.",
+        "correct": false
+      },
+      {
+        "text": "Le refroidissement doit être lent et progressif.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Sur le plan chimique, quels acides sont à la base des résines ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'acide acétique de qualité alimentaire.",
+        "correct": false
+      },
+      {
+        "text": "L'acide acrylique.",
+        "correct": true
+      },
+      {
+        "text": "L'acide méthacrylique.",
+        "correct": true
+      },
+      {
+        "text": "L'acide sulfurique concentré.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "À propos du peroxyde de benzoyle dans les résines thermopolymérisables :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il joue le rôle de donneur de radicaux libres pour initier la chaîne.",
+        "correct": true
+      },
+      {
+        "text": "Il est présent dans le liquide pour stabiliser le monomère.",
+        "correct": false
+      },
+      {
+        "text": "Sa décomposition se fait rapidement au-dessus de 60°C.",
+        "correct": true
+      },
+      {
+        "text": "Il sert principalement de pigment pour colorer la résine en rose.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Que se passe-t-il au quatrième stade de formation de la pâte ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le monomère a pénétré complètement les particules sphériques.",
+        "correct": true
+      },
+      {
+        "text": "C'est le stade optimal pour effectuer le bourrage dans le moufle.",
+        "correct": false
+      },
+      {
+        "text": "La pâte devient granuleuse et se sépare en plusieurs morceaux.",
+        "correct": false
+      },
+      {
+        "text": "La pâte commence à développer des propriétés élastiques.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles sont les propriétés de la réaction de polymérisation ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Elle transforme un solide en gaz par sublimation contrôlée.",
+        "correct": false
+      },
+      {
+        "text": "C'est une réaction endothermique qui nécessite une chaleur constante pour continuer.",
+        "correct": false
+      },
+      {
+        "text": "Elle produit un polymère linéaire à masse molaire élevée si elle est bien conduite.",
+        "correct": true
+      },
+      {
+        "text": "C'est une réaction extrêmement exothermique (libère de la chaleur).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Quelles précautions prendre lors du mélange poudre/liquide ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Mélanger vigoureusement pour incorporer le maximum d'air possible.",
+        "correct": false
+      },
+      {
+        "text": "Attendre le stade pâteux avant de procéder au bourrage.",
+        "correct": true
+      },
+      {
+        "text": "Utiliser un récipient poreux pour absorber l'excès de monomère.",
+        "correct": false
+      },
+      {
+        "text": "Respecter le rapport de 1/3 par volume entre le liquide et la poudre.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+"9": [
+  {
+    "question": "Concernant le rôle fondamental des revêtements compensateurs :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ils réduisent l'expansion thermique du substrat pour stabiliser la pièce.",
+        "correct": false
+      },
+      {
+        "text": "Ils servent de moule réfractaire capable de résister aux traitements thermiques de la coulée.",
+        "correct": true
+      },
+      {
+        "text": "Ils visent à augmenter la contraction de la cire pour faciliter le démoulage.",
+        "correct": false
+      },
+      {
+        "text": "Ils doivent assurer une expansion pour compenser la contraction linéaire des alliages lors du refroidissement.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos de la classification des revêtements selon le liant utilisé :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le liant phosphate est exclusivement utilisé pour les alliages précieux à bas point de fusion.",
+        "correct": false
+      },
+      {
+        "text": "Les revêtements à liant phosphate conviennent aux alliages non précieux (Ni-Cr, Co-Cr).",
+        "correct": true
+      },
+      {
+        "text": "Le liant silicique est le plus utilisé pour la coulée des bridges en céramo-métallique.",
+        "correct": false
+      },
+      {
+        "text": "Les revêtements à liant plâtre sont réservés aux alliages dont la fusion est inférieure à 1100°C.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La composition d'un revêtement à liant plâtre comprend :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Du silicate d'éthyle incorporé directement dans la poudre.",
+        "correct": false
+      },
+      {
+        "text": "Un substrat réfractaire type quartz ou cristobalite pour l'expansion thermique.",
+        "correct": true
+      },
+      {
+        "text": "Uniquement de la magnésie comme agent de prise.",
+        "correct": false
+      },
+      {
+        "text": "De l'hémihydrate de sulfate de calcium type alpha pour la résistance mécanique.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Concernant les propriétés chimiques et l'expansion de prise (liant plâtre) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le temps de prise varie généralement entre 5 et 25 minutes.",
+        "correct": true
+      },
+      {
+        "text": "L'immersion dans l'eau diminue l'expansion totale du matériau.",
+        "correct": false
+      },
+      {
+        "text": "Le temps de prise est indépendant de la température du liquide.",
+        "correct": false
+      },
+      {
+        "text": "L'expansion de prise initiale se situe entre 0,3 et 0,4%.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "L'expansion hygroscopique des revêtements à liant plâtre :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Peut atteindre des valeurs comprises entre 1,4 et 1,8%.",
+        "correct": true
+      },
+      {
+        "text": "Est une expansion secondaire provoquée par immersion dans l'eau dès l'amorce de la prise.",
+        "correct": true
+      },
+      {
+        "text": "Est uniquement observée avec les revêtements pour la coulée du titane.",
+        "correct": false
+      },
+      {
+        "text": "Est une contraction liée à l'évaporation rapide de l'eau distillée.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Sur les propriétés physiques de granulométrie et porosité :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Plus les grains sont gros, plus la précision de surface est élevée.",
+        "correct": false
+      },
+      {
+        "text": "Une granulométrie fine permet d'obtenir un meilleur état de surface des pièces coulées.",
+        "correct": true
+      },
+      {
+        "text": "Une absence totale de porosité est recherchée pour éviter les bulles.",
+        "correct": false
+      },
+      {
+        "text": "La porosité est indispensable pour permettre l'évacuation des gaz lors de la coulée.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Le comportement thermique du liant plâtre et de son substrat :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le plâtre (liant) subit une contraction linéaire pouvant atteindre 4% lors de la chauffe.",
+        "correct": true
+      },
+      {
+        "text": "Le quartz ne présente aucune variation dimensionnelle avant 1000°C.",
+        "correct": false
+      },
+      {
+        "text": "La tridymite possède une expansion thermique supérieure à celle de la cristobalite.",
+        "correct": false
+      },
+      {
+        "text": "La cristobalite assure une forte expansion (2,9%) à partir de 450°C.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les adjuvants spécifiques dans les revêtements à liant plâtre :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'acide borique est ajouté pour augmenter la dureté du moule.",
+        "correct": true
+      },
+      {
+        "text": "Les chlorures permettent de régler la contraction du plâtre.",
+        "correct": true
+      },
+      {
+        "text": "La silice colloïdale est le seul liquide utilisable pour le plâtre.",
+        "correct": false
+      },
+      {
+        "text": "Les agents réducteurs servent à accélérer l'oxydation des alliages.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant les revêtements à liant phosphate :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ils sont utilisés pour la technique céramo-métallique avec des alliages à haut point de fusion.",
+        "correct": true
+      },
+      {
+        "text": "Ils possèdent une expansion de prise nettement inférieure à celle du liant plâtre.",
+        "correct": false
+      },
+      {
+        "text": "Le liant est composé de phosphate d'ammonium primaire et d'oxyde de magnésium.",
+        "correct": true
+      },
+      {
+        "text": "Leur liquide de mélange est exclusivement composé de silicate d'éthyle pur.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Comparaison des propriétés mécaniques entre liant plâtre et liant phosphate :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La résistance pyroscopique (chocs thermiques) est meilleure pour les revêtements à liant plâtre.",
+        "correct": true
+      },
+      {
+        "text": "La quantité de liant plus élevée dans les phosphates améliore leur résistance pyroscopique.",
+        "correct": false
+      },
+      {
+        "text": "Les revêtements à liant plâtre sont plus résistants à la compression que les liants phosphate.",
+        "correct": false
+      },
+      {
+        "text": "La résistance à la compression est supérieure pour les liants phosphate (4-6 MPa).",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les particularités des revêtements à liant silicique :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ils sont le premier choix pour la coulée quotidienne des couronnes unitaires en or.",
+        "correct": false
+      },
+      {
+        "text": "Le liant se trouve toujours sous forme de poudre sèche mélangée au quartz.",
+        "correct": false
+      },
+      {
+        "text": "Leur usage est principalement réservé à la confection de modèles de duplicata.",
+        "correct": true
+      },
+      {
+        "text": "Ils utilisent principalement le silicate d'éthyle ou le silicate de sodium comme liant.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "La coulée du titane impose des contraintes spécifiques car :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La silice est le substrat idéal car elle ne réagit pas avec le titane liquide.",
+        "correct": false
+      },
+      {
+        "text": "Il nécessite un revêtement résistant à des températures de l'ordre de 1700°C.",
+        "correct": true
+      },
+      {
+        "text": "Le titane possède une très forte réactivité avec l'oxygène et le carbone.",
+        "correct": true
+      },
+      {
+        "text": "Le titane a une densité extrêmement élevée facilitant sa coulée en moule étroit.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Composition des revêtements pour la coulée du titane :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le liquide de mélange doit contenir de l'acide borique concentré.",
+        "correct": false
+      },
+      {
+        "text": "Ils utilisent systématiquement du quartz pur comme seul réfractaire.",
+        "correct": false
+      },
+      {
+        "text": "Le liant peut être un silicate d'éthyle ou un phosphate.",
+        "correct": true
+      },
+      {
+        "text": "Le substrat est à base de magnésie, d'alumine ou d'oxyde de calcium.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Pour réduire la réactivité du titane lors de la coulée, on contrôle :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'utilisation d'un liant plâtre pur pour stabiliser l'interface.",
+        "correct": false
+      },
+      {
+        "text": "Le temps de refroidissement et le temps de contact titane/revêtement.",
+        "correct": true
+      },
+      {
+        "text": "L'augmentation de la porosité pour piéger l'oxygène.",
+        "correct": false
+      },
+      {
+        "text": "La composition précise du revêtement et la température de coulée.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "À propos de la vitrocéramique pressée (système Empress) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Le revêtement est à base de silice (quartz/cristobalite) et de liant phosphate.",
+        "correct": true
+      },
+      {
+        "text": "Cette technique ne nécessite aucun matériau réfractaire.",
+        "correct": false
+      },
+      {
+        "text": "Le liant utilisé est obligatoirement un hémihydrate de sulfate de calcium.",
+        "correct": false
+      },
+      {
+        "text": "Elle utilise la technique de la cire perdue et un pressage à haute température.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Un matériau est défini comme \"réfractaire\" si :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Il sert uniquement à colorer la maquette en cire.",
+        "correct": false
+      },
+      {
+        "text": "Sa température de fusion est supérieure à 1500°C.",
+        "correct": true
+      },
+      {
+        "text": "Il peut subir des traitements thermiques sans se désintégrer.",
+        "correct": true
+      },
+      {
+        "text": "Sa température de fusion est comprise entre 500°C et 800°C.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "L'expansion thermique globale d'un revêtement dépend de :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "L'équilibre entre la dilatation du substrat et la contraction du liant.",
+        "correct": true
+      },
+      {
+        "text": "La présence de colorants organiques dans la poudre.",
+        "correct": false
+      },
+      {
+        "text": "La transformation cristalline des espèces de silice (quartz, cristobalite).",
+        "correct": true
+      },
+      {
+        "text": "Uniquement de la quantité d'eau distillée ajoutée au mélange.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Concernant le liquide de mélange des revêtements à haute température :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "On peut utiliser de l'eau distillée.",
+        "correct": true
+      },
+      {
+        "text": "L'utilisation d'acide chlorhydrique est indispensable pour le liant phosphate.",
+        "correct": false
+      },
+      {
+        "text": "On utilise de l'alcool dénaturé pour accélérer la prise.",
+        "correct": false
+      },
+      {
+        "text": "On utilise souvent une solution aqueuse de silice colloïdale pour améliorer les propriétés.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Les risques liés à la montée en température du moule (résistance pyroscopique) :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les craquelures n'ont aucune influence sur la précision de la pièce coulée.",
+        "correct": false
+      },
+      {
+        "text": "Plus le revêtement est riche en liant phosphate, plus il résiste aux chocs thermiques.",
+        "correct": false
+      },
+      {
+        "text": "Il est nécessaire de contrôler précisément la vitesse de chauffage.",
+        "correct": true
+      },
+      {
+        "text": "Une montée trop rapide peut entraîner des craquelures du revêtement.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "En conclusion sur les biomatériaux de revêtement :",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Un seul type de revêtement (liant plâtre) suffit pour tous les matériaux dentaires (métaux et céramiques).",
+        "correct": false
+      },
+      {
+        "text": "Leur propriété majeure est l'expansion compensatrice de prise et thermique.",
+        "correct": true
+      },
+      {
+        "text": "Ils ont pour unique but de lisser la surface de la cire avant la coulée.",
+        "correct": false
+      },
+      {
+        "text": "Ils sont indispensables à la réalisation de prothèses grâce à leur caractère réfractaire.",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
+
+
+
+
+
+
+
+"EMD OC 2021": [
+  {
+    "question": "Classification des ciments ZOE Parmi les propositions suivantes concernant l’origine des ciments à base d’oxyde de zinc-eugénol renforcés, lesquelles sont exactes ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ils sont d’origine minérale uniquement.",
+        "correct": false
+      },
+      {
+        "text": "Ils sont d’origine organique uniquement.",
+        "correct": false
+      },
+      {
+        "text": "Ils sont d’origine mixte.",
+        "correct": true
+      },
+      {
+        "text": "Ils sont d’origine céramique.",
+        "correct": false
+      },
+      {
+        "text": "Ils sont d’origine métallique.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Matériaux de protection pulpaire Quels matériaux sont utilisés comme fond de cavité pour la protection pulpaire ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Les adhésifs.",
+        "correct": false
+      },
+      {
+        "text": "Les ciments polycarboxylates.",
+        "correct": false
+      },
+      {
+        "text": "Les céramiques.",
+        "correct": false
+      },
+      {
+        "text": "Les ciments verres ionomères.",
+        "correct": true
+      },
+      {
+        "text": "L’hydroxyde de calcium.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Étanchéité des restaurations Quels facteurs influencent l’étanchéité d’une restauration ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "La viscosité.",
+        "correct": false
+      },
+      {
+        "text": "L’index de réfraction.",
+        "correct": false
+      },
+      {
+        "text": "La stabilité dimensionnelle.",
+        "correct": true
+      },
+      {
+        "text": "Les propriétés viscoélastiques.",
+        "correct": true
+      },
+      {
+        "text": "L’adhérence.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Choix des matériaux dentaires Quels critères guident le choix des matériaux dentaires ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Mauvais conducteurs thermiques et électriques.",
+        "correct": true
+      },
+      {
+        "text": "Solubles dans les fluides buccaux.",
+        "correct": false
+      },
+      {
+        "text": "Non tolérés par le milieu vivant.",
+        "correct": false
+      },
+      {
+        "text": "Désobturation difficile.",
+        "correct": false
+      },
+      {
+        "text": "Non agressifs pour les tissus dentaires.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Propriétés des ciments ZOE Quelles propriétés possèdent les ciments à base d’oxyde de zinc-eugénol ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Propriétés atoxiques.",
+        "correct": false
+      },
+      {
+        "text": "Propriétés sédatives.",
+        "correct": true
+      },
+      {
+        "text": "Propriétés antibactériennes.",
+        "correct": true
+      },
+      {
+        "text": "Propriétés esthétiques.",
+        "correct": false
+      },
+      {
+        "text": "Bonne résistance à la compression.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Inconvénients des ciments ZOE Quels sont les inconvénients des ciments ZOE ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Facilité d’emploi.",
+        "correct": false
+      },
+      {
+        "text": "Opacité radiographique.",
+        "correct": false
+      },
+      {
+        "text": "Désobturation facile.",
+        "correct": true
+      },
+      {
+        "text": "Temps de prise long.",
+        "correct": true
+      },
+      {
+        "text": "Désagrégation dans la salive.",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Préparation des ciments ZOE Quels éléments sont nécessaires pour la préparation des ciments ZOE ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Bloc de mélange.",
+        "correct": false
+      },
+      {
+        "text": "Plaque de verre rugueuse.",
+        "correct": true
+      },
+      {
+        "text": "Spatule plastique.",
+        "correct": false
+      },
+      {
+        "text": "Spatule en acier inoxydable.",
+        "correct": true
+      },
+      {
+        "text": "Applicateur jetable.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Ciments IRM Quelles propositions concernant les ciments IRM sont correctes ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ciment polycarboxylate.",
+        "correct": false
+      },
+      {
+        "text": "Ciment à base d’hydroxyde de calcium.",
+        "correct": false
+      },
+      {
+        "text": "Ciment à base de résine.",
+        "correct": false
+      },
+      {
+        "text": "Ciment ZOE renforcé en résine.",
+        "correct": true
+      },
+      {
+        "text": "Ciment verre ionomère.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Hydroxyde de calcium Quelles propriétés caractérisent l’hydroxyde de calcium ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Bonne résistance à la compression.",
+        "correct": false
+      },
+      {
+        "text": "Insoluble dans l’eau.",
+        "correct": false
+      },
+      {
+        "text": "Antiseptique et hémostatique.",
+        "correct": true
+      },
+      {
+        "text": "Conductibilité thermique faible.",
+        "correct": true
+      },
+      {
+        "text": "Non résorbable.",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Ciments verres ionomères Quelles sont les caractéristiques des ciments verres ionomères ?",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Adhérence à l’émail et à la dentine.",
+        "correct": true
+      },
+      {
+        "text": "Nécessitent un adhésif.",
+        "correct": false
+      },
+      {
+        "text": "Indiqués comme fond protecteur.",
+        "correct": true
+      },
+      {
+        "text": "Utilisés en obturation provisoire.",
+        "correct": false
+      },
+     
+    ]
+  }
+],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"EMD 24": [
+  {
+    "question": "Une céramique",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "inclusion de cristaux dans un verre",
+        "correct": true
+      },
+      {
+        "text": "constituée uniquement de verre",
+        "correct": false
+      },
+      {
+        "text": "traitée par frittage",
+        "correct": true
+      },
+      {
+        "text": "propriétés optiques avec peu de verre",
+        "correct": false
+      },
+      {
+        "text": "toutes justes",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Une céramique",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "attaquée par fluides",
+        "correct": false
+      },
+      {
+        "text": "bien tolérée",
+        "correct": true
+      },
+      {
+        "text": "retient plaque",
+        "correct": false
+      },
+      {
+        "text": "inattaquable",
+        "correct": true
+      },
+      {
+        "text": "métallique",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Titane",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "5 isotopes",
+        "correct": true
+      },
+      {
+        "text": "3 isotopes",
+        "correct": false
+      },
+      {
+        "text": "4 isotopes",
+        "correct": false
+      },
+      {
+        "text": "10 isotopes",
+        "correct": false
+      },
+      {
+        "text": "50 isotopes",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Alliages Ni-Cr",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "Ni Cr Fe seulement",
+        "correct": true
+      },
+      {
+        "text": "Ni Cr Fe + éléments",
+        "correct": false
+      },
+      {
+        "text": "Ni seul",
+        "correct": false
+      },
+      {
+        "text": "soufre important",
+        "correct": true
+      },
+      {
+        "text": "soufre traces",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Masse volumique Ni-Cr",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "8",
+        "correct": false
+      },
+      {
+        "text": "7",
+        "correct": true
+      },
+      {
+        "text": "4",
+        "correct": false
+      },
+      {
+        "text": "1",
+        "correct": false
+      },
+      {
+        "text": "10",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Alliages d’or ADA",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "2 types",
+        "correct": true
+      },
+      {
+        "text": "3 types",
+        "correct": false
+      },
+      {
+        "text": "9 types",
+        "correct": false
+      },
+      {
+        "text": "4 types",
+        "correct": false
+      },
+      {
+        "text": "toutes",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Tolérance alliage or",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "<70%",
+        "correct": false
+      },
+      {
+        "text": ">70%",
+        "correct": false
+      },
+      {
+        "text": ">90%",
+        "correct": false
+      },
+      {
+        "text": ">40%",
+        "correct": true
+      },
+      {
+        "text": "≥90%",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Ciment de scellement",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "mécanique",
+        "correct": false
+      },
+      {
+        "text": "chimique",
+        "correct": false
+      },
+      {
+        "text": "acide-base",
+        "correct": false
+      },
+      {
+        "text": "intrados",
+        "correct": false
+      },
+      {
+        "text": "extrados",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Inconvénients coulées",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "coût",
+        "correct": true
+      },
+      {
+        "text": "réintervention",
+        "correct": false
+      },
+      {
+        "text": "étapes",
+        "correct": true
+      },
+      {
+        "text": "temps",
+        "correct": true
+      },
+      {
+        "text": "toutes",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Préparation eugénate",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "silicone",
+        "correct": false
+      },
+      {
+        "text": "spatule inox",
+        "correct": false
+      },
+      {
+        "text": "plaque verre",
+        "correct": false
+      },
+      {
+        "text": "mélange progressif",
+        "correct": false
+      },
+      {
+        "text": "lumière",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Eugénate amélioré",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "huile coton",
+        "correct": false
+      },
+      {
+        "text": "acétate zinc",
+        "correct": false
+      },
+      {
+        "text": "monomère",
+        "correct": true
+      },
+      {
+        "text": "polymère résineux",
+        "correct": true
+      },
+      {
+        "text": "stéarate",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Hydroxyde de calcium",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "non résorbable",
+        "correct": false
+      },
+      {
+        "text": "provisoire",
+        "correct": true
+      },
+      {
+        "text": "dentinogène",
+        "correct": false
+      },
+      {
+        "text": "dents immatures",
+        "correct": false
+      },
+      {
+        "text": "poudre liquide",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "MTA",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "bioactif",
+        "correct": false
+      },
+      {
+        "text": "tricalcique",
+        "correct": false
+      },
+      {
+        "text": "dérivé Portland",
+        "correct": true
+      },
+      {
+        "text": "dents temporaires",
+        "correct": true
+      },
+      {
+        "text": "coiffage",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Scellement MTA",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "stabilité",
+        "correct": true
+      },
+      {
+        "text": "prise lente",
+        "correct": true
+      },
+      {
+        "text": "hydrophile",
+        "correct": true
+      },
+      {
+        "text": "biocompatible",
+        "correct": false
+      },
+      {
+        "text": "résistance",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Biodentine",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "silicate calcium",
+        "correct": true
+      },
+      {
+        "text": "rétro",
+        "correct": true
+      },
+      {
+        "text": "esthétique",
+        "correct": true
+      },
+      {
+        "text": "sandwich",
+        "correct": false
+      },
+      {
+        "text": "provisoire",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Protection dentino-pulpaire",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "isolation",
+        "correct": true
+      },
+      {
+        "text": "cément",
+        "correct": false
+      },
+      {
+        "text": "cicatrisation",
+        "correct": false
+      },
+      {
+        "text": "dentine réactionnelle",
+        "correct": true
+      },
+      {
+        "text": "dentine secondaire",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Bioactif",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "neuro",
+        "correct": false
+      },
+      {
+        "text": "couleur",
+        "correct": false
+      },
+      {
+        "text": "dentinogène",
+        "correct": true
+      },
+      {
+        "text": "apexification",
+        "correct": true
+      },
+      {
+        "text": "canaux",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Ciments ZOE",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "fond composite",
+        "correct": true
+      },
+      {
+        "text": "coiffage",
+        "correct": false
+      },
+      {
+        "text": "apexification",
+        "correct": true
+      },
+      {
+        "text": "canaux",
+        "correct": false
+      },
+      {
+        "text": "—",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "Nature ZOE",
+    "difficulty": 2,
+    "answers": [
+      {
+        "text": "organique",
+        "correct": false
+      },
+      {
+        "text": "minérale",
+        "correct": false
+      },
+      {
+        "text": "composite",
+        "correct": false
+      },
+      {
+        "text": "organo-minérale",
+        "correct": false
+      },
+      {
+        "text": "tricalcique",
+        "correct": true
+      }
+    ]
+  }
+],
+
+
 };
 
 
